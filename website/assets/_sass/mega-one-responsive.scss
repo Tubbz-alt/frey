@@ -2,34 +2,40 @@
   /* Custom, iPhone Retina */
   
   @media only screen and (max-width: 400px) {
+    
     .header-logo {
-      margin-top: -15px;
-      max-width: 40%;
+      display: none;
     }
-    .wrapper>.header {
-      min-height: 30px;
-    }
+    
     .brand {
       font-size: 8px;
     }
+    
     .IconBox {
-      width: 250px;
-      height: 250px;
+      width: 260px;
+      height: 260px;
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 20px 25px 20px 25px;
-      margin: 0 0 0 25px;
+      margin-top: 20px;
+      border: 1px solid #DAE5F0;
     }
+    
     h2 {
       text-align: center;
     }
-    .homepage-terminal-example {
+    
+    .Terminal-example {
       padding: 7px;
     }
+    
     .m-b-md {
       font-size: 11px;
       line-height: 16px;
+    }
+    
+    .FooterCopyright {
+      margin-top: 10px;
     }
   }
   /* Extra Small Devices, Phones */
@@ -39,18 +45,23 @@
       margin-top: -15px;
       max-width: 30%;
     }
+    
     .wrapper>.header {
       min-height: 30px;
     }
+    
     .brand {
       font-size: 10px;
     }
+    
     .BulletList--withHeader {
       text-align: center;
     }
+    
     .IconBox {
       margin: 0 0 25px 0;
       padding: 5px;
+      text-align: center;
     }
   }
   /* Small Devices, Tablets */
@@ -60,18 +71,35 @@
       margin-top: -15px;
       max-width: 30%;
     }
+    
     .wrapper>.header {
       min-height: 30px;
     }
-    .IconBox {
-      margin-right: 10px;
-      width: 160px;
-      height: 240px;
+    
+    .BulletList--withHeader {
+      text-align: center;
+      margin-bottom: 20px;
     }
-    .copyright {
+    
+    .BulletList--withHeader__IconBox, .UsedIn--IconBox {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .IconBox {
+      width: 220px;
+      height: 240px;
+      background: #FFFFFF;
+      line-height: 25px;
+      border: 1px solid #DAE5F0;
+      margin: 20px 15px 0 0 ;
+    }
+    
+    .FooterCopyright {
       font-size: 13px;
-      margin-left: -40px;
-      margin-top: -5px;
+      margin-top: 10px;
     }
   }
   /* Medium Devices, Desktops */
@@ -81,16 +109,24 @@
       margin-top: -45px;
       max-width: 35%;
     }
+    
     .wrapper>.header {
       min-height: 30px;
     }
-    .IconBox {
-      margin-right: 10px;
-      padding: 5px;
-      float: left;
-      width: 200px;
-      height: 200px;
+    
+    .BulletList--withHeader__IconBox {
+      display: flex;
+      flex-direction: row;
+      justify-content:center;
+      align-items: center;
     }
+    
+    .IconBox {
+      padding: 5px;
+      width: 260px;
+      height: 260px;
+    }
+    
     .BulletList--withHeader {
       margin-top: 130px;
     }
@@ -102,17 +138,20 @@
       margin-top: -15px;
       max-width: 20%;
     }
+    
     .BulletList--withHeader {
       margin-top: 130px;
+      text-align: left;
     }
+    
+    .BulletList--withHeader__IconBox {
+      display: block;
+    }
+    
     .IconBox {
-      width: 200px;
-      height: 200px;
-      margin-right: 20px;
-      padding: 10px;
-    }
-    .copyright {
-      font-size: 14px;
-      margin-left: -70px;
+      width: 260px;
+      height: 260px;
+      padding: 20px;
+      float: inherit;
     }
   }

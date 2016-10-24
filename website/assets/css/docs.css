@@ -1,43 +1,65 @@
 .main {
   background-color: #EFF2F5;
+
 }
-.row {
-  background-color: #FFFFFF;
-  padding-right: 100px;
+
+.BannerNarrow {
+  height: 120px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 95%;
+  
 }
-.col-md-3 {
-  background-clip: content-box;
-  height: 1800px;
-  width: 350px;
-}
-.bg-color {
-  background-color: #EFF2F5;
-}
-.panel-default {
-  width: 290px;
-  margin-top: 40px;
-  padding: 0 0 0 40px;
+
+.Widget-area {
   background-color: #EFF2F5;
   box-shadow: none;
+  width: 290px;
+  padding: 40px 20px;
+  
 }
+
 .list-group-item {
   background-color: #EFF2F5;
+  border: none;
+  
 }
+
 div.subitem a.list-group-item {
   padding-left: 30px;
+  border: none;
+  
 }
-h2,h3 {
-  margin-top: 35px;
+
+.Docs-title {
+  margin-top: 0;
+  margin-bottom: 30px;
   color: #003151;
 }
-p {
-  margin-top: 20px;
-  color: #A2A2A2;
+
+.Blog-title {
+  margin-top: 40px;
+  margin-bottom: 30px;
+  color: #003151;
 }
+
+p {
+  margin-top: 40px;
+  color: #A2A2A2;
+  font-size: 14px;
+  margin-bottom: 30px;
+  
+}
+
 ol {
   color: #A2A2A2;
+  font-size: 14px;
+  
 }
+
 span.highlight {
-  background-color: #F83824;
-  color: #000000;
+  background-color: #F58B4C;
+  color: #FFFFFF;
+  padding: 4px;
+  
 }

@@ -1,20 +1,22 @@
+.navbar {
+  margin-bottom: 0;
+  
+}
+
 .navbar-brand-logo .logo {
   float: left;
   overflow: hidden;
   width: 60px;
+  
 }
-.navbar {
-  margin-bottom: 0;
-}
-.banner-narrow {
-  height: 120px;
+
+.BannerWide {
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: 50% 95%;
+  background-position: 20% 100%;
+  
 }
-.brand h1 {
-  margin-top: -80px;
-}
+
 .IconBox {
   width: 200px;
   height: 200px;
@@ -28,78 +30,130 @@
   margin-top: 20px;
   margin-right: 10px;
   padding: 5px;
+  
 }
+
 .fa {
   font-size: 50px;
   color: #3EA3D8;
   padding-bottom: 15px;
+  
 }
-.section {
-  padding: 30px 0;
+
+.FeatureText {
   position: relative;
-  background-color: #f4f3ef;
+  line-height: 25px;
+  background-color: #FFFFFF;
+  border: 1px solid #DAE5F0;
+  padding: 50px;
+  margin-top: 90px;
+  
 }
-.homepage-terminal-example {
+
+.Terminal {
+  position: relative;
   font-family: monospace;
   background: #000B0F;
   color: #48d8a0;
   border-radius: 8px;
-  padding: 30px;
+  padding: 25px;
+  margin-top: 50px;
+  
 }
+
 .m-b-md {
-  font-size: 10px;
-  line-height: 15px;
+  font-size: 14px;
+  line-height: 25px;
+  
 }
+
 .highlighted-red {
   color: #F8585A;
+  
 }
+
 .highlighted-orange {
   color: #FF8901;
+  
 }
+
 .highlighted-pink {
   color: #E009ED;
+  
 }
+
+.Index-title {
+  color: #3EA3D8; 
+}
+
 p {
   text-align: left;
-}
-.TerminalBox {
-  margin-top: 50px;
-}
-.FeatureText {
-  line-height: 25px;
-  margin: 60px 0 30px 0;
-  background-color: #FFFFFF;
-  border: 1px solid #F3F6FA;
-  padding: 20px;
+  
 }
 
-/*.img-fluid {
-  width: 100%;
-  height: auto;  
-}*/
-
-.homepage-terminal-example {
-  margin-bottom: 25px;
-}
 .DesignGoalsSection {
+  margin-top: 50px;
   background-color: #3EA3D8;
   color: #FFFFFF;
+  
 }
+
 .CallToActionSection {
   background-color: #ED582E;
+  
 }
+
 .btn.btn-round {
   background-color: transparent;
   border: 1px solid #FFFFFF;
   color: #FFFFFF;
+  
 }
+
 .btn.btn-round:hover {
   background-color: #ED582D;
+  
 }
+
+
+/* Blog Page Styles Start*/
+
+.btn.btn-outline-blog {
+  background-color: transparent;
+  border: 1px solid #3EA3D8;
+  color: #3EA3D8;
+  border-radius: 25px;
+  
+}
+
+.btn.btn-outline-blog:hover {
+  background-color: #FFFFFF;
+  color: #3EA3D8;
+}
+
+.fa.fa-2x {
+  font-size: 30px;
+  padding-right: 20px;
+  text-decoration: none;
+}
+
+.Blogpost-thumb {
+  margin-bottom: 40px;
+}
+
+.list-unstyled.blog {
+  color: #A2A2A2;
+}
+
+/* Blog Page Styles Finish */
+
 .footer {
   background-color: #000B0F;
   color: #FFFFFF;
+  
 }
+
 .footer ul li a:hover {
   color: #DDDDDD;
+  
 }
