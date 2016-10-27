@@ -47,6 +47,7 @@ Unreleased and unplanned todos
 - [ ] Upon `may i destroy infra?` question, Frey should show all the resource IDs that are getting destroyed
 - [ ] `get` should be daisychained before `refresh`, not `plan`
 - [ ] Possible bug: We should likely not squashArray ansible actions such as `restart`, or actions in multiple files in the same dir are merged into one
+- [ ] Offer to run `backup` if a destructive change was detected. Skip otherwise. Defaults to yes
 
 ## v0.3.25 (2016-09-21)
 
