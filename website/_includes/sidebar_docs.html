@@ -1,5 +1,9 @@
 <div class="Widget">
-  <div id="sidebar" class="list-group">
+  <div id="sidebar" class="list-group collapse">
+    <ul class="Sidebar-mainMenu nav list-group visible-xs">
+      {% include main-menu.html %}
+    </ul>
+    <h4>Docs</h4>
     <a href="#" class="list-group-item"><i class="icon-dashboard"></i><span style="font-family: 'Exo 2', sans-serif;">Documentation Home</span></a>
     <a href="#users" class="list-group-item" data-toggle="collapse" data-parent="#sidebar"><i class="icon-group"></i><span style="font-family: 'Exo 2', sans-serif;">Upgrading and Compatibility</span></a>
     <div id="users" class="list-group subitem collapse in">
