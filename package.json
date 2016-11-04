@@ -31,7 +31,7 @@
     "web:install": "npm install && cd website && (bundle install --path _vendor/bundle || bundle update)",
     "web:start": "npm-run-all web:install --parallel web:watch web:serve",
     "web:serve": "cd website/_site && browser-sync start --server --files .",
-    "web:watch": "nodemon --verbose --watch ./ --ignore 'website/vendor' --ignore 'website/*.md' --ignore 'website/_site/*' --ext html,json,md,js,css,png,jpg --exec 'npm-run-all web:inject web:build'"
+    "web:watch": "nodemon --verbose --watch ./ --ignore 'website/_vendor/*' --ignore 'website/*.md' --ignore 'website/_site/*' --ext html,json,md,js,css,png,jpg --exec 'npm-run-all web:inject web:build'"
   },
   "files": [
     "bin",
