@@ -26,7 +26,7 @@
     "version:replace": "replace \"Frey version '\\d+\\.\\d+\\.\\d+'\" \"Frey version '$(npm run --silent version:current)'\" test/fixture/*.stdio",
     "web:deploy": "npm run web:inject && npm run web:build:full && scripts/web-deploy.sh",
     "web:build:full": "cd website && bundle exec jekyll build",
-    "web:build": "cd website && bundle exec jekyll build --incremental",
+    "web:build": "cd website && bundle exec jekyll build --incremental && npm run web:build:css",
     "web:build:css": "cd website && node-sass assets/sass/main.scss _site/assets/css/main.min.css --output-style compressed",
     "web:inject": "scripts/web-inject.sh",
     "web:install": "npm install && cd website && (bundle install --path _vendor/bundle || bundle update)",
