@@ -27,7 +27,7 @@
     "web:deploy": "npm run web:inject && npm run web:build:full && scripts/web-deploy.sh",
     "web:build:full": "cd website && bundle exec jekyll build && npm run web:build:css",
     "web:build": "cd website && bundle exec jekyll build --incremental && npm run web:build:css",
-    "web:build:css": "cd website && node-sass assets/sass/main.scss _site/assets/css/styles.min.css --output-style compressed",
+    "web:build:css": "cd website && node-sass assets/sass/main.scss _site/assets/css/main.min.css --output-style compressed",
     "web:inject": "scripts/web-inject.sh",
     "web:install": "npm install && cd website && (bundle install --path _vendor/bundle || bundle update)",
     "web:start": "npm-run-all web:install --parallel web:watch web:serve",
