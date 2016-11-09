@@ -6,7 +6,7 @@ ACCPTST:STDIO_REPLACE_DURATIONS
 ACCPTST:STDIO_REPLACE_REMOTE_EXEC
 ACCPTST:STDIO_REPLACE_ELAPSED
 (maybe) Destroying..
---> Frey version '0.3.25'
+--> Frey version '0.3.26'
 --> Will run: [ 'init', 'config', 'deps', 'prepare', 'refresh', 'validate', 'get', 'plan', 'backup', 'infra', 'install', 'setup', 'deploy', 'restart', 'show' ]
 --> {hostname} - init
 --> {hostname} - config
@@ -17,7 +17,7 @@ Reconstructing private key '{root}/test/scenario/digitalocean/frey-digitalocean.
 Found 'terraform' with version '0.7.3'
 Found 'terraformInventory' with version '0.6.0'
 Found 'pip' with version {{global_pip_version}}
-Found 'ansible' with version '2.0.2'
+Found 'ansible' with version '2.1.3'
 --> {hostname} - refresh
 --> Saved state to '{root}/test/scenario/digitalocean/Frey-state-terraform.tfstate'
 --> {hostname} - validate

@@ -42,6 +42,7 @@ roles=(
   "upstart,v1.0.0;telusdigital.upstart"
   "logrotate,v1.0.0;telusdigital.logrotate"
   "rsyslog,v3.0.1;tersmitten.rsyslog,v3.0.1"
+  "rsyslog,v3.0.2;tersmitten.rsyslog,v3.0.2"
   "fqdn,v1.0.0;holms.fqdn"
   "znc,v1.0.4;triplepoint.znc,1.0.4"
   "nginx,v2.0.1;jdauphant.nginx,v2.0.1"
