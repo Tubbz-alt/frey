@@ -49,7 +49,7 @@ Unreleased and unplanned todos
 - [ ] Possible bug: We should likely not squashArray ansible actions such as `restart`, or actions in multiple files in the same dir are merged into one
 - [ ] Offer to run `backup` if a destructive change was detected. Skip otherwise. Defaults to yes
 
-## v0.3.26 (Unreleased)
+## v0.3.26 (2016-11-09)
 
 - [x] Upgrade Ansible v2.0.2.0 -> v2.1.3 (@termitten)
 - [x] Upgrade role: rsyslog v3.0.1 -> v3.0.2 (@termitten)
