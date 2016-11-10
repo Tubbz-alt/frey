@@ -8,7 +8,8 @@
 
 Frey aims to be an all-in-one tool for developers and sysadmins to bring their app to production. 
 
-*Warning: Frey is Alpha. Use it for new projects and goofing around, leave it for existing ones.*
+
+## Warning: Frey is Alpha. FREY WILL CURRENTLY HAPILLY DESTROY YOUR PLATFORM AND CAREER. THANKS!
 
 ## Table of Contents
 
