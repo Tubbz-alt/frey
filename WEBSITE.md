@@ -49,7 +49,7 @@ Frey can be seen in the wild in these projects:
  - tus.io has a [Freyfile](https://github.com/tus/infra-tusd/blob/frey/infra/Freyfile.toml) 
  that sets up an EC2 instance, and let's Travis CI deploy to it on every push to `master`.
 
-If you're using Frey, let us know in an [issue](https://github.com/kvz/frey/issues/new).
+If you're using Frey, let us know in an [issue](https://github.com/freyproject/frey/issues/new).
 
 ## examples
 

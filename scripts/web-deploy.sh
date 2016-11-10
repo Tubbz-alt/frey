@@ -30,7 +30,7 @@ __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 __file="${__dir}/$(basename "${BASH_SOURCE[0]}")"
 __base="$(basename ${__file} .sh)"
 
-ghpages_repo=${GHPAGES_REPO:-"kvz/frey"}
+ghpages_repo=${GHPAGES_REPO:-"freyproject/frey"}
 ghpages_branch=${GHPAGES_BRANCH:-"gh-pages"}
 ghpages_url=${GHPAGES_URL:-"git@github.com:${ghpages_repo}.git"}
 

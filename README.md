@@ -1,8 +1,8 @@
 # Frey
 
 <!-- badges/ -->
-[![Build Status](https://travis-ci.org/kvz/frey.svg?branch=master)](https://travis-ci.org/kvz/frey)
-[![Join the chat at https://gitter.im/kvz/frey](https://badges.gitter.im/kvz/frey.svg)](https://gitter.im/kvz/frey?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Build Status](https://travis-ci.org/freyproject/frey.svg?branch=master)](https://travis-ci.org/freyproject/frey)
+[![Join the chat at https://gitter.im/freyproject/frey](https://badges.gitter.im/freyproject/frey.svg)](https://gitter.im/freyproject/frey?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Support](https://supporterhq.com/api/b/ac8vssyf8hcjnklgoq78zilo4/Frey)](https://supporterhq.com/support/ac8vssyf8hcjnklgoq78zilo4/Frey)
 <!-- /badges -->
 
@@ -57,7 +57,7 @@ Frey can be seen in the wild in these projects:
  - tus.io has a [Freyfile](https://github.com/tus/tusd/blob/frey/.infra/Freyfile.toml) 
  that sets up an EC2 instance, and let's Travis CI deploy to it on every push to `master`.
 
-If you're using Frey, let us know in an [issue](https://github.com/kvz/frey/issues/new).
+If you're using Frey, let us know in an [issue](https://github.com/freyproject/frey/issues/new).
 
 ## Features
 
@@ -85,9 +85,9 @@ As you can see, Frey additionally provides commands to:
 
 So how does Frey know what to do? All of the actions are orchestrated from a single source of truth, a declarative `Freyfile.toml`, written in [TOML](https://github.com/toml-lang/toml#user-content-comparison-with-other-formats), and kept under the source control of your existing project. Preferably in its own directory, like `./infra`.
 
-Here's an [example](https://github.com/kvz/frey/blob/master/test/scenario/digitalocean/Freyfile.toml) launching two web servers and a database server on Digital Ocean.
+Here's an [example](https://github.com/freyproject/frey/blob/master/test/scenario/digitalocean/Freyfile.toml) launching two web servers and a database server on Digital Ocean.
 
-If you have a huge project and your Freyfile  size is becoming an issue, Frey will happilly look for any other `*.toml` files in the same directory as you can see in this [example](https://github.com/kvz/frey/tree/master/test/scenario/dynamodb) where we set up a DynamoDB server on AWS using 4 different `toml` files.
+If you have a huge project and your Freyfile  size is becoming an issue, Frey will happilly look for any other `*.toml` files in the same directory as you can see in this [example](https://github.com/freyproject/frey/tree/master/test/scenario/dynamodb) where we set up a DynamoDB server on AWS using 4 different `toml` files.
 
 ## Secrets
 
@@ -275,7 +275,7 @@ Seeing as Otto uses Terraform for infra orchestration and also installs software
 
 Where the projects differ is that Otto aims to be zero config, and Frey aims to be minimal yet complete config. Every component needs to be described, and saved under Git. This approach provides more control and flexibility at the tradeoff of it being more work to describe all your pieces. Wether this trade-off is acceptable depends on the project.
 
-Frey does not offer setting up local environments yet, but this should be easy enough to add (as [we can make local connections](https://github.com/kvz/frey/blob/master/test/scenario/install/Freyfile.toml#L2) already) and is on the [roadmap](CHANGELOG.md).
+Frey does not offer setting up local environments yet, but this should be easy enough to add (as [we can make local connections](https://github.com/freyproject/frey/blob/master/test/scenario/install/Freyfile.toml#L2) already) and is on the [roadmap](CHANGELOG.md).
 
 ## Contributors
 

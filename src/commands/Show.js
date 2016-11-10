@@ -122,7 +122,7 @@ class Show extends Command {
         let fqdn = _.get(facts, 'ansible_facts.ansible_fqdn') + ''
 
         // @todo this is a hack to prevent failures like:
-        // https://travis-ci.org/kvz/frey/builds/116576951#L931
+        // https://travis-ci.org/freyproject/frey/builds/116576951#L931
         // where there must be some odd character leaking into the acceptance test fixtures
         val = val.replace(/[^A-Za-z0-9\.\-_]/mg, '')
         fqdn = fqdn.replace(/[^A-Za-z0-9\.\-_]/mg, '')

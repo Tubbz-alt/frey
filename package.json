@@ -46,7 +46,7 @@
   "preferGlobal": true,
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/kvz/frey.git"
+    "url": "git+ssh://git@github.com/freyproject/frey.git"
   },
   "dependencies": {
     "async": "1.5.2",
@@ -105,7 +105,7 @@
   "author": "Kevin van Zonneveld",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/kvz/frey/issues"
+    "url": "https://github.com/freyproject/frey/issues"
   },
-  "homepage": "https://github.com/kvz/frey#readme"
+  "homepage": "https://github.com/freyproject/frey#readme"
 }
