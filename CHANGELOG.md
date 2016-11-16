@@ -49,6 +49,7 @@ Unreleased and unplanned todos
 - [ ] Possible bug: We should likely not squashArray ansible actions such as `restart`, or actions in multiple files in the same dir are merged into one
 - [ ] Offer to run `backup` if a destructive change was detected. Skip otherwise. Defaults to yes
 - [ ] Replace leaky shell/exe abstraction hackjobs with `shelljs`
+- [x] Upgrade pip to 9.0.1
 
 ## v0.3.27 (Unreleased)
 

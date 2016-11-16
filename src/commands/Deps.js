@@ -124,7 +124,7 @@ class Deps extends Command {
       type: 'App',
       name: 'pip',
       exe: 'pip',
-      version: '7.1.2',
+      version: '9.0.1',
       range: '>= {{{self.version}}}',
       cmdVersion: '{{{self.exe}}} --version',
       versionTransformer (stdout) {
