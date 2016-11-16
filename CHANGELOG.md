@@ -48,6 +48,7 @@ Unreleased and unplanned todos
 - [ ] `get` should be daisychained before `refresh`, not `plan`
 - [ ] Possible bug: We should likely not squashArray ansible actions such as `restart`, or actions in multiple files in the same dir are merged into one
 - [ ] Offer to run `backup` if a destructive change was detected. Skip otherwise. Defaults to yes
+- [ ] Replace leaky shell/exe abstraction hackjobs with `shelljs`
 
 ## v0.3.27 (Unreleased)
 
