@@ -18,22 +18,18 @@ __sysTmpDir="${__sysTmpDir%/}" # <-- remove trailing slash on macosx
 __accptstTmpDir="${__sysTmpDir}/accptst"
 mkdir -p "${__accptstTmpDir}"
 
+__arch="amd64"
 if [[ "${OSTYPE}" == "darwin"* ]]; then
+  __os="darwin"
   cmdSed=gsed
   cmdTimeout="gtimeout --kill-after=21m 20m"
 else
+  __os="linux"
   cmdSed=sed
   cmdTimeout="timeout --kill-after=21m 20m"
 fi
 
 __node="$(which node)"
-
-__os="linux"
-if [[ "${OSTYPE}" == "darwin"* ]]; then
-  __os="darwin"
-fi
-__arch="amd64"
-
 
 if ! which "${cmdSed}" > /dev/null; then
   echo "Please install ${cmdSed}"
