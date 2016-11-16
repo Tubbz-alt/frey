@@ -156,7 +156,7 @@ class Deps extends Command {
       cmdInstall:
         'mkdir -p {{{self.dir}}} && ' +
         'pip install ' +
-        '--install-option=\'--prefix=pip\' ' +
+        '--prefix=pip ' +
         '--ignore-installed ' +
         '--force-reinstall ' +
         '--root \'{{{self.dir}}}\' ' +
