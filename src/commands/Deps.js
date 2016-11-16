@@ -131,7 +131,7 @@ class Deps extends Command {
         const version = `${stdout}`.trim().split('\n')[0].split(/\s+/)[1].replace('v', '')
         return version
       },
-      cmdInstall: 'sudo -HE env PATH=$PATH LD_LIBRARY_PATH=$LD_LIBRARY_PATH PYTHONPATH=$PYTHONPATH easy_install --upgrade pip==9.0.1'
+      cmdInstall: 'sudo -HE env PATH=$PATH LD_LIBRARY_PATH=$LD_LIBRARY_PATH PYTHONPATH=$PYTHONPATH easy_install --upgrade pip==9.0.1 && $(which pip) && pip --version'
     })
 
     deps.push({
