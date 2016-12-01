@@ -1,0 +1,13 @@
+# Munin hosts.
+# {{ ansible_managed }}
+
+{% for host in munin_hosts %}
+[{{ host.name }}]
+    address {{ host.address }}
+{% if host.extra is defined %}
+{% for extra in host.extra %}
+    {{ extra }}
+{% endfor %}
+{% endif %}
+
+{% endfor %}

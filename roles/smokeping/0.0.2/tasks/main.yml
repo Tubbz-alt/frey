@@ -1,0 +1,35 @@
+---
+- name: Smokeping | Install package smokeping and dependencies
+  apt: pkg={{ item  }} state=installed
+  tags: [ smokeping ]
+  with_items:
+    - smokeping
+
+- name: Smokeping | Main config file
+  template: src=etc/smokeping/config.j2 dest={{smk_path_config}}
+  tags: [ smokeping ]
+
+- name: Smokeping | Config.d files
+  template: src=etc/smokeping/config.d/{{item}}.j2 dest={{smk_path_config}}.d/{{item}}
+  tags: [ smokeping ]
+  with_items:
+    - Alerts
+    - Database
+    - General
+    - Presentation
+    - Probes
+    - Slaves
+    - Targets
+
+- name: Smokeping | Touch logfile
+  tags: [ smokeping ]
+  file: path={{smk_path_log}} owner=smokeping mode=0755 state=touch
+
+- name: Smokeping | Update crontab to write static images
+  tags: [ smokeping ]
+  # smokeping user has no shell and can hence not use its own cron. do as root + sudo
+  cron: user=root minute=*/5 name=smokeping job="cd '{{smk_path_imgcache}}' && run-this-one sudo -HEu smokeping env LC_ALL=C /usr/sbin/smokeping --debug --static='{{smk_path_imgcache}}' --config='{{smk_path_config}}' 2>&1 |sudo -HEu smokeping tee -a '{{smk_path_log}}'"
+
+- name: Smokeping | Restart
+  tags: [ smokeping ]
+  service: name=smokeping state=restarted
