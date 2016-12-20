@@ -24,12 +24,25 @@ __root="$(dirname "${__dir}")"
 
 
 version=$(node -e 'console.log(require("./package.json").version)')
+allUrls=""
 CODE_DIR="${CODE_DIR:-${HOME}/code}"
 echo "--> Scanning '${CODE_DIR}'..."
 while IFS= read -r -d '' freyFile; do
   infraDir="$(dirname "${freyFile}")"
-  echo "--> Processing '${infraDir}'..."
+  gitDir="${infraDir}/.git"
+  if [ ! -d "${gitDir}" ]; then
+    gitDir="${infraDir}/../.git"
+  fi
+
+  if [ ! -d "${gitDir}" ]; then
+    echo "Aborting as I found no Git dir for '${infraDir}'.";
+    exit 1
+  fi
+
+  echo "--> Processing '${freyFile}'..."
   pushd ${infraDir} > /dev/null
+    allUrls="${allUrls} - $(awk '/url = / {print $NF}' "${gitDir}/config" |sed -e 's#git@github.com:#https://github.com/#' -e 's#\.git$##')$(echo "\\n")"
+    continue
     [[ -z $(git status -s) ]] || (git diff |cat; git status ; echo "Aborting due to dirty git index at '${infraDir}'."; exit 1)
     # git reset --hard
     git checkout master
@@ -69,3 +82,6 @@ while IFS= read -r -d '' freyFile; do
     # git push -f origin "frey-v${version}"
   popd > /dev/null
 done < <(find "${CODE_DIR}" -maxdepth 3 -name Freyfile.hcl -print0)
+
+echo 
+echo -e "${allUrls}"
