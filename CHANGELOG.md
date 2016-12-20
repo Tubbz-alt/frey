@@ -49,10 +49,15 @@ Unreleased and unplanned todos
 - [ ] Possible bug: We should likely not squashArray ansible actions such as `restart`, or actions in multiple files in the same dir are merged into one
 - [ ] Offer to run `backup` if a destructive change was detected. Skip otherwise. Defaults to yes
 - [ ] Replace leaky shell/exe abstraction hackjobs with `shelljs`
-- [x] Upgrade pip to 9.0.1
 
-## v0.3.27 (Unreleased)
+## v0.3.27 (2016-12-12)
 
+[Diff](https://github.com/freyproject/frey/compare/v0.3.26...v0.3.27).
+
+- [x] Use --prefix=pip as per #51 (thx @ifedapoolarewaju)
+- [x] Move website to own repo over at https://github.com/freyproject/website/
+- [x] Move roles to own repos over at https://github.com/freyproject/ (@termitten)
+- [x] Upgrade pip to 9.0.1 and pin version #51
 - [x] Install `yarn` globally by default for the node role
 
 ## v0.3.26 (2016-11-09)
