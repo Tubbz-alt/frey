@@ -56,14 +56,14 @@ Unreleased and unplanned todos
 
 - [x] Use --prefix=pip as per #51 (thx @ifedapoolarewaju)
 - [x] Move website to own repo over at https://github.com/freyproject/website/
-- [x] Move roles to own repos over at https://github.com/freyproject/ (@termitten)
+- [x] Move roles to own repos over at https://github.com/freyproject/ (@tersmitten)
 - [x] Upgrade pip to 9.0.1 and pin version #51
 - [x] Install `yarn` globally by default for the node role
 
 ## v0.3.26 (2016-11-09)
 
-- [x] Upgrade Ansible v2.0.2.0 -> v2.1.3 (@termitten)
-- [x] Upgrade role: rsyslog v3.0.1 -> v3.0.2 (@termitten)
+- [x] Upgrade Ansible v2.0.2.0 -> v2.1.3 (@tersmitten)
+- [x] Upgrade role: rsyslog v3.0.1 -> v3.0.2 (@tersmitten)
 
 ## v0.3.25 (2016-09-21)
 
