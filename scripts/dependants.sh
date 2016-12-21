@@ -39,26 +39,34 @@ while IFS= read -r -d '' freyFile; do
     exit 1
   fi
 
+  if [[ "${freyFile}" = *"uppy-server/infra/Freyfile.hcl" ]]; then
+    echo "--> Skipping '${freyFile}' as requested"
+    continue
+  fi
+
   echo "--> Processing '${freyFile}'..."
   pushd ${infraDir} > /dev/null
     allUrls="${allUrls} - $(awk '/url = / {print $NF}' "${gitDir}/config" |sed -e 's#git@github.com:#https://github.com/#' -e 's#\.git$##')$(echo "\\n")"
-    continue
+    git reset --hard
     [[ -z $(git status -s) ]] || (git diff |cat; git status ; echo "Aborting due to dirty git index at '${infraDir}'."; exit 1)
-    # git reset --hard
     git checkout master
     git pull
     git checkout -B "frey-v${version}"
-    # git pull origin "frey-v${version}" || true
     npm unlink frey || true
     if grep -q 'FREY_VERSION' ./Makefile; then
       "${__root}/node_modules/.bin/replace" "^FREY_VERSION\s*:?=.*$" "FREY_VERSION := ${version}" ./Makefile
+      git add ./Makefile || true
       make frey
     elif [ -f ./package.json ]; then
       yarn upgrade frey@${version} || (yarn && yarn add --dev frey@${version}) || npm install --save-dev frey@${version}
+      git add ./package.json || true
+      git add ./yarn.lock || true
     elif [ -f ../package.json ]; then
       pushd ..
-      yarn upgrade frey@${version} || (yarn && yarn add --dev frey@${version}) || npm install --save-dev frey@${version}
+        yarn upgrade frey@${version} || (yarn && yarn add --dev frey@${version}) || npm install --save-dev frey@${version}
       popd
+      git add ../package.json || true
+      git add ../yarn.lock || true
     else
       echo "Unsure how to upgrade '${infraDir}'"
       exit 1
@@ -76,12 +84,11 @@ while IFS= read -r -d '' freyFile; do
       popd
     done < <(find "${__root}/roles" -maxdepth 1 -type d -print0) || true
 
-    git add --all .
+    git add "${freyFile}" || true
     git commit -m "Upgrade Frey to v${version} /cc @tersmitten" || true
-    git push
-    # git push -f origin "frey-v${version}"
+    git push -f origin "frey-v${version}"
   popd > /dev/null
 done < <(find "${CODE_DIR}" -maxdepth 3 -name Freyfile.hcl -print0)
 
-echo 
+echo
 echo -e "${allUrls}"
