@@ -1,0 +1,84 @@
+# tasks file for apt
+---
+- name: update configuration file - /etc/apt/sources.list
+  template:
+    src: "etc/apt/sources.list.{{ ansible_distribution }}.j2"
+    dest: /etc/apt/sources.list
+    owner: root
+    group: root
+    mode: 0644
+  register: apt_config_updated
+  when: apt_manage_sources_list
+  tags:
+    - configuration
+    - apt
+    - apt-configuration
+
+- name: update
+  apt:
+    update_cache: true
+    cache_valid_time: "{{ 0 if apt_config_updated is defined and apt_config_updated.changed else apt_update_cache_valid_time }}"
+  when: apt_update
+  tags:
+    - configuration
+    - apt
+    - apt-update
+
+- name: install dependencies
+  apt:
+    name: "{{ item }}"
+    state: "{{ apt_install_state }}"
+  with_items: "{{ apt_dependencies }}"
+  tags:
+    - configuration
+    - apt
+    - apt-dependencies
+
+- name: upgrade
+  apt:
+    upgrade: "{{ apt_upgrade_type }}"
+    update_cache: true
+  when: apt_upgrade
+  tags:
+    - configuration
+    - apt
+    - apt-upgrade
+
+- name: clean
+  command: apt-get -y clean
+  changed_when: false
+  when: apt_clean
+  tags:
+    - configuration
+    - apt
+    - apt-clean
+
+- name: autoremove
+  command: apt-get -y autoremove
+  changed_when: false
+  when: apt_autoremove
+  tags:
+    - configuration
+    - apt
+    - apt-autoremove
+
+- name: install
+  apt:
+    name: "{{ item }}"
+    state: "{{ apt_install_state }}"
+  with_items: "{{ apt_install }}"
+  tags:
+    - configuration
+    - apt
+    - apt-install
+
+- name: remove
+  apt:
+    name: "{{ item }}"
+    state: absent
+    purge: "{{ apt_remove_purge }}"
+  with_items: "{{ apt_remove }}"
+  tags:
+    - configuration
+    - apt
+    - apt-remove

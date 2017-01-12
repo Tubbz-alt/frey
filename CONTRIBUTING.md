@@ -13,7 +13,7 @@ Meaning anything that you'd like to add to the module, needs to be added to `fil
 
 ```bash
 cd ~/code
-git clone git@github.com:kvz/frey.git
+git clone git@github.com:freyproject/frey.git
 cd frey
 npm install
 npm link # Makes /usr/local/bin/frey point to ~/code/frey/bin/frey instead of the global install

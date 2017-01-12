@@ -1,6 +1,9 @@
 - akamine.smokeping -- Copyright (c) 2015 Hector Akamine
+- apt -- Copyright (c) Oefenweb.nl <https://github.com/Oefenweb>
 - carlosbuenosvinos.ansistrano-deploy -- Copyright (c) 2014 Carlos Buenosvinos
 - carlosbuenosvinos.ansistrano-rollback -- Copyright (c) 2014 Carlos Buenosvinos
+- deploy -- Copyright (c) 2014 Carlos Buenosvinos
+- fqdn -- Copyright (c) 2014 Roman Gorodeckij
 - geerlingguy.jenkins -- Copyright (c) 2014 Jeff Geerling
 - geerlingguy.munin -- Copyright (c) 2014 Jeff Geerling
 - geerlingguy.munin-node -- Copyright (c) 2014 Jeff Geerling
@@ -8,10 +11,25 @@
 - geerlingguy.redis -- Copyright (c) 2014 Jeff Geerling
 - holms.fqdn -- Copyright (c) 2014 Roman Gorodeckij
 - jdauphant.nginx -- Copyright 1994-2004 Benno Joy. All rights reserved.
+- jenkins -- Copyright (c) 2014 Jeff Geerling
 - jnv.unattended-upgrades -- Gnomovision version 69, Copyright (C) year name of author
 - ktosiek.nix -- Copyright (c) 2016, Tomasz Kontusz
+- logrotate -- Copyright (c) 2015 Aaron Pederson
+- munin -- Copyright (c) 2014 Jeff Geerling
+- munin-node -- Copyright (c) 2014 Jeff Geerling
+- nginx -- Copyright 1994-2004 Benno Joy. All rights reserved.
+- nix -- Copyright (c) 2016, Tomasz Kontusz
+- nodejs -- Copyright (c) 2014 Jeff Geerling
+- prometheus -- Copyright (c) 2015 William Yeh <william.pjyeh@gmail.com>
+- redis -- Copyright (c) 2014 Jeff Geerling
+- rollback -- Copyright (c) 2014 Carlos Buenosvinos
+- rsyslog -- Copyright (c) Oefenweb.nl <https://github.com/Oefenweb>
+- smokeping -- Copyright (c) 2015 Hector Akamine
 - telusdigital.logrotate -- Copyright (c) 2015 Aaron Pederson
 - telusdigital.upstart -- Copyright (c) 2015 Chris Olstrom
 - tersmitten.rsyslog -- Copyright (c) Oefenweb.nl <https://github.com/Oefenweb>
 - triplepoint.znc -- Copyright (c) 2015 Jonathan Hanson
+- unattended-upgrades -- Gnomovision version 69, Copyright (C) year name of author
+- upstart -- Copyright (c) 2015 Chris Olstrom
 - williamyeh.prometheus -- Copyright (c) 2015 William Yeh <william.pjyeh@gmail.com>
+- znc -- Copyright (c) 2015 Jonathan Hanson

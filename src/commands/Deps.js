@@ -124,14 +124,21 @@ class Deps extends Command {
       type: 'App',
       name: 'pip',
       exe: 'pip',
-      version: '7.1.2',
+      version: '9.0.1',
       range: '>= {{{self.version}}}',
       cmdVersion: '{{{self.exe}}} --version',
       versionTransformer (stdout) {
-        const version = `${stdout}`.trim().split('\n')[0].split(/\s+/)[1].replace('v', '')
+        if (!stdout) {
+          return stdout
+        }
+        const parts = `${stdout}`.trim().split('\n')[0].split(/\s+/)
+        if (!parts || !parts[1]) {
+          return stdout
+        }
+        const version = (parts[1] + '').replace('v', '')
         return version
       },
-      cmdInstall: 'sudo easy_install --upgrade pip'
+      cmdInstall: 'sudo -HE env PATH=${PATH:-} LD_LIBRARY_PATH=${LD_LIBRARY_PATH:-} PYTHONPATH=${PYTHONPATH:-} easy_install --upgrade pip==9.0.1 && $(which pip) && pip --version' // eslint-disable-line no-template-curly-in-string
     })
 
     deps.push({
@@ -156,7 +163,7 @@ class Deps extends Command {
       cmdInstall:
         'mkdir -p {{{self.dir}}} && ' +
         'pip install ' +
-        '--install-option=\'--prefix=pip\' ' +
+        '--prefix=pip ' +
         '--ignore-installed ' +
         '--force-reinstall ' +
         '--root \'{{{self.dir}}}\' ' +

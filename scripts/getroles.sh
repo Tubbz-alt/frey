@@ -3,16 +3,17 @@
 #
 # This file:
 #
-#  - Walks over any FREY_ environment variable
-#  - Adds encrypted keys ready for use to .travis.yml
+#  - Downloads all needed roles
+#  - Aggregates licences for these roles
 #
 # Run as:
 #
-#  ./encrypt.sh
+#  ./getroles.sh
 #
 # Authors:
 #
 #  - Kevin van Zonneveld <kevin@transloadit.com>
+#  - Mischa ter Smitten <mischa@tersmitten.nl>
 
 set -o pipefail
 set -o errexit
@@ -25,64 +26,62 @@ __file="${__dir}/$(basename "${BASH_SOURCE[0]}")"
 __base="$(basename ${__file} .sh)"
 __root="$(dirname "${__dir}")"
 
-# https://galaxy.ansible.com/geerlingguy/mysql/
+# https://github.com/freyproject/role-*
 
-# DISCLAMER FREY VERIONS != ANSIBLE GALAXY VERSION EVEN THOUGH IT APPEARS THAST WAY
-
-# "<freyRole>,<freyVersion>;<ansiRole>,<ansiVersion>"
+# <role name>,<role version>,<upstream branch to get changes from>
 roles=(
-  "deploy,v1.3.0;carlosbuenosvinos.ansistrano-deploy,1.3.0"
-  "deploy,v1.4.0;carlosbuenosvinos.ansistrano-deploy,1.4.0"
-  "rollback,v1.2.0;carlosbuenosvinos.ansistrano-rollback,1.2.0"
-  "nodejs,v2.1.1;geerlingguy.nodejs,2.1.1"
-  "redis,v1.2.0;geerlingguy.redis,1.2.0"
-  "unattended-upgrades,v1.2.0;jnv.unattended-upgrades,v1.2.0"
-  "munin,v1.1.2;geerlingguy.munin,1.1.2"
-  "munin-node,v1.2.0;geerlingguy.munin-node,1.2.0"
-  "upstart,v1.0.0;telusdigital.upstart"
-  "logrotate,v1.0.0;telusdigital.logrotate"
-  "rsyslog,v3.0.1;tersmitten.rsyslog,v3.0.1"
-  "fqdn,v1.0.0;holms.fqdn"
-  "znc,v1.0.4;triplepoint.znc,1.0.4"
-  "nginx,v2.0.1;jdauphant.nginx,v2.0.1"
-  "prometheus,v1.3.6;williamyeh.prometheus,1.3.6"
-  "smokeping,v0.0.1;akamine.smokeping"
-  "jenkins,v1.3.0;geerlingguy.jenkins,1.3.0"
-  "nix,v1.0.1;ktosiek.nix,v1.0.1"
+  'apt,1.3.0,master'
+  'rsyslog,3.1.0,master'
+  'rollback,1.2.0,master'
+  'rollback,1.3.0,master'
+  'deploy,1.3.0,master'
+  'deploy,1.4.0,master'
+  'nodejs,2.1.1,master'
+  'redis,1.2.0,master'
+  'unattended-upgrades,1.2.0,master'
+  'unattended-upgrades,1.3.0,master'
+  'munin,1.1.2,master'
+  'munin,1.2.0,master'
+  'munin-node,1.2.0,master'
+  'upstart,1.0.0,master'
+  'logrotate,1.0.0,master'
+  'fqdn,1.0.0,master'
+  'znc,1.0.4,master'
+  'znc,1.0.5,master'
+  'nginx,2.0.1,master'
+  'prometheus,1.3.6,master'
+  'smokeping,0.0.1,master'
+  'smokeping,0.0.2,master'
+  'jenkins,1.3.0,master'
+  'nix,1.0.1,master'
 )
 
 for role in "${roles[@]}"; do
-  freyRoleAndVersion="$(echo "${role}" |awk -F";" '{print $1}')"
-  freyRole="$(echo "${freyRoleAndVersion}" |awk -F"," '{print $1}')"
-  freyVersion="$(echo "${freyRoleAndVersion}" |awk -F"," '{print $2}')"
+  roleName="$(echo "${role}" |awk -F"," '{print $1}')"
+  roleVersion="$(echo "${role}" |awk -F"," '{print $2}')"
 
-  ansiRoleAndVersion="$(echo "${role}" |awk -F";" '{print $2}')"
-  ansiRole="$(echo "${ansiRoleAndVersion}" |awk -F"," '{print $1}')"
-  ansiVersion="$(echo "${ansiRoleAndVersion}" |awk -F"," '{print $2}')"
-
-  if [ ! -f "${__root}/roles/${freyRole}/${freyVersion}/README.md" ]; then
-    ansible-galaxy install \
-      --force \
-      --roles-path "${__root}/roles/${freyRole}/${freyVersion}" \
-    ${ansiRoleAndVersion}
-    shopt -s dotglob nullglob # to also glob over hidden files
-    set -x
-    mv "${__root}/roles/${freyRole}/${freyVersion}/${ansiRole}/"* "${__root}/roles/${freyRole}/${freyVersion}/"
-    rmdir "${__root}/roles/${freyRole}/${freyVersion}/${ansiRole}/"
+  if [ ! -f "${__root}/roles/${roleName}/${roleVersion}/README.md" ]; then
+    curl -sSL "https://github.com/freyproject/role-${roleName}/archive/frey-v${roleVersion}.tar.gz" \
+      -o "${__root}/roles/${roleName}-${roleVersion}.tar.gz"
+    mkdir -p "${__root}/roles/${roleName}/${roleVersion}"
+    tar -xzf "${__root}/roles/${roleName}-${roleVersion}.tar.gz" \
+      -C "${__root}/roles/${roleName}/${roleVersion}" \
+      --strip-components=1
+    rm -f "${__root}/roles/${roleName}-${roleVersion}.tar.gz"
   fi
 
-  licenseFile="$(find "${__root}/roles/${freyRole}/${freyVersion}" -name 'LICENSE*')"
+  licenseFile="$(find "${__root}/roles/${roleName}/${roleVersion}" -name 'LICENSE*')"
   if [ ! -f "${licenseFile}" ]; then
-    echo "WARNING! No LICENSE found in ${__root}/roles/${freyRole}/${freyVersion}"
+    echo "WARNING! No LICENSE found in ${__root}/roles/${roleName}/${roleVersion}"
   else
-    author=$(echo $(cat "${licenseFile}" |grep Copyright |tail -n1))
+    author=$(echo $(grep Copyright "${licenseFile}" |tail -n1))
 
     echo "${licenseFile}"
 
-    cp "${licenseFile}" "${__root}/licenses/${ansiRole}-LICENSE"
+    cp "${licenseFile}" "${__root}/licenses/${roleName}-LICENSE"
 
-    if ! egrep "^- ${ansiRole}" "${__root}/licenses/index.md" 2>&1 > /dev/null; then
-      echo "- ${ansiRole} -- ${author}" >> "${__root}/licenses/index.md"
+    if ! egrep "^- ${roleName}" "${__root}/licenses/index.md" 2>&1 > /dev/null; then
+      echo "- ${roleName} -- ${author}" >> "${__root}/licenses/index.md"
     fi
 
     sort "${__root}/licenses/index.md" -o "${__root}/licenses/index.md"

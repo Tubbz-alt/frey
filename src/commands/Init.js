@@ -7,7 +7,7 @@ import path from 'path'
 import _ from 'lodash'
 import async from 'async'
 import fs from 'fs'
-import uuid from 'node-uuid'
+import uuid from 'uuid'
 // import depurar from 'depurar'; const debug = depurar('frey')
 
 class Init extends Command {

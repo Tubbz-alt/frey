@@ -1,6 +1,6 @@
 {
   "name": "frey",
-  "version": "0.3.25",
+  "version": "0.3.27",
   "description": "Automated infrastructure CLI",
   "scripts": {
     "acceptance:savefixtures": "env SAVE_FIXTURES=true npm run acceptance",
@@ -25,13 +25,14 @@
     "version:current": "node -e 'console.log(require(\"./package.json\").version)'",
     "version:replace": "replace \"Frey version '\\d+\\.\\d+\\.\\d+'\" \"Frey version '$(npm run --silent version:current)'\" test/fixture/*.stdio",
     "web:deploy": "npm run web:inject && npm run web:build:full && scripts/web-deploy.sh",
-    "web:build:full": "cd website && bundle exec jekyll build",
-    "web:build": "cd website && bundle exec jekyll build --incremental",
+    "web:build:full": "cd website && bundle exec jekyll build && npm run web:build:css",
+    "web:build": "cd website && bundle exec jekyll build --incremental && npm run web:build:css",
+    "web:build:css": "cd website && node-sass assets/sass/main.scss _site/assets/css/main.min.css --output-style compressed",
     "web:inject": "scripts/web-inject.sh",
     "web:install": "npm install && cd website && (bundle install --path _vendor/bundle || bundle update)",
     "web:start": "npm-run-all web:install --parallel web:watch web:serve",
     "web:serve": "cd website/_site && browser-sync start --server --files .",
-    "web:watch": "nodemon --verbose --watch ./  --ignore 'website/*.md' --ignore 'website/_site/*' --ext html,json,md,js,css,png,jpg --exec 'npm-run-all web:inject web:build'"
+    "web:watch": "nodemon --verbose --watch ./ --ignore 'website/_vendor/*' --ignore 'website/*.md' --ignore 'website/_site/*' --ext html,json,md,js,css,scss,png,jpg --exec 'npm-run-all web:inject web:build'"
   },
   "files": [
     "bin",
@@ -45,7 +46,7 @@
   "preferGlobal": true,
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/kvz/frey.git"
+    "url": "git+ssh://git@github.com/freyproject/frey.git"
   },
   "dependencies": {
     "async": "1.5.2",
@@ -64,7 +65,6 @@
     "liftoff": "2.2.1",
     "lodash": "4.6.1",
     "mkdirp": "0.5.1",
-    "node-uuid": "1.4.7",
     "os-homedir": "1.0.1",
     "rc": "1.1.6",
     "replace": "0.3.0",
@@ -73,6 +73,7 @@
     "toml": "2.3.0",
     "tomlify-j0.4": "1.0.1",
     "update-notifier": "0.6.3",
+    "uuid": "^3.0.0",
     "yargs": "4.3.2"
   },
   "devDependencies": {
@@ -90,6 +91,7 @@
     "eslint-plugin-standard": "2.0.0",
     "istanbul": "0.4.2",
     "mocha": "2.4.5",
+    "node-sass": "3.11.1",
     "nodemon": "1.8.1",
     "npm-run-all": "2.1.1",
     "should": "8.3.0"
@@ -103,7 +105,7 @@
   "author": "Kevin van Zonneveld",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/kvz/frey/issues"
+    "url": "https://github.com/freyproject/frey/issues"
   },
-  "homepage": "https://github.com/kvz/frey#readme"
+  "homepage": "https://github.com/freyproject/frey#readme"
 }

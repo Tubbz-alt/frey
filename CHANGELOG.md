@@ -37,7 +37,7 @@ Unreleased and unplanned todos
 - [ ] Symlink ansible if needed: `mkdir -p ~/.frey/tools/ansible/2.0.1.0/pip/bin/ && ln -nfs ~/.frey/tools/ansible/2.0.1.0/usr/local/share/python/ansible ~/.frey/tools/ansible/2.0.1.0/pip/bin/ansible && ln -nfs ~/.frey/tools/ansible/2.0.1.0/usr/local/share/python/ansible-playbook ~/.frey/tools/ansible/2.0.1.0/pip/bin/ansible-playbook`
 - [ ] Deal with pip returning version `1.1` in some cases (we error out on that currently with an unrecognized version)
 
-## v0.3.26 (Unreleased)
+## v0.3.28 (Unreleased)
 
 - [ ] Transpile `facts {` to an `provisioner "remote-exec"` block writing ini file into `/etc/ansible/facts.d/frey.fact`
 - [ ] When `backup` is ran by hand, the chain should not be triggered. Yet when running a chain, `backup` should be part of it
@@ -48,6 +48,22 @@ Unreleased and unplanned todos
 - [ ] `get` should be daisychained before `refresh`, not `plan`
 - [ ] Possible bug: We should likely not squashArray ansible actions such as `restart`, or actions in multiple files in the same dir are merged into one
 - [ ] Offer to run `backup` if a destructive change was detected. Skip otherwise. Defaults to yes
+- [ ] Replace leaky shell/exe abstraction hackjobs with `shelljs`
+
+## v0.3.27 (2016-12-12)
+
+[Diff](https://github.com/freyproject/frey/compare/v0.3.26...v0.3.27).
+
+- [x] Use --prefix=pip as per #51 (thx @ifedapoolarewaju)
+- [x] Move website to own repo over at https://github.com/freyproject/website/
+- [x] Move roles to own repos over at https://github.com/freyproject/ (@tersmitten)
+- [x] Upgrade pip to 9.0.1 and pin version #51
+- [x] Install `yarn` globally by default for the node role
+
+## v0.3.26 (2016-11-09)
+
+- [x] Upgrade Ansible v2.0.2.0 -> v2.1.3 (@tersmitten)
+- [x] Upgrade role: rsyslog v3.0.1 -> v3.0.2 (@tersmitten)
 
 ## v0.3.25 (2016-09-21)
 
