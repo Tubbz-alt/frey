@@ -12,7 +12,7 @@ Creating public key '{tmpdir}/frey-install.pub'
 Found 'terraform' with version '0.7.3'
 Found 'terraformInventory' with version '0.6.0'
 Found 'pip' with version {{global_pip_version}}
-Found 'ansible' with version '2.2.1'
+Found 'ansible' with version '2.1.4'
 --> {hostname} - install
 
 PLAY [Local stuff] 
