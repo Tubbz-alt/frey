@@ -1,4 +1,3 @@
-'use strict'
 import Terraform from '../Terraform'
 import Command from '../Command'
 import _ from 'lodash'
@@ -7,9 +6,7 @@ import constants from '../constants'
 class Infra extends Command {
   constructor (name, runtime) {
     super(name, runtime)
-    this.boot = [
-      '_confirm'
-    ]
+    this.boot = [ '_confirm' ]
   }
 
   _confirm (cargo, cb) {
@@ -36,14 +33,9 @@ class Infra extends Command {
     }
 
     const terraform = new Terraform({
-      args: {
-        apply: constants.SHELLARG_PREPEND_AS_IS
-      },
+      args   : { apply: constants.SHELLARG_PREPEND_AS_IS },
       runtime: this.runtime,
-      cmdOpts: {
-        verbose: true,
-        limitSamples: false
-      }
+      cmdOpts: { verbose: true, limitSamples: false },
     })
 
     terraform.exe((err, stdout) => {

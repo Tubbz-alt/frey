@@ -1,5 +1,5 @@
-'use strict'
-import depurar from 'depurar'; const debug = depurar('frey')
+import depurar from 'depurar'
+const debug = depurar('frey')
 import _ from 'lodash'
 import flatten from 'flat'
 import crypto from 'crypto'
@@ -11,10 +11,10 @@ class Utils {
     const writeStream = fs.createWriteStream(writeFile)
     readStream.pipe(fn).pipe(writeStream)
 
-    readStream.on('error', (err) => {
+    readStream.on('error', err => {
       return cb(err)
     })
-    writeStream.on('error', (err) => {
+    writeStream.on('error', err => {
       return cb(err)
     })
 
@@ -35,8 +35,12 @@ class Utils {
     if (_.isFunction(subject)) {
       return subject
     }
-    if (opts.failhard === undefined) { opts.failhard = true }
-    if (opts.delimiter === undefined) { opts.delimiter = '.' }
+    if (opts.failhard === undefined) {
+      opts.failhard = true
+    }
+    if (opts.delimiter === undefined) {
+      opts.delimiter = '.'
+    }
 
     const unflat = _.cloneDeep(data)
     if (_.isArray(subject) || _.isObject(subject)) {
@@ -51,20 +55,28 @@ class Utils {
     if (_.isArray(subject)) {
       newSubject = []
       subject.forEach((val, key) => {
-        newSubject[key] = this.render(val, unflat, _.extend({}, opts, { failhard: false, parent: newSubject }))
+        newSubject[key] = this.render(
+          val,
+          unflat,
+          _.extend({}, opts, { failhard: false, parent: newSubject })
+        )
       })
     } else if (_.isObject(subject)) {
       newSubject = {}
       _.forOwn(subject, (val, key) => {
-        newSubject[key] = this.render(val, unflat, _.extend({}, opts, { failhard: false, parent: newSubject }))
+        newSubject[key] = this.render(
+          val,
+          unflat,
+          _.extend({}, opts, { failhard: false, parent: newSubject })
+        )
       })
     } else if (_.isString(subject)) {
-      newSubject = subject.replace(/\{\{\{([^\}]+)\}\}\}/g, (match, token) => {
+      newSubject = subject.replace(/\{\{\{([^}]+)\}\}\}/g, (match, token) => {
         if (match && flattened[token]) {
           return flattened[token]
         }
 
-        return '{{{' + token + '}}}'
+        return `{{{${token}}}}`
       })
     } else {
       newSubject = _.cloneDeep(subject)
@@ -82,8 +94,10 @@ class Utils {
       if (`${js}`.indexOf('{{{') > -1) {
         let nonParsed = `${js}`.match(/({{{[^}]+}}})/g)
         let list = nonParsed.join(', ')
-        debug({haystack: js})
-        throw new Error(`Unable to render var(s): ${list}. Run with DEBUG=Frey:* to see the relevant haystack. `)
+        debug({ haystack: js })
+        throw new Error(
+          `Unable to render var(s): ${list}. Run with DEBUG=Frey:* to see the relevant haystack. `
+        )
       }
     }
 

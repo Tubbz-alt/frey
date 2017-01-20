@@ -1,9 +1,9 @@
-'use strict'
 import Command from '../Command'
 import path from 'path'
 import async from 'async'
 import globby from 'globby'
-import depurar from 'depurar'; const debug = depurar('frey')
+import depurar from 'depurar'
+const debug = depurar('frey')
 import json2hcl from '../json2hcl'
 import fs from 'fs'
 import _ from 'lodash'
@@ -15,13 +15,14 @@ import TOML from 'toml'
 class Convert extends Command {
   constructor (name, runtime) {
     super(name, runtime)
-    this.boot = [
-      '_confirm'
-    ]
+    this.boot = [ '_confirm' ]
   }
 
   _confirm (cargo, cb) {
-    this.shell.confirm('About to convert existing TOML, YAML, CFG and TF to HCL files in your project dir. Make sure your files are under source control as this is a best-effort procedure. May I proceed?', cb)
+    this.shell.confirm(
+      'About to convert existing TOML, YAML, CFG and TF to HCL files in your project dir. Make sure your files are under source control as this is a best-effort procedure. May I proceed?',
+      cb
+    )
   }
 
   _parseTomlFile (tomlFile, cb) {
@@ -50,7 +51,7 @@ class Convert extends Command {
     let hcl = fs.readFileSync(hclFile, 'utf8')
     json2hcl(hcl, true, (err, parsed) => {
       if (err) {
-        debug({hclFile: hclFile, hcl: hcl})
+        debug({ hclFile, hcl })
         return cb(new Error(`Unable to parse '${hclFile}'. ${err}`))
       }
 
@@ -91,29 +92,27 @@ class Convert extends Command {
     const pattern = `${this.runtime.init.cliargs.projectDir}/*.{toml,yml,yaml,tf,cfg}`
     debug(`Reading from '${pattern}'`)
 
-    return globby(pattern)
-      .then((origFiles) => {
-        async.map(origFiles, this._parseFile.bind(this), (err, mapped) => {
+    return globby(pattern).then(origFiles => {
+      async.map(origFiles, this._parseFile.bind(this), (err, mapped) => {
+        if (err) {
+          return cb(err)
+        }
+
+        let config = {}
+        mapped.forEach(val => {
+          config = _.extend(config, val)
+        })
+
+        json2hcl(config, false, (err, hcl) => {
           if (err) {
-            return cb(err)
+            debug({ config })
+            return cb(new Error(`Unable to convert JSON to HCL. ${err}`))
           }
 
-          let config = {}
-          mapped.forEach((val) => {
-            config = _.extend(config, val)
-          })
-
-          json2hcl(config, false, (err, hcl) => {
-            if (err) {
-              debug({config: config})
-              return cb(new Error(`Unable to convert JSON to HCL. ${err}`))
-            }
-
-            fs.writeFile(`${this.runtime.init.cliargs.projectDir}/Freyfile.hcl`, hcl, 'utf-8', cb)
-          })
+          fs.writeFile(`${this.runtime.init.cliargs.projectDir}/Freyfile.hcl`, hcl, 'utf-8', cb)
         })
       })
-      .catch(cb)
+    }).catch(cb)
   }
 }
 

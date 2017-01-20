@@ -1,9 +1,10 @@
-'use strict'
 import Ansible from '../Ansible'
 import Command from '../Command'
 import constants from '../constants'
 import _ from 'lodash'
-import depurar from 'depurar'; const debug = depurar('frey')
+import depurar from 'depurar'
+
+const debug = depurar('frey')
 
 class Restart extends Command {
   main (cargo, cb) {

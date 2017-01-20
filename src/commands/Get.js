@@ -1,4 +1,3 @@
-'use strict'
 import Terraform from '../Terraform'
 import Command from '../Command'
 import _ from 'lodash'
@@ -13,12 +12,12 @@ class Get extends Command {
 
     const terraform = new Terraform({
       args: {
-        get: constants.SHELLARG_PREPEND_AS_IS,
-        state: constants.SHELLARG_REMOVE,
+        get        : constants.SHELLARG_PREPEND_AS_IS,
+        state      : constants.SHELLARG_REMOVE,
         parallelism: constants.SHELLARG_REMOVE,
-        update: true
+        update     : true,
       },
-      runtime: this.runtime
+      runtime: this.runtime,
     })
 
     terraform.exe((err, stdout) => {

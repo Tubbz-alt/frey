@@ -1,7 +1,5 @@
-'use strict'
 import Command from '../Command'
 // import depurar from 'depurar'; const debug = depurar('frey')
-
 class Validate extends Command {
   main (cargo, cb) {
     if (!this.runtime.init.paths.git_dir) {

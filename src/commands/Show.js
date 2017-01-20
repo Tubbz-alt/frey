@@ -1,4 +1,3 @@
-'use strict'
 import Command from '../Command'
 import constants from '../constants'
 import fs from 'fs'
@@ -7,19 +6,15 @@ import Terraform from '../Terraform'
 import Ansible from '../Ansible'
 import _ from 'lodash'
 import mkdirp from 'mkdirp'
-import depurar from 'depurar'; const debug = depurar('frey')
+import depurar from 'depurar'
+
+const debug = depurar('frey')
 
 class Show extends Command {
   constructor (name, runtime) {
     super(name, runtime)
-    this.boot = [
-      '_createTmpDir',
-      'output',
-      'publicAddresses',
-      'endpoint',
-      'facts'
-    ]
-    this.tmpFactDir = this.runtime.init.paths.process_tmp_dir + '/facts'
+    this.boot = [ '_createTmpDir', 'output', 'publicAddresses', 'endpoint', 'facts' ]
+    this.tmpFactDir = `${this.runtime.init.paths.process_tmp_dir}/facts`
   }
 
   _createTmpDir (cargo, cb) {
@@ -34,12 +29,12 @@ class Show extends Command {
 
     const terraform = new Terraform({
       cmdOpts: { verbose: false },
-      args: {
-        output: constants.SHELLARG_PREPEND_AS_IS,
-        state: this.runtime.config.global.infra_state_file,
-        parallelism: constants.SHELLARG_REMOVE
+      args   : {
+        output     : constants.SHELLARG_PREPEND_AS_IS,
+        state      : this.runtime.config.global.infra_state_file,
+        parallelism: constants.SHELLARG_REMOVE,
       },
-      runtime: this.runtime
+      runtime: this.runtime,
     })
 
     terraform.exe(cb)
@@ -57,13 +52,13 @@ class Show extends Command {
 
     const terraform = new Terraform({
       cmdOpts: { verbose: false },
-      args: {
-        output: constants.SHELLARG_PREPEND_AS_IS,
-        state: this.runtime.config.global.infra_state_file,
-        parallelism: constants.SHELLARG_REMOVE,
-        public_addresses: constants.SHELLARG_APPEND_AS_IS
+      args   : {
+        output          : constants.SHELLARG_PREPEND_AS_IS,
+        state           : this.runtime.config.global.infra_state_file,
+        parallelism     : constants.SHELLARG_REMOVE,
+        public_addresses: constants.SHELLARG_APPEND_AS_IS,
       },
-      runtime: this.runtime
+      runtime: this.runtime,
     })
 
     terraform.exe(cb)
@@ -81,13 +76,13 @@ class Show extends Command {
 
     const terraform = new Terraform({
       cmdOpts: { verbose: false },
-      args: {
-        output: constants.SHELLARG_PREPEND_AS_IS,
-        state: this.runtime.config.global.infra_state_file,
+      args   : {
+        output     : constants.SHELLARG_PREPEND_AS_IS,
+        state      : this.runtime.config.global.infra_state_file,
         parallelism: constants.SHELLARG_REMOVE,
-        endpoint: constants.SHELLARG_APPEND_AS_IS
+        endpoint   : constants.SHELLARG_APPEND_AS_IS,
       },
-      runtime: this.runtime
+      runtime: this.runtime,
     })
 
     terraform.exe(cb)
@@ -100,13 +95,19 @@ class Show extends Command {
     }
 
     const ansibleProps = _.find(this.runtime.deps, { name: 'ansible' })
-    const opts = { exe: ansibleProps.exe, args: {}, runtime: this.runtime, cmdOpts: { verbose: false } }
+    const opts = {
+      exe    : ansibleProps.exe,
+      args   : {},
+      runtime: this.runtime,
+      cmdOpts: { verbose: false },
+    }
 
     opts.args['module-name'] = 'setup'
     opts.args['tree'] = this.tmpFactDir
     opts.args['all'] = constants.SHELLARG_APPEND_AS_IS
-    opts.args['tags'] = constants.SHELLARG_REMOVE // ansible: error: no such option: --tags
+    opts.args['tags'] = constants.SHELLARG_REMOVE
 
+    // ansible: error: no such option: --tags
     const ansible = new Ansible(opts)
     ansible.exe((err, stdout) => {
       if (err) {
@@ -114,18 +115,18 @@ class Show extends Command {
       }
 
       let factList = []
-      globby.sync(`${this.tmpFactDir}/*`).forEach((filepath) => {
+      globby.sync(`${this.tmpFactDir}/*`).forEach(filepath => {
         const facts = JSON.parse(fs.readFileSync(filepath, 'utf-8'))
 
         const key = 'ansible_facts.ansible_service_mgr'
-        let val = _.get(facts, key) + ''
-        let fqdn = _.get(facts, 'ansible_facts.ansible_fqdn') + ''
+        let val = `${_.get(facts, key)}`
+        let fqdn = `${_.get(facts, 'ansible_facts.ansible_fqdn')}`
 
         // @todo this is a hack to prevent failures like:
         // https://travis-ci.org/freyproject/frey/builds/116576951#L931
         // where there must be some odd character leaking into the acceptance test fixtures
-        val = val.replace(/[^A-Za-z0-9\.\-_]/mg, '')
-        fqdn = fqdn.replace(/[^A-Za-z0-9\.\-_]/mg, '')
+        val = val.replace(/[^A-Za-z0-9.\-_]/mg, '')
+        fqdn = fqdn.replace(/[^A-Za-z0-9.\-_]/mg, '')
 
         factList.push(`${fqdn},${key} = ${val}`)
       })
@@ -136,10 +137,10 @@ class Show extends Command {
 
   main (cargo, cb) {
     const results = {
-      output: this.bootCargo.output,
+      output          : this.bootCargo.output,
       public_addresses: this.bootCargo.publicAddresses,
-      facts: this.bootCargo.facts,
-      endpoint: this.bootCargo.endpoint
+      facts           : this.bootCargo.facts,
+      endpoint        : this.bootCargo.endpoint,
     }
 
     _.forOwn(results, (out, key) => {

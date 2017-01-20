@@ -1,4 +1,3 @@
-'use strict'
 // import depurar from 'depurar'; const debug = depurar('frey')
 import path from 'path'
 import _ from 'lodash'
@@ -9,7 +8,7 @@ const platform = os.platform()
 const arch = `${os.arch()}`.replace('x64', 'amd64')
 
 module.exports = (input, reverse, cb) => {
-  let cmd = path.join(path.dirname(__dirname), 'bin', 'json2hcl-' + platform + '-' + arch)
+  let cmd = path.join(path.dirname(__dirname), 'bin', `json2hcl-${platform}-${arch}`)
   let args = []
 
   if (reverse) {
@@ -27,7 +26,6 @@ module.exports = (input, reverse, cb) => {
   //   args: args,
   //   input: input
   // })
-
   const child = spawn(cmd, args)
 
   let bufOut = ''
@@ -36,10 +34,10 @@ module.exports = (input, reverse, cb) => {
   child.stdin.write(input)
   child.stdin.end()
 
-  child.stdout.on('data', (data) => {
+  child.stdout.on('data', data => {
     bufOut += data
   })
-  child.stderr.on('data', (data) => {
+  child.stderr.on('data', data => {
     bufErr += data
   })
 

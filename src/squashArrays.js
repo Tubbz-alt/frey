@@ -1,4 +1,3 @@
-'use strict'
 // import depurar from 'depurar'; const debug = depurar('frey')
 import _ from 'lodash'
 
@@ -28,7 +27,7 @@ const squashArrays = (i, exceptions, path) => {
       'infra.*.resource.aws_instance.*.security_groups',
       'infra.*.resource.aws_route53_record.*.records',
       'infra.*.resource.aws_security_group.*.egress.*.cidr_blocks',
-      'infra.*.resource.aws_security_group.*.ingress.*.cidr_blocks'
+      'infra.*.resource.aws_security_group.*.ingress.*.cidr_blocks',
     ]
   }
   if (!path) {
@@ -39,18 +38,15 @@ const squashArrays = (i, exceptions, path) => {
   exceptions.forEach((ex, i) => {
     const pattern = [
       '^',
-      ex
-        .replace(/\./g, '\\.')
-        .replace(/\*\*/g, '.*')
-        .replace(/\*/g, '[^\\.]+'),
-      '$'
+      ex.replace(/\./g, '\\.').replace(/\*\*/g, '.*').replace(/\*/g, '[^\\.]+'),
+      '$',
     ].join('')
     regexceptions.push(new RegExp(pattern, 'g'))
   })
 
-  const isException = (pathString) => {
+  const isException = pathString => {
     let match = false
-    regexceptions.forEach((ex) => {
+    regexceptions.forEach(ex => {
       if (ex.test(pathString)) {
         match = true
         return false // Abort loop
