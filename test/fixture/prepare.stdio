@@ -11,7 +11,7 @@ Creating private encrypted key '{tmpdir}/frey-prepare.pem.cast5'
 Found 'terraform' with version '0.7.3'
 Found 'terraformInventory' with version '0.6.0'
 Found 'pip' with version {{global_pip_version}}
-Found 'ansible' with version '2.1.3'
+Found 'ansible' with version '2.2.1'
 Done
 Running help on all required tools
   --version             show program's version number and exit
