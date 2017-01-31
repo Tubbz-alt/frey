@@ -1,0 +1,52 @@
+nix_version: '1.8'
+nix_platform: amd64
+nix_package_url: '{{ nix_package_urls[nix_version][ansible_distribution_release][ansible_architecture] }}'
+nix_package_name: 'nix_{{ nix_version }}-1{{ ansible_distribution_release }}.deb'
+
+nix_package_urls:
+  '1.8':
+    trusty:
+      x86_64: http://nixos.org/releases/nix/nix-1.8/deb_ubuntu1404x86_64/nix_1.8-1_amd64.deb
+      i386: http://nixos.org/releases/nix/nix-1.8/deb_ubuntu1404i386/nix_1.8-1_i386.deb
+    utopic:
+      x86_64: http://nixos.org/releases/nix/nix-1.8/deb_ubuntu1410x86_64/nix_1.8-1_amd64.deb
+      i386: http://nixos.org/releases/nix/nix-1.8/deb_ubuntu1410i386/nix_1.8-1_i386.deb
+  '1.9':
+    trusty:
+      x86_64: http://nixos.org/releases/nix/nix-1.9/deb_ubuntu1404x86_64/nix_1.9-1_amd64.deb
+      i386: http://nixos.org/releases/nix/nix-1.9/deb_ubuntu1404i386/nix_1.9-1_i386.deb
+    utopic:
+      x86_64: http://nixos.org/releases/nix/nix-1.9/deb_ubuntu1410x86_64/nix_1.9-1_amd64.deb
+      i386: http://nixos.org/releases/nix/nix-1.9/deb_ubuntu1410i386/nix_1.9-1_i386.deb
+  '1.10':
+    trusty:
+      x86_64: http://nixos.org/releases/nix/nix-1.10/deb_ubuntu1404x86_64/nix_1.10-1_amd64.deb
+      i386: http://nixos.org/releases/nix/nix-1.10/deb_ubuntu1404i386/nix_1.10-1_i386.deb
+    utopic:
+      x86_64: http://nixos.org/releases/nix/nix-1.10/deb_ubuntu1410x86_64/nix_1.10-1_amd64.deb
+      i386: http://nixos.org/releases/nix/nix-1.10/deb_ubuntu1410i386/nix_1.10-1_i386.deb
+  '1.11':
+    trusty:
+      x86_64: http://nixos.org/releases/nix/nix-1.11/deb_ubuntu1404x86_64/nix_1.11-1_amd64.deb
+      i386: http://nixos.org/releases/nix/nix-1.11/deb_ubuntu1404i386/nix_1.11-1_i386.deb
+    utopic:
+      x86_64: http://nixos.org/releases/nix/nix-1.11/deb_ubuntu1410x86_64/nix_1.11-1_amd64.deb
+      i386: http://nixos.org/releases/nix/nix-1.11/deb_ubuntu1410i386/nix_1.11-1_i386.deb
+  '1.11.1':
+    trusty:
+      x86_64: http://nixos.org/releases/nix/nix-1.11.1/deb_ubuntu1404x86_64/nix_1.11.1-1_amd64.deb
+      i386: http://nixos.org/releases/nix/nix-1.11.1/deb_ubuntu1404i386/nix_1.11.1-1_i386.deb
+    utopic:
+      x86_64: http://nixos.org/releases/nix/nix-1.11.1/deb_ubuntu1410x86_64/nix_1.11.1-1_amd64.deb
+      i386: http://nixos.org/releases/nix/nix-1.11.1/deb_ubuntu1410i386/nix_1.11.1-1_i386.deb
+  '1.11.2':
+    trusty:
+      x86_64: http://nixos.org/releases/nix/nix-1.11.2/deb_ubuntu1404x86_64/nix_1.11.2-1_amd64.deb
+      i386: http://nixos.org/releases/nix/nix-1.11.2/deb_ubuntu1404i386/nix_1.11.2-1_i386.deb
+    utopic:
+      x86_64: http://nixos.org/releases/nix/nix-1.11.2/deb_ubuntu1410x86_64/nix_1.11.2-1_amd64.deb
+      i386: http://nixos.org/releases/nix/nix-1.11.2/deb_ubuntu1410i386/nix_1.11.2-1_i386.deb
+
+nix_users: []
+
+nix_trusted_binary_caches: []

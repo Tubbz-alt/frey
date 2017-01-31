@@ -1,0 +1,7 @@
+---
+- name: Install Packages | apt
+  apt:
+    state: "{{ apt_install_state | default('present') }}"
+    pkg: "{{ item }}"
+  with_items:
+    - logrotate

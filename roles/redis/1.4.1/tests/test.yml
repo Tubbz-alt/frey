@@ -1,0 +1,8 @@
+---
+- hosts: all
+
+  pre_tasks:
+    - include: pre.yml
+
+  roles:
+    - role_under_test

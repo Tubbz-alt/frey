@@ -1,0 +1,11 @@
+# test file for fqdn
+---
+- hosts: localhost
+  connection: local
+  become: true
+  pre_tasks:
+    - include: pre.yml
+  roles:
+    - ../../
+  vars:
+    fqdn: mx.example.com

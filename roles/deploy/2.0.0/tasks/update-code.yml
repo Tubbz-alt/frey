@@ -1,0 +1,25 @@
+---
+# Update code deployment step
+- name: ANSISTRANO | Get release version
+  set_fact:
+    ansistrano_release_version: "{{ lookup('pipe', 'date -u +%Y%m%d%H%M%SZ') }}"
+  run_once: true
+  when: ansistrano_release_version is not defined
+  delegate_to: 127.0.0.1
+
+- name: ANSISTRANO | Get release path
+  command: echo "{{ ansistrano_releases_path.stdout }}/{{ ansistrano_release_version }}"
+  register: ansistrano_release_path
+
+- include: "update-code/{{ ansistrano_deploy_via | default('rsync') }}.yml"
+
+- name: ANSISTRANO | Install npms
+  npm: path={{ ansistrano_release_path.stdout }} production=yes
+  become: false
+  when: ansistrano_npm|default(false)
+
+- name: ANSISTRANO | Copy release version into REVISION file
+  copy: content={{ ansistrano_release_version }} dest={{ ansistrano_release_path.stdout }}/REVISION
+
+- name: ANSISTRANO | Chown release dir
+  file: state=directory path={{ ansistrano_release_path.stdout }} mode="u=rwX,g=rwX,o=" recurse=yes owner={{ ansistrano_owner }} group={{ ansistrano_group }}

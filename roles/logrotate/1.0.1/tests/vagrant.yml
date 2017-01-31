@@ -1,0 +1,7 @@
+# test file for logrotate
+---
+- hosts: all
+  remote_user: vagrant
+  become: true
+  roles:
+    - ../../
