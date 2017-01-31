@@ -1,4 +1,4 @@
---> Frey version '0.3.27'
+--> Frey version '0.3.28'
 --> Will run: [ 'init', 'config', 'deps', 'prepare', 'validate' ]
 --> {hostname} - init
 --> {hostname} - config
@@ -10,7 +10,7 @@ Creating private encrypted key '{tmpdir}/frey-gitless/frey-frey-gitless.pem.cast
 Found 'terraform' with version '0.7.3'
 Found 'terraformInventory' with version '0.6.0'
 Found 'pip' with version {{global_pip_version}}
-Found 'ansible' with version '2.1.3'
+Found 'ansible' with version '2.1.4'
 --> {hostname} - validate
 
 --> Exiting with error: Frey requires project (and state) to be under Git, and residu to be ignored.

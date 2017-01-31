@@ -1,4 +1,3 @@
-'use strict'
 import chalk from 'chalk'
 import _ from 'lodash'
 import App from './App'
@@ -8,10 +7,10 @@ class Terraform extends App {
   exe (cb) {
     const terraformProps = _.find(this.runtime.deps, { name: 'terraform' })
     const defaults = {
-      args: {},
-      env: terraformProps.env || {},
+      args         : {},
+      env          : terraformProps.env || {},
       signatureOpts: { equal: '=', quote: '', dash: '-', escape: false },
-      exe: terraformProps.exe
+      exe          : terraformProps.exe,
     }
 
     if (!chalk.enabled) {

@@ -1,4 +1,3 @@
-'use strict'
 import Base from './Base'
 import Shell from './Shell'
 

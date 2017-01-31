@@ -1,4 +1,3 @@
-'use strict'
 import chalk from 'chalk'
 import _ from 'lodash'
 import App from './App'
@@ -10,10 +9,10 @@ class Ansible extends App {
     const terraformInvProps = _.find(this.runtime.deps, { name: 'terraformInventory' })
     const ansibleProps = _.find(this.runtime.deps, { name: 'ansible' })
     const defaults = {
-      args: {},
-      env: ansibleProps.env || {},
+      args         : {},
+      env          : ansibleProps.env || {},
       signatureOpts: { equal: '=', quote: '', dash: '--', escape: false },
-      exe: ansibleProps.exePlaybook
+      exe          : ansibleProps.exePlaybook,
     }
 
     defaults.args['inventory-file'] = terraformInvProps.exe
@@ -32,7 +31,6 @@ class Ansible extends App {
     // Also, make it so that extra-vars can be appended vs
     // overwritten further down already
     // defaults.args['extra-vars'] = 'ansistrano_release_version=$(date -u +%Y%m%d%H%M%SZ)'
-
     const connection = _.get(this.runtime, 'config.global.connection')
     if (connection !== undefined) {
       if (connection === 'local') {
@@ -43,13 +41,15 @@ class Ansible extends App {
         defaults.args['private-key'] = constants.SHELLARG_REMOVE
       } else {
         const hostFile = '/tmp/anshosts'
-        fs.writeFileSync(hostFile, connection + '\n', 'utf-8')
+        fs.writeFileSync(hostFile, `${connection}\n`, 'utf-8')
         defaults.args['inventory-file'] = hostFile
       }
     } else {
-      fs.stat(this.runtime.config.global.infra_state_file, (err) => {
+      fs.stat(this.runtime.config.global.infra_state_file, err => {
         if (err) {
-          return cb(new Error(`Can't find infra_state_file '${this.runtime.config.global.infra_state_file}'. Did you provision infra yet? `))
+          return cb(new Error(
+            `Can't find infra_state_file '${this.runtime.config.global.infra_state_file}'. Did you provision infra yet? `
+          ))
         }
       })
     }
@@ -66,7 +66,6 @@ class Ansible extends App {
     //   args.push(`limit=${this.runtime.init.cliargs.limit}`)
     // }
     //
-
     this._exe(defaults, cb)
   }
 }

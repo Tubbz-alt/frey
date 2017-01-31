@@ -1,9 +1,7 @@
-'use strict'
 import _ from 'lodash'
 import Shell from './Shell'
 import constants from './constants'
 // import depurar from 'depurar'; const debug = depurar('frey')
-
 class App {
   constructor (opts) {
     this.opts = opts
@@ -34,9 +32,9 @@ class App {
 
   _escape (str) {
     if (!str.replace) {
-      throw new Error('You should pass _escape a string. But you passed: ' + str)
+      throw new Error(`You should pass _escape a string. But you passed: ${str}`)
     }
-    return str.replace(/([^a-zA-Z0-9\-\.\/,_])/g, '\\$1')
+    return str.replace(/([^a-zA-Z0-9\-./,_])/g, '\\$1')
   }
 
   _objectToEnv (obj, opts = {}) {
@@ -63,7 +61,7 @@ class App {
     opts.dash = opts.dash || ''
     opts.escape = opts.escape === true || opts.escape === undefined
 
-    let fn = (str) => {
+    let fn = str => {
       return str
     }
     if (opts.escape) {
@@ -76,10 +74,7 @@ class App {
     _.forOwn(obj, (val, key) => {
       if (val === constants.SHELLARG_BOOLEAN_FLAG) {
         // turn on a boolean flag
-        args.push([
-          opts.dash,
-          fn(key)
-        ].join(''))
+        args.push([ opts.dash, fn(key) ].join(''))
       } else if (val === constants.SHELLARG_PREPEND_AS_IS) {
         // add the value as is
         prepend.push(fn(key))
@@ -91,14 +86,7 @@ class App {
         return
       } else {
         // key/value pair
-        args.push([
-          opts.dash,
-          fn(key),
-          opts.equal,
-          opts.quote,
-          fn(val),
-          opts.quote
-        ].join(''))
+        args.push([ opts.dash, fn(key), opts.equal, opts.quote, fn(val), opts.quote ].join(''))
       }
     })
 

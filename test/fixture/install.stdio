@@ -1,7 +1,7 @@
 ACCPTST:STDIO_REPLACE_LONGTIMES
 ACCPTST:STDIO_REPLACE_DURATIONS
 ACCPTST:STDIO_REPLACE_ASTERISKHR
---> Frey version '0.3.27'
+--> Frey version '0.3.28'
 --> Will run: [ 'init', 'config', 'deps', 'prepare', 'install' ]
 --> {hostname} - init
 --> {hostname} - config
@@ -12,7 +12,7 @@ Creating public key '{tmpdir}/frey-install.pub'
 Found 'terraform' with version '0.7.3'
 Found 'terraformInventory' with version '0.6.0'
 Found 'pip' with version {{global_pip_version}}
-Found 'ansible' with version '2.1.3'
+Found 'ansible' with version '2.1.4'
 --> {hostname} - install
 
 PLAY [Local stuff] 

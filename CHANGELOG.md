@@ -24,7 +24,9 @@ Unreleased and unplanned todos
 - [ ] Add generic cleanup method that `.pem` as well as `Frey-residu-*` can be registered with, so it will all be deleted if `global.purge_residu` is turned on (default = `true`)
 - [ ] Don't rely on `exceptions` in `squashArrays`, but have a more clever system to preserve arrays (a better json2hcl or adhering to arrayed config might also fix this already, ridding ourselves from squash)
 
-## v0.3.x (Unreleased)
+## v0.3.x
+
+Released: Unreleased.
 
 - [ ] Consider putting `provider` `output` `variable` `resource` at the root level, and removing intermediate `playbooks` level from `install`, `setup`, `backup`, `restore`, etc. This will simplify how the hcl looks, and (maybe) allow us to keep the hcl for terraform untouched, vs doing hcl->object->json (but what about injecting FREY vars..)
 - [ ] Make Frey less 'classy', utilizing more pure functions, and allow the introduction of globals such as `runtime`
@@ -37,7 +39,9 @@ Unreleased and unplanned todos
 - [ ] Symlink ansible if needed: `mkdir -p ~/.frey/tools/ansible/2.0.1.0/pip/bin/ && ln -nfs ~/.frey/tools/ansible/2.0.1.0/usr/local/share/python/ansible ~/.frey/tools/ansible/2.0.1.0/pip/bin/ansible && ln -nfs ~/.frey/tools/ansible/2.0.1.0/usr/local/share/python/ansible-playbook ~/.frey/tools/ansible/2.0.1.0/pip/bin/ansible-playbook`
 - [ ] Deal with pip returning version `1.1` in some cases (we error out on that currently with an unrecognized version)
 
-## v0.3.28 (Unreleased)
+## v0.3.29
+
+Released: Unreleased.
 
 - [ ] Transpile `facts {` to an `provisioner "remote-exec"` block writing ini file into `/etc/ansible/facts.d/frey.fact`
 - [ ] When `backup` is ran by hand, the chain should not be triggered. Yet when running a chain, `backup` should be part of it
@@ -48,10 +52,25 @@ Unreleased and unplanned todos
 - [ ] `get` should be daisychained before `refresh`, not `plan`
 - [ ] Possible bug: We should likely not squashArray ansible actions such as `restart`, or actions in multiple files in the same dir are merged into one
 - [ ] Offer to run `backup` if a destructive change was detected. Skip otherwise. Defaults to yes
-- [ ] Replace leaky shell/exe abstraction hackjobs with `shelljs`
 
-## v0.3.27 (2016-12-12)
+## v0.3.29
 
+Released: Unreleased.
+
+- [ ] Replace leaky shell/exe abstraction hackjobs with `scrolex`
+- [ ] Switch from terraformInventory to terraform-provisioner-ansible (https://github.com/jonmorehouse/terraform-provisioner-ansible)
+
+## v0.3.28
+
+Released: 2017-01-31.
+[Diff](https://github.com/freyproject/frey/compare/v0.3.27...v0.3.28).
+
+- [x] Upgrade all roles with upstream patches and new insights such as host vars (@tersmitten)
+- [x] Fix bug where `frey remote` would not abe able to find google cloud infra
+
+## v0.3.27
+
+Released: 2016-12-12.
 [Diff](https://github.com/freyproject/frey/compare/v0.3.26...v0.3.27).
 
 - [x] Use --prefix=pip as per #51 (thx @ifedapoolarewaju)
@@ -60,40 +79,54 @@ Unreleased and unplanned todos
 - [x] Upgrade pip to 9.0.1 and pin version #51
 - [x] Install `yarn` globally by default for the node role
 
-## v0.3.26 (2016-11-09)
+## v0.3.26
+
+Released: 2016-11-09.
 
 - [x] Upgrade Ansible v2.0.2.0 -> v2.1.3 (@tersmitten)
 - [x] Upgrade role: rsyslog v3.0.1 -> v3.0.2 (@tersmitten)
 
-## v0.3.25 (2016-09-21)
+## v0.3.25
+
+Released: 2016-09-21.
 
 - [x] Make `remote` less noisy
 - [-] Transpile terraform files one-on-one, so we can also use Frey capable modules(?) <-- No. Modules are possible but remain `tf` files. Reason: there's no sane way to spread ansible playbooks accross those.
 - [x] Before `plan`, do a `terraform get`
 - [x] Reformat scenario example Freyfiles 
 
-## v0.3.24 (2016-09-18)
+## v0.3.24
+
+Released: 2016-09-18.
 
 - [x] Add nix role
 
-## v0.3.23 (2016-09-15)
+## v0.3.23
+
+Released: 2016-09-15.
 
 - [x] Ship `bin` inside the npm as well
 
-## v0.3.22 (2016-09-15)
+## v0.3.22
+
+Released: 2016-09-15.
 
 - [x] Upgrade from Terraform 0.6.15 -> 0.7.3 again, because all our states cannot be downgraded
 - [x] Better exception handling
 - [x] More control over squashArray exceptions by using full paths
 
-## v0.3.21 (2016-09-15)
+## v0.3.21
+
+Released: 2016-09-15.
 
 - [x] Fix node install problem on Trusty with python 2.7.6: https://github.com/ansible/ansible/issues/9966#issuecomment-246373269 https://github.com/nodesource/distributions/issues/354
 - [x] Squash exceptions on non object arrays
 - [x] Downgrade from Terraform 0.7.3 -> 0.6.15 as the first throws EOL errors (test with `statuspage` repo and you'll see)
 - [x] Less verbosity in debug mode
 
-## v0.3.20 (2016-09-14)
+## v0.3.20
+
+Released: 2016-09-14.
 
 - [x] Write a higher quality json->hcl->json converter
 - [x] Upgrade from Terraform 0.6.15 -> 0.7.3
@@ -103,29 +136,39 @@ Unreleased and unplanned todos
 - [x] Upgrade babel
 - [x] Upgrade eslint and fix newly found linting issues
 
-## v0.3.19 (2016-09-02)
+## v0.3.19
+
+Released: 2016-09-02.
 
 - [x] Upgrade depurar
 - [x] Change website to use Jekyll (vs middleman)
 - [x] Upgrade to Ansible 2.0.2.0 as that fixes an issue with getting remote tempdir https://github.com/ansible/ansible/issues/13876
 
-## v0.3.18 (2016-04-16)
+## v0.3.18
+
+Released: 2016-04-16.
 
 - [x] Do a prepare before remote, so that we can have key decryption, as well as offer newcomers into a project a working `remote` (bugfixed)
 
-## v0.3.17 (2016-04-16)
+## v0.3.17
+
+Released: 2016-04-16.
 
 - [x] Upgrade to Terraform 0.6.15
 - [x] Make it easier to use Frey without Providers (just the install and setup phase, targeting hostnames you already know)
 - [x] Upgrade pyhcl to 0.2.1 (see https://github.com/virtuald/pyhcl/issues/7)
 
-## v0.3.16 (2016-04-13)
+## v0.3.16
+
+Released: 2016-04-13.
 
 - [x] Fix Remote ssh bug using `SHELLARG_PREPEND_AS_IS`
 - [x] Allow more control over cli args via constants
 - [x] Add support for feeding commands to `Remote` via cli
 
-## v0.3.15 (2016-03-31)
+## v0.3.15
+
+Released: 2016-03-31.
 
 - [x] Add role: Jenkins
 - [x] Collect all licenses and store them in a good/public place
@@ -134,11 +177,15 @@ Unreleased and unplanned todos
 - [x] Add role: munin-node
 - [x] Command's exe functions should mostly be in a util class
 
-## v0.3.14 (2016-03-30)
+## v0.3.14
+
+Released: 2016-03-30.
 
 - [x] Fix for incomplete Node 0.10 version matching
 
-## v0.3.13 (2016-03-30)
+## v0.3.13
+
+Released: 2016-03-30.
 
 - [x] Convert `format.js` to ES6 and make it a first class citizen via `frey format`
 - [x] Implement Backup and Restore via Ansible
@@ -153,13 +200,17 @@ Unreleased and unplanned todos
 - [-] Consider running `frey prepare` upon `postinstall`, and then removing it from the chain (at least the installing of dependencies)
 - [x] Fix bug: `Error: only one instance of babel-polyfill is allowed`
 
-## v0.3.12 (2016-03-29)
+## v0.3.12
+
+Released: 2016-03-29.
 
 - [x] Support for node 0.10 (so Frey is usable on non-Node Travis projects - all Travis boxes ship with node 0.10)
 - [x] Set ansistrano defaults: `ansistrano_current_dir: "current"` and `ansistrano_shared_paths: [ logs ]`
 - [x] Allow to omit `ansistrano_npm`, `ansistrano_owner`, and `ansistrano_group`
 
-## v0.3.11 (2016-03-29)
+## v0.3.11
+
+Released: 2016-03-29.
 
 - [x] Add run-one to cronjobs
 - [x] Upgrade to Terraform 0.6.14
@@ -182,38 +233,52 @@ Unreleased and unplanned todos
 - [x] Add role: upstart
 - [x] Add role: logrotate
 
-## v0.3.10 (2016-03-22)
+## v0.3.10
+
+Released: 2016-03-22.
 
 - [x] docs: link to tusd and uppy-server
 - [x] Upgrade role: deploy to 1.4.0
 - [x] Add role: munin
 - [x] Deprecate glob in favor of globby (which we already required in some places)
 
-## v0.3.9 (2016-03-19)
+## v0.3.9
+
+Released: 2016-03-19.
 
 - [x] Appname can be configured in Freyfile, defaults to git dir. Git dir is in init.paths
 - [x] Show endpoint if such output is available
 
-## v0.3.8 (2016-03-18)
+## v0.3.8
+
+Released: 2016-03-18.
 
 - [x] Add role: redis
 - [x] Add role: unattended-upgrades
 - [x] Upgrade dependencies
 
-## v0.3.7 (2016-03-17)
+## v0.3.7
+
+Released: 2016-03-17.
 
 - [x] Ship roles with npm
 
-## v0.3.6 (2016-03-17)
+## v0.3.6
+
+Released: 2016-03-17.
 
 - [x] Use pyhcl 0.1.15 and 0.2.0 to avoid install crashed
 
-## v0.3.5 (2016-03-17)
+## v0.3.5
+
+Released: 2016-03-17.
 
 - [x] Add role: nodejs
 - [x] Add roles: deploy & rollback via anistrano https://github.com/ansistrano/deploy/blob/master/README.md
 
-## v0.3.4 (2016-03-16)
+## v0.3.4
+
+Released: 2016-03-16.
 
 - [-] Write ansible instructions to a single file again, use tags to filter out at runtime
 - [-] No need for underscored `_gatherTerraformArgs` functions in most Commands
@@ -239,13 +304,17 @@ Unreleased and unplanned todos
 - [x] Implement restart
 - [x] Name encoded files `.cast5` vs `.enc`
 
-## v0.3.3 (2016-03-11)
+## v0.3.3
+
+Released: 2016-03-11.
 
 - [x] Use internal cast5-cbc encryption vs shelling out to openssl
 - [x] Automatic SSH private key reconstruction via encrypted file and FREY_ENCRYPTION_SECRET
 - [x] Add basic toml formatter
 
-## v0.3.2 (2016-03-09)
+## v0.3.2
+
+Released: 2016-03-09.
 
 - [x] Release v0.3.2
 - [x] Add support for multi-files-project
@@ -270,7 +339,9 @@ Unreleased and unplanned todos
 - [x] Fix that `this.runtime.Runtime` is thing now. Remove `Runtime` alltogehter?
 - [x] Let compile go before prepare so we can use (ssh) config in prepare
 
-## v0.3.1 (2016-02-19)
+## v0.3.1
+
+Released: 2016-02-19.
 
 - [x] Implement install
 - [x] Signify chained via ▽

@@ -1,8 +1,8 @@
-'use strict'
 import Terraform from '../Terraform'
 import Command from '../Command'
 import _ from 'lodash'
-import depurar from 'depurar'; const debug = depurar('frey')
+import depurar from 'depurar'
+const debug = depurar('frey')
 import constants from '../constants'
 
 class Refresh extends Command {
@@ -13,14 +13,9 @@ class Refresh extends Command {
     }
 
     const terraform = new Terraform({
-      args: {
-        refresh: constants.SHELLARG_PREPEND_AS_IS
-      },
+      args   : { refresh: constants.SHELLARG_PREPEND_AS_IS },
       runtime: this.runtime,
-      cmdOpts: {
-        verbose: false,
-        limitSamples: false
-      }
+      cmdOpts: { verbose: false, limitSamples: false },
     })
 
     terraform.exe((err, stdout) => {

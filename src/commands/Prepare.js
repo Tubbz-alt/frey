@@ -1,11 +1,12 @@
-'use strict'
 import Command from '../Command'
 import mkdirp from 'mkdirp'
 import utils from '../Utils'
 import semver from 'semver'
 import fs from 'fs'
 import async from 'async'
-import depurar from 'depurar'; const debug = depurar('frey')
+import depurar from 'depurar'
+
+const debug = depurar('frey')
 
 class Prepare extends Command {
   constructor (name, runtime) {
@@ -14,12 +15,12 @@ class Prepare extends Command {
   }
 
   main (cargo, cb) {
-    return async.eachSeries(this.runtime.deps, this._make.bind(this), (err) => {
+    return async.eachSeries(this.runtime.deps, this._make.bind(this), err => {
       if (err) {
         return cb(err)
       }
 
-      cb(null, { })
+      cb(null, {})
     })
   }
 
@@ -33,130 +34,135 @@ class Prepare extends Command {
     return func(props, cb)
   }
 
-  _makePrivkey (props, cb) {
-    return fs.stat(props.privkey, (err) => {
+  _makePrivkey ({ privkey, privkeyEnc, email }, cb) {
+    return fs.stat(privkey, err => {
       if (!err) {
         // Already exists
-        debug(`Key '${props.privkey}' aready exists`)
+        debug(`Key '${privkey}' aready exists`)
         return cb(null)
       }
 
-      fs.stat(props.privkeyEnc, (err) => {
+      fs.stat(privkeyEnc, err => {
         if (!err) {
           // We have an encrypted version, let's try a reconstruct
           if (!process.env.FREY_ENCRYPTION_SECRET) {
-            debug(`Wanted to reconstruct '${props.privkey}' from '${props.privkeyEnc}' but there is no FREY_ENCRYPTION_SECRET`)
+            debug(
+              `Wanted to reconstruct '${privkey}' from '${privkeyEnc}' but there is no FREY_ENCRYPTION_SECRET`
+            )
           } else {
-            process.on('exit', (code) => {
+            process.on('exit', code => {
               // From node docs: "You must only perform synchronous operations in this handler"
               try {
-                this._out(`Cleaning up '${props.privkey}' after process exit with code '${code}' \n`)
-                fs.unlinkSync(props.privkey)
+                this._out(`Cleaning up '${privkey}' after process exit with code '${code}' \n`)
+                fs.unlinkSync(privkey)
               } catch (e) {
-                this._out(`Was unable to clean up '${props.privkey}'\n`)
+                this._out(`Was unable to clean up '${privkey}'\n`)
               }
             })
 
-            this._out(`Reconstructing private key '${props.privkey}' from '${props.privkeyEnc}'\n`)
-            return utils.decryptFile(props.privkeyEnc, props.privkey, process.env.FREY_ENCRYPTION_SECRET, (err) => {
-              if (err) {
-                return cb(err)
+            this._out(`Reconstructing private key '${privkey}' from '${privkeyEnc}'\n`)
+            return utils.decryptFile(
+              privkeyEnc,
+              privkey,
+              process.env.FREY_ENCRYPTION_SECRET,
+              err => {
+                if (err) {
+                  return cb(err)
+                }
+                const cmd = [
+                  `(grep 'BEGIN RSA PRIVATE KEY' '${privkey}' || (rm -f '${privkey}'; false))`,
+                  `chmod 400 '${privkey}'`,
+                ].join(' && ')
+                this.shell.exeScript(cmd, { verbose: true, limitSamples: false }, cb)
               }
-              const cmd = [
-                `(grep 'BEGIN RSA PRIVATE KEY' '${props.privkey}' || (rm -f '${props.privkey}'; false))`,
-                `chmod 400 '${props.privkey}'`
-              ].join(' && ')
-              this.shell.exeScript(cmd, {verbose: true, limitSamples: false}, cb)
-            })
+            )
           }
         }
 
-        this._out(`Creating private key '${props.privkey}'\n`)
+        this._out(`Creating private key '${privkey}'\n`)
         const cmd = [
-          `ssh-keygen -b 2048 -t rsa -C '${props.email}' -f '${props.privkey}' -q -N ''`,
-          `rm -f '${props.privkey}.pub'`
+          `ssh-keygen -b 2048 -t rsa -C '${email}' -f '${privkey}' -q -N ''`,
+          `rm -f '${privkey}.pub'`,
         ].join(' && ')
-        this.shell.exeScript(cmd, {verbose: true, limitSamples: false}, cb)
+        this.shell.exeScript(cmd, { verbose: true, limitSamples: false }, cb)
       })
     })
   }
 
-  _makePrivkeyEnc (props, cb) {
+  _makePrivkeyEnc ({ privkeyEnc, privkey }, cb) {
     if (!process.env.FREY_ENCRYPTION_SECRET) {
       // Not needed
-      debug(`Skipping creation of '${props.privkeyEnc}', as there is no FREY_ENCRYPTION_SECRET`)
+      debug(`Skipping creation of '${privkeyEnc}', as there is no FREY_ENCRYPTION_SECRET`)
       return cb(null)
     }
-    return fs.stat(props.privkeyEnc, (err) => {
+    return fs.stat(privkeyEnc, err => {
       if (!err) {
         // Already exists
-        debug(`Key '${props.privkeyEnc}' aready exists`)
+        debug(`Key '${privkeyEnc}' aready exists`)
         return cb(null)
       }
 
-      this._out(`Creating private encrypted key '${props.privkeyEnc}'\n`)
-      utils.encryptFile(props.privkey, props.privkeyEnc, process.env.FREY_ENCRYPTION_SECRET, (err) => {
+      this._out(`Creating private encrypted key '${privkeyEnc}'\n`)
+      utils.encryptFile(privkey, privkeyEnc, process.env.FREY_ENCRYPTION_SECRET, err => {
         if (err) {
           return cb(err)
         }
 
-        const cmd = [
-          `chmod 400 '${props.privkeyEnc}'`
-        ].join(' && ')
-        this.shell.exeScript(cmd, {verbose: true, limitSamples: false}, cb)
+        const cmd = [ `chmod 400 '${privkeyEnc}'` ].join(' && ')
+        this.shell.exeScript(cmd, { verbose: true, limitSamples: false }, cb)
       })
     })
   }
 
-  _makePubkey (props, cb) {
-    return fs.stat(props.pubkey, (err) => {
+  _makePubkey ({ pubkey, privkey, email }, cb) {
+    return fs.stat(pubkey, err => {
       if (!err) {
         // Already exists
-        debug(`Key '${props.pubkey}' aready exists`)
+        debug(`Key '${pubkey}' aready exists`)
         return cb(null)
       }
 
-      this._out(`Creating public key '${props.pubkey}'\n`)
+      this._out(`Creating public key '${pubkey}'\n`)
       const cmd = [
-        `echo -n $(ssh-keygen -yf '${props.privkey}') > '${props.pubkey}'`,
-        `echo ' ${props.email}' >> '${props.pubkey}'`
+        `echo -n $(ssh-keygen -yf '${privkey}') > '${pubkey}'`,
+        `echo ' ${email}' >> '${pubkey}'`,
       ].join(' && ')
 
-      this.shell.exeScript(cmd, {verbose: true, limitSamples: false, stdin: 0}, cb)
+      this.shell.exeScript(cmd, { verbose: true, limitSamples: false, stdin: 0 }, cb)
     })
   }
 
-  _makePubkeyFingerprint (props, cb) {
-    const cmd = `ssh-keygen -lf '${props.pubkey}' | awk '{print $2}'`
-    this.shell.exeScript(cmd, {verbose: false, limitSamples: false}, (err, stdout) => {
+  _makePubkeyFingerprint ({ pubkey }, cb) {
+    const cmd = `ssh-keygen -lf '${pubkey}' | awk '{print $2}'`
+    this.shell.exeScript(cmd, { verbose: false, limitSamples: false }, (err, stdout) => {
       this.runtime.config.global.ssh.keypub_fingerprint = `${stdout}`.trim()
       return cb(err)
     })
   }
 
-  _makePermission (props, cb) {
-    debug(`perming ${props.file} ${props.mode}`)
-    return fs.chmod(props.file, props.mode, cb)
+  _makePermission ({ file, mode }, cb) {
+    debug(`perming ${file} ${mode}`)
+    return fs.chmod(file, mode, cb)
   }
 
-  _makeDir (props, cb) {
-    return mkdirp(props.dir, (err) => {
+  _makeDir ({ dir, name }, cb) {
+    return mkdirp(dir, err => {
       if (err) {
         return cb(err)
       }
 
-      debug(`Directory for '${props.name}' present at '${props.dir}'`)
+      debug(`Directory for '${name}' present at '${dir}'`)
       return cb(null)
     })
   }
 
   _makeApp (props, cb) {
-    return this._satisfy(props, (satisfied) => {
+    return this._satisfy(props, satisfied => {
       if (satisfied) {
         return cb(null)
       }
 
-      return this.shell.confirm(`May I run '${props.cmdInstall}' for you?`, (err) => {
+      return this.shell.confirm(`May I run '${props.cmdInstall}' for you?`, err => {
         if (err) {
           return cb(err)
         }
@@ -166,7 +172,7 @@ class Prepare extends Command {
             return cb(new Error(`Failed to install '${props.name}'. ${err}`))
           }
 
-          return this._satisfy(props, (satisfied) => {
+          return this._satisfy(props, satisfied => {
             if (!satisfied) {
               const msg = `Version of '${props.name}' still not satisfied after install`
               return cb(new Error(msg))
@@ -180,16 +186,19 @@ class Prepare extends Command {
   }
 
   _satisfy (appProps, cb) {
-    this.shell.exeScript(appProps.cmdVersion, {verbose: false, limitSamples: false}, (err, stdout) => {
+    this.shell.exeScript(appProps.cmdVersion, { verbose: false, limitSamples: false }, (
+      err,
+      stdout
+    ) =>      {
       if (err) {
-        // We don't want to bail out if version command does not exist yet
-        // Or maybe --version returns non-zero exit code, which is common
+          // We don't want to bail out if version command does not exist yet
+          // Or maybe --version returns non-zero exit code, which is common
         debug({
           msg: `Continuing after failed command ${appProps.cmd}. ${err}`,
           exe: appProps.exe,
-          foundVersion: foundVersion,
-          err: err,
-          stdout: stdout
+          foundVersion,
+          err,
+          stdout,
         })
       }
 

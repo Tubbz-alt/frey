@@ -1,6 +1,6 @@
 {
   "name": "frey",
-  "version": "0.3.27",
+  "version": "0.3.28",
   "description": "Automated infrastructure CLI",
   "scripts": {
     "acceptance:savefixtures": "env SAVE_FIXTURES=true npm run acceptance",
@@ -32,7 +32,8 @@
     "web:install": "npm install && cd website && (bundle install --path _vendor/bundle || bundle update)",
     "web:start": "npm-run-all web:install --parallel web:watch web:serve",
     "web:serve": "cd website/_site && browser-sync start --server --files .",
-    "web:watch": "nodemon --verbose --watch ./ --ignore 'website/_vendor/*' --ignore 'website/*.md' --ignore 'website/_site/*' --ext html,json,md,js,css,scss,png,jpg --exec 'npm-run-all web:inject web:build'"
+    "web:watch": "nodemon --verbose --watch ./ --ignore 'website/_vendor/*' --ignore 'website/*.md' --ignore 'website/_site/*' --ext html,json,md,js,css,scss,png,jpg --exec 'npm-run-all web:inject web:build'",
+    "build:watch": "babel src --watch --source-maps --out-dir lib"
   },
   "files": [
     "bin",
@@ -77,24 +78,31 @@
     "yargs": "4.3.2"
   },
   "devDependencies": {
-    "babel-cli": "6.14.0",
-    "babel-preset-es2015": "6.14.0",
+    "babel-cli": "6.18.0",
+    "babel-preset-es2015": "6.18.0",
     "babel-register": "6.14.0",
     "browser-sync": "2.11.0",
     "chai": "3.5.0",
     "coveralls": "2.11.9",
     "cross-env": "1.0.7",
     "doctoc": "1.0.0",
-    "eslint": "3.4.0",
-    "eslint-config-standard": "6.0.0",
-    "eslint-plugin-promise": "^2.0.1",
-    "eslint-plugin-standard": "2.0.0",
+    "eslint": "3.13.1",
+    "eslint-config-standard": "6.2.1",
+    "eslint-plugin-promise": "3.4.0",
+    "eslint-plugin-standard": "2.0.1",
     "istanbul": "0.4.2",
     "mocha": "2.4.5",
     "node-sass": "3.11.1",
     "nodemon": "1.8.1",
     "npm-run-all": "2.1.1",
-    "should": "8.3.0"
+    "should": "8.3.0",
+    "babel-core": "6.21.0",
+    "babel-eslint": "7.1.1",
+    "babel-plugin-add-module-exports": "0.2.1",
+    "babel-plugin-es6-promise": "1.1.0",
+    "babel-plugin-syntax-async-functions": "6.13.0",
+    "babel-plugin-transform-async-to-generator": "6.16.0",
+    "babel-plugin-transform-object-assign": "6.8.0"
   },
   "keywords": [
     "terraform",
@@ -107,5 +115,16 @@
   "bugs": {
     "url": "https://github.com/freyproject/frey/issues"
   },
-  "homepage": "https://github.com/freyproject/frey#readme"
+  "homepage": "https://github.com/freyproject/frey#readme",
+  "babel": {
+    "presets": [
+      "es2015"
+    ],
+    "plugins": [
+      "add-module-exports",
+      "transform-object-assign",
+      "es6-promise",
+      "transform-async-to-generator"
+    ]
+  }
 }

@@ -1,4 +1,3 @@
-'use strict'
 import Command from '../Command'
 import utils from '../Utils'
 import osHomedir from 'os-homedir'
@@ -9,17 +8,10 @@ import async from 'async'
 import fs from 'fs'
 import uuid from 'uuid'
 // import depurar from 'depurar'; const debug = depurar('frey')
-
 class Init extends Command {
   constructor (name, runtime) {
     super(name, runtime)
-    this.boot = [
-      '_env',
-      '_os',
-      '_cliargs',
-      '_findClosestProjectGit',
-      '_paths'
-    ]
+    this.boot = [ '_env', '_os', '_cliargs', '_findClosestProjectGit', '_paths' ]
   }
 
   _env (cargo, cb) {
@@ -28,14 +20,14 @@ class Init extends Command {
 
   _os (cargo, cb) {
     const osdata = {
-      cores: os.cpus().length,
-      tmp: os.tmpdir(),
-      cwd: process.cwd(),
-      home: osHomedir(),
-      user: this.bootCargo._env.USER,
+      cores   : os.cpus().length,
+      tmp     : os.tmpdir(),
+      cwd     : process.cwd(),
+      home    : osHomedir(),
+      user    : this.bootCargo._env.USER,
       platform: os.platform(),
       hostname: os.hostname(),
-      arch: `${os.arch()}`.replace('x64', 'amd64')
+      arch    : `${os.arch()}`.replace('x64', 'amd64'),
     }
     return cb(null, osdata)
   }
@@ -96,8 +88,7 @@ class Init extends Command {
     // This operation is performed in parallel, but the results array will
     // be in the same order as the original. Hence, use the last/longest/closest
     // path that has Git.
-
-    return async.reject(paths, fs.stat, (results) => {
+    return async.reject(paths, fs.stat, results => {
       // debug({paths: paths, results: results})
       if (typeof results === 'undefined' || !results.length) {
         return cb(null, undefined)
@@ -110,19 +101,19 @@ class Init extends Command {
   _paths (cargo, cb) {
     const freyDir = path.resolve(__dirname, '../..')
     return cb(null, {
-      frey_dir: freyDir,
-      roles_dir: freyDir + '/roles',
-      git_dir: this.bootCargo._findClosestProjectGit,
-      process_tmp_dir: this.bootCargo._os.tmp + '/' + uuid.v4()
+      frey_dir       : freyDir,
+      roles_dir      : `${freyDir}/roles`,
+      git_dir        : this.bootCargo._findClosestProjectGit,
+      process_tmp_dir: `${this.bootCargo._os.tmp}/${uuid.v4()}`,
     })
   }
 
   main (cargo, cb) {
     return cb(null, {
       cliargs: this.bootCargo._cliargs,
-      env: this.bootCargo._env,
-      os: this.bootCargo._os,
-      paths: this.bootCargo._paths
+      env    : this.bootCargo._env,
+      os     : this.bootCargo._os,
+      paths  : this.bootCargo._paths,
     })
   }
 }

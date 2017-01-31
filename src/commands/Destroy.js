@@ -1,17 +1,13 @@
-'use strict'
 import Terraform from '../Terraform'
 import Command from '../Command'
 import _ from 'lodash'
 import constants from '../constants'
 
 // import depurar from 'depurar'; const debug = depurar('frey')
-
 class Destroy extends Command {
   constructor (name, runtime) {
     super(name, runtime)
-    this.boot = [
-      '_confirm'
-    ]
+    this.boot = [ '_confirm' ]
   }
 
   _confirm (cargo, cb) {
@@ -29,15 +25,9 @@ class Destroy extends Command {
     }
 
     const terraform = new Terraform({
-      args: {
-        destroy: constants.SHELLARG_PREPEND_AS_IS,
-        force: constants.SHELLARG_BOOLEAN_FLAG
-      },
+      args   : { destroy: constants.SHELLARG_PREPEND_AS_IS, force: constants.SHELLARG_BOOLEAN_FLAG },
       runtime: this.runtime,
-      cmdOpts: {
-        verbose: true,
-        limitSamples: false
-      }
+      cmdOpts: { verbose: true, limitSamples: false },
     })
 
     terraform.exe((err, stdout) => {

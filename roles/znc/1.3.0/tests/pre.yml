@@ -1,0 +1,11 @@
+# pre test file for znc
+---
+- name: pre | ensure CA certificates are present, so we can talk to TLS servers
+  apt:
+    name: "{{ item }}"
+    state: "{{ apt_install_state | default('present') }}"
+    update_cache: true
+    cache_valid_time: "{{ apt_update_cache_valid_time | default(3600) }}"
+  with_items:
+    - ca-certificates
+    - openssl

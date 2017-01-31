@@ -1,9 +1,9 @@
-'use strict'
 import Ansible from '../Ansible'
 import Command from '../Command'
 import _ from 'lodash'
 import constants from '../constants'
-import depurar from 'depurar'; const debug = depurar('frey')
+import depurar from 'depurar'
+const debug = depurar('frey')
 
 class Deploy extends Command {
   main (cargo, cb) {

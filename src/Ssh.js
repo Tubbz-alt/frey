@@ -1,19 +1,14 @@
-'use strict'
 import App from './App'
 import constants from './constants'
 
 class Ssh extends App {
   exe (cb) {
     const defaults = {
-      args: {},
-      env: {},
+      args         : {},
+      env          : {},
       signatureOpts: { equal: '', quote: '', dash: '-', escape: false },
-      cmdOpts: {
-        stdin: 'inherit',
-        stdout: 'inherit',
-        stderr: 'inherit'
-      },
-      exe: 'ssh'
+      cmdOpts      : { stdin: 'inherit', stdout: 'inherit', stderr: 'inherit' },
+      exe          : 'ssh',
     }
 
     defaults.args['i'] = this.runtime.config.global.ssh.privatekey_file

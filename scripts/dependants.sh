@@ -39,10 +39,10 @@ while IFS= read -r -d '' freyFile; do
     exit 1
   fi
 
-  if [[ "${freyFile}" = *"uppy-server/infra/Freyfile.hcl" ]]; then
-    echo "--> Skipping '${freyFile}' as requested"
-    continue
-  fi
+  # if [[ "${freyFile}" = *"uppy-server/infra/Freyfile.hcl" ]]; then
+  #   echo "--> Skipping '${freyFile}' as requested"
+  #   continue
+  # fi
 
   echo "--> Processing '${freyFile}'..."
   pushd ${infraDir} > /dev/null

@@ -1,8 +1,8 @@
-'use strict'
 import Command from '../Command'
 import _ from 'lodash'
 import fs from 'fs'
-import depurar from 'depurar'; const debug = depurar('frey')
+import depurar from 'depurar'
+const debug = depurar('frey')
 import flatten from 'flat'
 import YAML from 'js-yaml'
 import commands from '../commands'
@@ -10,21 +10,18 @@ import commands from '../commands'
 class Docbuild extends Command {
   constructor (name, runtime) {
     super(name, runtime)
-    this.boot = [
-      '_chain',
-      '_defaults'
-    ]
+    this.boot = [ '_chain', '_defaults' ]
   }
 
   _chain (cargo, cb) {
-    const chainYaml = this.runtime.init.paths.frey_dir + '/chain.yml'
+    const chainYaml = `${this.runtime.init.paths.frey_dir}/chain.yml`
     fs.writeFileSync(chainYaml, YAML.safeDump(commands), 'utf-8')
-    debug('Wrote ' + chainYaml)
+    debug(`Wrote ${chainYaml}`)
     cb(null)
   }
 
   _defaults (cargo, cb) {
-    const defaultYaml = this.runtime.init.paths.frey_dir + '/defaults.yml'
+    const defaultYaml = `${this.runtime.init.paths.frey_dir}/defaults.yml`
     const runtime = _.cloneDeep(this.runtime)
 
     delete runtime.frey
@@ -49,7 +46,7 @@ class Docbuild extends Command {
         return
       }
       if (_.isNumber(val)) {
-        output[key] = 'Example: ' + val
+        output[key] = `Example: ${val}`
         return
       }
       if (!_.isString(val)) {
@@ -62,7 +59,7 @@ class Docbuild extends Command {
       val = _.replace(val, this.runtime.init.os.user, '{{{ init.os.user }}}')
       val = _.replace(val, this.runtime.init.paths.frey_dir, '{{{ init.paths.frey_dir }}}')
 
-      output[key] = 'Example: ' + val
+      output[key] = `Example: ${val}`
     })
 
     const buf = fs.readFileSync(defaultYaml, 'utf-8')
@@ -70,7 +67,7 @@ class Docbuild extends Command {
     // const original = {}
     const merged = _.defaults(original, output)
     fs.writeFileSync(defaultYaml, YAML.safeDump(merged), 'utf-8')
-    debug('Wrote ' + defaultYaml)
+    debug(`Wrote ${defaultYaml}`)
     cb(null)
   }
 

@@ -1,4 +1,3 @@
-'use strict'
 import chalk from 'chalk'
 import util from 'util'
 import async from 'async'
@@ -31,7 +30,7 @@ class Base {
     // Create an array of wrapper methods that can store results
     // in bootCargo, before executing the callback
     const methods = []
-    this.boot.forEach((method) => {
+    this.boot.forEach(method => {
       return methods.push((cargo, cb) => {
         const f = this[method].bind(this)
         return f(cargo, (err, cargo) => {
@@ -67,7 +66,9 @@ class Base {
       })
     } else if (_.isString(result)) {
       _.forOwn(process.env, (val, key) => {
-        if (key.indexOf('SECRET') > -1 || key.indexOf('PASSWORD') > -1 || key.indexOf('TOKEN') > -1) {
+        if (
+          key.indexOf('SECRET') > -1 || key.indexOf('PASSWORD') > -1 || key.indexOf('TOKEN') > -1
+        ) {
           result = _.replace(result, val, '********')
         }
       })
@@ -79,14 +80,14 @@ class Base {
   _out (...args) {
     let index = 0
     let str = args[0]
-    str = `${str}`.replace(/%[o%s]/g, (m) => {
+    str = `${str}`.replace(/%[o%s]/g, m => {
       if (m === '%%') {
         return m
       }
 
       index++
-      let ret = (_.pullAt(args, index))[0]
-      ret = util.inspect(ret, {colors: chalk.supportsColor})
+      let ret = _.pullAt(args, index)[0]
+      ret = util.inspect(ret, { colors: chalk.supportsColor })
 
       if (m === '%o') {
         ret = ret.replace(/\s*\n\s*/g, ' ')

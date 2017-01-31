@@ -1,4 +1,3 @@
-'use strict'
 import TerraformInventory from '../TerraformInventory'
 import Ssh from '../Ssh'
 import Command from '../Command'
@@ -6,26 +5,21 @@ import constants from '../constants'
 import inquirer from 'inquirer'
 import async from 'async'
 import _ from 'lodash'
-import depurar from 'depurar'; const debug = depurar('frey')
+import depurar from 'depurar'
+
+const debug = depurar('frey')
 
 class Remote extends Command {
   constructor (name, runtime) {
     super(name, runtime)
-    this.boot = [
-      '_gatherHosts',
-      '_selectHosts'
-    ]
+    this.boot = [ '_gatherHosts', '_selectHosts' ]
   }
 
   _gatherHosts (cargo, cb) {
     const terraformInventory = new TerraformInventory({
-      cmdOpts: {
-        verbose: false
-      },
-      args: {
-        list: constants.SHELLARG_BOOLEAN_FLAG
-      },
-      runtime: this.runtime
+      cmdOpts: { verbose: false },
+      args   : { list: constants.SHELLARG_BOOLEAN_FLAG },
+      runtime: this.runtime,
     })
 
     terraformInventory.exe((err, stdout) => {
@@ -35,7 +29,7 @@ class Remote extends Command {
 
       const trimmed = `${stdout}`.trim()
       if (!trimmed) {
-        const msg = 'Unable to get \'terraformInventory\', this is a requirement to determine connection endpoints'
+        const msg = "Unable to get 'terraformInventory', this is a requirement to determine connection endpoints"
         return cb(new Error(msg))
       }
 
@@ -43,10 +37,12 @@ class Remote extends Command {
       const filteredHosts = {}
 
       _.forOwn(hosts, (ips, name) => {
-        if (name.indexOf('name_') === -1) {
+        // For google cloud this comes in the form of:
+        // {"statuspage":["104.197.75.177"],"statuspage.0":["104.197.75.177"],"type_google_compute_instance":["104.197.75.177"]}
+        if (name.indexOf('name_') === -1 && !name.match(/\.\d+$/)) {
           return
         }
-        ips.forEach((ip) => {
+        ips.forEach(ip => {
           filteredHosts[ip] = name.replace('name_', '')
         })
       })
@@ -62,26 +58,18 @@ class Remote extends Command {
       let ip = Object.keys(this.bootCargo._gatherHosts)[0]
       let hostname = this.bootCargo._gatherHosts[ip]
       selectedHosts.push(ip)
-      debug('Automatically selected host ' + hostname + ' because there is just one')
+      debug(`Automatically selected host ${hostname} because there is just one`)
       return cb(null, selectedHosts)
     }
 
     // https://www.npmjs.com/package/inquirer
     const choices = []
     _.forOwn(this.bootCargo._gatherHosts, (hostname, ip) => {
-      choices.push({
-        name: hostname,
-        value: ip
-      })
+      choices.push({ name: hostname, value: ip })
     })
 
-    const question = {
-      type: 'list',
-      name: 'server',
-      message: 'Select server',
-      choices: choices
-    }
-    inquirer.prompt(question, (answers) => {
+    const question = { type: 'list', name: 'server', message: 'Select server', choices }
+    inquirer.prompt(question, answers => {
       if (!_.has(answers, 'server')) {
         return cb(new Error('No server selected'))
       }

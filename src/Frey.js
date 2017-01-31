@@ -1,4 +1,3 @@
-'use strict'
 // var info = Depurar('frey')
 // import util from 'util'
 // import fs from 'fs'
@@ -16,18 +15,15 @@ class Frey extends Base {
   constructor (cliargs = {}) {
     super()
 
-    if (cliargs._ === undefined) { cliargs._ = [] }
-    if (cliargs._[0] === undefined) { cliargs._[0] = 'prepare' }
-
-    this.boot = [
-      '_injectCliargs',
-      '_composeChain'
-    ]
-    this.runtime = {
-      frey: {
-        cliargs: cliargs
-      }
+    if (cliargs._ === undefined) {
+      cliargs._ = []
     }
+    if (cliargs._[0] === undefined) {
+      cliargs._[0] = 'prepare'
+    }
+
+    this.boot = [ '_injectCliargs', '_composeChain' ]
+    this.runtime = { frey: { cliargs } }
   }
 
   _injectCliargs (cargo, nextCb) {
@@ -36,8 +32,8 @@ class Frey extends Base {
 
   _composeChain (cliargs, nextCb) {
     const cmd = cliargs._[0]
-    const chain = _.filter(commands, { 'chained': true })
-    const startAt = _.findIndex(chain, {name: cmd})
+    const chain = _.filter(commands, { chained: true })
+    const startAt = _.findIndex(chain, { name: cmd })
     let filteredChain = []
 
     if (startAt < 0) {
@@ -47,8 +43,8 @@ class Frey extends Base {
       let length = 0
       if (cliargs.bail) {
         length = startAt + 1
-      } else if (cliargs.bailAfter && _.findIndex(chain, {name: cliargs.bailAfter}) > -1) {
-        length = _.findIndex(chain, {name: cliargs.bailAfter}) + 1
+      } else if (cliargs.bailAfter && _.findIndex(chain, { name: cliargs.bailAfter }) > -1) {
+        length = _.findIndex(chain, { name: cliargs.bailAfter }) + 1
       } else {
         length = chain.length
       }
@@ -66,23 +62,35 @@ class Frey extends Base {
       filteredChain.unshift('get')
     }
 
-    if (filteredChain.indexOf('prepare') < 0 && (startAt < 0 || startAt > _.findIndex(chain, {name: 'prepare'}))) {
+    if (
+      filteredChain.indexOf('prepare') < 0 &&
+        (startAt < 0 || startAt > _.findIndex(chain, { name: 'prepare' }))
+    ) {
       if (cmd !== 'convert') {
         filteredChain.unshift('prepare')
       }
     }
 
-    if (filteredChain.indexOf('format') < 0 && (startAt < 0 || startAt > _.findIndex(chain, {name: 'format'}))) {
+    if (
+      filteredChain.indexOf('format') < 0 &&
+        (startAt < 0 || startAt > _.findIndex(chain, { name: 'format' }))
+    ) {
       if (cmd === 'convert' && !cliargs.bail) {
         filteredChain.push('format')
       }
     }
 
-    if (filteredChain.indexOf('deps') < 0 && (startAt < 0 || startAt > _.findIndex(chain, {name: 'deps'}))) {
+    if (
+      filteredChain.indexOf('deps') < 0 &&
+        (startAt < 0 || startAt > _.findIndex(chain, { name: 'deps' }))
+    ) {
       filteredChain.unshift('deps')
     }
 
-    if (filteredChain.indexOf('config') < 0 && (startAt < 0 || startAt > _.findIndex(chain, {name: 'config'}))) {
+    if (
+      filteredChain.indexOf('config') < 0 &&
+        (startAt < 0 || startAt > _.findIndex(chain, { name: 'config' }))
+    ) {
       filteredChain.unshift('config')
     }
 

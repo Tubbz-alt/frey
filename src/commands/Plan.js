@@ -1,4 +1,3 @@
-'use strict'
 import Terraform from '../Terraform'
 import Command from '../Command'
 import _ from 'lodash'
@@ -13,11 +12,11 @@ class Plan extends Command {
 
     const terraform = new Terraform({
       args: {
-        plan: constants.SHELLARG_PREPEND_AS_IS,
+        plan   : constants.SHELLARG_PREPEND_AS_IS,
         refresh: 'false',
-        out: this.runtime.config.global.infra_plan_file
+        out    : this.runtime.config.global.infra_plan_file,
       },
-      runtime: this.runtime
+      runtime: this.runtime,
     })
 
     terraform.exe((err, stdout) => {
@@ -28,11 +27,7 @@ class Plan extends Command {
       this._out(`--> Saved plan as '${this.runtime.config.global.infra_plan_file}'\n`)
 
       if (stdout.match(/No changes/)) {
-        return cb(null, {
-          add: 0,
-          change: 0,
-          destroy: 0
-        })
+        return cb(null, { add: 0, change: 0, destroy: 0 })
       }
 
       const match = stdout.match(/(\d+) to add, (\d+) to change, (\d+) to destroy/)
@@ -40,11 +35,7 @@ class Plan extends Command {
         return cb(new Error('Unable to parse add/change/destroy'))
       }
 
-      return cb(null, {
-        add: match[1],
-        change: match[2],
-        destroy: match[3]
-      })
+      return cb(null, { add: match[1], change: match[2], destroy: match[3] })
     })
   }
 }

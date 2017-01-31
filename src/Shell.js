@@ -1,5 +1,5 @@
-'use strict'
-import depurar from 'depurar'; const debug = depurar('frey')
+import depurar from 'depurar'
+const debug = depurar('frey')
 import chalk from 'chalk'
 import { spawn } from 'child_process'
 import _ from 'lodash'
@@ -18,28 +18,27 @@ class Shell extends Base {
       return cb(null)
     }
 
-    inquirer.prompt({ type: 'confirm', name: 'confirmation', message: question, default: false }, (answers) => {
-      if (_.get(answers, 'confirmation') !== true) {
-        return cb(new Error('Question declined. Aborting. '))
-      }
+    inquirer.prompt(
+      { type: 'confirm', name: 'confirmation', message: question, default: false },
+      answers => {
+        if (_.get(answers, 'confirmation') !== true) {
+          return cb(new Error('Question declined. Aborting. '))
+        }
 
-      return cb(null)
-    })
+        return cb(null)
+      }
+    )
   }
 
   _buildChildEnv (extra = {}) {
     let childEnv = {}
 
-    childEnv = _.extend(
-      {},
-      this.runtime.init.env,
-      extra
-    )
+    childEnv = _.extend({}, this.runtime.init.env, extra)
 
     // Automatically add all FREY_* environment variables to Terraform environment
     _.forOwn(this.runtime.init.env, (val, key) => {
       if (_.startsWith(key, 'FREY_')) {
-        childEnv['TF_VAR_' + key] = val
+        childEnv[`TF_VAR_${key}`] = val
       }
     })
 
@@ -47,25 +46,21 @@ class Shell extends Base {
   }
 
   exeScript (scriptArgs, cmdOpts, cb) {
-    scriptArgs = [
-      'bash',
-      '-o', 'pipefail',
-      '-o', 'errexit',
-      '-o', 'nounset',
-      '-c'
-    ].concat(scriptArgs)
+    scriptArgs = [ 'bash', '-o', 'pipefail', '-o', 'errexit', '-o', 'nounset', '-c' ].concat(
+      scriptArgs
+    )
 
     return this.exe(scriptArgs, cmdOpts, cb)
   }
 
-  _debugCmd (opts, args) {
+  _debugCmd ({ input, env }, args) {
     let debugCmd = ''
 
-    if (opts.input) {
-      debugCmd += `echo '${opts.input}' | \\\n`
+    if (input) {
+      debugCmd += `echo '${input}' | \\\n`
     }
 
-    _.forOwn(opts.env, (val, key) => {
+    _.forOwn(env, (val, key) => {
       if (_.has(process.env, key)) {
         return
       }
@@ -86,28 +81,42 @@ class Shell extends Base {
       }
       debugCmd += `${key}=${val} \\\n`
     })
-    debugCmd += args.join(' \\\n  ') + ' \\\n|| false'
+    debugCmd += `${args.join(' \\\n  ')} \\\n|| false`
 
-    debugCmd = debugCmd.replace(/\-o \\\n {2}/g, '-o ')
+    debugCmd = debugCmd.replace(/-o \\\n {2}/g, '-o ')
     return debugCmd
   }
 
   exe (cmdArgs, cmdOpts = {}, cb) {
-    if (cmdOpts.env === undefined) { cmdOpts.env = {} }
-    if (cmdOpts.verbose === undefined) { cmdOpts.verbose = true }
-    if (cmdOpts.input === undefined) { cmdOpts.input = undefined }
-    if (cmdOpts.stdin === undefined) { cmdOpts.stdin = 'ignore' }
-    if (cmdOpts.stdout === undefined) { cmdOpts.stdout = 'pipe' }
-    if (cmdOpts.stderr === undefined) { cmdOpts.stderr = 'pipe' }
-    if (cmdOpts.limitSamples === undefined) { cmdOpts.limitSamples = 3 }
+    if (cmdOpts.env === undefined) {
+      cmdOpts.env = {}
+    }
+    if (cmdOpts.verbose === undefined) {
+      cmdOpts.verbose = true
+    }
+    if (cmdOpts.input === undefined) {
+      cmdOpts.input = undefined
+    }
+    if (cmdOpts.stdin === undefined) {
+      cmdOpts.stdin = 'ignore'
+    }
+    if (cmdOpts.stdout === undefined) {
+      cmdOpts.stdout = 'pipe'
+    }
+    if (cmdOpts.stderr === undefined) {
+      cmdOpts.stderr = 'pipe'
+    }
+    if (cmdOpts.limitSamples === undefined) {
+      cmdOpts.limitSamples = 3
+    }
 
     let dir = this.dir || this.runtime.init.cliargs.projectDir
 
     const opts = {
-      cwd: dir,
-      env: this._buildChildEnv(cmdOpts.env),
+      cwd  : dir,
+      env  : this._buildChildEnv(cmdOpts.env),
       stdio: [ cmdOpts.stdin, cmdOpts.stdout, cmdOpts.stderr ],
-      input: cmdOpts.input
+      input: cmdOpts.input,
     }
 
     let debugCmd = this._debugCmd(opts, cmdArgs)
@@ -119,7 +128,7 @@ class Shell extends Base {
     let lastStdout = []
 
     if (child.stdout) {
-      child.stdout.on('data', (data) => {
+      child.stdout.on('data', data => {
         if (data) {
           lastStdout.push(`${data}`)
           if (cmdOpts.limitSamples) {
@@ -134,7 +143,7 @@ class Shell extends Base {
     }
 
     if (child.stderr) {
-      child.stderr.on('data', (data) => {
+      child.stderr.on('data', data => {
         if (data) {
           lastStderr.push(`${data}`)
           if (cmdOpts.limitSamples) {
@@ -148,7 +157,7 @@ class Shell extends Base {
       })
     }
 
-    return child.on('close', (code) => {
+    return child.on('close', code => {
       if (code !== 0) {
         const msg = `Script '${cmd} ${cmdArgs.join(' ')}' exited with code: '${code}'`
         const err = new Error(msg)
