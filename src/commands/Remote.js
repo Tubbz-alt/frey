@@ -37,7 +37,9 @@ class Remote extends Command {
       const filteredHosts = {}
 
       _.forOwn(hosts, (ips, name) => {
-        if (name.indexOf('name_') === -1) {
+        // For google cloud this comes in the form of:
+        // {"statuspage":["104.197.75.177"],"statuspage.0":["104.197.75.177"],"type_google_compute_instance":["104.197.75.177"]}
+        if (name.indexOf('name_') === -1 && !name.match(/\.\d+$/)) {
           return
         }
         ips.forEach(ip => {
