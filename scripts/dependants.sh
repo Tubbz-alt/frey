@@ -87,6 +87,7 @@ while IFS= read -r -d '' freyFile; do
     git add "${freyFile}" || true
     git commit -m "Upgrade Frey to v${version} /cc @tersmitten" || true
     git push -f origin "frey-v${version}"
+    git checkout master
   popd > /dev/null
 done < <(find "${CODE_DIR}" -maxdepth 3 -name Freyfile.hcl -print0)
 
