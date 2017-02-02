@@ -1,9 +1,9 @@
-import depurar from 'depurar'
+const depurar = require('depurar')
 const debug = depurar('frey')
-import _ from 'lodash'
-import flatten from 'flat'
-import crypto from 'crypto'
-import fs from 'fs'
+const _ = require('lodash')
+const flatten = require('flat')
+const crypto = require('crypto')
+const fs = require('fs')
 
 class Utils {
   _cryptFile (fn, readFile, writeFile, cb) {
@@ -29,6 +29,21 @@ class Utils {
 
   decryptFile (readFile, writeFile, password, cb) {
     this._cryptFile(crypto.createDecipher('cast5-cbc', password), readFile, writeFile, cb)
+  }
+
+  buildChildEnv (extra = {}, processEnv = {}) {
+    let childEnv = {}
+
+    childEnv = _.extend({}, processEnv, extra)
+
+    // Automatically add all FREY_* environment variables to Terraform environment
+    _.forOwn(processEnv, (val, key) => {
+      if (_.startsWith(key, 'FREY_')) {
+        childEnv[`TF_VAR_${key}`] = val
+      }
+    })
+
+    return childEnv
   }
 
   render (subject, data, opts = {}) {

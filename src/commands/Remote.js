@@ -1,11 +1,11 @@
-import TerraformInventory from '../TerraformInventory'
-import Ssh from '../Ssh'
-import Command from '../Command'
-import constants from '../constants'
-import inquirer from 'inquirer'
-import async from 'async'
-import _ from 'lodash'
-import depurar from 'depurar'
+const TerraformInventory = require('../apps/TerraformInventory')
+const Ssh = require('../apps/Ssh')
+const Command = require('../Command')
+const constants = require('../constants')
+const inquirer = require('inquirer')
+const async = require('async')
+const _ = require('lodash')
+const depurar = require('depurar')
 
 const debug = depurar('frey')
 
@@ -104,7 +104,7 @@ class Remote extends Command {
         return cb(err)
       }
 
-      this._out(`--> Closed console to '${hosts.join(', ')}'\n`)
+      this._out(`--> Closed console to '${hosts.join(', ')}'`)
       return cb(null)
     })
   }

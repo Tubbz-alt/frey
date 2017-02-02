@@ -1,12 +1,12 @@
-import Command from '../Command'
-import constants from '../constants'
-import fs from 'fs'
-import globby from 'globby'
-import Terraform from '../Terraform'
-import Ansible from '../Ansible'
-import _ from 'lodash'
-import mkdirp from 'mkdirp'
-import depurar from 'depurar'
+const Command = require('../Command')
+const constants = require('../constants')
+const fs = require('fs')
+const globby = require('globby')
+const Terraform = require('../apps/Terraform')
+const Ansible = require('../apps/Ansible')
+const _ = require('lodash')
+const mkdirp = require('mkdirp')
+const depurar = require('depurar')
 
 const debug = depurar('frey')
 
@@ -145,8 +145,8 @@ class Show extends Command {
 
     _.forOwn(results, (out, key) => {
       if (out) {
-        this._out(`- [ ${key} ] ------------------------------\n`)
-        this._out(`${out}\n`)
+        this._out(`- [ ${key} ] ------------------------------`)
+        this._out(`${out}`)
       }
     })
 

@@ -1,15 +1,20 @@
 // var info = Depurar('frey')
-// import util from 'util'
-// import fs from 'fs'
-// import depurar from 'depurar'; const debug = depurar('frey')
-import inflection from 'inflection'
-import async from 'async'
-import _ from 'lodash'
-import chalk from 'chalk'
-import os from 'os'
-import Base from './Base'
-import commands from './commands'
-import pkgConfig from '../package.json'
+// const util = require('util')
+// const fs = require('fs')
+// const debug = require('depurar')('frey')
+const inflection = require('inflection')
+const async = require('async')
+const _ = require('lodash')
+// const chalk = require('chalk')
+const os = require('os')
+const Base = require('./Base')
+const commands = require('./commands')
+const pkgConfig = require('../package.json')
+
+global.frey = {
+  currentCommand: 'welcome',
+  currentHost   : os.hostname(),
+}
 
 class Frey extends Base {
   constructor (cliargs = {}) {
@@ -100,8 +105,8 @@ class Frey extends Base {
   }
 
   main (cargo, cb) {
-    this._out('--> Frey version %s\n', pkgConfig.version)
-    this._out('--> Will run: %o\n', this.bootCargo._composeChain)
+    this._outFlush('--> Frey version %s', pkgConfig.version)
+    this._outFlush('--> Will run: %o', this.bootCargo._composeChain)
 
     async.eachSeries(this.bootCargo._composeChain, this._runOne.bind(this), cb)
   }
@@ -113,17 +118,25 @@ class Frey extends Base {
     const obj = new Class(command, this.runtime)
     const func = obj.run.bind(obj)
 
-    let hostname = _.get(this.runtime, 'init.os.hostname') || os.hostname()
+    // let hostname =
 
-    this._out(chalk.gray('--> '))
-    this._out(chalk.gray(`${hostname} - `))
-    this._out(chalk.green(`${command}`))
-    this._out(chalk.green('\n'))
+    // let x =
+    // this._out(chalk.gray('--> '))
+    // this._out(chalk.gray(`${hostname} - `))
+    // this._out(chalk.green(`${command}`))
+    // this._out(chalk.green(''))
+    //
+    // this._out(
+
+    global.frey.currentCommand = command
+    // global.frey.currentHost = _.get(this.runtime, 'init.os.hostname') || os.hostname()
+    // this._out('start')
 
     func((err, result) => {
       const append = {}
       append[command] = result
       this.runtime = _.extend(this.runtime, append)
+      this._outFlush('finished')
       return cb(err)
     })
   }

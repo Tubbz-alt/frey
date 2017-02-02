@@ -1,9 +1,10 @@
-import chalk from 'chalk'
-import util from 'util'
-import async from 'async'
-import _ from 'lodash'
-import depurar from 'depurar'
+const chalk = require('chalk')
+const util = require('util')
+const async = require('async')
+const _ = require('lodash')
+const depurar = require('depurar')
 const debug = depurar('frey')
+const Scrolex = require('scrolex')
 
 class Base {
   constructor () {
@@ -77,7 +78,7 @@ class Base {
     return result
   }
 
-  _out (...args) {
+  _formatter (args) {
     let index = 0
     let str = args[0]
     str = `${str}`.replace(/%[o%s]/g, m => {
@@ -97,8 +98,26 @@ class Base {
     })
 
     str = this._secureOutput(str)
+    return str
+  }
 
-    return process.stdout.write(`${str}`)
+  _out (...args) {
+    const str  = this._formatter(args)
+    const opts = {
+      mode      : process.env.FREY_SCROLEX_MODE || process.env.SCROLEX_MODE || 'singlescroll',
+      components: `frey>${global.frey.currentHost}>${global.frey.currentCommand}`,
+    }
+    Scrolex.out(`${str}`, opts)
+  }
+
+  _outFlush (...args) {
+    const str  = this._formatter(args)
+    const opts = {
+      mode      : process.env.FREY_SCROLEX_MODE || process.env.SCROLEX_MODE || 'singlescroll',
+      components: `frey>${global.frey.currentHost}>${global.frey.currentCommand}`,
+      flush     : true,
+    }
+    Scrolex.out(`${str}`, opts)
   }
 }
 

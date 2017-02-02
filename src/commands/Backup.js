@@ -1,8 +1,8 @@
-import Ansible from '../Ansible'
-import Command from '../Command'
-import _ from 'lodash'
-import constants from '../constants'
-import depurar from 'depurar'
+const Ansible = require('../apps/Ansible')
+const Command = require('../Command')
+const _ = require('lodash')
+const constants = require('../constants')
+const depurar = require('depurar')
 const debug = depurar('frey')
 
 class Backup extends Command {

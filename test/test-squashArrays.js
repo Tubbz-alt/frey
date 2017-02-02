@@ -1,4 +1,4 @@
-import squashArrays from '../src/squashArrays'
+const squashArrays = require('../src/squashArrays')
 import { expect } from 'chai'
 
 describe('squashArrays', () => {

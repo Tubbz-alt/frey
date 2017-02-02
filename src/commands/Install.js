@@ -1,9 +1,9 @@
-import Ansible from '../Ansible'
-import Command from '../Command'
-import _ from 'lodash'
-import depurar from 'depurar'
+const Ansible = require('../apps/Ansible')
+const Command = require('../Command')
+const _ = require('lodash')
+const depurar = require('depurar')
 const debug = depurar('frey')
-import constants from '../constants'
+const constants = require('../constants')
 
 class Install extends Command {
   main (cargo, cb) {

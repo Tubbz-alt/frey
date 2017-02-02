@@ -1,10 +1,11 @@
-import depurar from 'depurar'
+const depurar = require('depurar')
 const debug = depurar('frey')
-import chalk from 'chalk'
+const chalk = require('chalk')
 import { spawn } from 'child_process'
-import _ from 'lodash'
-import inquirer from 'inquirer'
-import Base from './Base'
+const _ = require('lodash')
+const inquirer = require('inquirer')
+const Base = require('./Base')
+const utils = require('./Utils')
 
 class Shell extends Base {
   constructor (runtime) {
@@ -14,7 +15,7 @@ class Shell extends Base {
 
   confirm (question, cb) {
     if (this.runtime.init.cliargs.forceYes) {
-      this._out(`--> Skipping confirmation for '${question}' as '--force-yes' applies\n`)
+      this._out(`--> Skipping confirmation for '${question}' as '--force-yes' applies`)
       return cb(null)
     }
 
@@ -28,21 +29,6 @@ class Shell extends Base {
         return cb(null)
       }
     )
-  }
-
-  _buildChildEnv (extra = {}) {
-    let childEnv = {}
-
-    childEnv = _.extend({}, this.runtime.init.env, extra)
-
-    // Automatically add all FREY_* environment variables to Terraform environment
-    _.forOwn(this.runtime.init.env, (val, key) => {
-      if (_.startsWith(key, 'FREY_')) {
-        childEnv[`TF_VAR_${key}`] = val
-      }
-    })
-
-    return childEnv
   }
 
   exeScript (scriptArgs, cmdOpts, cb) {
@@ -114,7 +100,7 @@ class Shell extends Base {
 
     const opts = {
       cwd  : dir,
-      env  : this._buildChildEnv(cmdOpts.env),
+      env  : utils.buildChildEnv(cmdOpts.env, this.runtime.init.env),
       stdio: [ cmdOpts.stdin, cmdOpts.stdout, cmdOpts.stderr ],
       input: cmdOpts.input,
     }

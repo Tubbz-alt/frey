@@ -1,18 +1,18 @@
-import Command from '../Command'
-import squashArrays from '../squashArrays'
-import utils from '../Utils'
-import json2hcl from '../json2hcl'
-import path from 'path'
-import depurar from 'depurar'
+const Command = require('../Command')
+const squashArrays = require('../squashArrays')
+const utils = require('../Utils')
+const json2hcl = require('../json2hcl')
+const path = require('path')
+const depurar = require('depurar')
 const debug = depurar('frey')
-import globby from 'globby'
-import async from 'async'
-import fs from 'fs'
-import _ from 'lodash'
-import INI from 'ini'
-import YAML from 'js-yaml'
+const globby = require('globby')
+const async = require('async')
+const fs = require('fs')
+const _ = require('lodash')
+const INI = require('ini')
+const YAML = require('js-yaml')
 import { unflatten } from 'flat'
-// import constants from '../constants'
+// const constants = require('../constants')
 class Config extends Command {
   constructor (name, runtime) {
     super(name, runtime)

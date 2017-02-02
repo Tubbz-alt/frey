@@ -1,4 +1,4 @@
-import Frey from '../src/Frey'
+const Frey = require('../src/Frey')
 import { expect } from 'chai'
 
 describe('Frey', () => {

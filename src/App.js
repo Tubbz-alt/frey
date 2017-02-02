@@ -1,7 +1,9 @@
-import _ from 'lodash'
-import Shell from './Shell'
-import constants from './constants'
-// import depurar from 'depurar'; const debug = depurar('frey')
+const _ = require('lodash')
+const Shell = require('./Shell')
+const constants = require('./constants')
+const Scrolex = require('scrolex')
+const utils = require('./Utils')
+// const debug = require('depurar')('frey')
 class App {
   constructor (opts) {
     this.opts = opts
@@ -15,18 +17,25 @@ class App {
     const exe = this.opts.exe || defaults.exe
     const signatureOpts = this.opts.signatureOpts || defaults.signatureOpts
     const cmdOpts = this.opts.cmdOpts || defaults.cmdOpts || {}
-    const env = this._objectToEnv(_.defaults(this.opts.env, defaults.env))
+    const env = utils.buildChildEnv(this._objectToEnv(_.defaults(this.opts.env, defaults.env)), this.runtime.init.env)
     const args = this._objectToFlags(_.defaults(this.opts.args, defaults.args), signatureOpts)
 
     cmdOpts.env = env
 
+    if (!cmdOpts.components) {
+      cmdOpts.addCommandAsComponent = true
+      cmdOpts.mode = process.env.FREY_SCROLEX_MODE || process.env.SCROLEX_MODE || 'singlescroll'
+      cmdOpts.components = `frey>${global.frey.currentHost}>${global.frey.currentCommand}`
+    }
+
     const cmdArgs = [ exe ].concat(args)
-    this.shell.exe(cmdArgs, cmdOpts, (err, stdout) => {
+
+    Scrolex.exe(cmdArgs, cmdOpts, (err, out) => {
       if (err) {
         return cb(err)
       }
 
-      return cb(null, stdout)
+      return cb(null, out)
     })
   }
 

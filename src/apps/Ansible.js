@@ -1,8 +1,8 @@
-import chalk from 'chalk'
-import _ from 'lodash'
-import App from './App'
-import fs from 'fs'
-import constants from './constants'
+const chalk = require('chalk')
+const _ = require('lodash')
+const App = require('../App')
+const fs = require('fs')
+const constants = require('../constants')
 
 class Ansible extends App {
   exe (cb) {

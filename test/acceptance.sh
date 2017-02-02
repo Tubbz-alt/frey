@@ -36,6 +36,8 @@ if ! which "${cmdSed}" > /dev/null; then
   exit 1
 fi
 
+export SCROLEX_MODE='passthru'
+
 # Running prepare before other scenarios is important on Travis,
 # so that stdio can diverge - and we can enforce stricter
 # stdio comparison on all other tests.

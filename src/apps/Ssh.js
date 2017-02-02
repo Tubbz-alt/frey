@@ -1,5 +1,5 @@
-import App from './App'
-import constants from './constants'
+const App = require('../App')
+const constants = require('../constants')
 
 class Ssh extends App {
   exe (cb) {

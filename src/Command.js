@@ -1,5 +1,5 @@
-import Base from './Base'
-import Shell from './Shell'
+const Base = require('./Base')
+const Shell = require('./Shell')
 
 class Command extends Base {
   constructor (name, runtime) {

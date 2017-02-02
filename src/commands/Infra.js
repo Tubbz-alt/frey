@@ -1,7 +1,7 @@
-import Terraform from '../Terraform'
-import Command from '../Command'
-import _ from 'lodash'
-import constants from '../constants'
+const Terraform = require('../apps/Terraform')
+const Command = require('../Command')
+const _ = require('lodash')
+const constants = require('../constants')
 
 class Infra extends Command {
   constructor (name, runtime) {
@@ -43,7 +43,7 @@ class Infra extends Command {
         return cb(err)
       }
 
-      this._out(`--> Saved new state to '${this.runtime.config.global.infra_state_file}'\n`)
+      this._out(`--> Saved new state to '${this.runtime.config.global.infra_state_file}'`)
 
       return cb(null)
     })

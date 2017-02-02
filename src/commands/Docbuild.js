@@ -1,11 +1,11 @@
-import Command from '../Command'
-import _ from 'lodash'
-import fs from 'fs'
-import depurar from 'depurar'
+const Command = require('../Command')
+const _ = require('lodash')
+const fs = require('fs')
+const depurar = require('depurar')
 const debug = depurar('frey')
-import flatten from 'flat'
-import YAML from 'js-yaml'
-import commands from '../commands'
+const flatten = require('flat')
+const YAML = require('js-yaml')
+const commands = require('../commands')
 
 class Docbuild extends Command {
   constructor (name, runtime) {

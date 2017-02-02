@@ -1,16 +1,16 @@
-import Command from '../Command'
-import path from 'path'
-import async from 'async'
-import globby from 'globby'
-import depurar from 'depurar'
+const Command = require('../Command')
+const path = require('path')
+const async = require('async')
+const globby = require('globby')
+const depurar = require('depurar')
 const debug = depurar('frey')
-import json2hcl from '../json2hcl'
-import fs from 'fs'
-import _ from 'lodash'
-// import tomlify from 'tomlify-j0.4'
-import INI from 'ini'
-import YAML from 'js-yaml'
-import TOML from 'toml'
+const json2hcl = require('../json2hcl')
+const fs = require('fs')
+const _ = require('lodash')
+// const tomlify = require('tomlify-j0.4')
+const INI = require('ini')
+const YAML = require('js-yaml')
+const TOML = require('toml')
 
 class Convert extends Command {
   constructor (name, runtime) {

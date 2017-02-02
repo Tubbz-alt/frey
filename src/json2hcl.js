@@ -1,9 +1,9 @@
-// import depurar from 'depurar'; const debug = depurar('frey')
-import path from 'path'
-import _ from 'lodash'
-import squashArrays from './squashArrays'
+// const debug = require('depurar')('frey')
+const path = require('path')
+const _ = require('lodash')
+const squashArrays = require('./squashArrays')
 import { spawn } from 'child_process'
-import os from 'os'
+const os = require('os')
 const platform = os.platform()
 const arch = `${os.arch()}`.replace('x64', 'amd64')
 

@@ -2,15 +2,15 @@
 if (process.version.match(/^v?0\.10.*/)) {
   require('babel-polyfill')
 }
-import Frey from './Frey'
-// import depurar from 'depurar'; const debug = depurar('frey')
-import yargs from 'yargs'
-import chalk from 'chalk'
+const Frey = require('./Frey')
+// const debug = require('depurar')('frey')
+const yargs = require('yargs')
+const chalk = require('chalk')
 const updateNotifier = require('update-notifier')
-import pkg from '../package.json'
-import LiftOff from 'liftoff'
-import commands from './commands'
-import _ from 'lodash'
+const pkg = require('../package.json')
+const LiftOff = require('liftoff')
+const commands = require('./commands')
+const _ = require('lodash')
 
 updateNotifier({ pkg }).notify({ defer: false })
 

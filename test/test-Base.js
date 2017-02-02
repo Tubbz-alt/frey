@@ -1,6 +1,6 @@
-import Base from '../src/Base'
+const Base = require('../src/Base')
 import { expect } from 'chai'
-// import depurar from 'depurar'; const debug = depurar('frey')
+// const debug = require('depurar')('frey')
 describe('Base', () => {
   describe('run', () => {
     it('should run a bootchain', done => {

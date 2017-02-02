@@ -1,12 +1,12 @@
-import Terraform from '../Terraform'
-import Command from '../Command'
-import _ from 'lodash'
-import constants from '../constants'
+const Terraform = require('../apps/Terraform')
+const Command = require('../Command')
+const _ = require('lodash')
+const constants = require('../constants')
 
 class Get extends Command {
   main (cargo, cb) {
     if (!_.has(this.runtime.config, 'infra')) {
-      this._out(`Skipping as there are no infra instructions\n`)
+      this._out(`Skipping as there are no infra instructions`)
       return cb(null)
     }
 
@@ -25,7 +25,7 @@ class Get extends Command {
         return cb(err)
       }
 
-      this._out(`--> Updated modules'\n`)
+      this._out(`--> Updated modules'`)
       return cb(null)
     })
   }

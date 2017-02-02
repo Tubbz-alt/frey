@@ -1,5 +1,5 @@
-// import depurar from 'depurar'; const debug = depurar('frey')
-import _ from 'lodash'
+// const debug = require('depurar')('frey')
+const _ = require('lodash')
 
 // HCL nests EVERYTHING into an array. While that's cool.. going back to
 // ansible yaml, it poses problems. Here's the counter hack.

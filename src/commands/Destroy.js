@@ -1,9 +1,9 @@
-import Terraform from '../Terraform'
-import Command from '../Command'
-import _ from 'lodash'
-import constants from '../constants'
+const Terraform = require('../apps/Terraform')
+const Command = require('../Command')
+const _ = require('lodash')
+const constants = require('../constants')
 
-// import depurar from 'depurar'; const debug = depurar('frey')
+// const debug = require('depurar')('frey')
 class Destroy extends Command {
   constructor (name, runtime) {
     super(name, runtime)
@@ -12,7 +12,7 @@ class Destroy extends Command {
 
   _confirm (cargo, cb) {
     if (!_.has(this.runtime.config, 'infra')) {
-      this._out(`Skipping as there are no install instructions\n`)
+      this._out(`Skipping as there are no install instructions`)
       return cb(null)
     }
     this.shell.confirm('May I destroy your infrastructure?', cb)
@@ -20,7 +20,7 @@ class Destroy extends Command {
 
   main (cargo, cb) {
     if (!_.has(this.runtime.config, 'infra')) {
-      this._out(`Skipping as there are no install instructions\n`)
+      this._out(`Skipping as there are no install instructions`)
       return cb(null)
     }
 
@@ -35,7 +35,7 @@ class Destroy extends Command {
         return cb(err)
       }
 
-      this._out(`--> Saved new state to '${this.runtime.config.global.infra_state_file}'\n`)
+      this._out(`--> Saved new state to '${this.runtime.config.global.infra_state_file}'`)
 
       return cb(null)
     })

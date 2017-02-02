@@ -1,14 +1,14 @@
-import Terraform from '../Terraform'
-import Command from '../Command'
-import _ from 'lodash'
-import depurar from 'depurar'
+const Terraform = require('../apps/Terraform')
+const Command = require('../Command')
+const _ = require('lodash')
+const depurar = require('depurar')
 const debug = depurar('frey')
-import constants from '../constants'
+const constants = require('../constants')
 
 class Refresh extends Command {
   main (cargo, cb) {
     if (!_.has(this.runtime.config, 'infra')) {
-      this._out(`Skipping as there are no install instructions\n`)
+      this._out(`Skipping as there are no install instructions`)
       return cb(null)
     }
 
@@ -28,7 +28,7 @@ class Refresh extends Command {
         }
       }
 
-      this._out(`--> Saved state to '${this.runtime.config.global.infra_state_file}'\n`)
+      this._out(`--> Saved state to '${this.runtime.config.global.infra_state_file}'`)
       return cb(null)
     })
   }

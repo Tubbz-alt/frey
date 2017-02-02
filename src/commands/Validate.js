@@ -1,5 +1,5 @@
-import Command from '../Command'
-// import depurar from 'depurar'; const debug = depurar('frey')
+const Command = require('../Command')
+// const debug = require('depurar')('frey')
 class Validate extends Command {
   main (cargo, cb) {
     if (!this.runtime.init.paths.git_dir) {

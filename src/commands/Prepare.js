@@ -1,10 +1,10 @@
-import Command from '../Command'
-import mkdirp from 'mkdirp'
-import utils from '../Utils'
-import semver from 'semver'
-import fs from 'fs'
-import async from 'async'
-import depurar from 'depurar'
+const Command = require('../Command')
+const mkdirp = require('mkdirp')
+const utils = require('../Utils')
+const semver = require('semver')
+const fs = require('fs')
+const async = require('async')
+const depurar = require('depurar')
 
 const debug = depurar('frey')
 
@@ -204,7 +204,7 @@ class Prepare extends Command {
 
       const foundVersion = appProps.versionTransformer(stdout)
 
-      this._out(`Found '${appProps.name}' with version '${foundVersion}'\n`)
+      this._out(`Found '${appProps.name}' with version '${foundVersion}'`)
 
       if (!stdout || !semver.satisfies(foundVersion, appProps.range)) {
         this._out(`'${appProps.name}' needs to be installed or upgraded. \n`)

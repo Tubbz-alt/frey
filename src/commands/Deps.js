@@ -1,6 +1,6 @@
-import Command from '../Command'
-import utils from '../Utils'
-// import depurar from 'depurar'; const debug = depurar('frey')
+const Command = require('../Command')
+const utils = require('../Utils')
+// const debug = require('depurar')('frey')
 class Deps extends Command {
   main (cargo, cb) {
     let deps = []

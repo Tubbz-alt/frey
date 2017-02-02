@@ -1,13 +1,13 @@
-import Command from '../Command'
-import utils from '../Utils'
-import osHomedir from 'os-homedir'
-import os from 'os'
-import path from 'path'
-import _ from 'lodash'
-import async from 'async'
-import fs from 'fs'
-import uuid from 'uuid'
-// import depurar from 'depurar'; const debug = depurar('frey')
+const Command = require('../Command')
+const utils = require('../Utils')
+const osHomedir = require('os-homedir')
+const os = require('os')
+const path = require('path')
+const _ = require('lodash')
+const async = require('async')
+const fs = require('fs')
+const uuid = require('uuid')
+// const debug = require('depurar')('frey')
 class Init extends Command {
   constructor (name, runtime) {
     super(name, runtime)

@@ -1,8 +1,8 @@
-import Ansible from '../Ansible'
-import Command from '../Command'
-import constants from '../constants'
-import _ from 'lodash'
-import depurar from 'depurar'
+const Ansible = require('../apps/Ansible')
+const Command = require('../Command')
+const constants = require('../constants')
+const _ = require('lodash')
+const depurar = require('depurar')
 
 const debug = depurar('frey')
 

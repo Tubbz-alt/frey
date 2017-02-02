@@ -1,11 +1,11 @@
-import Command from '../Command'
-import constants from '../constants'
-import Terraform from '../Terraform'
-import async from 'async'
-import fs from 'fs'
-// import _ from 'lodash'
-import globby from 'globby'
-import depurar from 'depurar'
+const Command = require('../Command')
+const constants = require('../constants')
+const Terraform = require('../apps/Terraform')
+const async = require('async')
+const fs = require('fs')
+// const _ = require('lodash')
+const globby = require('globby')
+const depurar = require('depurar')
 
 const debug = depurar('frey')
 
