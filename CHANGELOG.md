@@ -59,7 +59,9 @@ Released: Unreleased.
 
 - [ ] Replace leaky shell/exe abstraction hackjobs with `scrolex`
 - [ ] Switch from terraformInventory to terraform-provisioner-ansible (https://github.com/jonmorehouse/terraform-provisioner-ansible)
+- [x] Update znq role ([see](https://github.com/triplepoint/ansible-znc/issues/4))
 - [x] Add timezone role
+
 
 ## v0.3.28
 
