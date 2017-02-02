@@ -67,6 +67,8 @@ roles=(
   'znc,1.1.0,master'
   'znc,1.2.0,master'
   'znc,1.3.0,master'
+  'znc,1.3.1,master'
+  'znc,1.3.2,master'
   'nginx,2.0.1,master'
   'prometheus,1.3.6,master'
   'smokeping,0.0.1,master'
@@ -80,6 +82,7 @@ roles=(
   'nix,1.1.0,master'
   'nix,1.2.0,master'
   'nix,1.2.1,master'
+  'timezone,1.0.0,master'
 )
 
 for role in "${roles[@]}"; do

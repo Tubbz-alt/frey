@@ -1,0 +1,25 @@
+# tasks file for timezone
+---
+- name: configure /etc/localtime
+  file:
+    src: /usr/share/zoneinfo/{{ timezone_zone }}
+    dest: /etc/localtime
+    state: link
+    force: true
+  tags:
+    - configuration
+    - timezone
+    - timezone-configure-etc-localtime
+
+- name: configure /etc/timezone
+  template:
+    src: etc/timezone.j2
+    dest: /etc/timezone
+    owner: root
+    group: root
+    mode: 0644
+  notify: update tzdata
+  tags:
+    - configuration
+    - timezone
+    - timezone-configure-etc-timezone

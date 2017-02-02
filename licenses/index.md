@@ -28,6 +28,7 @@
 - telusdigital.logrotate -- Copyright (c) 2015 Aaron Pederson
 - telusdigital.upstart -- Copyright (c) 2015 Chris Olstrom
 - tersmitten.rsyslog -- Copyright (c) Oefenweb.nl <https://github.com/Oefenweb>
+- timezone -- Copyright (c) Oefenweb.nl <https://github.com/Oefenweb>
 - triplepoint.znc -- Copyright (c) 2015 Jonathan Hanson
 - unattended-upgrades -- Gnomovision version 69, Copyright (C) year name of author
 - upstart -- Copyright (c) 2015 Chris Olstrom

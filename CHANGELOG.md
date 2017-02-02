@@ -60,6 +60,8 @@ Released: Unreleased.
 - [ ] Switch from terraformInventory to terraform-provisioner-ansible (https://github.com/jonmorehouse/terraform-provisioner-ansible)
 - [x] Add support for scrolling output via scrolex
 - [x] Avoid duplication in build steps
+- [x] Update znq role ([see](https://github.com/triplepoint/ansible-znc/issues/4))
+- [x] Add timezone role
 
 ## v0.3.28
 
