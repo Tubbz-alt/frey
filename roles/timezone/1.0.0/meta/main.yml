@@ -1,0 +1,21 @@
+# meta file for timezone
+---
+galaxy_info:
+  author: Mischa ter Smitten
+  company: Oefenweb.nl B.V.
+  description: Set timezone on Debian-like systems
+  license: MIT
+  min_ansible_version: 1.9.6
+  platforms:
+    - name: Ubuntu
+      versions:
+        - precise
+        - trusty
+        - xenial
+    - name: Debian
+      versions:
+        - wheezy
+        - jessie
+  galaxy_tags:
+    - system
+dependencies: []
