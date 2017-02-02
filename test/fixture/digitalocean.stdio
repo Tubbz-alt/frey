@@ -6,41 +6,63 @@ ACCPTST:STDIO_REPLACE_DURATIONS
 ACCPTST:STDIO_REPLACE_REMOTE_EXEC
 ACCPTST:STDIO_REPLACE_ELAPSED
 (maybe) Destroying..
---> Frey version '0.3.28'
---> Will run: [ 'init', 'config', 'deps', 'prepare', 'refresh', 'validate', 'get', 'plan', 'backup', 'infra', 'install', 'setup', 'deploy', 'restart', 'show' ]
---> {hostname} - init
---> {hostname} - config
---> {hostname} - deps
---> {hostname} - prepare
-Reconstructing private key '{root}/test/scenario/digitalocean/frey-digitalocean.pem' from '{root}/test/scenario/digitalocean/frey-digitalocean.pem.cast5'
------BEGIN RSA PRIVATE KEY-----
-Found 'terraform' with version '0.7.3'
-Found 'terraformInventory' with version '0.6.0'
-Found 'pip' with version {{global_pip_version}}
-Found 'ansible' with version '2.1.4'
---> {hostname} - refresh
---> Saved state to '{root}/test/scenario/digitalocean/Frey-state-terraform.tfstate'
---> {hostname} - validate
---> {hostname} - get
---> Updated modules'
---> {hostname} - plan
-The Terraform execution plan has been generated and is shown below.
-Resources are shown in alphabetical order for quick scanning. Green resources
-will be created (or destroyed and then created if an existing resource
-exists), yellow resources are being changed in-place, and red resources
-will be destroyed. Cyan entries are data sources to be read.
+❯ frey ❯ {hostname} ❯ welcome ❯
 
-Your plan was also saved to the path below. Call the "apply" subcommand
-with this plan file and Terraform will exactly execute this execution
-plan.
+    --> Frey version '0.3.28' ✔
 
-Path: {root}/test/scenario/digitalocean/Frey-residu-terraform.plan
+    --> Will run: [ 'init', 'config', 'deps', 'prepare', 'refresh', 'validate', 'get', 'plan', 'backup', 'infra', 'install', 'setup', 'deploy', 'restart', 'show' ] ✔
 
-+ digitalocean_domain.domain-web
+❯ frey ❯ {hostname} ❯ init ❯
+
+    finished ✔
+
+❯ frey ❯ {hostname} ❯ config ❯
+
+    finished ✔
+
+❯ frey ❯ {hostname} ❯ deps ❯
+
+    finished ✔
+
+❯ frey ❯ {hostname} ❯ prepare ❯
+
+    Reconstructing private key '{root}/test/scenario/digitalocean/frey-digitalocean.pem' from '{root}/test/scenario/digitalocean/frey-digitalocean.pem.cast5'
+    -----BEGIN RSA PRIVATE KEY-----
+    Found 'terraform' with version '0.7.3'
+    Found 'terraformInventory' with version '0.6.0'
+    Found 'pip' with version {{global_pip_version}}
+    Found 'ansible' with version '2.1.4'
+    finished ✔
+
+    --> Saved state to '{root}/test/scenario/digitalocean/Frey-state-terraform.tfstate'
+    finished ✔
+
+❯ frey ❯ {hostname} ❯ validate ❯ terraform ❯
+
+    finished ✔
+
+    --> Updated modules'
+    finished ✔
+
+❯ frey ❯ {hostname} ❯ plan ❯ terraform ❯
+
+    The Terraform execution plan has been generated and is shown below.
+    Resources are shown in alphabetical order for quick scanning. Green resources
+    will be created (or destroyed and then created if an existing resource
+    exists), yellow resources are being changed in-place, and red resources
+    will be destroyed. Cyan entries are data sources to be read.
+
+    Your plan was also saved to the path below. Call the "apply" subcommand
+    with this plan file and Terraform will exactly execute this execution
+    plan.
+
+    Path: {root}/test/scenario/digitalocean/Frey-residu-terraform.plan
+
+    + digitalocean_domain.domain-web
     ip_address: "${element(digitalocean_droplet.freytest-web.*.ipv4_address, count.index)}"
     name:       "web-0.freyexample.com"
 
-+ digitalocean_droplet.freytest-db
+    + digitalocean_droplet.freytest-db
     image:                "ubuntu-14-04-x64"
     ipv4_address:         "<computed>"
     ipv4_address_private: "<computed>"
@@ -53,7 +75,7 @@ Path: {root}/test/scenario/digitalocean/Frey-residu-terraform.plan
     ssh_keys.#:           "<computed>"
     status:               "<computed>"
 
-+ digitalocean_droplet.freytest-web
+    + digitalocean_droplet.freytest-web
     image:                "ubuntu-14-04-x64"
     ipv4_address:         "<computed>"
     ipv4_address_private: "<computed>"
@@ -66,112 +88,826 @@ Path: {root}/test/scenario/digitalocean/Frey-residu-terraform.plan
     ssh_keys.#:           "<computed>"
     status:               "<computed>"
 
-+ digitalocean_ssh_key.freytest-sshkey
+    + digitalocean_ssh_key.freytest-sshkey
     fingerprint: "<computed>"
     name:        "Frey test"
     public_key:  "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCyqYu9Afk0RMvxlDu3bVTNYOHeAX9zVCfuvdUE7osGXcOc8Ggn1kleaHXuHLwrfbsE0KZ6yUkRTh6JO3hhTSDeqw9RpNSGKt7YTLdfkM0LhybnPFed/efeGaKEQX0IMCVVL+su7fgT5ESWanR9ibrDqo0tHGWVLp6if7IBCIkmUiMrC6HbMUm3BclwAVlA3azS7Fk7y75urwlgVZbYkXcN30fwpA+PX61oj/UMN1eloabZiv+EeZhAJj1envrMKO6TAhVYL7Nw2qNYMYP5Hh5wRfSZqB5sLRvET9IXItQ5yUjyI7F2b8t5WmBBJMlv2wIYgKPlbqGpmfPBycz0cd09 {user}@digitalocean.freyproject.io\n"
-Plan: 4 to add, 0 to change, 0 to destroy.
---> Saved plan as '{root}/test/scenario/digitalocean/Frey-residu-terraform.plan'
---> {hostname} - backup
---> {hostname} - infra
-digitalocean_ssh_key.freytest-sshkey: Creating...
-  fingerprint: "" => "<computed>"
-  name:        "" => "Frey test"
-  public_key:  "" => "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCyqYu9Afk0RMvxlDu3bVTNYOHeAX9zVCfuvdUE7osGXcOc8Ggn1kleaHXuHLwrfbsE0KZ6yUkRTh6JO3hhTSDeqw9RpNSGKt7YTLdfkM0LhybnPFed/efeGaKEQX0IMCVVL+su7fgT5ESWanR9ibrDqo0tHGWVLp6if7IBCIkmUiMrC6HbMUm3BclwAVlA3azS7Fk7y75urwlgVZbYkXcN30fwpA+PX61oj/UMN1eloabZiv+EeZhAJj1envrMKO6TAhVYL7Nw2qNYMYP5Hh5wRfSZqB5sLRvET9IXItQ5yUjyI7F2b8t5WmBBJMlv2wIYgKPlbqGpmfPBycz0cd09 {user}@digitalocean.freyproject.io\n"
-digitalocean_ssh_key.freytest-sshkey: Creation complete
-digitalocean_droplet.freytest-db: Creating...
-  image:                "" => "ubuntu-14-04-x64"
-  ipv4_address:         "" => "<computed>"
-  ipv4_address_private: "" => "<computed>"
-  ipv6_address:         "" => "<computed>"
-  ipv6_address_private: "" => "<computed>"
-  locked:               "" => "<computed>"
-  name:                 "" => "db-0"
-  region:               "" => "nyc2"
-  size:                 "" => "512mb"
-  ssh_keys.#:           "" => "1"
-  ssh_keys.0:           "" => "{bigint}"
-  status:               "" => "<computed>"
-digitalocean_droplet.freytest-db: Provisioning with 'remote-exec'...
-digitalocean_droplet.freytest-db (remote-exec): /root
-digitalocean_droplet.freytest-db: Creation complete
-digitalocean_droplet.freytest-web: Creating...
-  image:                "" => "ubuntu-14-04-x64"
-  ipv4_address:         "" => "<computed>"
-  ipv4_address_private: "" => "<computed>"
-  ipv6_address:         "" => "<computed>"
-  ipv6_address_private: "" => "<computed>"
-  locked:               "" => "<computed>"
-  name:                 "" => "web-0"
-  region:               "" => "nyc2"
-  size:                 "" => "512mb"
-  ssh_keys.#:           "" => "1"
-  ssh_keys.0:           "" => "{bigint}"
-  status:               "" => "<computed>"
-digitalocean_droplet.freytest-web: Provisioning with 'remote-exec'...
-digitalocean_droplet.freytest-web (remote-exec): /root
-digitalocean_droplet.freytest-web: Creation complete
-digitalocean_domain.domain-web: Creating...
-  ip_address: "" => "{ip}"
-  name:       "" => "web-0.freyexample.com"
-digitalocean_domain.domain-web: Creation complete
+    Plan: 4 to add, 0 to change, 0 to destroy.
+    Plan: 4 to add, 0 to change, 0 to destroy. ✔
 
-Apply complete! Resources: 4 added, 0 changed, 0 destroyed.
+    Plan: 4 to add, 0 to change, 0 to destroy. ✔
 
-The state of your infrastructure has been saved to the path
-below. This state is required to modify and destroy your
-infrastructure, so keep it safe. To inspect the complete state
-use the `terraform show` command.
+    --> Saved plan as '{root}/test/scenario/digitalocean/Frey-residu-terraform.plan'
+    finished ✔
 
-State path: {root}/test/scenario/digitalocean/Frey-state-terraform.tfstate
+❯ frey ❯ {hostname} ❯ backup ❯ terraform ❯
 
-Outputs:
+    finished ✔
 
-public_address = {ip}
-public_addresses = {ip}
-{ip}
---> Saved new state to '{root}/test/scenario/digitalocean/Frey-state-terraform.tfstate'
---> {hostname} - install
+❯ frey ❯ {hostname} ❯ infra ❯ terraform ❯
 
-PLAY [Install freytest-web] ****************************************************
+    digitalocean_ssh_key.freytest-sshkey: Creating...
+    fingerprint: "" => "<computed>"
+    name:        "" => "Frey test"
+    public_key:  "" => "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCyqYu9Afk0RMvxlDu3bVTNYOHeAX9zVCfuvdUE7osGXcOc8Ggn1kleaHXuHLwrfbsE0KZ6yUkRTh6JO3hhTSDeqw9RpNSGKt7YTLdfkM0LhybnPFed/efeGaKEQX0IMCVVL+su7fgT5ESWanR9ibrDqo0tHGWVLp6if7IBCIkmUiMrC6HbMUm3BclwAVlA3azS7Fk7y75urwlgVZbYkXcN30fwpA+PX61oj/UMN1eloabZiv+EeZhAJj1envrMKO6TAhVYL7Nw2qNYMYP5Hh5wRfSZqB5sLRvET9IXItQ5yUjyI7F2b8t5WmBBJMlv2wIYgKPlbqGpmfPBycz0cd09 {user}@digitalocean.freyproject.io\n"
+    digitalocean_ssh_key.freytest-sshkey: Creation complete
+    digitalocean_droplet.freytest-db: Creating...
+    image:                "" => "ubuntu-14-04-x64"
+    ipv4_address:         "" => "<computed>"
+    ipv4_address_private: "" => "<computed>"
+    ipv6_address:         "" => "<computed>"
+    ipv6_address_private: "" => "<computed>"
+    locked:               "" => "<computed>"
+    name:                 "" => "db-0"
+    region:               "" => "nyc2"
+    size:                 "" => "512mb"
+    ssh_keys.#:           "" => "1"
+    ssh_keys.0:           "" => "{bigint}"
+    status:               "" => "<computed>"
+    digitalocean_droplet.freytest-db: Provisioning with 'remote-exec'...
+    digitalocean_droplet.freytest-db (remote-exec): /root
+    digitalocean_droplet.freytest-db: Creation complete
+    digitalocean_droplet.freytest-web: Creating...
+    image:                "" => "ubuntu-14-04-x64"
+    ipv4_address:         "" => "<computed>"
+    ipv4_address_private: "" => "<computed>"
+    ipv6_address:         "" => "<computed>"
+    ipv6_address_private: "" => "<computed>"
+    locked:               "" => "<computed>"
+    name:                 "" => "web-0"
+    region:               "" => "nyc2"
+    size:                 "" => "512mb"
+    ssh_keys.#:           "" => "1"
+    ssh_keys.0:           "" => "{bigint}"
+    status:               "" => "<computed>"
+    digitalocean_droplet.freytest-web: Provisioning with 'remote-exec'...
+    digitalocean_droplet.freytest-web (remote-exec): /root
+    digitalocean_droplet.freytest-web: Creation complete
+    digitalocean_domain.domain-web: Creating...
+    ip_address: "" => "{ip}"
+    name:       "" => "web-0.freyexample.com"
+    digitalocean_domain.domain-web: Creation complete
 
-TASK [setup] *******************************************************************
-ok: [{ip}]
+    Apply complete! Resources: 4 added, 0 changed, 0 destroyed.
 
-TASK [Execute deploy command] **************************************************
-changed: [{ip}] => (item=pwd)
-changed: [{ip}] => (item=echo web)
+    The state of your infrastructure has been saved to the path
+    below. This state is required to modify and destroy your
+    infrastructure, so keep it safe. To inspect the complete state
+    use the `terraform show` command.
 
-PLAY [Install freytest-db] *****************************************************
+    State path: {root}/test/scenario/digitalocean/Frey-state-terraform.tfstate
 
-TASK [setup] *******************************************************************
-ok: [{ip}]
+    Outputs:
 
-TASK [Execute deploy command] **************************************************
-changed: [{ip}] => (item=pwd)
-changed: [{ip}] => (item=echo db)
+    public_address = {ip}
+    public_addresses = {ip}
+    {ip}
+    {ip} ✔
 
-PLAY RECAP *********************************************************************
-{ip} : ok=2    changed=1    unreachable=0    failed=0   
-{ip} : ok=2    changed=1    unreachable=0    failed=0   
+    {ip} ✔
 
---> {hostname} - setup
---> {hostname} - deploy
---> {hostname} - restart
---> {hostname} - show
-- [ output ] ------------------------------
-public_address = {ip}
-public_addresses = {ip}
-{ip}
+    --> Saved new state to '{root}/test/scenario/digitalocean/Frey-state-terraform.tfstate'
+    finished ✔
 
-- [ public_addresses ] ------------------------------
-{ip}
-{ip}
+❯ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯
 
-- [ facts ] ------------------------------
-db-0,ansible_facts.ansible_service_mgr = upstart
-web-0,ansible_facts.ansible_service_mgr = upstart
+
+    PLAY [Install freytest-web] ****************************************************
+
+    TASK [setup] *******************************************************************
+    ok: [{ip}]
+
+    TASK [Execute deploy command] **************************************************
+    changed: [{ip}] => (item=pwd)
+    changed: [{ip}] => (item=echo web)
+
+    PLAY [Install freytest-db] *****************************************************
+
+    TASK [setup] *******************************************************************
+    ok: [{ip}]
+
+    TASK [Execute deploy command] **************************************************
+    changed: [{ip}] => (item=pwd)
+    changed: [{ip}] => (item=echo db)
+
+    PLAY RECAP *********************************************************************
+    {ip} : ok=2    changed=1    unreachable=0    failed=0
+    {ip} : ok=2    changed=1    unreachable=0    failed=0
+
+ ✔
+
+ ✔
+
+    finished ✔
+
+❯ frey ❯ {hostname} ❯ setup ❯ ansible-playbook ❯
+
+    finished ✔
+
+❯ frey ❯ {hostname} ❯ deploy ❯ ansible-playbook ❯
+
+    finished ✔
+
+❯ frey ❯ {hostname} ❯ restart ❯ ansible-playbook ❯
+
+    finished ✔
+
+❯ frey ❯ {hostname} ❯ show ❯ terraform ❯
+
+    public_address = {ip}
+    public_addresses = {ip}
+    {ip}
+    {ip} ✔
+
+    {ip} ✔
+
+❯ frey ❯ {hostname} ❯ show ❯ terraform ❯
+
+    {ip}
+    {ip}
+    {ip} ✔
+
+    {ip} ✔
+
+❯ frey ❯ {hostname} ❯ show ❯ ansible ❯
+
+    {ip} | SUCCESS => {
+    "ansible_facts": {
+    "ansible_all_ipv4_addresses": [
+    "{ip}",
+    "{ip}"
+    ],
+    "ansible_all_ipv6_addresses": [
+    "fe80::5483:caff:fea5:a93d"
+    ],
+    "ansible_architecture": "x86_64",
+    "ansible_bios_date": "11/03/2016",
+    "ansible_bios_version": "{bigint}",
+    "ansible_cmdline": {
+    "BOOT_IMAGE": "/boot/vmlinuz-4.4.0-53-generic",
+    "clocksource": "kvm-clock",
+    "console": "tty1",
+    "net.ifnames": "0",
+    "notsc": true,
+    "ro": true,
+    "root": "LABEL=DOROOT"
+    },
+    "ansible_date_time": {
+    "date": "2017-02-02",
+    "day": "02",
+    "epoch": "{bigint}",
+    "hour": "16",
+    "iso8601": "2017-02-02T16:09:13Z",
+    "iso8601_basic": "{bigint}T{bigint}",
+    "iso8601_basic_short": "{bigint}T160913",
+    "iso8601_micro": "2017-02-02T{duration}Z",
+    "minute": "09",
+    "month": "02",
+    "second": "13",
+    "time": "16:09:13",
+    "tz": "UTC",
+    "tz_offset": "+0000",
+    "weekday": "Thursday",
+    "weekday_number": "4",
+    "weeknumber": "05",
+    "year": "2017"
+    },
+    "ansible_default_ipv4": {
+    "address": "{ip}",
+    "alias": "eth0",
+    "broadcast": "{ip}",
+    "gateway": "{ip}",
+    "interface": "eth0",
+    "macaddress": "56:83:ca:a5:a9:3d",
+    "mtu": 1500,
+    "netmask": "{ip}",
+    "network": "{ip}",
+    "type": "ether"
+    },
+    "ansible_default_ipv6": {},
+    "ansible_devices": {
+    "vda": {
+    "holders": [],
+    "host": "SCSI storage controller: Red Hat, Inc Virtio block device",
+    "model": null,
+    "partitions": {
+    "vda1": {
+    "sectors": "{bigint}",
+    "sectorsize": 512,
+    "size": "20.00 GB",
+    "start": "4096"
+    },
+    "vda15": {
+    "sectors": "2048",
+    "sectorsize": 512,
+    "size": "1.00 MB",
+    "start": "2048"
+    }
+    },
+    "removable": "0",
+    "rotational": "1",
+    "sas_address": null,
+    "sas_device_handle": null,
+    "scheduler_mode": "",
+    "sectors": "{bigint}",
+    "sectorsize": "512",
+    "size": "20.00 GB",
+    "support_discard": "0",
+    "vendor": "0x1af4"
+    }
+    },
+    "ansible_distribution": "Ubuntu",
+    "ansible_distribution_major_version": "14",
+    "ansible_distribution_release": "trusty",
+    "ansible_distribution_version": "14.04",
+    "ansible_dns": {
+    "nameservers": [
+    "{ip}",
+    "{ip}"
+    ]
+    },
+    "ansible_domain": "",
+    "ansible_env": {
+    "HOME": "/root",
+    "LANG": "en_US",
+    "LC_ALL": "en_US",
+    "LC_MESSAGES": "en_US",
+    "LOGNAME": "root",
+    "MAIL": "/var/mail/root",
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games",
+    "PWD": "/root",
+    "SHELL": "/bin/bash",
+    "SHLVL": "1",
+    "SSH_CLIENT": "{ip} 2459 22",
+    "SSH_CONNECTION": "{ip} 2459 {ip} 22",
+    "SSH_TTY": "/dev/pts/0",
+    "TERM": "xterm-256color",
+    "USER": "root",
+    "XDG_RUNTIME_DIR": "/run/user/0",
+    "XDG_SESSION_ID": "2",
+    "_": "/bin/sh"
+    },
+    "ansible_eth0": {
+    "active": true,
+    "device": "eth0",
+    "ipv4": {
+    "address": "{ip}",
+    "broadcast": "{ip}",
+    "netmask": "{ip}",
+    "network": "{ip}"
+    },
+    "ipv4_secondaries": [
+    {
+    "address": "{ip}",
+    "broadcast": "global",
+    "netmask": "{ip}",
+    "network": "{ip}"
+    }
+    ],
+    "ipv6": [
+    {
+    "address": "fe80::5483:caff:fea5:a93d",
+    "prefix": "64",
+    "scope": "link"
+    }
+    ],
+    "macaddress": "56:83:ca:a5:a9:3d",
+    "mtu": 1500,
+    "pciid": "virtio0",
+    "promisc": false,
+    "type": "ether"
+    },
+    "ansible_eth1": {
+    "active": false,
+    "device": "eth1",
+    "macaddress": "4a:a4:f0:bb:a5:61",
+    "mtu": 1500,
+    "pciid": "virtio1",
+    "promisc": false,
+    "type": "ether"
+    },
+    "ansible_fips": false,
+    "ansible_form_factor": "Other",
+    "ansible_fqdn": "db-0",
+    "ansible_gather_subset": [
+    "hardware",
+    "network",
+    "virtual"
+    ],
+    "ansible_hostname": "db-0",
+    "ansible_interfaces": [
+    "lo",
+    "eth1",
+    "eth0"
+    ],
+    "ansible_kernel": "4.4.0-53-generic",
+    "ansible_lo": {
+    "active": true,
+    "device": "lo",
+    "ipv4": {
+    "address": "{ip}",
+    "broadcast": "host",
+    "netmask": "{ip}",
+    "network": "{ip}"
+    },
+    "ipv6": [
+    {
+    "address": "::1",
+    "prefix": "128",
+    "scope": "host"
+    }
+    ],
+    "mtu": 65536,
+    "promisc": false,
+    "type": "loopback"
+    },
+    "ansible_lsb": {
+    "codename": "trusty",
+    "description": "Ubuntu 14.04.5 LTS",
+    "id": "Ubuntu",
+    "major_release": "14",
+    "release": "14.04"
+    },
+    "ansible_machine": "x86_64",
+    "ansible_machine_id": "{uuid}",
+    "ansible_memfree_mb": 116,
+    "ansible_memory_mb": {
+    "nocache": {
+    "free": 428,
+    "used": 60
+    },
+    "real": {
+    "free": 116,
+    "total": 488,
+    "used": 372
+    },
+    "swap": {
+    "cached": 0,
+    "free": 0,
+    "total": 0,
+    "used": 0
+    }
+    },
+    "ansible_memtotal_mb": 488,
+    "ansible_mounts": [
+    {
+    "device": "/dev/vda1",
+    "fstype": "ext4",
+    "mount": "/",
+    "options": "rw,noatime,errors=remount-ro",
+    "size_available": {bigint},
+    "size_total": {bigint},
+    "uuid": "{uuid}"
+    }
+    ],
+    "ansible_nodename": "db-0",
+    "ansible_os_family": "Debian",
+    "ansible_pkg_mgr": "apt",
+    "ansible_processor": [
+    "GenuineIntel",
+    "Intel(R) Xeon(R) CPU E5-2630L v2 @ 2.40GHz"
+    ],
+    "ansible_processor_cores": 1,
+    "ansible_processor_count": 1,
+    "ansible_processor_threads_per_core": 1,
+    "ansible_processor_vcpus": 1,
+    "ansible_product_name": "Droplet",
+    "ansible_product_serial": "{bigint}",
+    "ansible_product_uuid": "C4A419E2-E88F-4A5D-9D49-8BB9D5A2711E",
+    "ansible_product_version": "{bigint}",
+    "ansible_python": {
+    "executable": "/usr/bin/python",
+    "has_sslcontext": false,
+    "type": "CPython",
+    "version": {
+    "major": 2,
+    "micro": 6,
+    "minor": 7,
+    "releaselevel": "final",
+    "serial": 0
+    },
+    "version_info": [
+    2,
+    7,
+    6,
+    "final",
+    0
+    ]
+    },
+    "ansible_python_version": "2.7.6",
+    "ansible_selinux": false,
+    "ansible_service_mgr": "upstart",
+    "ansible_ssh_host_key_dsa_public": "AAAAB3NzaC1kc3MAAACBAJ3sSEMUrlerVaAcMltIUIVbDP7Wjtt7PAIPyAdcXpSInXBXBZMYTk2tzWv7GBGXQAudVo0Me0L/QfQ+HXtu7oXkMRmohY4vcf61CZH4f2fd6+q7c3DOCCynxrbXQKPB9N3M0JtkqTf+laBDqHE9S6L8ILyrbip4SAouQoG9JIrvAAAAFQD1hmr9mZWaF2qwVFW5Pl/+kLp77QAAAIARddI9fhK/upxg8BlVlnfhcG0D3+zMbMEvlR5HDtLMvEV8hZl0mY586RauPdLVxMAJXippT3rT9Ga6RuxNzm4Lb+TcAzKXoex4xXgOGgQDwvJr6QN3Eh6f3jTBK8bXdu++7p7FTmXUwrp2vKtkipvNkZYKaPUEVPAI5Aaaf9OsOQAAAIBkSeco9tUqemQMTwFxT8YNgG06XEUb8dCpC+GPI1Prys0IYcr/SoxUsqv6+SWFNPWEa59XgUC7r9cvp5+NR139kTLvY7eA1fcBgD7OdPCgPJZy87P9n+cFWLkmC2xlF30Wo0R6Ff9CLLhEZy2LfvsfZZ0kF8HqSOOFA3xoQ5vSkQ==",
+    "ansible_ssh_host_key_ecdsa_public": "AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBNe/5cdI8fUU5pzSc/DEhtEYWEfuG9ZBZCJ7JoDxVMMDBq/VArDnMnB4MSaTPxpRQCaMcExvEbaTK7T72QluSC4=",
+    "ansible_ssh_host_key_ed25519_public": "AAAAC3NzaC1lZDI1NTE5AAAAIN0AVhP1S5deYhRppQpcPQzxVjw0TaI+Jz17lrpdQFsG",
+    "ansible_ssh_host_key_rsa_public": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDLROO/SHzwzBrQyn3uKHt7YEyOVIWeK/ZdweU1RCFEUYDD1/aPhIe11L3HkqM9avh1gTyRBjgeflKbZyEVpO5vMALQVLTTlPKxpd3JspTO1arCigk+qYZSNVkkfapgTP3Q79bS4ZFUM8ws43oVTUmy6/9cyZlPRmefaTsuiBwzkcQ6BhAxfpHk+9utIeJizHLz8X4O1bOeNrO75CdajJ6wfIJ9kJPRm1gtlCcPYx4D7AbkONzmAowZWqUsSB0l+Csw3+xK9RZhcSdB2yWuPZnyPyGDWY3NU9a5vK99PdAnmWiGAQHB/venfRJcIA4AF0pYPRH0pKON+9PBubTP/46R",
+    "ansible_swapfree_mb": 0,
+    "ansible_swaptotal_mb": 0,
+    "ansible_system": "{os}",
+    "ansible_system_capabilities": [
+    "cap_chown",
+    "cap_dac_override",
+    "cap_dac_read_search",
+    "cap_fowner",
+    "cap_fsetid",
+    "cap_kill",
+    "cap_setgid",
+    "cap_setuid",
+    "cap_setpcap",
+    "cap_linux_immutable",
+    "cap_net_bind_service",
+    "cap_net_broadcast",
+    "cap_net_admin",
+    "cap_net_raw",
+    "cap_ipc_lock",
+    "cap_ipc_owner",
+    "cap_sys_module",
+    "cap_sys_rawio",
+    "cap_sys_chroot",
+    "cap_sys_ptrace",
+    "cap_sys_pacct",
+    "cap_sys_admin",
+    "cap_sys_boot",
+    "cap_sys_nice",
+    "cap_sys_resource",
+    "cap_sys_time",
+    "cap_sys_tty_config",
+    "cap_mknod",
+    "cap_lease",
+    "cap_audit_write",
+    "cap_audit_control",
+    "cap_setfcap",
+    "cap_mac_override",
+    "cap_mac_admin",
+    "cap_syslog",
+    "cap_wake_alarm",
+    "cap_block_suspend",
+    "37+ep"
+    ],
+    "ansible_system_capabilities_enforced": "True",
+    "ansible_system_vendor": "DigitalOcean",
+    "ansible_uptime_seconds": 91,
+    "ansible_user_dir": "/root",
+    "ansible_user_gecos": "root",
+    "ansible_user_gid": 0,
+    "ansible_user_id": "root",
+    "ansible_user_shell": "/bin/bash",
+    "ansible_user_uid": 0,
+    "ansible_userspace_architecture": "x86_64",
+    "ansible_userspace_bits": "64",
+    "ansible_virtualization_role": "host",
+    "ansible_virtualization_type": "kvm",
+    "module_setup": true
+    },
+    "changed": false
+    }
+    {ip} | SUCCESS => {
+    "ansible_facts": {
+    "ansible_all_ipv4_addresses": [
+    "{ip}",
+    "{ip}"
+    ],
+    "ansible_all_ipv6_addresses": [
+    "fe80::40a:69ff:fe5d:1991"
+    ],
+    "ansible_architecture": "x86_64",
+    "ansible_bios_date": "11/03/2016",
+    "ansible_bios_version": "{bigint}",
+    "ansible_cmdline": {
+    "BOOT_IMAGE": "/boot/vmlinuz-4.4.0-53-generic",
+    "clocksource": "kvm-clock",
+    "console": "tty1",
+    "net.ifnames": "0",
+    "notsc": true,
+    "ro": true,
+    "root": "LABEL=DOROOT"
+    },
+    "ansible_date_time": {
+    "date": "2017-02-02",
+    "day": "02",
+    "epoch": "{bigint}",
+    "hour": "16",
+    "iso8601": "2017-02-02T16:09:14Z",
+    "iso8601_basic": "{bigint}T{bigint}",
+    "iso8601_basic_short": "{bigint}T160914",
+    "iso8601_micro": "2017-02-02T{duration}Z",
+    "minute": "09",
+    "month": "02",
+    "second": "14",
+    "time": "16:09:14",
+    "tz": "UTC",
+    "tz_offset": "+0000",
+    "weekday": "Thursday",
+    "weekday_number": "4",
+    "weeknumber": "05",
+    "year": "2017"
+    },
+    "ansible_default_ipv4": {
+    "address": "{ip}",
+    "alias": "eth0",
+    "broadcast": "{ip}",
+    "gateway": "{ip}",
+    "interface": "eth0",
+    "macaddress": "06:0a:69:5d:19:91",
+    "mtu": 1500,
+    "netmask": "{ip}",
+    "network": "{ip}",
+    "type": "ether"
+    },
+    "ansible_default_ipv6": {},
+    "ansible_devices": {
+    "vda": {
+    "holders": [],
+    "host": "SCSI storage controller: Red Hat, Inc Virtio block device",
+    "model": null,
+    "partitions": {
+    "vda1": {
+    "sectors": "{bigint}",
+    "sectorsize": 512,
+    "size": "20.00 GB",
+    "start": "4096"
+    },
+    "vda15": {
+    "sectors": "2048",
+    "sectorsize": 512,
+    "size": "1.00 MB",
+    "start": "2048"
+    }
+    },
+    "removable": "0",
+    "rotational": "1",
+    "sas_address": null,
+    "sas_device_handle": null,
+    "scheduler_mode": "",
+    "sectors": "{bigint}",
+    "sectorsize": "512",
+    "size": "20.00 GB",
+    "support_discard": "0",
+    "vendor": "0x1af4"
+    }
+    },
+    "ansible_distribution": "Ubuntu",
+    "ansible_distribution_major_version": "14",
+    "ansible_distribution_release": "trusty",
+    "ansible_distribution_version": "14.04",
+    "ansible_dns": {
+    "nameservers": [
+    "{ip}",
+    "{ip}"
+    ]
+    },
+    "ansible_domain": "",
+    "ansible_env": {
+    "HOME": "/root",
+    "LANG": "en_US",
+    "LC_ALL": "en_US",
+    "LC_MESSAGES": "en_US",
+    "LOGNAME": "root",
+    "MAIL": "/var/mail/root",
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games",
+    "PWD": "/root",
+    "SHELL": "/bin/bash",
+    "SHLVL": "1",
+    "SSH_CLIENT": "{ip} 41802 22",
+    "SSH_CONNECTION": "{ip} 41802 {ip} 22",
+    "SSH_TTY": "/dev/pts/0",
+    "TERM": "xterm-256color",
+    "USER": "root",
+    "XDG_RUNTIME_DIR": "/run/user/0",
+    "XDG_SESSION_ID": "2",
+    "_": "/bin/sh"
+    },
+    "ansible_eth0": {
+    "active": true,
+    "device": "eth0",
+    "ipv4": {
+    "address": "{ip}",
+    "broadcast": "{ip}",
+    "netmask": "{ip}",
+    "network": "{ip}"
+    },
+    "ipv4_secondaries": [
+    {
+    "address": "{ip}",
+    "broadcast": "global",
+    "netmask": "{ip}",
+    "network": "{ip}"
+    }
+    ],
+    "ipv6": [
+    {
+    "address": "fe80::40a:69ff:fe5d:1991",
+    "prefix": "64",
+    "scope": "link"
+    }
+    ],
+    "macaddress": "06:0a:69:5d:19:91",
+    "mtu": 1500,
+    "pciid": "virtio0",
+    "promisc": false,
+    "type": "ether"
+    },
+    "ansible_eth1": {
+    "active": false,
+    "device": "eth1",
+    "macaddress": "12:39:3f:0e:4c:25",
+    "mtu": 1500,
+    "pciid": "virtio1",
+    "promisc": false,
+    "type": "ether"
+    },
+    "ansible_fips": false,
+    "ansible_form_factor": "Other",
+    "ansible_fqdn": "web-0",
+    "ansible_gather_subset": [
+    "hardware",
+    "network",
+    "virtual"
+    ],
+    "ansible_hostname": "web-0",
+    "ansible_interfaces": [
+    "lo",
+    "eth1",
+    "eth0"
+    ],
+    "ansible_kernel": "4.4.0-53-generic",
+    "ansible_lo": {
+    "active": true,
+    "device": "lo",
+    "ipv4": {
+    "address": "{ip}",
+    "broadcast": "host",
+    "netmask": "{ip}",
+    "network": "{ip}"
+    },
+    "ipv6": [
+    {
+    "address": "::1",
+    "prefix": "128",
+    "scope": "host"
+    }
+    ],
+    "mtu": 65536,
+    "promisc": false,
+    "type": "loopback"
+    },
+    "ansible_lsb": {
+    "codename": "trusty",
+    "description": "Ubuntu 14.04.5 LTS",
+    "id": "Ubuntu",
+    "major_release": "14",
+    "release": "14.04"
+    },
+    "ansible_machine": "x86_64",
+    "ansible_machine_id": "{uuid}",
+    "ansible_memfree_mb": 115,
+    "ansible_memory_mb": {
+    "nocache": {
+    "free": 427,
+    "used": 61
+    },
+    "real": {
+    "free": 115,
+    "total": 488,
+    "used": 373
+    },
+    "swap": {
+    "cached": 0,
+    "free": 0,
+    "total": 0,
+    "used": 0
+    }
+    },
+    "ansible_memtotal_mb": 488,
+    "ansible_mounts": [
+    {
+    "device": "/dev/vda1",
+    "fstype": "ext4",
+    "mount": "/",
+    "options": "rw,noatime,errors=remount-ro",
+    "size_available": {bigint},
+    "size_total": {bigint},
+    "uuid": "{uuid}"
+    }
+    ],
+    "ansible_nodename": "web-0",
+    "ansible_os_family": "Debian",
+    "ansible_pkg_mgr": "apt",
+    "ansible_processor": [
+    "GenuineIntel",
+    "Intel(R) Xeon(R) CPU E5-2630L v2 @ 2.40GHz"
+    ],
+    "ansible_processor_cores": 1,
+    "ansible_processor_count": 1,
+    "ansible_processor_threads_per_core": 1,
+    "ansible_processor_vcpus": 1,
+    "ansible_product_name": "Droplet",
+    "ansible_product_serial": "{bigint}",
+    "ansible_product_uuid": "FD5EF2F9-B940-4447-8C19-AB951A96DE24",
+    "ansible_product_version": "{bigint}",
+    "ansible_python": {
+    "executable": "/usr/bin/python",
+    "has_sslcontext": false,
+    "type": "CPython",
+    "version": {
+    "major": 2,
+    "micro": 6,
+    "minor": 7,
+    "releaselevel": "final",
+    "serial": 0
+    },
+    "version_info": [
+    2,
+    7,
+    6,
+    "final",
+    0
+    ]
+    },
+    "ansible_python_version": "2.7.6",
+    "ansible_selinux": false,
+    "ansible_service_mgr": "upstart",
+    "ansible_ssh_host_key_dsa_public": "AAAAB3NzaC1kc3MAAACBAMmFQBgZulKLIAuJUMioDzHbIcpsiv13YCoxquvuPEf7WEfSNv6cBdcDt4n6BSBIwYGTjGfCcW2Jf2CAJ2SmiPIPEQJcL/JoQijcKlBa8rINADlcROIdmsjEk8yCQnaHp4OcuGLvTqGgwFJDDOligvyl3/A0PwD1pf4ksFiaZ8nfAAAAFQD9XiB/HPgkjcMQOmL4T7gFehUuvwAAAIEAmNTpCkdhprSa5Brd9HAWjok1RiOiBKsCpfGwn27/znNN62j/Zd4S1P+AEPmpQluUH9MPUkn8q4hmIzlQ8Eqi1f8mOVWwAua2n32ZObRWAnmOS2HmEMyIiAGiQ9C5ptfVkBXW9lsBtdxGm/OgKySiSY1S2/yZv5ag3UWClknGpNwAAACBAKmXDNDwz9Kfg7J1r2r2O9cywX4yD919omYwjSlHTKSA7B5D2obVC2lGQU69B7ylPT45dbO+QG/EIgBfD3JeGl9Of6fv97HIyjpNp1Ot03l/S4LQERsEtleGkoxAMX5OAUe0a9Euha467hovVmJSMtzHdeWAJj92qzEbseoJt70G",
+    "ansible_ssh_host_key_ecdsa_public": "AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBE2MWqj69T7s6adv1HNwbNhRJO8qYjQ9EcI0IVJoKZ7w3MHSiz5982Mz9qIcet7v2lGuZX/x9FD0+6Z/7XVXzLY=",
+    "ansible_ssh_host_key_ed25519_public": "AAAAC3NzaC1lZDI1NTE5AAAAIKjE0z4C6mZXkra8rdLV43bj2JczgmvQ2Q6/f8YfaH9W",
+    "ansible_ssh_host_key_rsa_public": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDWPCDO0evSd1aRoUzqIJqszZ/mdipySYsemxIevaBmWyn5X6RhsDDyaZDMn26Y/OR1Ib8OzKgFqOtLds0Cixqf9fdqpD2uUOcupcrG/diFFuqw82+14cYMAPKDeeGBQR/x4LTFBkOJSLWh6Cp7NMHfoEX7BFcpDrskH6n+VeLOJT20HxCnv61qH79pqZAc/n6IkA6yfdibnc7V3ffBiptmDlhVlgD13K3OJJlU6SnE438PakQ7eHv470XJ+RpVvFS/kxL3lxhVUZWuDJ+TbXiimp3vXL8Oz5LB51iHPF590w4fodc0+Zq/XPyl2Z1BMl9cFW84bIHC3my6T1gsnU/T",
+    "ansible_swapfree_mb": 0,
+    "ansible_swaptotal_mb": 0,
+    "ansible_system": "{os}",
+    "ansible_system_capabilities": [
+    "cap_chown",
+    "cap_dac_override",
+    "cap_dac_read_search",
+    "cap_fowner",
+    "cap_fsetid",
+    "cap_kill",
+    "cap_setgid",
+    "cap_setuid",
+    "cap_setpcap",
+    "cap_linux_immutable",
+    "cap_net_bind_service",
+    "cap_net_broadcast",
+    "cap_net_admin",
+    "cap_net_raw",
+    "cap_ipc_lock",
+    "cap_ipc_owner",
+    "cap_sys_module",
+    "cap_sys_rawio",
+    "cap_sys_chroot",
+    "cap_sys_ptrace",
+    "cap_sys_pacct",
+    "cap_sys_admin",
+    "cap_sys_boot",
+    "cap_sys_nice",
+    "cap_sys_resource",
+    "cap_sys_time",
+    "cap_sys_tty_config",
+    "cap_mknod",
+    "cap_lease",
+    "cap_audit_write",
+    "cap_audit_control",
+    "cap_setfcap",
+    "cap_mac_override",
+    "cap_mac_admin",
+    "cap_syslog",
+    "cap_wake_alarm",
+    "cap_block_suspend",
+    "37+ep"
+    ],
+    "ansible_system_capabilities_enforced": "True",
+    "ansible_system_vendor": "DigitalOcean",
+    "ansible_uptime_seconds": 42,
+    "ansible_user_dir": "/root",
+    "ansible_user_gecos": "root",
+    "ansible_user_gid": 0,
+    "ansible_user_id": "root",
+    "ansible_user_shell": "/bin/bash",
+    "ansible_user_uid": 0,
+    "ansible_userspace_architecture": "x86_64",
+    "ansible_userspace_bits": "64",
+    "ansible_virtualization_role": "host",
+    "ansible_virtualization_type": "kvm",
+    "module_setup": true
+    },
+    "changed": false
+    }
+    } ✔
+
+    } ✔
+
+    - [ output ] ------------------------------
+    public_address = {ip}
+    public_addresses = {ip}
+    {ip}
+    - [ public_addresses ] ------------------------------
+    {ip}
+    {ip}
+    - [ facts ] ------------------------------
+    db-0,ansible_facts.ansible_service_mgr = upstart
+    web-0,ansible_facts.ansible_service_mgr = upstart
+    finished ✔
+
 Done
-Cleaning up '{root}/test/scenario/digitalocean/frey-digitalocean.pem' after process exit with code '0' 
+    Cleaning up '{root}/test/scenario/digitalocean/frey-digitalocean.pem' after process exit with code '0'
 Finished
 (maybe) Destroying..

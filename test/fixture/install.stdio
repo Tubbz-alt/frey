@@ -1,33 +1,60 @@
 ACCPTST:STDIO_REPLACE_LONGTIMES
 ACCPTST:STDIO_REPLACE_DURATIONS
 ACCPTST:STDIO_REPLACE_ASTERISKHR
---> Frey version '0.3.28'
---> Will run: [ 'init', 'config', 'deps', 'prepare', 'install' ]
---> {hostname} - init
---> {hostname} - config
---> {hostname} - deps
---> {hostname} - prepare
-Creating private key '{tmpdir}/frey-install.pem'
-Creating public key '{tmpdir}/frey-install.pub'
-Found 'terraform' with version '0.7.3'
-Found 'terraformInventory' with version '0.6.0'
-Found 'pip' with version {{global_pip_version}}
-Found 'ansible' with version '2.1.4'
---> {hostname} - install
-
-PLAY [Local stuff] 
-
-TASK [setup] 
-ok: [local]
-
-TASK [{root}/roles/pwd/v1.0.0 : Execute arbitrary command] 
-changed: [local]
-
-TASK [Showcase we can access FREY_ environment variables] 
-changed: [local]
-
-PLAY RECAP 
-local                      : ok=3    changed=2    unreachable=0    failed=0   
-
-Done
-Finished
+[?25l ✔ frey ❯ {hostname} ❯ welcome ❯ --> Frey version '0.3.28'
+[?25h[?25l ✔ frey ❯ {hostname} ❯ welcome ❯ --> Will run: [ 'init', 'config', 'deps', 'prepare', 'install' ]
+[?25h[?25l ✔ frey ❯ {hostname} ❯ init ❯ finished
+[?25h[?25l ✔ frey ❯ {hostname} ❯ config ❯ finished
+[?25h[?25l ✔ frey ❯ {hostname} ❯ deps ❯ finished
+[?25h[?25l ⡐ frey ❯ {hostname} ❯ prepare ❯ Creating private key '{tmpdir}/frey-install.pem'
+[?25h[?25l ⡠ frey ❯ {hostname} ❯ prepare ❯ Creating public key '{tmpdir}/frey-install.pub'
+[?25l[1000D[K[1A[1000D[K ⢄ frey ❯ {hostname} ❯ prepare ❯ Found 'terraform' with version '0.7.3'
+[?25l[1000D[K[1A[1000D[K ⢂ frey ❯ {hostname} ❯ prepare ❯ Found 'terraformInventory' with version '0.6.0'
+[?25l[1000D[K[1A[1000D[K ⢁ frey ❯ {hostname} ❯ prepare ❯ Found 'pip' with version {{global_pip_version}}
+[?25l[1000D[K[1A[1000D[K ⡁ frey ❯ {hostname} ❯ prepare ❯ Found 'ansible' with version '2.1.4'
+[?25l[1000D[K[1A[1000D[K ✔ frey ❯ {hostname} ❯ prepare ❯ finished
+[?25h[?25l ⡠ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ 
+[?25l[1000D[K[1A[1000D[K ⢄ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ PLAY [Local stuff] 
+[?25l[1000D[K[1A[1000D[K ⢂ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ 
+[?25l[1000D[K[1A[1000D[K ⢁ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ TASK [setup] 
+[?25l[1000D[K[1A[1000D[K ⡁ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ TASK [setup] 
+[?25l[1000D[K[1A[1000D[K ⡈ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ TASK [setup] 
+[?25l[1000D[K[1A[1000D[K ⡐ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ TASK [setup] 
+[?25l[1000D[K[1A[1000D[K ⡠ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ TASK [setup] 
+[?25l[1000D[K[1A[1000D[K ⢄ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ TASK [setup] 
+[?25l[1000D[K[1A[1000D[K ⢂ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ TASK [setup] 
+[?25l[1000D[K[1A[1000D[K ⢁ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ TASK [setup] 
+[?25l[1000D[K[1A[1000D[K ⡁ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ TASK [setup] 
+[?25l[1000D[K[1A[1000D[K ⡈ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ TASK [setup] 
+[?25l[1000D[K[1A[1000D[K ⡐ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ TASK [setup] 
+[?25l[1000D[K[1A[1000D[K ⡠ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ TASK [setup] 
+[?25l[1000D[K[1A[1000D[K ⢄ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ TASK [setup] 
+[?25l[1000D[K[1A[1000D[K ⢂ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ TASK [setup] 
+[?25l[1000D[K[1A[1000D[K ⢁ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ TASK [setup] 
+[?25l[1000D[K[1A[1000D[K ⡁ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ TASK [setup] 
+[?25l[1000D[K[1A[1000D[K ⡈ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ TASK [setup] 
+[?25l[1000D[K[1A[1000D[K ⡐ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ TASK [setup] 
+[?25l[1000D[K[1A[1000D[K ⡠ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ ok: [local]
+[?25l[1000D[K[1A[1000D[K ⢄ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ 
+[?25l[1000D[K[1A[1000D[K ⢂ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ TASK [{root}/roles/pwd/v1.0.0 : Execute arbitrary command] 
+[?25l[1000D[K[1A[1000D[K ⢁ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ TASK [{root}/roles/pwd/v1.0.0 : Execute arbitrary command] 
+[?25l[1000D[K[1A[1000D[K ⡁ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ TASK [{root}/roles/pwd/v1.0.0 : Execute arbitrary command] 
+[?25l[1000D[K[1A[1000D[K ⡈ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ TASK [{root}/roles/pwd/v1.0.0 : Execute arbitrary command] 
+[?25l[1000D[K[1A[1000D[K ⡐ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ TASK [{root}/roles/pwd/v1.0.0 : Execute arbitrary command] 
+[?25l[1000D[K[1A[1000D[K ⡠ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ changed: [local]
+[?25l[1000D[K[1A[1000D[K ⢄ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ 
+[?25l[1000D[K[1A[1000D[K ⢂ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ TASK [Showcase we can access FREY_ environment variables] 
+[?25l[1000D[K[1A[1000D[K ⢁ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ TASK [Showcase we can access FREY_ environment variables] 
+[?25l[1000D[K[1A[1000D[K ⡁ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ TASK [Showcase we can access FREY_ environment variables] 
+[?25l[1000D[K[1A[1000D[K ⡈ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ TASK [Showcase we can access FREY_ environment variables] 
+[?25l[1000D[K[1A[1000D[K ⡐ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ changed: [local]
+[?25l[1000D[K[1A[1000D[K ⡠ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ 
+[?25l[1000D[K[1A[1000D[K ⢄ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ PLAY RECAP 
+[?25l[1000D[K[1A[1000D[K ⢂ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ local                      : ok=3    changed=2    unreachable=0    failed=0
+[?25l[1000D[K[1A[1000D[K ⢁ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ 
+[?25l[1000D[K[1A[1000D[K ⡁ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ 
+[?25l[1000D[K[1A[1000D[K ✔ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ 
+[?25h[?25l ⡐ 
+[?25l[1000D[K[1A[1000D[K ✔ frey ❯ {hostname} ❯ install ❯ ansible-playbook ❯ finished
+[?25hDone
+[?25hFinished

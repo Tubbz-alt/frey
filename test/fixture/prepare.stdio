@@ -1,17 +1,33 @@
 ACCPTST:STDIO_SKIP_COMPARE
---> Frey version '0.3.28'
---> Will run: [ 'init', 'config', 'deps', 'prepare' ]
---> {hostname} - init
---> {hostname} - config
---> {hostname} - deps
---> {hostname} - prepare
-Creating private key '{tmpdir}/frey-prepare.pem'
-Creating public key '{tmpdir}/frey-prepare.pub'
-Creating private encrypted key '{tmpdir}/frey-prepare.pem.cast5'
-Found 'terraform' with version '0.7.3'
-Found 'terraformInventory' with version '0.6.0'
-Found 'pip' with version {{global_pip_version}}
-Found 'ansible' with version '2.1.4'
+❯ frey ❯ {hostname} ❯ welcome ❯
+
+    --> Frey version '0.3.28' ✔
+
+    --> Will run: [ 'init', 'config', 'deps', 'prepare' ] ✔
+
+❯ frey ❯ {hostname} ❯ init ❯
+
+    finished ✔
+
+❯ frey ❯ {hostname} ❯ config ❯
+
+    finished ✔
+
+❯ frey ❯ {hostname} ❯ deps ❯
+
+    finished ✔
+
+❯ frey ❯ {hostname} ❯ prepare ❯
+
+    Creating private key '{tmpdir}/frey-prepare.pem'
+    Creating public key '{tmpdir}/frey-prepare.pub'
+    Creating private encrypted key '{tmpdir}/frey-prepare.pem.cast5'
+    Found 'terraform' with version '0.7.3'
+    Found 'terraformInventory' with version '0.6.0'
+    Found 'pip' with version {{global_pip_version}}
+    Found 'ansible' with version '2.1.4'
+    finished ✔
+
 Done
 Running help on all required tools
   --version             show program's version number and exit
