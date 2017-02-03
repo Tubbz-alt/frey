@@ -51,14 +51,18 @@ class App {
     const opts       = _.defaultsDeep(this.opts, _.cloneDeep(appDefaultOpts))
     const runtimeEnv = this.runtime && this.runtime.init ? this.runtime.init.env : {}
 
-    const env  = utils.buildChildEnv(this._objectToEnv(opts.env), runtimeEnv)
+    const env  = utils.buildChildEnv(this._objectToEnv(opts.env || {}), runtimeEnv)
     const args = this._objectToFlags(opts.args, opts.signatureOpts)
 
     const scrolexOpts = {
-      env       : env,
       stdio     : opts.stdio || [ 'pipe', 'pipe', 'pipe' ],
       mode      : opts.mode || process.env.FREY_SCROLEX_MODE || process.env.SCROLEX_MODE || 'singlescroll',
       components: opts.components || `frey>${global.frey.currentHost}>${global.frey.currentCommand}`,
+    }
+
+    if (_.keys(env).length > 0) {
+      // Only add env if it's filled, otherwise we boot processes with an empty env, leading to $PATH finding issues
+      scrolexOpts.env = env
     }
 
     // scrolexOpts.addCommandAsComponent = true
