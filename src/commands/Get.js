@@ -25,7 +25,7 @@ class Get extends Command {
         return cb(err)
       }
 
-      this._out(`--> Updated modules'`)
+      this._out(`Updated modules'`)
       return cb(null)
     })
   }

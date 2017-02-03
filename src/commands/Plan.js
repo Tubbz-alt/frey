@@ -24,7 +24,7 @@ class Plan extends Command {
         return cb(err)
       }
 
-      this._out(`--> Saved plan as '${this.runtime.config.global.infra_plan_file}'`)
+      this._out(`Saved plan as '${this.runtime.config.global.infra_plan_file}'`)
 
       if (stdout.match(/No changes/)) {
         return cb(null, { add: 0, change: 0, destroy: 0 })

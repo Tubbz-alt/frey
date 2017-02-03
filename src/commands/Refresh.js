@@ -28,7 +28,7 @@ class Refresh extends Command {
         }
       }
 
-      this._out(`--> Saved state to '${this.runtime.config.global.infra_state_file}'`)
+      this._out(`Saved state to '${this.runtime.config.global.infra_state_file}'`)
       return cb(null)
     })
   }

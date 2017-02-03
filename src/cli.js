@@ -93,7 +93,7 @@ if (argv._[0] === 'completion') {
 if (!_.find(commands, { name: argv._[0] })) {
   yargs.showHelp()
   console.error('')
-  console.error(`--> Command '${argv._[0]}' is not recognized`)
+  console.error(`Command '${argv._[0]}' is not recognized`)
   process.exit(1)
 }
 
@@ -127,9 +127,9 @@ liftOff.launch({ cwd: argv.projectDir }, ({ configBase }) => {
     if (err) {
       // yargs.showHelp()
       console.error('')
-      console.error(`--> Exiting with error: ${err.message}`)
+      console.error(`Exiting with error: ${err.message}`)
       if (err.details) {
-        console.error('--> Details:')
+        console.error('Details:')
         console.error('')
         console.error(err.details)
         console.error('')

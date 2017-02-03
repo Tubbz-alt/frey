@@ -105,8 +105,8 @@ class Frey extends Base {
   }
 
   main (cargo, cb) {
-    this._outFlush('--> Frey version %s', pkgConfig.version)
-    this._outFlush('--> Will run: %o', this.bootCargo._composeChain)
+    this._outFlush('Frey version %s', pkgConfig.version)
+    this._outFlush('Will run: %o', this.bootCargo._composeChain)
 
     async.eachSeries(this.bootCargo._composeChain, this._runOne.bind(this), cb)
   }
@@ -121,7 +121,7 @@ class Frey extends Base {
     // let hostname =
 
     // let x =
-    // this._out(chalk.gray('--> '))
+    // this._out(chalk.gray(''))
     // this._out(chalk.gray(`${hostname} - `))
     // this._out(chalk.green(`${command}`))
     // this._out(chalk.green(''))

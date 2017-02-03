@@ -15,7 +15,7 @@ class Shell extends Base {
 
   confirm (question, cb) {
     if (this.runtime.init.cliargs.forceYes) {
-      this._out(`--> Skipping confirmation for '${question}' as '--force-yes' applies`)
+      this._out(`Skipping confirmation for '${question}' as '--force-yes' applies`)
       return cb(null)
     }
 

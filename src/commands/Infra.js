@@ -42,7 +42,7 @@ class Infra extends Command {
         return cb(err)
       }
 
-      this._out(`--> Saved new state to '${this.runtime.config.global.infra_state_file}'`)
+      this._out(`Saved new state to '${this.runtime.config.global.infra_state_file}'`)
 
       return cb(null)
     })

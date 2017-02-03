@@ -104,7 +104,7 @@ class Remote extends Command {
         return cb(err)
       }
 
-      this._out(`--> Closed console to '${hosts.join(', ')}'`)
+      this._out(`Closed console to '${hosts.join(', ')}'`)
       return cb(null)
     })
   }
