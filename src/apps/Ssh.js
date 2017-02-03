@@ -7,7 +7,7 @@ class Ssh extends App {
       args         : {},
       env          : {},
       signatureOpts: { equal: '', quote: '', dash: '-', escape: false },
-      cmdOpts      : { stdin: 'inherit', stdout: 'inherit', stderr: 'inherit' },
+      cmdOpts      : { stdio: [process.stdin, process.stdout, process.stderr] },
       exe          : 'ssh',
     }
 

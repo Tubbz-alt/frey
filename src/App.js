@@ -1,14 +1,50 @@
-const _ = require('lodash')
-const Shell = require('./Shell')
+const _         = require('lodash')
+const Shell     = require('./Shell')
 const constants = require('./constants')
-const Scrolex = require('scrolex')
-const utils = require('./Utils')
-// const debug = require('depurar')('frey')
+const Scrolex   = require('scrolex')
+const utils     = require('./Utils')
+const debug     = require('depurar')('frey')
+
 class App {
   constructor (opts) {
     this.opts    = opts
     this.runtime = opts.runtime
     this.shell   = new Shell(this.runtime)
+  }
+
+  _debugCmd ({ cmdOpts, env }, args) {
+    const input = cmdOpts && cmdOpts.stdio ? cmdOpts.stdio[0] : false
+
+    let debugCmd = ''
+    if (input && input !== 'inherit' && input !== 0 && input !== process.stdin) {
+      debugCmd += `echo '${input}' | \\\n`
+    }
+
+    _.forOwn(env, (val, key) => {
+      if (_.has(process.env, key)) {
+        return
+      }
+      if (key.indexOf('npm_config') === 0) {
+        return
+      }
+      if (key.indexOf('MFLAGS') === 0) {
+        return
+      }
+      if (key.indexOf('MAKEFLAGS') === 0) {
+        return
+      }
+      if (key.indexOf('TF_VAR_') === 0) {
+        return
+      }
+      if (key.indexOf('FREY_') === 0) {
+        return
+      }
+      debugCmd += `${key}=${val} \\\n`
+    })
+    debugCmd += `${args.join(' \\\n  ')} \\\n|| false`
+
+    debugCmd = debugCmd.replace(/-o \\\n {2}/g, '-o ')
+    return debugCmd
   }
 
   _exe (inDefaults, cb) {
@@ -17,7 +53,8 @@ class App {
     const exe = this.opts.exe || defaults.exe
     const signatureOpts = this.opts.signatureOpts || defaults.signatureOpts
     const cmdOpts = this.opts.cmdOpts || defaults.cmdOpts || {}
-    const env = utils.buildChildEnv(this._objectToEnv(_.defaults(this.opts.env, defaults.env)), this.runtime.init.env)
+    const runtimeEnv = this.runtime && this.runtime.init ? this.runtime.init.env : {}
+    const env = utils.buildChildEnv(this._objectToEnv(_.defaults(this.opts.env, defaults.env)), runtimeEnv)
     const args = this._objectToFlags(_.defaults(this.opts.args, defaults.args), signatureOpts)
 
     cmdOpts.env = env
@@ -25,11 +62,15 @@ class App {
     if (!cmdOpts.mode) {
       cmdOpts.mode = process.env.FREY_SCROLEX_MODE || process.env.SCROLEX_MODE || 'singlescroll'
     }
+    // cmdOpts.addCommandAsComponent = true
     if (!cmdOpts.components) {
       cmdOpts.components = `frey>${global.frey.currentHost}>${global.frey.currentCommand}`
     }
 
     const cmdArgs = [ exe ].concat(args)
+
+    // const debugCmd = this._debugCmd({ cmdOpts, env }, cmdArgs)
+    // debug({debugCmd})
 
     Scrolex.exe(cmdArgs, cmdOpts, (err, out) => {
       if (err) {
@@ -41,7 +82,11 @@ class App {
   }
 
   _escape (str) {
-    if (!str.replace) {
+    if (str === true || str === false) {
+      return str
+    }
+    if (`${str}` !== str) {
+      debug({str})
       throw new Error(`You should pass _escape a string. But you passed: ${str}`)
     }
     return str.replace(/([^a-zA-Z0-9\-./,_])/g, '\\$1')
@@ -95,8 +140,11 @@ class App {
         // turned off, don't add at all
         return
       } else {
-        // key/value pair
-        args.push([ opts.dash, fn(key), opts.equal, opts.quote, fn(val), opts.quote ].join(''))
+        // (array of) key/value pairs
+        const vals = _.isArray(val) ? val : [ val ]
+        vals.forEach((val) => {
+          args.push(`${opts.dash}${fn(key)}${opts.equal}${opts.quote}${fn(val)}${opts.quote}`)
+        })
       }
     })
 

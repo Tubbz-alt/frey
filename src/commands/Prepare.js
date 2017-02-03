@@ -1,12 +1,12 @@
 const Command = require('../Command')
-const mkdirp = require('mkdirp')
-const utils = require('../Utils')
-const semver = require('semver')
-const fs = require('fs')
-const async = require('async')
+const mkdirp  = require('mkdirp')
+const utils   = require('../Utils')
+const Bash    = require('../apps/Bash')
+const semver  = require('semver')
+const fs      = require('fs')
+const async   = require('async')
 const depurar = require('depurar')
-
-const debug = depurar('frey')
+const debug   = depurar('frey')
 
 class Prepare extends Command {
   constructor (name, runtime) {
@@ -73,7 +73,7 @@ class Prepare extends Command {
                   `(grep 'BEGIN RSA PRIVATE KEY' '${privkey}' || (rm -f '${privkey}'; false))`,
                   `chmod 400 '${privkey}'`,
                 ].join(' && ')
-                this.shell.exeScript(cmd, { verbose: true }, cb)
+                new Bash({ script: cmd, mode: 'silent' }).exe(cb)
               }
             )
           }
@@ -84,7 +84,7 @@ class Prepare extends Command {
           `ssh-keygen -b 2048 -t rsa -C '${email}' -f '${privkey}' -q -N ''`,
           `rm -f '${privkey}.pub'`,
         ].join(' && ')
-        this.shell.exeScript(cmd, { verbose: true }, cb)
+        new Bash({ script: cmd, mode: 'silent' }).exe(cb)
       })
     })
   }
@@ -108,8 +108,7 @@ class Prepare extends Command {
           return cb(err)
         }
 
-        const cmd = [ `chmod 400 '${privkeyEnc}'` ].join(' && ')
-        this.shell.exeScript(cmd, { verbose: true }, cb)
+        new Bash({script: `chmod 400 '${privkeyEnc}'`, mode: 'silent'}).exe(cb)
       })
     })
   }
@@ -128,13 +127,13 @@ class Prepare extends Command {
         `echo ' ${email}' >> '${pubkey}'`,
       ].join(' && ')
 
-      this.shell.exeScript(cmd, { verbose: true, stdin: 0 }, cb)
+      new Bash({ script: cmd, stdio: [process.stdin, 'pipe', 'pipe'], mode: 'silent' }).exe(cb)
     })
   }
 
   _makePubkeyFingerprint ({ pubkey }, cb) {
     const cmd = `ssh-keygen -lf '${pubkey}' | awk '{print $2}'`
-    this.shell.exeScript(cmd, { mode: 'silent' }, (err, stdout) => {
+    new Bash({ script: cmd, mode: 'silent' }).exe((err, stdout) => {
       this.runtime.config.global.ssh.keypub_fingerprint = `${stdout}`.trim()
       return cb(err)
     })
@@ -167,7 +166,7 @@ class Prepare extends Command {
           return cb(err)
         }
 
-        this.shell.exeScript(props.cmdInstall, {}, (err, stdout) => {
+        new Bash({script: props.cmdInstall, mode: 'silent'}).exe((err, stdout) => {
           if (err) {
             return cb(new Error(`Failed to install '${props.name}'. ${err}`))
           }
@@ -186,13 +185,11 @@ class Prepare extends Command {
   }
 
   _satisfy (appProps, cb) {
-    this.shell.exeScript(appProps.cmdVersion, { mode: 'silent' }, (
-      err,
-      stdout
-    ) =>      {
+    new Bash({ script: appProps.cmdVersion, mode: 'silent' }).exe((err, stdout) => {
+      debug({stdout})
       if (err) {
-          // We don't want to bail out if version command does not exist yet
-          // Or maybe --version returns non-zero exit code, which is common
+        // We don't want to bail out if version command does not exist yet
+        // Or maybe --version returns non-zero exit code, which is common
         debug({
           msg: `Continuing after failed command ${appProps.cmd}. ${err}`,
           exe: appProps.exe,
