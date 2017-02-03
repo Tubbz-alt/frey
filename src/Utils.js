@@ -31,21 +31,6 @@ class Utils {
     this._cryptFile(crypto.createDecipher('cast5-cbc', password), readFile, writeFile, cb)
   }
 
-  buildChildEnv (extra = {}, processEnv = {}) {
-    let childEnv = {}
-
-    childEnv = _.extend({}, processEnv, extra)
-
-    // Automatically add all FREY_* environment variables to Terraform environment
-    _.forOwn(processEnv, (val, key) => {
-      if (_.startsWith(key, 'FREY_')) {
-        childEnv[`TF_VAR_${key}`] = val
-      }
-    })
-
-    return childEnv
-  }
-
   render (subject, data, opts = {}) {
     if (_.isFunction(subject)) {
       return subject

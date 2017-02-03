@@ -13,7 +13,7 @@
     "libversion": "node ./lib/cli.js --version",
     "lint": "eslint .",
     "mocha:coverage": "npm run mocha && istanbul report text-summary lcov && (cat coverage/lcov.info | coveralls || true)",
-    "mocha": "mocha --compilers js:babel-register --grep=\"${GREP}\" --recursive test${MOCHA_TRAILER}",
+    "mocha": "mocha --compilers js:babel-register --grep=\"${GREP}\" --recursive test${MOCHA_TRAILER} src/**.test.js test/test-*.js",
     "release:major": "env SEMANTIC=major npm run release",
     "release:minor": "env SEMANTIC=minor npm run release",
     "release:patch": "env SEMANTIC=patch npm run release",

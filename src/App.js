@@ -2,11 +2,10 @@ const _         = require('lodash')
 const Shell     = require('./Shell')
 const constants = require('./constants')
 const Scrolex   = require('scrolex')
-const utils     = require('./Utils')
 const debug     = require('depurar')('frey')
 
 class App {
-  constructor (opts) {
+  constructor (opts = {}) {
     this.opts    = opts
     this.runtime = opts.runtime
     this.shell   = new Shell(this.runtime)
@@ -47,11 +46,26 @@ class App {
     return debugCmd
   }
 
+  _buildChildEnv (extra = {}, processEnv = {}) {
+    let childEnv = {}
+
+    childEnv = _.extend({}, processEnv, extra)
+
+    // Automatically add all FREY_* environment variables to Terraform environment
+    _.forOwn(processEnv, (val, key) => {
+      if (_.startsWith(key, 'FREY_')) {
+        childEnv[`TF_VAR_${key}`] = val
+      }
+    })
+
+    return childEnv
+  }
+
   _exe (appDefaultOpts, cb) {
     const opts       = _.defaultsDeep(this.opts, _.cloneDeep(appDefaultOpts))
     const runtimeEnv = this.runtime && this.runtime.init ? this.runtime.init.env : {}
 
-    const env  = utils.buildChildEnv(this._objectToEnv(opts.env || {}), runtimeEnv)
+    const env  = this._buildChildEnv(this._objectToEnv(opts.env || {}), runtimeEnv)
     const args = this._objectToFlags(opts.args, opts.signatureOpts)
 
     const scrolexOpts = {

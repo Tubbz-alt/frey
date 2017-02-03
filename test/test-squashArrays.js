@@ -1,5 +1,5 @@
 const squashArrays = require('../src/squashArrays')
-import { expect } from 'chai'
+const expect = require('chai').expect
 
 describe('squashArrays', () => {
   it('should squash', done => {

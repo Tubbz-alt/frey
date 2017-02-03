@@ -1,17 +1,8 @@
 const utils = require('../src/Utils')
-import { expect } from 'chai'
+const expect = require('chai').expect
 // const debug = require('depurar')('frey')
 // debug utils
 describe('Utils', () => {
-  describe('buildChildEnv', () => {
-    it('should convert tf vars', done => {
-      const env = utils.buildChildEnv({ EXTRA: 'Yes Please' }, { FREY_SOMETHING: 'foobar' })
-      expect(
-        env
-      ).to.deep.equal({ EXTRA: 'Yes Please', FREY_SOMETHING: 'foobar', TF_VAR_FREY_SOMETHING: 'foobar' })
-      done()
-    })
-  })
   describe('render', () => {
     it('should handle strings', done => {
       const result = utils.render('Hi my name is {{{name}}}.', { name: 'kevin' })

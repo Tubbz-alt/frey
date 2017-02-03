@@ -1,5 +1,5 @@
 const Base = require('../src/Base')
-import { expect } from 'chai'
+const expect = require('chai').expect
 // const debug = require('depurar')('frey')
 describe('Base', () => {
   describe('run', () => {

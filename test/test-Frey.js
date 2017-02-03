@@ -1,5 +1,5 @@
 const Frey = require('../src/Frey')
-import { expect } from 'chai'
+const expect = require('chai').expect
 
 describe('Frey', () => {
   describe('_composeChain', () => {
