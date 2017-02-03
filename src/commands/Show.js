@@ -28,7 +28,7 @@ class Show extends Command {
     }
 
     const terraform = new Terraform({
-      cmdOpts: { verbose: false },
+      cmdOpts: { mode: 'silent' },
       args   : {
         output     : constants.SHELLARG_PREPEND_AS_IS,
         state      : this.runtime.config.global.infra_state_file,
@@ -51,7 +51,7 @@ class Show extends Command {
     }
 
     const terraform = new Terraform({
-      cmdOpts: { verbose: false },
+      cmdOpts: { mode: 'silent' },
       args   : {
         output          : constants.SHELLARG_PREPEND_AS_IS,
         state           : this.runtime.config.global.infra_state_file,
@@ -75,7 +75,7 @@ class Show extends Command {
     }
 
     const terraform = new Terraform({
-      cmdOpts: { verbose: false },
+      cmdOpts: { mode: 'silent' },
       args   : {
         output     : constants.SHELLARG_PREPEND_AS_IS,
         state      : this.runtime.config.global.infra_state_file,
@@ -99,7 +99,7 @@ class Show extends Command {
       exe    : ansibleProps.exe,
       args   : {},
       runtime: this.runtime,
-      cmdOpts: { verbose: false },
+      cmdOpts: { mode: 'silent' },
     }
 
     opts.args['module-name'] = 'setup'

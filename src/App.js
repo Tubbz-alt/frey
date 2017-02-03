@@ -6,9 +6,9 @@ const utils = require('./Utils')
 // const debug = require('depurar')('frey')
 class App {
   constructor (opts) {
-    this.opts = opts
+    this.opts    = opts
     this.runtime = opts.runtime
-    this.shell = new Shell(this.runtime)
+    this.shell   = new Shell(this.runtime)
   }
 
   _exe (inDefaults, cb) {
@@ -22,8 +22,10 @@ class App {
 
     cmdOpts.env = env
 
-    if (!cmdOpts.components) {
+    if (!cmdOpts.mode) {
       cmdOpts.mode = process.env.FREY_SCROLEX_MODE || process.env.SCROLEX_MODE || 'singlescroll'
+    }
+    if (!cmdOpts.components) {
       cmdOpts.components = `frey>${global.frey.currentHost}>${global.frey.currentCommand}`
     }
 

@@ -15,7 +15,7 @@ class Refresh extends Command {
     const terraform = new Terraform({
       args   : { refresh: constants.SHELLARG_PREPEND_AS_IS },
       runtime: this.runtime,
-      cmdOpts: { verbose: false, limitSamples: false },
+      cmdOpts: { mode: 'silent' },
     })
 
     terraform.exe((err, stdout) => {

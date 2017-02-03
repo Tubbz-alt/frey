@@ -35,7 +35,7 @@ class Infra extends Command {
     const terraform = new Terraform({
       args   : { apply: constants.SHELLARG_PREPEND_AS_IS },
       runtime: this.runtime,
-      cmdOpts: { verbose: true, limitSamples: false },
+      cmdOpts: { verbose: true },
     })
 
     terraform.exe((err, stdout) => {
