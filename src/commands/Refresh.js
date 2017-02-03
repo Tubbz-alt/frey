@@ -12,13 +12,11 @@ class Refresh extends Command {
       return cb(null)
     }
 
-    const terraform = new Terraform({
+    new Terraform({
       args   : { refresh: constants.SHELLARG_PREPEND_AS_IS },
       runtime: this.runtime,
       cmdOpts: { mode: 'silent' },
-    })
-
-    terraform.exe((err, stdout) => {
+    }).exe((err, stdout) => {
       if (err) {
         if (`${err.details}`.match(/when there is existing state/)) {
           debug('Ignoring refresh error about missing statefile')

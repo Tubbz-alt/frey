@@ -16,13 +16,11 @@ class Remote extends Command {
   }
 
   _gatherHosts (cargo, cb) {
-    const terraformInventory = new TerraformInventory({
+    new TerraformInventory({
       cmdOpts: { mode: 'silent' },
       args   : { list: constants.SHELLARG_BOOLEAN_FLAG },
       runtime: this.runtime,
-    })
-
-    terraformInventory.exe((err, stdout) => {
+    }).exe((err, stdout) => {
       if (err) {
         return cb(err)
       }
@@ -86,8 +84,7 @@ class Remote extends Command {
       opts.args[rcmd] = constants.SHELLARG_APPEND_AS_IS
     }
 
-    const ssh = new Ssh(opts)
-    ssh.exe((err, stdout) => {
+    new Ssh(opts).exe((err, stdout) => {
       if (err) {
         return cb(err)
       }

@@ -10,16 +10,14 @@ class Plan extends Command {
       return cb(null)
     }
 
-    const terraform = new Terraform({
+    new Terraform({
       args: {
         plan   : constants.SHELLARG_PREPEND_AS_IS,
         refresh: 'false',
         out    : this.runtime.config.global.infra_plan_file,
       },
       runtime: this.runtime,
-    })
-
-    terraform.exe((err, stdout) => {
+    }).exe((err, stdout) => {
       if (err) {
         return cb(err)
       }

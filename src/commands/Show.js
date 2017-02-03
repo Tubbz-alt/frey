@@ -27,7 +27,7 @@ class Show extends Command {
       return cb(null)
     }
 
-    const terraform = new Terraform({
+    new Terraform({
       cmdOpts: { mode: 'silent' },
       args   : {
         output     : constants.SHELLARG_PREPEND_AS_IS,
@@ -35,9 +35,7 @@ class Show extends Command {
         parallelism: constants.SHELLARG_REMOVE,
       },
       runtime: this.runtime,
-    })
-
-    terraform.exe(cb)
+    }).exe(cb)
   }
 
   publicAddresses (cargo, cb) {
@@ -50,7 +48,7 @@ class Show extends Command {
       return cb(null)
     }
 
-    const terraform = new Terraform({
+    new Terraform({
       cmdOpts: { mode: 'silent' },
       args   : {
         output          : constants.SHELLARG_PREPEND_AS_IS,
@@ -59,9 +57,7 @@ class Show extends Command {
         public_addresses: constants.SHELLARG_APPEND_AS_IS,
       },
       runtime: this.runtime,
-    })
-
-    terraform.exe(cb)
+    }).exe(cb)
   }
 
   endpoint (cargo, cb) {
@@ -74,7 +70,7 @@ class Show extends Command {
       return cb(null)
     }
 
-    const terraform = new Terraform({
+    new Terraform({
       cmdOpts: { mode: 'silent' },
       args   : {
         output     : constants.SHELLARG_PREPEND_AS_IS,
@@ -83,9 +79,7 @@ class Show extends Command {
         endpoint   : constants.SHELLARG_APPEND_AS_IS,
       },
       runtime: this.runtime,
-    })
-
-    terraform.exe(cb)
+    }).exe(cb)
   }
 
   facts (cargo, cb) {
@@ -108,8 +102,7 @@ class Show extends Command {
     opts.args['tags'] = constants.SHELLARG_REMOVE
 
     // ansible: error: no such option: --tags
-    const ansible = new Ansible(opts)
-    ansible.exe((err, stdout) => {
+    new Ansible(opts).exe((err, stdout) => {
       if (err) {
         return cb(err)
       }

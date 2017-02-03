@@ -16,8 +16,7 @@ class Deploy extends Command {
 
     opts.args[this.runtime.config.global.deploy_file] = constants.SHELLARG_APPEND_AS_IS
 
-    const ansible = new Ansible(opts)
-    ansible.exe(cb)
+    new Ansible(opts).exe(cb)
   }
 }
 

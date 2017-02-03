@@ -24,12 +24,10 @@ class Destroy extends Command {
       return cb(null)
     }
 
-    const terraform = new Terraform({
+    new Terraform({
       args   : { destroy: constants.SHELLARG_PREPEND_AS_IS, force: constants.SHELLARG_BOOLEAN_FLAG },
       runtime: this.runtime,
-    })
-
-    terraform.exe((err, stdout) => {
+    }).exe((err, stdout) => {
       if (err) {
         return cb(err)
       }

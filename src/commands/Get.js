@@ -10,7 +10,7 @@ class Get extends Command {
       return cb(null)
     }
 
-    const terraform = new Terraform({
+    new Terraform({
       args: {
         get        : constants.SHELLARG_PREPEND_AS_IS,
         state      : constants.SHELLARG_REMOVE,
@@ -18,9 +18,7 @@ class Get extends Command {
         update     : true,
       },
       runtime: this.runtime,
-    })
-
-    terraform.exe((err, stdout) => {
+    }).exe((err, stdout) => {
       if (err) {
         return cb(err)
       }
