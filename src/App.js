@@ -47,32 +47,27 @@ class App {
     return debugCmd
   }
 
-  _exe (inDefaults, cb) {
-    const defaults = _.cloneDeep(inDefaults)
-
-    const exe = this.opts.exe || defaults.exe
-    const signatureOpts = this.opts.signatureOpts || defaults.signatureOpts
-    const cmdOpts = this.opts.cmdOpts || defaults.cmdOpts || {}
+  _exe (appDefaultOpts, cb) {
+    const opts       = _.defaultsDeep(this.opts, _.cloneDeep(appDefaultOpts))
     const runtimeEnv = this.runtime && this.runtime.init ? this.runtime.init.env : {}
-    const env = utils.buildChildEnv(this._objectToEnv(_.defaults(this.opts.env, defaults.env)), runtimeEnv)
-    const args = this._objectToFlags(_.defaults(this.opts.args, defaults.args), signatureOpts)
 
-    cmdOpts.env = env
+    const env  = utils.buildChildEnv(this._objectToEnv(opts.env), runtimeEnv)
+    const args = this._objectToFlags(opts.args, opts.signatureOpts)
 
-    if (!cmdOpts.mode) {
-      cmdOpts.mode = process.env.FREY_SCROLEX_MODE || process.env.SCROLEX_MODE || 'singlescroll'
-    }
-    // cmdOpts.addCommandAsComponent = true
-    if (!cmdOpts.components) {
-      cmdOpts.components = `frey>${global.frey.currentHost}>${global.frey.currentCommand}`
+    const scrolexOpts = {
+      env       : env,
+      stdio     : opts.stdio || [ 'pipe', 'pipe', 'pipe' ],
+      mode      : opts.mode || process.env.FREY_SCROLEX_MODE || process.env.SCROLEX_MODE || 'singlescroll',
+      components: opts.components || `frey>${global.frey.currentHost}>${global.frey.currentCommand}`,
     }
 
-    const cmdArgs = [ exe ].concat(args)
+    // scrolexOpts.addCommandAsComponent = true
+    const scrolexArgs = [ opts.exe ].concat(args)
 
-    // const debugCmd = this._debugCmd({ cmdOpts, env }, cmdArgs)
+    // const debugCmd = this._debugCmd({ scrolexOpts, env }, scrolexArgs)
     // debug({debugCmd})
 
-    Scrolex.exe(cmdArgs, cmdOpts, (err, out) => {
+    Scrolex.exe(scrolexArgs, scrolexOpts, (err, out) => {
       if (err) {
         return cb(err)
       }

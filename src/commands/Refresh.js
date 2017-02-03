@@ -15,7 +15,7 @@ class Refresh extends Command {
     new Terraform({
       args   : { refresh: constants.SHELLARG_PREPEND_AS_IS },
       runtime: this.runtime,
-      cmdOpts: { mode: 'silent' },
+      mode   : 'silent',
     }).exe((err, stdout) => {
       if (err) {
         if (`${err.details}`.match(/when there is existing state/)) {

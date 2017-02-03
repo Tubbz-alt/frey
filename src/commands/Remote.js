@@ -17,7 +17,7 @@ class Remote extends Command {
 
   _gatherHosts (cargo, cb) {
     new TerraformInventory({
-      cmdOpts: { mode: 'silent' },
+      mode   : 'silent',
       args   : { list: constants.SHELLARG_BOOLEAN_FLAG },
       runtime: this.runtime,
     }).exe((err, stdout) => {

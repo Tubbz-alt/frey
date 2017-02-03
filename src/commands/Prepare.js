@@ -73,7 +73,7 @@ class Prepare extends Command {
                   `(grep 'BEGIN RSA PRIVATE KEY' '${privkey}' || (rm -f '${privkey}'; false))`,
                   `chmod 400 '${privkey}'`,
                 ].join(' && ')
-                new Bash({ script: cmd, cmdOpts: { mode: 'silent' } }).exe(cb)
+                new Bash({ script: cmd, mode: 'silent' }).exe(cb)
               }
             )
           }
@@ -84,7 +84,7 @@ class Prepare extends Command {
           `ssh-keygen -b 2048 -t rsa -C '${email}' -f '${privkey}' -q -N ''`,
           `rm -f '${privkey}.pub'`,
         ].join(' && ')
-        new Bash({ script: cmd, cmdOpts: { mode: 'silent' } }).exe(cb)
+        new Bash({ script: cmd, mode: 'silent' }).exe(cb)
       })
     })
   }
@@ -108,7 +108,7 @@ class Prepare extends Command {
           return cb(err)
         }
 
-        new Bash({ script: `chmod 400 '${privkeyEnc}'`, cmdOpts: { mode: 'silent' } }).exe(cb)
+        new Bash({ script: `chmod 400 '${privkeyEnc}'`, mode: 'silent' }).exe(cb)
       })
     })
   }
@@ -127,13 +127,13 @@ class Prepare extends Command {
         `echo ' ${email}' >> '${pubkey}'`,
       ].join(' && ')
 
-      new Bash({ script: cmd, stdio: [process.stdin, 'pipe', 'pipe'], cmdOpts: { mode: 'silent' } }).exe(cb)
+      new Bash({ script: cmd, stdio: [process.stdin, 'pipe', 'pipe'], mode: 'silent' }).exe(cb)
     })
   }
 
   _makePubkeyFingerprint ({ pubkey }, cb) {
     const cmd = `ssh-keygen -lf '${pubkey}' | awk '{print $2}'`
-    new Bash({ script: cmd, cmdOpts: { mode: 'silent' } }).exe((err, stdout) => {
+    new Bash({ script: cmd, mode: 'silent' }).exe((err, stdout) => {
       this.runtime.config.global.ssh.keypub_fingerprint = `${stdout}`.trim()
       return cb(err)
     })
@@ -166,7 +166,7 @@ class Prepare extends Command {
           return cb(err)
         }
 
-        new Bash({ script: props.cmdInstall, cmdOpts: { mode: 'silent' } }).exe((err, stdout) => {
+        new Bash({ script: props.cmdInstall }).exe((err, stdout) => {
           if (err) {
             return cb(new Error(`Failed to install '${props.name}'. ${err}`))
           }
@@ -185,7 +185,7 @@ class Prepare extends Command {
   }
 
   _satisfy (appProps, cb) {
-    new Bash({ script: appProps.cmdVersion, cmdOpts: { mode: 'silent' } }).exe((err, stdout) => {
+    new Bash({ script: appProps.cmdVersion, mode: 'silent' }).exe((err, stdout) => {
       if (err) {
         // We don't want to bail out if version command does not exist yet
         // Or maybe --version returns non-zero exit code, which is common

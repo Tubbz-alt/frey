@@ -12,9 +12,7 @@ class Bash extends App {
       env          : {},
       signatureOpts: { equal: '', quote: '', dash: '-', escape: false },
       exe          : 'bash',
-      cmdOpts      : {
-        stdio: ['pipe', 'pipe', 'pipe'],
-      },
+      stdio        : ['pipe', 'pipe', 'pipe'],
     }
 
     defaults.args[this.opts.script] = constants.SHELLARG_APPEND_AS_IS

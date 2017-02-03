@@ -31,7 +31,7 @@ class Format extends Command {
     }
     args[hclFile] = constants.SHELLARG_APPEND_AS_IS
 
-    new Terraform({ cmdOpts: { mode: 'silent' }, args, runtime: this.runtime }).exe(err => {
+    new Terraform({ mode: 'silent', args, runtime: this.runtime }).exe(err => {
       if (err) {
         return cb(err)
       }

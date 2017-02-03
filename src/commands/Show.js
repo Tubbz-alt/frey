@@ -28,8 +28,8 @@ class Show extends Command {
     }
 
     new Terraform({
-      cmdOpts: { mode: 'silent' },
-      args   : {
+      mode: 'silent',
+      args: {
         output     : constants.SHELLARG_PREPEND_AS_IS,
         state      : this.runtime.config.global.infra_state_file,
         parallelism: constants.SHELLARG_REMOVE,
@@ -49,8 +49,8 @@ class Show extends Command {
     }
 
     new Terraform({
-      cmdOpts: { mode: 'silent' },
-      args   : {
+      mode: 'silent',
+      args: {
         output          : constants.SHELLARG_PREPEND_AS_IS,
         state           : this.runtime.config.global.infra_state_file,
         parallelism     : constants.SHELLARG_REMOVE,
@@ -71,8 +71,8 @@ class Show extends Command {
     }
 
     new Terraform({
-      cmdOpts: { mode: 'silent' },
-      args   : {
+      mode: 'silent',
+      args: {
         output     : constants.SHELLARG_PREPEND_AS_IS,
         state      : this.runtime.config.global.infra_state_file,
         parallelism: constants.SHELLARG_REMOVE,
@@ -93,7 +93,7 @@ class Show extends Command {
       exe    : ansibleProps.exe,
       args   : {},
       runtime: this.runtime,
-      cmdOpts: { mode: 'silent' },
+      mode   : 'silent',
     }
 
     opts.args['module-name'] = 'setup'
