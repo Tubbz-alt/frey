@@ -53,14 +53,14 @@ class Prepare extends Command {
             process.on('exit', code => {
               // From node docs: "You must only perform synchronous operations in this handler"
               try {
-                this._out(`Cleaning up '${privkey}' after process exit with code '${code}' \n`)
+                this._out(`Cleaning up '${privkey}' after process exit with code '${code}' `)
                 fs.unlinkSync(privkey)
               } catch (e) {
-                this._out(`Was unable to clean up '${privkey}'\n`)
+                this._out(`Was unable to clean up '${privkey}'`)
               }
             })
 
-            this._out(`Reconstructing private key '${privkey}' from '${privkeyEnc}'\n`)
+            this._out(`Reconstructing private key '${privkey}' from '${privkeyEnc}'`)
             return utils.decryptFile(
               privkeyEnc,
               privkey,
@@ -79,7 +79,7 @@ class Prepare extends Command {
           }
         }
 
-        this._out(`Creating private key '${privkey}'\n`)
+        this._out(`Creating private key '${privkey}'`)
         const cmd = [
           `ssh-keygen -b 2048 -t rsa -C '${email}' -f '${privkey}' -q -N ''`,
           `rm -f '${privkey}.pub'`,
@@ -102,7 +102,7 @@ class Prepare extends Command {
         return cb(null)
       }
 
-      this._out(`Creating private encrypted key '${privkeyEnc}'\n`)
+      this._out(`Creating private encrypted key '${privkeyEnc}'`)
       utils.encryptFile(privkey, privkeyEnc, process.env.FREY_ENCRYPTION_SECRET, err => {
         if (err) {
           return cb(err)
@@ -122,7 +122,7 @@ class Prepare extends Command {
         return cb(null)
       }
 
-      this._out(`Creating public key '${pubkey}'\n`)
+      this._out(`Creating public key '${pubkey}'`)
       const cmd = [
         `echo -n $(ssh-keygen -yf '${privkey}') > '${pubkey}'`,
         `echo ' ${email}' >> '${pubkey}'`,
@@ -207,7 +207,7 @@ class Prepare extends Command {
       this._out(`Found '${appProps.name}' with version '${foundVersion}'`)
 
       if (!stdout || !semver.satisfies(foundVersion, appProps.range)) {
-        this._out(`'${appProps.name}' needs to be installed or upgraded. \n`)
+        this._out(`'${appProps.name}' needs to be installed or upgraded. `)
         return cb(false)
       }
 
