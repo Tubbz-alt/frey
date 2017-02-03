@@ -1,8 +1,8 @@
 ❯ frey ❯ {hostname} ❯ welcome ❯
 
-    --> Frey version '0.3.28' ✔
+    Frey version '0.3.28' ✔
 
-    --> Will run: [ 'init', 'config', 'deps', 'prepare' ] ✔
+    Will run: [ 'init', 'config', 'deps', 'prepare' ] ✔
 
 ❯ frey ❯ {hostname} ❯ init ❯
 
@@ -19,11 +19,20 @@
 ❯ frey ❯ {hostname} ❯ prepare ❯
 
     Reconstructing private key '{root}/test/scenario/sshreconstruct/frey-sshreconstruct.pem' from '{root}/test/scenario/sshreconstruct/frey-sshreconstruct.pem.cast5'
-    -----BEGIN RSA PRIVATE KEY-----
+❯ frey ❯ {hostname} ❯ prepare ❯
+
     Creating public key '{root}/test/scenario/sshreconstruct/frey-sshreconstruct.pub'
+❯ frey ❯ {hostname} ❯ prepare ❯
+
     Found 'terraform' with version '0.7.3'
+❯ frey ❯ {hostname} ❯ prepare ❯
+
     Found 'terraformInventory' with version '0.6.0'
+❯ frey ❯ {hostname} ❯ prepare ❯
+
     Found 'pip' with version {{global_pip_version}}
+❯ frey ❯ {hostname} ❯ prepare ❯
+
     Found 'ansible' with version '2.1.4'
     finished ✔
 

@@ -1,8 +1,8 @@
 ❯ frey ❯ {hostname} ❯ welcome ❯
 
-    --> Frey version '0.3.28' ✔
+    Frey version '0.3.28' ✔
 
-    --> Will run: [ 'init', 'config', 'deps', 'prepare' ] ✔
+    Will run: [ 'init', 'config', 'deps', 'prepare' ] ✔
 
 ❯ frey ❯ {hostname} ❯ init ❯
 
@@ -19,11 +19,23 @@
 ❯ frey ❯ {hostname} ❯ prepare ❯
 
     Creating private key '{tmpdir}/frey-sshkeygen.pem'
+❯ frey ❯ {hostname} ❯ prepare ❯
+
     Creating public key '{tmpdir}/frey-sshkeygen.pub'
+❯ frey ❯ {hostname} ❯ prepare ❯
+
     Creating private encrypted key '{tmpdir}/frey-sshkeygen.pem.cast5'
+❯ frey ❯ {hostname} ❯ prepare ❯
+
     Found 'terraform' with version '0.7.3'
+❯ frey ❯ {hostname} ❯ prepare ❯
+
     Found 'terraformInventory' with version '0.6.0'
+❯ frey ❯ {hostname} ❯ prepare ❯
+
     Found 'pip' with version {{global_pip_version}}
+❯ frey ❯ {hostname} ❯ prepare ❯
+
     Found 'ansible' with version '2.1.4'
     finished ✔
 
@@ -33,9 +45,9 @@ Done
 {tmpdir}/frey-sshkeygen.pub
 ❯ frey ❯ {hostname} ❯ welcome ❯
 
-    --> Frey version '0.3.28' ✔
+    Frey version '0.3.28' ✔
 
-    --> Will run: [ 'init', 'config', 'deps', 'prepare' ] ✔
+    Will run: [ 'init', 'config', 'deps', 'prepare' ] ✔
 
 ❯ frey ❯ {hostname} ❯ init ❯
 
@@ -52,9 +64,17 @@ Done
 ❯ frey ❯ {hostname} ❯ prepare ❯
 
     Creating public key '{tmpdir}/frey-sshkeygen.pub'
+❯ frey ❯ {hostname} ❯ prepare ❯
+
     Found 'terraform' with version '0.7.3'
+❯ frey ❯ {hostname} ❯ prepare ❯
+
     Found 'terraformInventory' with version '0.6.0'
+❯ frey ❯ {hostname} ❯ prepare ❯
+
     Found 'pip' with version {{global_pip_version}}
+❯ frey ❯ {hostname} ❯ prepare ❯
+
     Found 'ansible' with version '2.1.4'
     finished ✔
 

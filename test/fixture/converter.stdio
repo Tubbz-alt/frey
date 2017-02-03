@@ -1,8 +1,8 @@
 ❯ frey ❯ {hostname} ❯ welcome ❯
 
-    --> Frey version '0.3.28' ✔
+    Frey version '0.3.28' ✔
 
-    --> Will run: [ 'init', 'config', 'deps', 'convert', 'format' ] ✔
+    Will run: [ 'init', 'config', 'deps', 'convert', 'format' ] ✔
 
 ❯ frey ❯ {hostname} ❯ init ❯
 
@@ -18,20 +18,15 @@
 
 ❯ frey ❯ {hostname} ❯ convert ❯
 
-    --> Skipping confirmation for 'About to convert existing TOML, YAML, CFG and TF to HCL files in your project dir. Make sure your files are under source control as this is a best-effort procedure. May I proceed?' as '--force-yes' applies
+    Skipping confirmation for 'About to convert existing TOML, YAML, CFG and TF to HCL files in your project dir. Make sure your files are under source control as this is a best-effort procedure. May I proceed?' as '--force-yes' applies
     finished ✔
 
 ❯ frey ❯ {hostname} ❯ format ❯
 
-    --> Skipping confirmation for 'About to rewrite all HCL files in your project dir. Make sure your files are under source control as this is a best-effort procedure. May I proceed?' as '--force-yes' applies
-❯ frey ❯ {hostname} ❯ format ❯ terraform ❯
+    Skipping confirmation for 'About to rewrite all HCL files in your project dir. Make sure your files are under source control as this is a best-effort procedure. May I proceed?' as '--force-yes' applies
+❯ frey ❯ {hostname} ❯ format ❯
 
-    {root}/test/scenario/converter/Freyfile.hcl
-    {root}/test/scenario/converter/Freyfile.hcl ✔
-
-    {root}/test/scenario/converter/Freyfile.hcl ✔
-
-    --> Skipping confirmation for 'About to rewrite all HCL files in your project dir. Make sure your files are under source control as this is a best-effort procedure. May I proceed?' as '--force-yes' applies
+    Skipping confirmation for 'About to rewrite all HCL files in your project dir. Make sure your files are under source control as this is a best-effort procedure. May I proceed?' as '--force-yes' applies
     finished ✔
 
 Done

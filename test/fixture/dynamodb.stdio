@@ -2,9 +2,9 @@ ACCPTST:STDIO_REPLACE_ELAPSED
 (maybe) Destroying..
 ❯ frey ❯ {hostname} ❯ welcome ❯
 
-    --> Frey version '0.3.28' ✔
+    Frey version '0.3.28' ✔
 
-    --> Will run: [ 'init', 'config', 'deps', 'prepare', 'refresh', 'validate', 'get', 'plan', 'backup', 'infra', 'install', 'setup', 'deploy', 'restart', 'show' ] ✔
+    Will run: [ 'init', 'config', 'deps', 'prepare', 'refresh', 'validate', 'get', 'plan', 'backup', 'infra', 'install', 'setup', 'deploy', 'restart', 'show' ] ✔
 
 ❯ frey ❯ {hostname} ❯ init ❯
 
@@ -21,25 +21,39 @@ ACCPTST:STDIO_REPLACE_ELAPSED
 ❯ frey ❯ {hostname} ❯ prepare ❯
 
     Creating private key '{tmpdir}/frey-dynamodb.pem'
+❯ frey ❯ {hostname} ❯ prepare ❯
+
     Creating public key '{tmpdir}/frey-dynamodb.pub'
+❯ frey ❯ {hostname} ❯ prepare ❯
+
     Creating private encrypted key '{tmpdir}/frey-dynamodb.pem.cast5'
+❯ frey ❯ {hostname} ❯ prepare ❯
+
     Found 'terraform' with version '0.7.3'
+❯ frey ❯ {hostname} ❯ prepare ❯
+
     Found 'terraformInventory' with version '0.6.0'
+❯ frey ❯ {hostname} ❯ prepare ❯
+
     Found 'pip' with version {{global_pip_version}}
+❯ frey ❯ {hostname} ❯ prepare ❯
+
     Found 'ansible' with version '2.1.4'
     finished ✔
 
-    --> Saved state to '{root}/test/scenario/dynamodb/Frey-state-terraform.tfstate'
+❯ frey ❯ {hostname} ❯ refresh ❯
+
+    Saved state to '{root}/test/scenario/dynamodb/Frey-state-terraform.tfstate'
     finished ✔
 
-❯ frey ❯ {hostname} ❯ validate ❯ terraform ❯
+❯ frey ❯ {hostname} ❯ validate ❯
 
     finished ✔
 
-    --> Updated modules'
+    Updated modules'
     finished ✔
 
-❯ frey ❯ {hostname} ❯ plan ❯ terraform ❯
+❯ frey ❯ {hostname} ❯ plan ❯
 
     The Terraform execution plan has been generated and is shown below.
     Resources are shown in alphabetical order for quick scanning. Green resources
@@ -84,14 +98,14 @@ ACCPTST:STDIO_REPLACE_ELAPSED
 
     Plan: 1 to add, 0 to change, 0 to destroy. ✔
 
-    --> Saved plan as '{root}/test/scenario/dynamodb/Frey-residu-terraform.plan'
+    Saved plan as '{root}/test/scenario/dynamodb/Frey-residu-terraform.plan'
     finished ✔
 
-❯ frey ❯ {hostname} ❯ backup ❯ terraform ❯
+❯ frey ❯ {hostname} ❯ backup ❯
 
     finished ✔
 
-❯ frey ❯ {hostname} ❯ infra ❯ terraform ❯
+❯ frey ❯ {hostname} ❯ infra ❯
 
     aws_dynamodb_table.basic-dynamodb-table: Creating...
     arn:                                                   "" => "<computed>"
@@ -138,39 +152,26 @@ ACCPTST:STDIO_REPLACE_ELAPSED
 
     endpoint = http://dynamodb.com:8080/endpoint/arn:aws:dynamodb:us-east-1:501208355536:table/GameScores ✔
 
-    --> Saved new state to '{root}/test/scenario/dynamodb/Frey-state-terraform.tfstate'
+    Saved new state to '{root}/test/scenario/dynamodb/Frey-state-terraform.tfstate'
     finished ✔
 
-❯ frey ❯ {hostname} ❯ install ❯ terraform ❯
-
-    finished ✔
-
-❯ frey ❯ {hostname} ❯ setup ❯ terraform ❯
+❯ frey ❯ {hostname} ❯ install ❯
 
     finished ✔
 
-❯ frey ❯ {hostname} ❯ deploy ❯ terraform ❯
+❯ frey ❯ {hostname} ❯ setup ❯
 
     finished ✔
 
-❯ frey ❯ {hostname} ❯ restart ❯ terraform ❯
+❯ frey ❯ {hostname} ❯ deploy ❯
 
     finished ✔
 
-❯ frey ❯ {hostname} ❯ show ❯ terraform ❯
+❯ frey ❯ {hostname} ❯ restart ❯
 
-    arn = arn:aws:dynamodb:us-east-1:501208355536:table/GameScores
-    endpoint = http://dynamodb.com:8080/endpoint/arn:aws:dynamodb:us-east-1:501208355536:table/GameScores
-    endpoint = http://dynamodb.com:8080/endpoint/arn:aws:dynamodb:us-east-1:501208355536:table/GameScores ✔
+    finished ✔
 
-    endpoint = http://dynamodb.com:8080/endpoint/arn:aws:dynamodb:us-east-1:501208355536:table/GameScores ✔
-
-❯ frey ❯ {hostname} ❯ show ❯ terraform ❯
-
-    http://dynamodb.com:8080/endpoint/arn:aws:dynamodb:us-east-1:501208355536:table/GameScores
-    http://dynamodb.com:8080/endpoint/arn:aws:dynamodb:us-east-1:501208355536:table/GameScores ✔
-
-    http://dynamodb.com:8080/endpoint/arn:aws:dynamodb:us-east-1:501208355536:table/GameScores ✔
+❯ frey ❯ {hostname} ❯ show ❯
 
     - [ output ] ------------------------------
     arn = arn:aws:dynamodb:us-east-1:501208355536:table/GameScores

@@ -1,6 +1,6 @@
 ACCPTST:STDIO_SKIP_COMPARE
-[?25l ✔ frey ❯ {hostname} ❯ welcome ❯ --> Frey version '0.3.28'
-[?25h[?25l ✔ frey ❯ {hostname} ❯ welcome ❯ --> Will run: [ 'init', 'config' ]
+[?25l ✔ frey ❯ {hostname} ❯ welcome ❯ Frey version '0.3.28'
+[?25h[?25l ✔ frey ❯ {hostname} ❯ welcome ❯ Will run: [ 'init', 'config' ]
 [?25h[?25l ✔ frey ❯ {hostname} ❯ init ❯ finished
 [?25h[?25l ✔ frey ❯ {hostname} ❯ config ❯ finished
 [?25hDone

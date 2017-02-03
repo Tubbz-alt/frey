@@ -1,8 +1,8 @@
 ❯ frey ❯ {hostname} ❯ welcome ❯
 
-    --> Frey version '0.3.28' ✔
+    Frey version '0.3.28' ✔
 
-    --> Will run: [ 'init', 'config', 'deps', 'prepare', 'validate' ] ✔
+    Will run: [ 'init', 'config', 'deps', 'prepare', 'validate' ] ✔
 
 ❯ frey ❯ {hostname} ❯ init ❯
 
@@ -19,11 +19,23 @@
 ❯ frey ❯ {hostname} ❯ prepare ❯
 
     Creating private key '{tmpdir}/frey-gitless/frey-frey-gitless.pem'
+❯ frey ❯ {hostname} ❯ prepare ❯
+
     Creating public key '{tmpdir}/frey-gitless/frey-frey-gitless.pub'
+❯ frey ❯ {hostname} ❯ prepare ❯
+
     Creating private encrypted key '{tmpdir}/frey-gitless/frey-frey-gitless.pem.cast5'
+❯ frey ❯ {hostname} ❯ prepare ❯
+
     Found 'terraform' with version '0.7.3'
+❯ frey ❯ {hostname} ❯ prepare ❯
+
     Found 'terraformInventory' with version '0.6.0'
+❯ frey ❯ {hostname} ❯ prepare ❯
+
     Found 'pip' with version {{global_pip_version}}
+❯ frey ❯ {hostname} ❯ prepare ❯
+
     Found 'ansible' with version '2.1.4'
     finished ✔
 
@@ -32,4 +44,4 @@
     finished ✔
 
 
---> Exiting with error: Frey requires project (and state) to be under Git, and residu to be ignored.
+Exiting with error: Frey requires project (and state) to be under Git, and residu to be ignored.
