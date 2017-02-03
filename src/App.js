@@ -23,7 +23,6 @@ class App {
     cmdOpts.env = env
 
     if (!cmdOpts.components) {
-      cmdOpts.addCommandAsComponent = true
       cmdOpts.mode = process.env.FREY_SCROLEX_MODE || process.env.SCROLEX_MODE || 'singlescroll'
       cmdOpts.components = `frey>${global.frey.currentHost}>${global.frey.currentCommand}`
     }
