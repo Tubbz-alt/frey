@@ -43,9 +43,9 @@ function destroy() {
 if true; then destroy; fi
 if true; then trap destroy EXIT; fi
 
-rm -f *.pem 2>&1 > /dev/null || true
+rm -f *.pem > /dev/null 2>&1 || true
 
-git init 2>&1 > /dev/null || true
+git init > /dev/null 2>&1 || true
 
 "${__node}" "${__root}/${__codelib}/cli.js" config \
   --cfg-var "global.ssh.key_dir=${__dir}" \
@@ -54,7 +54,7 @@ git init 2>&1 > /dev/null || true
   --cfg-var="global.terraformcfg.parallelism=1" \
 || false
 
-rm -f Frey-residu* 2>&1 > /dev/null || true
-rm -f *.pem 2>&1 > /dev/null || true
+rm -f Frey-residu* > /dev/null 2>&1 || true
+rm -f *.pem > /dev/null 2>&1 || true
 
 echo "Finished"

@@ -30,7 +30,7 @@ echo "ACCPTST:STDIO_SKIP_COMPARE"
 
 rm -f "${__sysTmpDir}/frey-customprepare"* || true
 
-git init 2>&1 > /dev/null || true
+git init > /dev/null 2>&1 || true
 
 "${__node}" "${__root}/${__codelib}/cli.js" prepare \
   --force-yes \
@@ -46,6 +46,6 @@ echo "Running help on all required tools"
 
 echo "All tools were able to execute"
 
-rm -f Frey-residu* 2>&1 > /dev/null || true
+rm -f Frey-residu* > /dev/null 2>&1 || true
 
 exit 0

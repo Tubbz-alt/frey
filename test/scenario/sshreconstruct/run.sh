@@ -20,9 +20,9 @@ fi
 rm -f *.pem
 rm -f *.pub
 
-git init 2>&1 > /dev/null || true
+git init > /dev/null 2>&1 || true
 
 FREY_ENCRYPTION_SECRET=abc "${__node}" "${__root}/${__codelib}/cli.js" prepare \
   --bail prepare
 
-rm -f Frey-residu* 2>&1 > /dev/null || true
+rm -f Frey-residu* > /dev/null 2>&1 || true

@@ -30,7 +30,7 @@ echo "ACCPTST:STDIO_SKIP_COMPARE"
 
 rm -f "${__sysTmpDir}/frey-prepare"* || true
 
-git init 2>&1 > /dev/null || true
+git init > /dev/null 2>&1 || true
 
 # node "${__root}/lib/cli.js" prepare \
 env -i \
@@ -55,5 +55,5 @@ for file in $(ls Frey-residu-*); do
   echo ""
 done
 
-rm -f Frey-residu* 2>&1 > /dev/null || true
+rm -f Frey-residu* > /dev/null 2>&1 || true
 exit 0

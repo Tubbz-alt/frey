@@ -36,7 +36,7 @@ function destroy() {
 if true; then destroy; fi
 if true; then trap destroy EXIT; fi
 
-git init 2>&1 > /dev/null || true
+git init > /dev/null 2>&1 || true
 
 "${__node}" "${__root}/${__codelib}/cli.js" \
   --cfg-var "global.ssh.key_dir=${__sysTmpDir}" \
@@ -44,5 +44,5 @@ git init 2>&1 > /dev/null || true
   --force-yes \
 || false
 
-rm -f Frey-residu* 2>&1 > /dev/null || true
+rm -f Frey-residu* > /dev/null 2>&1 || true
 echo "Finished"

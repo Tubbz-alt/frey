@@ -109,7 +109,7 @@ for role in "${roles[@]}"; do
 
     cp "${licenseFile}" "${__root}/licenses/${roleName}-LICENSE"
 
-    if ! egrep "^- ${roleName}" "${__root}/licenses/index.md" 2>&1 > /dev/null; then
+    if ! egrep "^- ${roleName}" "${__root}/licenses/index.md" > /dev/null 2>&1; then
       echo "- ${roleName} -- ${author}" >> "${__root}/licenses/index.md"
     fi
 

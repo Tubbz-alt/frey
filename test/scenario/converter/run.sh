@@ -17,9 +17,9 @@ if [[ "${OSTYPE}" == "darwin"* ]]; then
   __node="babel-node"; __codelib="src"
 fi
 
-git init 2>&1 > /dev/null || true
-rm -f *.pem 2>&1 > /dev/null || true
-rm -f Freyfile.hcl 2>&1 > /dev/null || true
+git init > /dev/null 2>&1 || true
+rm -f *.pem > /dev/null 2>&1 || true
+rm -f Freyfile.hcl > /dev/null 2>&1 || true
 
 # We seem to not be able to guarantee the create order of multiple web hosts, so override with count = 1 in tests
 "${__node}" "${__root}/${__codelib}/cli.js" convert --projectDir .\
@@ -29,7 +29,7 @@ rm -f Freyfile.hcl 2>&1 > /dev/null || true
 
 cat Freyfile.hcl
 
-rm -f *.pem 2>&1 > /dev/null || true
-rm -f Frey-residu* 2>&1 > /dev/null || true
+rm -f *.pem > /dev/null 2>&1 || true
+rm -f Frey-residu* > /dev/null 2>&1 || true
 
 echo "Finished"

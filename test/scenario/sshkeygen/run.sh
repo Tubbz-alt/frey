@@ -17,7 +17,7 @@ if [[ "${OSTYPE}" == "darwin"* ]]; then
   __node="babel-node"; __codelib="src"
 fi
 
-git init 2>&1 > /dev/null || true
+git init > /dev/null 2>&1 || true
 
 rm -f "${__sysTmpDir}/frey-sshkeygen."* || true
 "${__node}" "${__root}/${__codelib}/cli.js" \
@@ -33,4 +33,4 @@ rm -f "${__sysTmpDir}/frey-sshkeygen.pub" || true
 
 ls "${__sysTmpDir}/frey-sshkeygen."* || true
 
-rm -f Frey-residu* 2>&1 > /dev/null || true
+rm -f Frey-residu* > /dev/null 2>&1 || true
