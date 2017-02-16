@@ -36,6 +36,7 @@ git init > /dev/null 2>&1 || true
 env -i \
 PATH=${PATH} \
 USER=${USER} \
+SCROLEX_MODE=${SCROLEX_MODE:-} \
 HOME=${HOME} \
 FREY_SHOULD_BE_AS_VAR_IN_TERRAFORM=now \
 "${__node}" "${__root}/${__codelib}/cli.js" config \

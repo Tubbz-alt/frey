@@ -17,7 +17,6 @@ if [[ "${OSTYPE}" == "darwin"* ]]; then
   __node="babel-node"; __codelib="src"
 fi
 
-
 echo "ACCPTST:STDIO_REPLACE_LONGTIMES"
 echo "ACCPTST:STDIO_REPLACE_DURATIONS"
 echo "ACCPTST:STDIO_REPLACE_ASTERISKHR"
@@ -40,6 +39,7 @@ env -i \
 PATH=${PATH} \
 USER=${USER} \
 HOME=${HOME} \
+SCROLEX_MODE=${SCROLEX_MODE:-} \
 DEBUG=${DEBUG:-} \
 FREY_SHOULD_BE_AS_VAR_IN_ANSIBLE=now \
 "${__node}" "${__root}/${__codelib}/cli.js" install \
@@ -48,6 +48,9 @@ FREY_SHOULD_BE_AS_VAR_IN_ANSIBLE=now \
   --force-yes \
   --bail \
 || false
+
+
+cat group_vars/all/Frey-residu-playbooks_vars.yml
 
 rm -f Frey-residu* > /dev/null 2>&1 || true
 

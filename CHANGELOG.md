@@ -60,6 +60,7 @@ Released: TBA.
 Released: TBA.
 [Diff](https://github.com/freyproject/frey/compare/v0.3.28...v0.3.29).
 
+- [x] Make it possible to set Frey specific "role" variables (#62)
 - [x] Remove `docbuild`
 - [x] Rename commands->steps to reduce ambiguity
 - [x] Refactor Apps, remove cmdOpts sublayer

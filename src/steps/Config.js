@@ -8,6 +8,7 @@ const debug = depurar('frey')
 const globby = require('globby')
 const async = require('async')
 const fs = require('fs')
+const mkdirp = require('mkdirp')
 const _ = require('lodash')
 const INI = require('ini')
 const YAML = require('js-yaml')
@@ -25,6 +26,7 @@ class Config extends Step {
       '_renderConfig',
       '_writeTerraformFile',
       '_writeAnsibleCfg',
+      '_writeAnsiblePlaybooksVars',
       '_writeAnsiblePlaybookInstall',
       '_writeAnsiblePlaybookSetup',
       '_writeAnsiblePlaybookDeploy',
@@ -100,7 +102,7 @@ class Config extends Step {
       }
     }
 
-    debug(newConfig)
+    debug({newConfig})
 
     return cb(null, newConfig)
   }
@@ -119,21 +121,44 @@ class Config extends Step {
 
     const defaults = {
       global: {
-        terraformcfg    : { parallelism: '{{{init.os.cores}}}' },
-        appname         : appName,
-        roles_dir       : '{{{init.paths.frey_dir}}}/roles',
-        tools_dir       : '{{{init.os.home}}}/.frey/tools',
-        infra_state_file: '{{{init.cliargs.projectDir}}}/Frey-state-terraform.tfstate',
-        ansiblecfg_file : '{{{init.cliargs.projectDir}}}/Frey-residu-ansible.cfg',
-        infra_plan_file : '{{{init.cliargs.projectDir}}}/Frey-residu-terraform.plan',
-        infra_file      : '{{{init.cliargs.projectDir}}}/Frey-residu-infra.tf.json',
-        install_file    : '{{{init.cliargs.projectDir}}}/Frey-residu-install.yml',
-        setup_file      : '{{{init.cliargs.projectDir}}}/Frey-residu-setup.yml',
-        deploy_file     : '{{{init.cliargs.projectDir}}}/Frey-residu-deploy.yml',
-        restart_file    : '{{{init.cliargs.projectDir}}}/Frey-residu-restart.yml',
-        backup_file     : '{{{init.cliargs.projectDir}}}/Frey-residu-backup.yml',
-        restore_file    : '{{{init.cliargs.projectDir}}}/Frey-residu-restore.yml',
-        ssh             : {
+        terraformcfg       : { parallelism: '{{{init.os.cores}}}' },
+        appname            : appName,
+        roles_dir          : '{{{init.paths.frey_dir}}}/roles',
+        tools_dir          : '{{{init.os.home}}}/.frey/tools',
+        infra_state_file   : '{{{init.cliargs.projectDir}}}/Frey-state-terraform.tfstate',
+        ansiblecfg_file    : '{{{init.cliargs.projectDir}}}/Frey-residu-ansible.cfg',
+        infra_plan_file    : '{{{init.cliargs.projectDir}}}/Frey-residu-terraform.plan',
+        infra_file         : '{{{init.cliargs.projectDir}}}/Frey-residu-infra.tf.json',
+        install_file       : '{{{init.cliargs.projectDir}}}/Frey-residu-install.yml',
+        setup_file         : '{{{init.cliargs.projectDir}}}/Frey-residu-setup.yml',
+        deploy_file        : '{{{init.cliargs.projectDir}}}/Frey-residu-deploy.yml',
+        restart_file       : '{{{init.cliargs.projectDir}}}/Frey-residu-restart.yml',
+        backup_file        : '{{{init.cliargs.projectDir}}}/Frey-residu-backup.yml',
+        restore_file       : '{{{init.cliargs.projectDir}}}/Frey-residu-restore.yml',
+        playbooks_vars_file: '{{{init.cliargs.projectDir}}}/group_vars/all/Frey-residu-playbooks_vars.yml',
+        playbooks_vars     : {
+          apt_manage_sources_list              : true,
+          apt_src_enable                       : false,
+          apt_update_cache_valid_time          : 86400,
+          apt_upgrade                          : false,
+          apt_dpkg_configure                   : true,
+          apt_install_state                    : 'present',
+          apt_clean                            : true,
+          apt_autoremove                       : false,
+          ansistrano_shared_paths              : ['logs'],
+          ansistrano_keep_releases             : 10,
+          ansistrano_npm                       : 'no',
+          ansistrano_owner                     : 'www-data',
+          ansistrano_group                     : 'www-data',
+          ansistrano_allow_anonymous_stats     : 'no',
+          ansistrano_remove_rolled_back        : 'no',
+          fqdn                                 : `{{ lookup('env', 'FREY_DOMAIN') }}`,
+          hostname                             : `{{ fqdn.split('.')[0] }}`,
+          nodejs_yarn                          : false,
+          nodejs_npm_global_packages           : [ 'yarn' ],
+          unattended_remove_unused_dependencies: true,
+        },
+        ssh: {
           key_dir            : '{{{init.os.home}}}/.ssh',
           email              : `{{{init.os.user}}}@${appName}.freyproject.io`,
           keypair_name       : `${appName}`,
@@ -309,11 +334,17 @@ class Config extends Step {
   }
 
   _writeAnsiblePlaybook (step, cargo, cb) {
-    const cfgBlock = _.get(this.bootCargo._renderConfig, `${step}.playbooks`)
+    let cfgBlock = {}
+    let target   = this.bootCargo._renderConfig.global[`${step}_file`]
+    if (step === 'playbooks_vars') {
+      cfgBlock = _.get(this.bootCargo._renderConfig, `global.playbooks_vars`)
+    } else {
+      cfgBlock = _.get(this.bootCargo._renderConfig, `${step}.playbooks`)
+    }
 
     if (!cfgBlock) {
       debug(`No ${step} instructions found`)
-      fs.unlink(this.bootCargo._renderConfig.global[`${step}_file`], err => {
+      fs.unlink(target, err => {
         if (err) {
         }
         return cb(null)
@@ -330,12 +361,21 @@ class Config extends Step {
     debug(
       'Writing %s instructions at %s',
       step,
-      this.bootCargo._renderConfig.global[`${step}_file`]
+      target
     )
 
-    return fs.writeFile(this.bootCargo._renderConfig.global[`${step}_file`], encoded, cb)
+    mkdirp(`${path.dirname(target)}`, (err) => {
+      if (err) {
+        return cb(err)
+      }
+
+      fs.writeFile(target, encoded, cb)
+    })
   }
 
+  _writeAnsiblePlaybooksVars (cargo, cb) {
+    return this._writeAnsiblePlaybook('playbooks_vars', cargo, cb)
+  }
   _writeAnsiblePlaybookInstall (cargo, cb) {
     return this._writeAnsiblePlaybook('install', cargo, cb)
   }

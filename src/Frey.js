@@ -9,11 +9,12 @@ const _ = require('lodash')
 const Base = require('./Base')
 const steps = require('./steps')
 const pkgConfig = require('../package.json')
+
 const scrolex = require('scrolex').persistOpts({
-  announce             : true,
-  addCommandAsComponent: true,
-  mode                 : process.env.FREY_SCROLEX_MODE || process.env.SCROLEX_MODE || 'singlescroll',
+  addCommandAsComponent: false,
+  announce             : false,
   components           : `frey>main`,
+  mode                 : process.env.FREY_SCROLEX_MODE || process.env.SCROLEX_MODE || 'singlescroll',
 })
 
 class Frey extends Base {
