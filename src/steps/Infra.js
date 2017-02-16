@@ -2,7 +2,7 @@ const Terraform = require('../apps/Terraform')
 const Step = require('../Step')
 const _ = require('lodash')
 const constants = require('../constants')
-const utils = require('../utils')
+const utils = require('../Utils')
 
 class Infra extends Step {
   constructor (name, runtime) {
