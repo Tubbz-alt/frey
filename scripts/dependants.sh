@@ -45,7 +45,7 @@ while IFS= read -r -d '' freyFile; do
   # fi
 
   echo "--> Processing '${freyFile}'..."
-  pushd ${infraDir} > /dev/null
+  pushd "${infraDir}" > /dev/null
     allUrls="${allUrls} - $(awk '/url = / {print $NF}' "${gitDir}/config" |sed -e 's#git@github.com:#https://github.com/#' -e 's#\.git$##')$(echo "\\n")"
     git reset --hard
     [[ -z $(git status -s) ]] || (git diff |cat; git status ; echo "Aborting due to dirty git index at '${infraDir}'."; exit 1)
