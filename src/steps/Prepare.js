@@ -186,6 +186,8 @@ class Prepare extends Step {
 
   _satisfy (appProps, cb) {
     new Bash().exe({ script: appProps.cmdVersion, mode: 'silent' }, (err, stdout) => {
+      const foundVersion = appProps.versionTransformer(stdout)
+
       if (err) {
         // We don't want to bail out if version step does not exist yet
         // Or maybe --version returns non-zero exit code, which is common
@@ -197,8 +199,6 @@ class Prepare extends Step {
           stdout,
         })
       }
-
-      const foundVersion = appProps.versionTransformer(stdout)
 
       this._scroll(`Found '${appProps.name}' with version '${foundVersion}'`)
 
