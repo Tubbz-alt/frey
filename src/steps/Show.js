@@ -26,7 +26,7 @@ class Show extends Step {
       return cb(null)
     }
 
-    new Terraform({
+    new Terraform().exe({
       mode: 'silent',
       args: {
         output     : constants.SHELLARG_PREPEND_AS_IS,
@@ -34,7 +34,7 @@ class Show extends Step {
         parallelism: constants.SHELLARG_REMOVE,
       },
       runtime: this.runtime,
-    }).exe(cb)
+    }, cb)
   }
 
   publicAddresses (cargo, cb) {
@@ -47,7 +47,7 @@ class Show extends Step {
       return cb(null)
     }
 
-    new Terraform({
+    new Terraform().exe({
       mode: 'silent',
       args: {
         output          : constants.SHELLARG_PREPEND_AS_IS,
@@ -56,7 +56,7 @@ class Show extends Step {
         public_addresses: constants.SHELLARG_APPEND_AS_IS,
       },
       runtime: this.runtime,
-    }).exe(cb)
+    }, cb)
   }
 
   endpoint (cargo, cb) {
@@ -69,7 +69,7 @@ class Show extends Step {
       return cb(null)
     }
 
-    new Terraform({
+    new Terraform().exe({
       mode: 'silent',
       args: {
         output     : constants.SHELLARG_PREPEND_AS_IS,
@@ -78,7 +78,7 @@ class Show extends Step {
         endpoint   : constants.SHELLARG_APPEND_AS_IS,
       },
       runtime: this.runtime,
-    }).exe(cb)
+    }, cb)
   }
 
   facts (cargo, cb) {
@@ -101,7 +101,7 @@ class Show extends Step {
     opts.args['tags'] = constants.SHELLARG_REMOVE
 
     // ansible: error: no such option: --tags
-    new Ansible(opts).exe((err, stdout) => {
+    new Ansible().exe(opts, (err, stdout) => {
       if (err) {
         return cb(err)
       }

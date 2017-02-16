@@ -16,7 +16,7 @@ class Backup extends Step {
 
     opts.args[this.runtime.config.global.backup_file] = constants.SHELLARG_APPEND_AS_IS
 
-    new Ansible(opts).exe(cb)
+    new Ansible().exe(opts, cb)
   }
 }
 

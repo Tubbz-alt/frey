@@ -2,8 +2,8 @@ const App = require('../App')
 const constants = require('../constants')
 
 class Bash extends App {
-  exe (cb) {
-    const defaults = {
+  _appDefaults (userOpts, runtime, cb) {
+    const appDefaults = {
       args: {
         e: constants.SHELLARG_BOOLEAN_FLAG,
         u: constants.SHELLARG_BOOLEAN_FLAG,
@@ -15,9 +15,9 @@ class Bash extends App {
       stdio        : ['pipe', 'pipe', 'pipe'],
     }
 
-    defaults.args[this.opts.script] = constants.SHELLARG_APPEND_AS_IS
+    appDefaults.args[userOpts.script] = constants.SHELLARG_APPEND_AS_IS
 
-    this._exe(defaults, cb)
+    cb(null, appDefaults)
   }
 }
 

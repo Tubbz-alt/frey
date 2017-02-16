@@ -16,11 +16,11 @@ class Remote extends Step {
   }
 
   _gatherHosts (cargo, cb) {
-    new TerraformInventory({
+    new TerraformInventory().exe({
       mode   : 'silent',
       args   : { list: constants.SHELLARG_BOOLEAN_FLAG },
       runtime: this.runtime,
-    }).exe((err, stdout) => {
+    }, (err, stdout) => {
       if (err) {
         return cb(err)
       }
@@ -84,7 +84,7 @@ class Remote extends Step {
       opts.args[rcmd] = constants.SHELLARG_APPEND_AS_IS
     }
 
-    new Ssh(opts).exe((err, stdout) => {
+    new Ssh().exe(opts, (err, stdout) => {
       if (err) {
         return cb(err)
       }

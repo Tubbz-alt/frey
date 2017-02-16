@@ -10,7 +10,7 @@ class Get extends Step {
       return cb(null)
     }
 
-    new Terraform({
+    new Terraform().exe({
       args: {
         get        : constants.SHELLARG_PREPEND_AS_IS,
         state      : constants.SHELLARG_REMOVE,
@@ -18,7 +18,7 @@ class Get extends Step {
         update     : true,
       },
       runtime: this.runtime,
-    }).exe((err, stdout) => {
+    }, (err, stdout) => {
       if (err) {
         return cb(err)
       }

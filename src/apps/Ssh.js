@@ -2,8 +2,8 @@ const App = require('../App')
 const constants = require('../constants')
 
 class Ssh extends App {
-  exe (cb) {
-    const defaults = {
+  _appDefaults (userOpts, runtime, cb) {
+    const appDefaults = {
       args         : {},
       env          : {},
       signatureOpts: { equal: '', quote: '', dash: '-', escape: false },
@@ -11,18 +11,18 @@ class Ssh extends App {
       exe          : 'ssh',
     }
 
-    defaults.args['i'] = this.runtime.config.global.ssh.privatekey_file
-    defaults.args['l'] = this.runtime.config.global.ssh.user
+    appDefaults.args['i'] = runtime.config.global.ssh.privatekey_file
+    appDefaults.args['l'] = runtime.config.global.ssh.user
 
-    defaults.args['-oUserKnownHostsFile=/dev/null'] = constants.SHELLARG_PREPEND_AS_IS
-    defaults.args['-oCheckHostIP=no'] = constants.SHELLARG_PREPEND_AS_IS
-    defaults.args['-oStrictHostKeyChecking=no'] = constants.SHELLARG_PREPEND_AS_IS
+    appDefaults.args['-oUserKnownHostsFile=/dev/null'] = constants.SHELLARG_PREPEND_AS_IS
+    appDefaults.args['-oCheckHostIP=no'] = constants.SHELLARG_PREPEND_AS_IS
+    appDefaults.args['-oStrictHostKeyChecking=no'] = constants.SHELLARG_PREPEND_AS_IS
 
-    if (this.runtime.init.cliargs.verbose) {
-      defaults.args['vvvv'] = constants.SHELLARG_BOOLEAN_FLAG
+    if (runtime.init.cliargs.verbose) {
+      appDefaults.args['vvvv'] = constants.SHELLARG_BOOLEAN_FLAG
     }
 
-    this._exe(defaults, cb)
+    cb(null, appDefaults)
   }
 }
 

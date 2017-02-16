@@ -1,16 +1,9 @@
 const _ = require('lodash')
-const Shell = require('./Shell')
 const constants = require('./constants')
 const debug = require('depurar')('frey')
 const scrolex = require('scrolex')
 
 class App {
-  constructor (opts = {}) {
-    this.opts = opts
-    this.runtime = opts.runtime
-    this.shell = new Shell(this.runtime)
-  }
-
   _debugCmd ({ cmdOpts, env }, args) {
     const input = cmdOpts && cmdOpts.stdio ? cmdOpts.stdio[0] : false
 
@@ -61,38 +54,48 @@ class App {
     return childEnv
   }
 
-  _exe (appDefaultOpts, cb) {
-    const opts = _.defaultsDeep(this.opts, _.cloneDeep(appDefaultOpts))
-    const runtimeEnv = this.runtime && this.runtime.init ? this.runtime.init.env : {}
+  _appDefaults (userOpts, runtime, cb) {
+    throw new Error(`_appDefaults should be overridden`)
+  }
 
-    const env = this._buildChildEnv(this._objectToEnv(opts.env || {}), runtimeEnv)
-    const args = this._objectToFlags(opts.args, opts.signatureOpts)
-
-    const scrolexOpts = {
-      stdio: opts.stdio || ['pipe', 'pipe', 'pipe'],
-    }
-
-    if (_.keys(env).length > 0) {
-      // Only add env if it's filled, otherwise we boot processes with an empty env, leading to $PATH finding issues
-      scrolexOpts.env = env
-    }
-
-    if ('mode' in opts) {
-      scrolexOpts.mode = opts.mode
-    }
-
-    // scrolexOpts.addCommandAsComponent = true
-    const scrolexArgs = [opts.exe].concat(args)
-
-    // const debugCmd = this._debugCmd({ scrolexOpts, env }, scrolexArgs)
-    // debug({debugCmd})
-
-    scrolex.exe(scrolexArgs, scrolexOpts, (err, out) => {
+  exe (userOpts, cb) {
+    const runtime = userOpts.runtime
+    this._appDefaults(userOpts, runtime, (err, appDefaults) => {
       if (err) {
         return cb(err)
       }
 
-      return cb(null, out)
+      const opts = _.defaultsDeep({}, userOpts, _.cloneDeep(appDefaults))
+      const runtimeEnv = runtime && runtime.init ? runtime.init.env : {}
+      const env = this._buildChildEnv(this._objectToEnv(opts.env || {}), runtimeEnv)
+      const args = this._objectToFlags(opts.args, opts.signatureOpts)
+
+      const scrolexOpts = {
+        stdio: opts.stdio || ['pipe', 'pipe', 'pipe'],
+      }
+
+      if (_.keys(env).length > 0) {
+        // Only add env if it's filled, otherwise we boot processes with an empty env, leading to $PATH finding issues
+        scrolexOpts.env = env
+      }
+
+      if ('mode' in opts) {
+        scrolexOpts.mode = opts.mode
+      }
+
+      // scrolexOpts.addCommandAsComponent = true
+      const scrolexArgs = [opts.exe].concat(args)
+
+      // const debugCmd = this._debugCmd({ scrolexOpts, env }, scrolexArgs)
+      // debug({debugCmd})
+
+      scrolex.exe(scrolexArgs, scrolexOpts, (err, out) => {
+        if (err) {
+          return cb(err)
+        }
+
+        return cb(null, out)
+      })
     })
   }
 

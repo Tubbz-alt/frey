@@ -32,10 +32,10 @@ class Infra extends Step {
       return cb(null)
     }
 
-    new Terraform({
+    new Terraform().exe({
       args   : { apply: constants.SHELLARG_PREPEND_AS_IS },
       runtime: this.runtime,
-    }).exe((err, stdout) => {
+    }, (err, stdout) => {
       if (err) {
         return cb(err)
       }

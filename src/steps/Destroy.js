@@ -24,10 +24,10 @@ class Destroy extends Step {
       return cb(null)
     }
 
-    new Terraform({
+    new Terraform().exe({
       args   : { destroy: constants.SHELLARG_PREPEND_AS_IS, force: constants.SHELLARG_BOOLEAN_FLAG },
       runtime: this.runtime,
-    }).exe((err, stdout) => {
+    }, (err, stdout) => {
       if (err) {
         return cb(err)
       }

@@ -60,6 +60,7 @@ Released: TBA.
 Released: TBA.
 [Diff](https://github.com/freyproject/frey/compare/v0.3.28...v0.3.29).
 
+- [x] Simplify `App` so that there's less indirection
 - [x] Add bash script linting via `shellcheck`
 - [x] Replace use of ES6 `import` to `require` so we can run Frey `src` on recent nodes without babel
 - [x] Make it possible to set Frey specific "role" variables (#62)

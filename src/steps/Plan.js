@@ -10,7 +10,7 @@ class Plan extends Step {
       return cb(null)
     }
 
-    new Terraform({
+    new Terraform().exe({
       runtime: this.runtime,
       mode   : 'passthru',
       args   : {
@@ -18,7 +18,7 @@ class Plan extends Step {
         refresh: 'false',
         out    : this.runtime.config.global.infra_plan_file,
       },
-    }).exe((err, stdout) => {
+    }, (err, stdout) => {
       if (err) {
         return cb(err)
       }

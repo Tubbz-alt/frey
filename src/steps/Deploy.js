@@ -16,7 +16,7 @@ class Deploy extends Step {
 
     opts.args[this.runtime.config.global.deploy_file] = constants.SHELLARG_APPEND_AS_IS
 
-    new Ansible(opts).exe(cb)
+    new Ansible().exe(opts, cb)
   }
 }
 

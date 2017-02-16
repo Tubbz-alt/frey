@@ -5,68 +5,68 @@ const fs = require('fs')
 const constants = require('../constants')
 
 class Ansible extends App {
-  exe (cb) {
-    const terraformInvProps = _.find(this.runtime.deps, { name: 'terraformInventory' })
-    const ansibleProps = _.find(this.runtime.deps, { name: 'ansible' })
-    const defaults = {
+  _appDefaults (userOpts, runtime, cb) {
+    const terraformInvProps = _.find(runtime.deps, { name: 'terraformInventory' })
+    const ansibleProps = _.find(runtime.deps, { name: 'ansible' })
+    const appDefaults = {
       args         : {},
       env          : ansibleProps.env || {},
       signatureOpts: { equal: '=', quote: '', dash: '--', escape: false },
       exe          : ansibleProps.exePlaybook,
     }
 
-    defaults.args['inventory-file'] = terraformInvProps.exe
-    defaults.args['user'] = this.runtime.config.global.ssh.user
-    defaults.args['private-key'] = this.runtime.config.global.ssh.privatekey_file
+    appDefaults.args['inventory-file'] = terraformInvProps.exe
+    appDefaults.args['user'] = runtime.config.global.ssh.user
+    appDefaults.args['private-key'] = runtime.config.global.ssh.privatekey_file
 
-    if (this.runtime.init.cliargs.tags) {
-      defaults.args['tags'] = this.runtime.init.cliargs.tags
+    if (runtime.init.cliargs.tags) {
+      appDefaults.args['tags'] = runtime.init.cliargs.tags
     }
 
-    if (this.runtime.init.cliargs.verbose) {
-      defaults.args['-vvvv'] = constants.SHELLARG_APPEND_AS_IS
+    if (runtime.init.cliargs.verbose) {
+      appDefaults.args['-vvvv'] = constants.SHELLARG_APPEND_AS_IS
     }
 
     // @todo: Put in a JS date here if you want the same stamp on all machines in a cluster.
     // Also, make it so that extra-vars can be appended vs
     // overwritten further down already
-    // defaults.args['extra-vars'] = 'ansistrano_release_version=$(date -u +%Y%m%d%H%M%SZ)'
-    const connection = _.get(this.runtime, 'config.global.connection')
+    // appDefaults.args['extra-vars'] = 'ansistrano_release_version=$(date -u +%Y%m%d%H%M%SZ)'
+    const connection = _.get(runtime, 'config.global.connection')
     if (connection !== undefined) {
       if (connection === 'local') {
-        defaults.args['connection'] = 'local'
-        defaults.args['extra-vars'] = `variable_host=${connection}`
-        defaults.args['inventory-file'] = `${connection},`
-        defaults.args['user'] = constants.SHELLARG_REMOVE
-        defaults.args['private-key'] = constants.SHELLARG_REMOVE
+        appDefaults.args['connection'] = 'local'
+        appDefaults.args['extra-vars'] = `variable_host=${connection}`
+        appDefaults.args['inventory-file'] = `${connection},`
+        appDefaults.args['user'] = constants.SHELLARG_REMOVE
+        appDefaults.args['private-key'] = constants.SHELLARG_REMOVE
       } else {
         const hostFile = '/tmp/anshosts'
         fs.writeFileSync(hostFile, `${connection}\n`, 'utf-8')
-        defaults.args['inventory-file'] = hostFile
+        appDefaults.args['inventory-file'] = hostFile
       }
     } else {
-      fs.stat(this.runtime.config.global.infra_state_file, err => {
+      fs.stat(runtime.config.global.infra_state_file, err => {
         if (err) {
           return cb(new Error(
-            `Can't find infra_state_file '${this.runtime.config.global.infra_state_file}'. Did you provision infra yet? `
+            `Can't find infra_state_file '${runtime.config.global.infra_state_file}'. Did you provision infra yet? `
           ))
         }
       })
     }
 
     if (!chalk.enalbed) {
-      defaults.env.ANSIBLE_NOCOLOR = 'true'
+      appDefaults.env.ANSIBLE_NOCOLOR = 'true'
     }
 
-    defaults.env.ANSIBLE_CONFIG = this.runtime.config.global.ansiblecfg_file
-    defaults.env.TF_STATE = this.runtime.config.global.infra_state_file
+    appDefaults.env.ANSIBLE_CONFIG = runtime.config.global.ansiblecfg_file
+    appDefaults.env.TF_STATE = runtime.config.global.infra_state_file
 
     // The limit option tells Ansible to target only certain hosts.
-    // if (this.runtime.init.cliargs.limit) {
-    //   args.push(`limit=${this.runtime.init.cliargs.limit}`)
+    // if (runtime.init.cliargs.limit) {
+    //   args.push(`limit=${runtime.init.cliargs.limit}`)
     // }
     //
-    this._exe(defaults, cb)
+    cb(null, appDefaults)
   }
 }
 

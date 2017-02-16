@@ -16,7 +16,7 @@ class Install extends Step {
 
     opts.args[this.runtime.config.global.install_file] = constants.SHELLARG_APPEND_AS_IS
 
-    new Ansible(opts).exe(cb)
+    new Ansible().exe(opts, cb)
   }
 }
 

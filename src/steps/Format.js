@@ -31,7 +31,7 @@ class Format extends Step {
     }
     args[hclFile] = constants.SHELLARG_APPEND_AS_IS
 
-    new Terraform({ mode: 'silent', args, runtime: this.runtime }).exe(err => {
+    new Terraform().exe({ mode: 'silent', args, runtime: this.runtime }, err => {
       if (err) {
         return cb(err)
       }

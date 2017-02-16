@@ -12,11 +12,11 @@ class Refresh extends Step {
       return cb(null)
     }
 
-    new Terraform({
+    new Terraform().exe({
       args   : { refresh: constants.SHELLARG_PREPEND_AS_IS },
       runtime: this.runtime,
       mode   : 'silent',
-    }).exe((err, stdout) => {
+    }, (err, stdout) => {
       if (err) {
         if (`${err.details}`.match(/when there is existing state/)) {
           debug('Ignoring refresh error about missing statefile')
