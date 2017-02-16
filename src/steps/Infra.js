@@ -2,6 +2,7 @@ const Terraform = require('../apps/Terraform')
 const Step = require('../Step')
 const _ = require('lodash')
 const constants = require('../constants')
+const utils = require('../utils')
 
 class Infra extends Step {
   constructor (name, runtime) {
@@ -20,7 +21,7 @@ class Infra extends Step {
     }
 
     if (this.runtime.plan.change > 0 || this.runtime.plan.destroy > 0) {
-      return this.shell.confirm('This infra change is destructive in nature, may I proceed?', cb)
+      return utils.confirm('This infra change is destructive in nature, may I proceed?', this.runtime.init.cliargs.forceYes, cb)
     } else {
       return cb(null)
     }

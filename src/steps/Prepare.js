@@ -1,6 +1,7 @@
 const Step = require('../Step')
-const mkdirp = require('mkdirp')
 const utils = require('../Utils')
+const mkdirp = require('mkdirp')
+
 const Bash = require('../apps/Bash')
 const semver = require('semver')
 const fs = require('fs')
@@ -161,7 +162,7 @@ class Prepare extends Step {
         return cb(null)
       }
 
-      return this.shell.confirm(`May I run '${props.cmdInstall}' for you?`, err => {
+      return utils.confirm(`May I run '${props.cmdInstall}' for you?`, this.runtime.init.cliargs.forceYes, err => {
         if (err) {
           return cb(err)
         }

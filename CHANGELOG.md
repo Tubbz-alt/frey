@@ -12,7 +12,6 @@ Unreleased and unplanned todos
 - [ ] Implement `commit`: Safely commit state automatically
 - [ ] Indent stdout/err
 - [ ] Mocha tests for `App`
-- [ ] Mocha tests for `Shell`
 - [ ] Mocha tests for `Base`
 - [ ] Remote state in S3 feature
 - [ ] Use Terraform modules similar to Ansible roles: https://www.terraform.io/docs/modules/sources.html
@@ -61,6 +60,7 @@ Released: TBA.
 Released: TBA.
 [Diff](https://github.com/freyproject/frey/compare/v0.3.28...v0.3.29).
 
+- [x] Deprecate `Shell.js`
 - [x] Add basic Ansible commnad output parsing -> feedback to scrolex (#62)
 - [x] Simplify `App` so that there's less indirection
 - [x] Add bash script linting via `shellcheck`

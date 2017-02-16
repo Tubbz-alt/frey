@@ -1,6 +1,7 @@
 const Terraform = require('../apps/Terraform')
 const Step = require('../Step')
 const _ = require('lodash')
+const utils = require('../Utils')
 const constants = require('../constants')
 
 // const debug = require('depurar')('frey')
@@ -15,7 +16,7 @@ class Destroy extends Step {
       this._scroll(`Skipping as there are no install instructions`)
       return cb(null)
     }
-    this.shell.confirm('May I destroy your infrastructure?', cb)
+    utils.confirm('May I destroy your infrastructure?', this.runtime.init.cliargs.forceYes, cb)
   }
 
   main (cargo, cb) {

@@ -2,6 +2,7 @@ const Step = require('../Step')
 const constants = require('../constants')
 const Terraform = require('../apps/Terraform')
 const async = require('async')
+const utils = require('../Utils')
 const fs = require('fs')
 // const _ = require('lodash')
 const globby = require('globby')
@@ -16,8 +17,9 @@ class Format extends Step {
   }
 
   _confirm (cargo, cb) {
-    this.shell.confirm(
+    utils.confirm(
       'About to rewrite all HCL files in your project dir. Make sure your files are under source control as this is a best-effort procedure. May I proceed?',
+      this.runtime.init.cliargs.forceYes,
       cb
     )
   }
@@ -54,8 +56,9 @@ class Format extends Step {
       fs.writeFileSync(hclFile, buf, 'utf-8')
 
       debug(`Saved ${hclFile}`)
-      this.shell.confirm(
+      utils.confirm(
         'About to rewrite all HCL files in your project dir. Make sure your files are under source control as this is a best-effort procedure. May I proceed?',
+        this.runtime.init.cliargs.forceYes,
         cb
       )
     })

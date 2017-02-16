@@ -4,6 +4,8 @@ const _ = require('lodash')
 const flatten = require('flat')
 const crypto = require('crypto')
 const fs = require('fs')
+const inquirer = require('inquirer')
+const scrolex = require('scrolex')
 
 class Utils {
   _cryptFile (fn, readFile, writeFile, cb) {
@@ -21,6 +23,24 @@ class Utils {
     writeStream.on('finish', () => {
       return cb(null)
     })
+  }
+
+  confirm (question, forceYes, cb) {
+    if (forceYes) {
+      scrolex.scroll(`Skipping confirmation for '${question}' as '--force-yes' applies`)
+      return cb(null)
+    }
+
+    inquirer.prompt(
+      { type: 'confirm', name: 'confirmation', message: question, default: false },
+      answers => {
+        if (_.get(answers, 'confirmation') !== true) {
+          return cb(new Error('Question declined. Aborting. '))
+        }
+
+        return cb(null)
+      }
+    )
   }
 
   encryptFile (readFile, writeFile, password, cb) {

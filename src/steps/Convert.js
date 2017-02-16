@@ -1,6 +1,7 @@
 const Step = require('../Step')
 const path = require('path')
 const async = require('async')
+const utils = require('../Utils')
 const globby = require('globby')
 const depurar = require('depurar')
 const debug = depurar('frey')
@@ -19,8 +20,9 @@ class Convert extends Step {
   }
 
   _confirm (cargo, cb) {
-    this.shell.confirm(
+    utils.confirm(
       'About to convert existing TOML, YAML, CFG and TF to HCL files in your project dir. Make sure your files are under source control as this is a best-effort procedure. May I proceed?',
+      this.runtime.init.cliargs.forceYes,
       cb
     )
   }
