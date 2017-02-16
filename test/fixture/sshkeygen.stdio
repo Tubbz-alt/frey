@@ -1,5 +1,5 @@
  › frey › main ›
-   Frey version '0.3.28'
+   Frey version '0.3.29'
    Will run: [ 'init', 'config', 'deps', 'prepare' ]
  › frey › prepare ›
    Creating private key '{tmpdir}/frey-sshkeygen.pem'
@@ -14,7 +14,7 @@ Done
 {tmpdir}/frey-sshkeygen.pem.cast5
 {tmpdir}/frey-sshkeygen.pub
  › frey › main ›
-   Frey version '0.3.28'
+   Frey version '0.3.29'
    Will run: [ 'init', 'config', 'deps', 'prepare' ]
  › frey › prepare ›
    Creating public key '{tmpdir}/frey-sshkeygen.pub'
