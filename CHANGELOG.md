@@ -71,6 +71,7 @@ Released: TBA.
 - [x] Avoid duplication in build steps
 - [x] Update znq role ([see](https://github.com/triplepoint/ansible-znc/issues/4))
 - [x] Add timezone role
+- [x] Add yarn role
 
 ## v0.3.28
 

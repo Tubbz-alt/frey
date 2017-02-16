@@ -83,6 +83,7 @@ roles=(
   'nix,1.2.0,master'
   'nix,1.2.1,master'
   'timezone,1.0.0,master'
+  'yarn,1.0.3,master'
 )
 
 for role in "${roles[@]}"; do

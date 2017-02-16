@@ -33,4 +33,5 @@
 - unattended-upgrades -- Gnomovision version 69, Copyright (C) year name of author
 - upstart -- Copyright (c) 2015 Chris Olstrom
 - williamyeh.prometheus -- Copyright (c) 2015 William Yeh <william.pjyeh@gmail.com>
+- yarn -- Copyright (c) Oefenweb.nl <https://github.com/Oefenweb>
 - znc -- Copyright (c) 2015 Jonathan Hanson
