@@ -17,7 +17,8 @@ __root="$(cd "$(dirname "$(dirname "$(dirname "${__dir}")")")" && pwd)"
 __sysTmpDir="${TMPDIR:-/tmp}"
 __sysTmpDir="${__sysTmpDir%/}" # <-- remove trailing slash on macosx
 __node="node"; __codelib="lib"
-if [[ "${OSTYPE}" == "darwin"* ]]; then
+__nodeMajor="$(node -v |sed 's/v/./' |awk -F. '{print $2}')"
+if [[ "${OSTYPE}" == "darwin"* ]] && [ "${__nodeMajor}" -ge 6 ]; then
   __node="node"; __codelib="src"
 fi
 
