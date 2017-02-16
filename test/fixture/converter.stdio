@@ -1,34 +1,12 @@
-❯ frey ❯ {hostname} ❯ welcome ❯
-
-    Frey version '0.3.28' ✔
-
-    Will run: [ 'init', 'config', 'deps', 'convert', 'format' ] ✔
-
-❯ frey ❯ {hostname} ❯ init ❯
-
-    finished ✔
-
-❯ frey ❯ {hostname} ❯ config ❯
-
-    finished ✔
-
-❯ frey ❯ {hostname} ❯ deps ❯
-
-    finished ✔
-
-❯ frey ❯ {hostname} ❯ convert ❯
-
-    Skipping confirmation for 'About to convert existing TOML, YAML, CFG and TF to HCL files in your project dir. Make sure your files are under source control as this is a best-effort procedure. May I proceed?' as '--force-yes' applies
-    finished ✔
-
-❯ frey ❯ {hostname} ❯ format ❯
-
-    Skipping confirmation for 'About to rewrite all HCL files in your project dir. Make sure your files are under source control as this is a best-effort procedure. May I proceed?' as '--force-yes' applies
-❯ frey ❯ {hostname} ❯ format ❯
-
-    Skipping confirmation for 'About to rewrite all HCL files in your project dir. Make sure your files are under source control as this is a best-effort procedure. May I proceed?' as '--force-yes' applies
-    finished ✔
-
+ › frey › main ›
+   Frey version '0.3.28'
+   Will run: [ 'init', 'config', 'deps', 'convert', 'format' ]
+ › frey › convert ›
+   Skipping confirmation for 'About to convert existing TOML, YAML, CFG and TF to HCL files in your project dir. Make sure your files are under source control as this is a best-effort procedure. May I proceed?' as '--force-yes' applies
+ › frey › format ›
+   Skipping confirmation for 'About to rewrite all HCL files in your project dir. Make sure your files are under source control as this is a best-effort procedure. May I proceed?' as '--force-yes' applies
+   {root}/test/scenario/converter/Freyfile.hcl
+   Skipping confirmation for 'About to rewrite all HCL files in your project dir. Make sure your files are under source control as this is a best-effort procedure. May I proceed?' as '--force-yes' applies
 Done
 "global" "ansiblecfg" "defaults" {}
 "global" "ansiblecfg" ssh_connection {

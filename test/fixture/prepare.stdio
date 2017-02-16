@@ -1,45 +1,24 @@
 ACCPTST:STDIO_SKIP_COMPARE
-❯ frey ❯ {hostname} ❯ welcome ❯
+ › frey › main ›
+   Frey version '0.3.28'
+   Will run: [ 'init', 'config', 'deps', 'prepare' ]
+ › frey › prepare ›
+   Creating private key '{tmpdir}/frey-prepare.pem'
+   Creating public key '{tmpdir}/frey-prepare.pub'
+   Creating private encrypted key '{tmpdir}/frey-prepare.pem.cast5'
+   Terraform v0.7.3
 
-    Frey version '0.3.28' ✔
-
-    Will run: [ 'init', 'config', 'deps', 'prepare' ] ✔
-
-❯ frey ❯ {hostname} ❯ init ❯
-
-    finished ✔
-
-❯ frey ❯ {hostname} ❯ config ❯
-
-    finished ✔
-
-❯ frey ❯ {hostname} ❯ deps ❯
-
-    finished ✔
-
-❯ frey ❯ {hostname} ❯ prepare ❯
-
-    Creating private key '{tmpdir}/frey-prepare.pem'
-❯ frey ❯ {hostname} ❯ prepare ❯
-
-    Creating public key '{tmpdir}/frey-prepare.pub'
-❯ frey ❯ {hostname} ❯ prepare ❯
-
-    Creating private encrypted key '{tmpdir}/frey-prepare.pem.cast5'
-❯ frey ❯ {hostname} ❯ prepare ❯
-
-    Found 'terraform' with version '0.7.3'
-❯ frey ❯ {hostname} ❯ prepare ❯
-
-    Found 'terraformInventory' with version '0.6.0'
-❯ frey ❯ {hostname} ❯ prepare ❯
-
-    Found 'pip' with version {{global_pip_version}}
-❯ frey ❯ {hostname} ❯ prepare ❯
-
-    Found 'ansible' with version '2.1.4'
-    finished ✔
-
+   Your version of Terraform is out of date! The latest version
+   is 0.8.7. You can update by downloading from www.terraform.io
+   Found 'terraform' with version '0.7.3'
+   {home}/.frey/tools/terraform-inventory/0.6/terraform-inventory version 0.6
+   Found 'terraformInventory' with version '0.6.0'
+   pip 9.0.1 from /usr/local/lib/python2.7/site-packages/pip-9.0.1-py2.7.egg (python 2.7)
+   Found 'pip' with version {{global_pip_version}}
+   ansible-playbook 2.1.4.0
+   config file =
+   configured module search path = Default w/o overrides
+   Found 'ansible' with version '2.1.4'
 Done
 Running help on all required tools
   --version             show program's version number and exit

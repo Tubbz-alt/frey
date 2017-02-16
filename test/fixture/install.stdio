@@ -1,59 +1,60 @@
 ACCPTST:STDIO_REPLACE_LONGTIMES
 ACCPTST:STDIO_REPLACE_DURATIONS
 ACCPTST:STDIO_REPLACE_ASTERISKHR
-[?25l ✔ frey ❯ {hostname} ❯ welcome ❯ Frey version '0.3.28'
-[?25h[?25l ✔ frey ❯ {hostname} ❯ welcome ❯ Will run: [ 'init', 'config', 'deps', 'prepare', 'install' ]
-[?25h[?25l ✔ frey ❯ {hostname} ❯ init ❯ finished
-[?25h[?25l ✔ frey ❯ {hostname} ❯ config ❯ finished
-[?25h[?25l ✔ frey ❯ {hostname} ❯ deps ❯ finished
-[?25h[?25l ⡐ frey ❯ {hostname} ❯ prepare ❯ Creating private key '{tmpdir}/frey-install.pem'
-[?25h[?25l ⢄ frey ❯ {hostname} ❯ prepare ❯ Creating public key '{tmpdir}/frey-install.pub'
-[?25h[?25l ⢄ frey ❯ {hostname} ❯ prepare ❯ Found 'terraform' with version '0.7.3'
-[?25h[?25l ⢄ frey ❯ {hostname} ❯ prepare ❯ Found 'terraformInventory' with version '0.6.0'
-[?25h[?25l ⢄ frey ❯ {hostname} ❯ prepare ❯ Found 'pip' with version {{global_pip_version}}
-[?25h[?25l ⢄ frey ❯ {hostname} ❯ prepare ❯ Found 'ansible' with version '2.1.4'
-[?25h[?25l ✔ frey ❯ {hostname} ❯ prepare ❯ finished
-[?25h[?25l ⢄ frey ❯ {hostname} ❯ install ❯ 
-[?25l[1000D[K[1A[1000D[K ⢂ frey ❯ {hostname} ❯ install ❯ PLAY [Local stuff] 
-[?25l[1000D[K[1A[1000D[K ⢁ frey ❯ {hostname} ❯ install ❯ 
-[?25l[1000D[K[1A[1000D[K ⡁ frey ❯ {hostname} ❯ install ❯ TASK [setup] 
-[?25l[1000D[K[1A[1000D[K ⡈ frey ❯ {hostname} ❯ install ❯ TASK [setup] 
-[?25l[1000D[K[1A[1000D[K ⡐ frey ❯ {hostname} ❯ install ❯ TASK [setup] 
-[?25l[1000D[K[1A[1000D[K ⡠ frey ❯ {hostname} ❯ install ❯ TASK [setup] 
-[?25l[1000D[K[1A[1000D[K ⢄ frey ❯ {hostname} ❯ install ❯ TASK [setup] 
-[?25l[1000D[K[1A[1000D[K ⢂ frey ❯ {hostname} ❯ install ❯ TASK [setup] 
-[?25l[1000D[K[1A[1000D[K ⢁ frey ❯ {hostname} ❯ install ❯ TASK [setup] 
-[?25l[1000D[K[1A[1000D[K ⡁ frey ❯ {hostname} ❯ install ❯ TASK [setup] 
-[?25l[1000D[K[1A[1000D[K ⡈ frey ❯ {hostname} ❯ install ❯ TASK [setup] 
-[?25l[1000D[K[1A[1000D[K ⡐ frey ❯ {hostname} ❯ install ❯ TASK [setup] 
-[?25l[1000D[K[1A[1000D[K ⡠ frey ❯ {hostname} ❯ install ❯ TASK [setup] 
-[?25l[1000D[K[1A[1000D[K ⢄ frey ❯ {hostname} ❯ install ❯ TASK [setup] 
-[?25l[1000D[K[1A[1000D[K ⢂ frey ❯ {hostname} ❯ install ❯ TASK [setup] 
-[?25l[1000D[K[1A[1000D[K ⢁ frey ❯ {hostname} ❯ install ❯ TASK [setup] 
-[?25l[1000D[K[1A[1000D[K ⡁ frey ❯ {hostname} ❯ install ❯ TASK [setup] 
-[?25l[1000D[K[1A[1000D[K ⡈ frey ❯ {hostname} ❯ install ❯ TASK [setup] 
-[?25l[1000D[K[1A[1000D[K ⡐ frey ❯ {hostname} ❯ install ❯ TASK [setup] 
-[?25l[1000D[K[1A[1000D[K ⡠ frey ❯ {hostname} ❯ install ❯ ok: [local]
-[?25l[1000D[K[1A[1000D[K ⢄ frey ❯ {hostname} ❯ install ❯ 
-[?25l[1000D[K[1A[1000D[K ⢂ frey ❯ {hostname} ❯ install ❯ TASK [{root}/roles/pwd/v1.0.0 : Execute arbitrary command] 
-[?25l[1000D[K[1A[1000D[K ⢁ frey ❯ {hostname} ❯ install ❯ TASK [{root}/roles/pwd/v1.0.0 : Execute arbitrary command] 
-[?25l[1000D[K[1A[1000D[K ⡁ frey ❯ {hostname} ❯ install ❯ TASK [{root}/roles/pwd/v1.0.0 : Execute arbitrary command] 
-[?25l[1000D[K[1A[1000D[K ⡈ frey ❯ {hostname} ❯ install ❯ TASK [{root}/roles/pwd/v1.0.0 : Execute arbitrary command] 
-[?25l[1000D[K[1A[1000D[K ⡐ frey ❯ {hostname} ❯ install ❯ TASK [{root}/roles/pwd/v1.0.0 : Execute arbitrary command] 
-[?25l[1000D[K[1A[1000D[K ⡠ frey ❯ {hostname} ❯ install ❯ changed: [local]
-[?25l[1000D[K[1A[1000D[K ⢄ frey ❯ {hostname} ❯ install ❯ 
-[?25l[1000D[K[1A[1000D[K ⢂ frey ❯ {hostname} ❯ install ❯ TASK [Showcase we can access FREY_ environment variables] 
-[?25l[1000D[K[1A[1000D[K ⢁ frey ❯ {hostname} ❯ install ❯ TASK [Showcase we can access FREY_ environment variables] 
-[?25l[1000D[K[1A[1000D[K ⡁ frey ❯ {hostname} ❯ install ❯ TASK [Showcase we can access FREY_ environment variables] 
-[?25l[1000D[K[1A[1000D[K ⡈ frey ❯ {hostname} ❯ install ❯ TASK [Showcase we can access FREY_ environment variables] 
-[?25l[1000D[K[1A[1000D[K ⡐ frey ❯ {hostname} ❯ install ❯ TASK [Showcase we can access FREY_ environment variables] 
-[?25l[1000D[K[1A[1000D[K ⡠ frey ❯ {hostname} ❯ install ❯ changed: [local]
-[?25l[1000D[K[1A[1000D[K ⢄ frey ❯ {hostname} ❯ install ❯ 
-[?25l[1000D[K[1A[1000D[K ⢂ frey ❯ {hostname} ❯ install ❯ PLAY RECAP 
-[?25l[1000D[K[1A[1000D[K ⢁ frey ❯ {hostname} ❯ install ❯ local                      : ok=3    changed=2    unreachable=0    failed=0
-[?25l[1000D[K[1A[1000D[K ⡁ frey ❯ {hostname} ❯ install ❯ 
-[?25l[1000D[K[1A[1000D[K ✔ frey ❯ {hostname} ❯ install ❯ 
-[?25h[?25l ⡐ 
-[?25l[1000D[K[1A[1000D[K ✔ frey ❯ {hostname} ❯ install ❯ finished
-[?25hDone
-[?25hFinished
+ › frey › main ›
+   Frey version '0.3.28'
+   Will run: [ 'init', 'config', 'deps', 'prepare', 'install' ]
+ › frey › prepare ›
+   Creating private key '{tmpdir}/frey-install.pem'
+   Creating public key '{tmpdir}/frey-install.pub'
+   Terraform v0.7.3
+
+   Your version of Terraform is out of date! The latest version
+   is 0.8.7. You can update by downloading from www.terraform.io
+   Found 'terraform' with version '0.7.3'
+   {home}/.frey/tools/terraform-inventory/0.6/terraform-inventory version 0.6
+   Found 'terraformInventory' with version '0.6.0'
+   pip 9.0.1 from /usr/local/lib/python2.7/site-packages/pip-9.0.1-py2.7.egg (python 2.7)
+   Found 'pip' with version {{global_pip_version}}
+   ansible-playbook 2.1.4.0
+   config file =
+   configured module search path = Default w/o overrides
+   Found 'ansible' with version '2.1.4'
+ › frey › install ›
+
+   PLAY [Local stuff] 
+
+   TASK [setup] 
+   ok: [local]
+
+   TASK [Showcase we can access FREY_ environment variables] 
+   changed: [local]
+
+   PLAY RECAP 
+   local                      : ok=2    changed=1    unreachable=0    failed=0
+
+Done
+ansistrano_npm: I_HAVE_BEEN_TURNED_FROM_no_INTO_THIS_FOR_TESTING_PURPOSES
+this_is_a_fresh_var: true
+apt_manage_sources_list: true
+apt_src_enable: false
+apt_update_cache_valid_time: 86400
+apt_upgrade: false
+apt_dpkg_configure: true
+apt_install_state: present
+apt_clean: true
+apt_autoremove: false
+ansistrano_shared_paths:
+  - logs
+ansistrano_keep_releases: 10
+ansistrano_owner: www-data
+ansistrano_group: www-data
+ansistrano_allow_anonymous_stats: 'no'
+ansistrano_remove_rolled_back: 'no'
+fqdn: "{{ lookup('env', 'FREY_DOMAIN') }}"
+hostname: "{{ fqdn.split('.')[0] }}"
+nodejs_yarn: false
+nodejs_npm_global_packages:
+  - yarn
+unattended_remove_unused_dependencies: true
+Finished
