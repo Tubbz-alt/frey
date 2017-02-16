@@ -23,7 +23,7 @@ class Get extends Step {
         return cb(err)
       }
 
-      this._scroll(`Updated modules'`)
+      this._scroll(`Updated modules`)
       return cb(null)
     })
   }

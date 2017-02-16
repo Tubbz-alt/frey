@@ -138,8 +138,8 @@ class Show extends Step {
 
     _.forOwn(results, (out, key) => {
       if (out) {
-        this._scroll(`- [ ${key} ] ------------------------------`)
-        this._scroll(`${out}`)
+        this._stick(`- [ ${key} ] ------------------------------`)
+        this._stick(`${out}`)
       }
     })
 

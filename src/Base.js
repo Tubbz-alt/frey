@@ -102,21 +102,23 @@ class Base {
   }
 
   _scroll (...args) {
-    const str  = this._formatter(args)
-    const opts = {
-      mode      : process.env.FREY_SCROLEX_MODE || process.env.SCROLEX_MODE || 'singlescroll',
-      components: `frey>${global.frey.currentHost}>${global.frey.currentStep}`,
-    }
-    scrolex.scroll(`${str}`, opts)
+    const str = this._formatter(args)
+    scrolex.scroll(`${str}`)
   }
 
   _stick (...args) {
-    const str  = this._formatter(args)
-    const opts = {
-      mode      : process.env.FREY_SCROLEX_MODE || process.env.SCROLEX_MODE || 'singlescroll',
-      components: `frey>${global.frey.currentHost}>${global.frey.currentStep}`,
-    }
-    scrolex.stick(`${str}`, opts)
+    const str = this._formatter(args)
+    scrolex.stick(`${str}`)
+  }
+
+  _failure (...args) {
+    const str = this._formatter(args)
+    scrolex.failure(`${str}`)
+  }
+
+  _success (...args) {
+    const str = this._formatter(args)
+    scrolex.success(`${str}`)
   }
 }
 

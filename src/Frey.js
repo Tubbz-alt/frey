@@ -6,15 +6,15 @@ const inflection = require('inflection')
 const async = require('async')
 const _ = require('lodash')
 // const chalk = require('chalk')
-const os = require('os')
 const Base = require('./Base')
 const steps = require('./steps')
 const pkgConfig = require('../package.json')
-
-global.frey = {
-  currentStep: 'welcome',
-  currentHost   : os.hostname(),
-}
+const scrolex = require('scrolex').persistOpts({
+  announce             : true,
+  addCommandAsComponent: true,
+  mode                 : process.env.FREY_SCROLEX_MODE || process.env.SCROLEX_MODE || 'singlescroll',
+  components           : `frey>main`,
+})
 
 class Frey extends Base {
   constructor (cliargs = {}) {
@@ -118,25 +118,14 @@ class Frey extends Base {
     const obj = new Class(step, this.runtime)
     const func = obj.run.bind(obj)
 
-    // let hostname =
-
-    // let x =
-    // this._scroll(chalk.gray(''))
-    // this._scroll(chalk.gray(`${hostname} - `))
-    // this._scroll(chalk.green(`${step}`))
-    // this._scroll(chalk.green(''))
-    //
-    // this._scroll(
-
-    global.frey.currentStep = step
-    // global.frey.currentHost = _.get(this.runtime, 'init.os.hostname') || os.hostname()
-    // this._scroll('start')
+    scrolex.persistOpts({
+      components: `frey>${step}`,
+    })
 
     func((err, result) => {
       const append = {}
       append[step] = result
       this.runtime = _.extend(this.runtime, append)
-      this._stick('finished')
       return cb(err)
     })
   }

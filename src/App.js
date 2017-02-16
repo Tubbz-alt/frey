@@ -1,8 +1,8 @@
 const _         = require('lodash')
 const Shell     = require('./Shell')
 const constants = require('./constants')
-const scrolex   = require('scrolex')
 const debug     = require('depurar')('frey')
+const scrolex   = require('scrolex')
 
 class App {
   constructor (opts = {}) {
@@ -69,9 +69,7 @@ class App {
     const args = this._objectToFlags(opts.args, opts.signatureOpts)
 
     const scrolexOpts = {
-      stdio     : opts.stdio || [ 'pipe', 'pipe', 'pipe' ],
-      mode      : opts.mode || process.env.FREY_SCROLEX_MODE || process.env.SCROLEX_MODE || 'singlescroll',
-      components: opts.components || `frey>${global.frey.currentHost}>${global.frey.currentStep}`,
+      stdio: opts.stdio || [ 'pipe', 'pipe', 'pipe' ],
     }
 
     // @todo: rm -rf ~/.frey/tools/terraform/0.7.3/ && source ../../../env.sh && ./run.sh
