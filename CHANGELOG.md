@@ -61,7 +61,7 @@ Released: TBA.
 Released: TBA.
 [Diff](https://github.com/freyproject/frey/compare/v0.3.28...v0.3.29).
 
-- [x] Add basic Ansible commnad output parsing -> feedback to scrolex
+- [x] Add basic Ansible commnad output parsing -> feedback to scrolex (#62)
 - [x] Simplify `App` so that there's less indirection
 - [x] Add bash script linting via `shellcheck`
 - [x] Replace use of ES6 `import` to `require` so we can run Frey `src` on recent nodes without babel
@@ -73,8 +73,8 @@ Released: TBA.
 - [x] Avoid duplication in build steps
 - [x] Update znq role ([see](https://github.com/triplepoint/ansible-znc/issues/4))
 - [x] Add timezone role
+- [x] Replace nodejs role with Oefenweb's
 - [x] Add yarn role
-- [x] Swap nodejs role
 
 ## v0.3.28
 
