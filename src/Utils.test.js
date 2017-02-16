@@ -1,4 +1,4 @@
-const utils = require('../src/Utils')
+const utils = require('./Utils')
 const expect = require('chai').expect
 // const debug = require('depurar')('frey')
 // debug utils

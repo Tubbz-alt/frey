@@ -1,4 +1,4 @@
-const squashArrays = require('../src/squashArrays')
+const squashArrays = require('./squashArrays')
 const expect = require('chai').expect
 
 describe('squashArrays', () => {

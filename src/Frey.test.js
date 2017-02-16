@@ -1,4 +1,4 @@
-const Frey = require('../src/Frey')
+const Frey = require('./Frey')
 const expect = require('chai').expect
 
 describe('Frey', () => {

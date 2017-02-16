@@ -1,4 +1,4 @@
-const Base = require('../src/Base')
+const Base = require('./Base')
 const expect = require('chai').expect
 // const debug = require('depurar')('frey')
 describe('Base', () => {
