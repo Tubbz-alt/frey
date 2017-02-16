@@ -11,11 +11,9 @@ install {
     hosts  = "{{ variable_host | default('infra-tusd-server')}}"
     name   = "Local stuff"
     become = "False"
-    roles  = ["{{{init.paths.roles_dir}}}/pwd/v1.0.0"]
     tasks {
       name    = "Showcase we can access FREY_ environment variables"
       command = "echo {{lookup('env', 'FREY_SHOULD_BE_AS_VAR_IN_ANSIBLE')}}"
     }
   }
 }
-
