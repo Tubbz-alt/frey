@@ -82,8 +82,16 @@ class App {
       if ('mode' in opts) {
         scrolexOpts.mode = opts.mode
       }
+      if ('addCommandAsComponent' in opts) {
+        scrolexOpts.addCommandAsComponent = opts.addCommandAsComponent
+      }
+      if ('cbPreLinefeed' in opts) {
+        scrolexOpts.cbPreLinefeed = opts.cbPreLinefeed
+      }
+      if ('showCmd' in opts) {
+        scrolexOpts.showCmd = opts.showCmd
+      }
 
-      // scrolexOpts.addCommandAsComponent = true
       const scrolexArgs = [opts.exe].concat(args)
 
       // const debugCmd = this._debugCmd({ scrolexOpts, env }, scrolexArgs)

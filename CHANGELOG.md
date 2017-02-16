@@ -54,12 +54,14 @@ Released: TBA.
 - [ ] `get` should be daisychained before `refresh`, not `plan`
 - [ ] Possible bug: We should likely not squashArray ansible actions such as `restart`, or actions in multiple files in the same dir are merged into one
 - [ ] Offer to run `backup` if a destructive change was detected. Skip otherwise. Defaults to yes
+- [ ] Ansible command output parsing is very basic, we can do a better job
 
 ## v0.3.29
 
 Released: TBA.
 [Diff](https://github.com/freyproject/frey/compare/v0.3.28...v0.3.29).
 
+- [x] Add basic Ansible commnad output parsing -> feedback to scrolex
 - [x] Simplify `App` so that there's less indirection
 - [x] Add bash script linting via `shellcheck`
 - [x] Replace use of ES6 `import` to `require` so we can run Frey `src` on recent nodes without babel

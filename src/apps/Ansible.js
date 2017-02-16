@@ -9,10 +9,27 @@ class Ansible extends App {
     const terraformInvProps = _.find(runtime.deps, { name: 'terraformInventory' })
     const ansibleProps = _.find(runtime.deps, { name: 'ansible' })
     const appDefaults = {
-      args         : {},
-      env          : ansibleProps.env || {},
-      signatureOpts: { equal: '=', quote: '', dash: '--', escape: false },
-      exe          : ansibleProps.exePlaybook,
+      args                 : {},
+      env                  : ansibleProps.env || {},
+      signatureOpts        : { equal: '=', quote: '', dash: '--', escape: false },
+      exe                  : ansibleProps.exePlaybook,
+      addCommandAsComponent: true,
+      showCmd              : 'ansible',
+      cbPreLinefeed        : function (type, line, { flush = false, code = undefined }, callback) {
+        if (this._opts.mode === 'passthru') {
+          return callback(null, line)
+        }
+        let modifiedLine = line
+        let matches = false
+
+        matches = modifiedLine.match(/\[([^\]]+)\]\s*\*{3,}\s*$/)
+        if (matches) {
+          this._local.lastShowCmd = matches[1]
+          modifiedLine = null // <-- don't output this line
+        }
+
+        return callback(null, modifiedLine)
+      },
     }
 
     appDefaults.args['inventory-file'] = terraformInvProps.exe
