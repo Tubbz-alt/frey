@@ -9,22 +9,21 @@ class Ansible extends App {
     const terraformInvProps = _.find(runtime.deps, { name: 'terraformInventory' })
     const ansibleProps = _.find(runtime.deps, { name: 'ansible' })
     const appDefaults = {
-      args                 : {},
-      env                  : ansibleProps.env || {},
-      signatureOpts        : { equal: '=', quote: '', dash: '--', escape: false },
-      exe                  : ansibleProps.exePlaybook,
-      addCommandAsComponent: true,
-      showCmd              : 'ansible',
-      cbPreLinefeed        : function (type, line, { flush = false, code = undefined }, callback) {
+      args         : {},
+      env          : ansibleProps.env || {},
+      signatureOpts: { equal: '=', quote: '', dash: '--', escape: false },
+      exe          : ansibleProps.exePlaybook,
+      cbPreLinefeed: function (type, line, { flush = false, code = undefined }, callback) {
+        // @todo Ansible command output parsing is very basic, we can do a better job
         if (this._opts.mode === 'passthru') {
           return callback(null, line)
         }
         let modifiedLine = line
         let matches = false
 
-        matches = modifiedLine.match(/\[([^\]]+)\]\s*\*{3,}\s*$/)
+        matches = modifiedLine.match(/([a-zA-Z0-9]+)?\s*\[([^\]]+)\]\s*\*{3,}\s*$/)
         if (matches) {
-          this._local.lastShowCmd = matches[1]
+          this._opts.extraComponents = [ 'ansible', matches[1], matches[2] ]
           modifiedLine = null // <-- don't output this line
         }
 
