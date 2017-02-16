@@ -72,12 +72,13 @@ class App {
       stdio: opts.stdio || [ 'pipe', 'pipe', 'pipe' ],
     }
 
-    // @todo: rm -rf ~/.frey/tools/terraform/0.7.3/ && source ../../../env.sh && ./run.sh
-    // console.log({r: this.runtime})
-
     if (_.keys(env).length > 0) {
       // Only add env if it's filled, otherwise we boot processes with an empty env, leading to $PATH finding issues
       scrolexOpts.env = env
+    }
+
+    if ('mode' in opts) {
+      scrolexOpts.mode = opts.mode
     }
 
     // scrolexOpts.addCommandAsComponent = true
