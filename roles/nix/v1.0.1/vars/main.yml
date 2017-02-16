@@ -1,1 +1,0 @@
-nix_package_name: nix_{{ nix_version }}_{{ nix_platform }}.deb
