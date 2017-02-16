@@ -4,6 +4,7 @@ node_js:
 - '4.2.1'
 env:
   global:
+  - FREY_OS=precise # <-- this FREY_OS is ignored, but useful for display in Travis build index
   - secure: DAMC3dcumbrzkpIMSaGEOnjL71zn3jld3IJAVlt0VqKqxgHB72vdrWB9tFT25kicJPLEoZFyHcfTN4t6+irf2foXBl034Gd4ciSAw8d3ZpRZHGcKbc02dsAFZU/gPsyQMvIDZOTZ3oGFZY0UmXl0x7L3MnZg7gzJ/n12pUK1kHxH8bSXQM8/T9UyUzjq2gyu389/piQsXle7ZXSXlxtC+KDqrngKmko/afuo2OZ9NQUGXMjvfg1Zjd+P6SVroOMKLQAJHwk5o70W33WPGvdHJx8ompIxtVCzJ/jZslw+dzEmLQqb9C+OVU2Wx8W+BxYOs/TRsKhjsx/QVQyEyNpjwkw1pSFlhzjWbDTvLo6jin+QvOnOYBrUXz6YtCEOP/PfVsiEdZsAXfwUDzYtzLjBvtULw+SleVm7sCDeOaZoaHkyHdtWjndcVrCcaK6yeJbG69xeGYanKjk2XqfPtxJTg2SpCJnBkdVUUOzO/ZD+dJ5V9vVHdoDieIJ7uJ6pQwuCwP/lM2+tAus4yxxd4pNLhQf4PK2UCY9ssfPre4rTFawMrSazMFwvewdTR5WGm4JsTRHMC4o9DipmzanH2Uk5D0QKAZ7Sl88AGVxRdISGLTKMEgEnNlTZAuwbqmlU+ke0uGldXRSmHBmaCgI2r90rJLb2Kgn/vbpt8aJyJvwmIv8=
   - secure: mdZbUTLN4RQ0ZWm62o0b+3oYtDL8TAcF1ri8edOgXCmbx46maEuRDvrmzNnZpYiW0mRq3dwtCjbHRmmKCdk/JNDi4P5SsF6mFVHte15q2Anzt33nqTJtvGyzzAEUSNHFSO1x8pmKUdUPIiQhpkY8klFuPC/h/QGO9Qf64xlz/OUJapxvRqkWJBnuRF8Yyr26TYVeF0gWa61+gla6B7Y4rW3+zVSVVj8LX97muM/KF4T/t20k/6002Ud9+2XHYrDupEMTUECh5RqBrymXNRmBQieU4n1t0nkacmDfQSOgHVb3rnINRARxFPAHMCiwidyxe9dhHFROKfRAc9tGBMWUyy0SyPmrV9de2VzVkXOAtFVhwzYpX7NNYCICNQ4QbwL8xXr7zMJtKFw74wfX1Fy6JiGWBzsTmUD9hAIqXOcVZyY9sLDHZBgmoTb2jfaeYAAUSlCuuVMraLPW4+lEy6fGCQvG4jPmy138WOtKozAFnDqy8eBBWVkkvB4eJNDYLbQpfTIfrTzOuKI/gSeV3uKlQvGEjObve311IhetXpu3uHYQzbYK88NFK1DtHZY3+nKE0KtYLTS+KiRIs2LehtrtLXdGZc5KXvWp3TgIT/Z/vj4Uv8IUf8IohlcyPNqV2SjbnprXNTt+v2VgKodpr3ICPKITj1HWvPobASAf4QCmvMc=
   - secure: YuanWh6wPTx4vcW6Lfc85ymZ00M/lKQAhkif7TlT7ktNVM8dgu9TWNwYfe6cZjqD0KJDELeuz5o6wRrBPb9K+j6Rbg0nds3ThHJoYv3oBraVVPpQnZnMSSWTwBr0D/oaiCPVGLQ+rIq6h57/53yKpobGo7Ybou9Y260F5TcahtY6G1yr2ySjJYbmvraaUcd+8H7NGcZTWeO/SHNEEV5xb8EUpEFLWGoDMcJV6A3pxMPCj5eUNg0hhCINtgMBRe1+QFtlJ52kFx1flKezicexTqib0uK79r3/M7zmckY9UZXMX50G4uGs2w+wIGIjjsj5Oyld5RP06zrJF/UTwc294b9+eMX/sEbzmdrpeSiw7hTdawb/Q5p6ZhYoxB2uDydYss8O6YutLl71uwv5YpANEhlBA5TRs7WMd7vy7c8ZqU4ksliVuufIgGRkHhffjkmqN0pWs5LhgJVm+pMmBjHC6sm+zzrt49Nf11BWvi2nk5aZeZNzZigPnzk3nsSFaKxlJEIOTSuTxe/xZLV/xKv15buxPS3v/6Pxkfrz+3pU4nkcYwhhmn7bV4D8HoJuN9fdDGwUmwffTgOkTjYiKhbjn3tGZhSFnq0KptD3PqRlJfPxbZS8ZbmTIPSI/kodYJb7D/kuvKG7kJuaspDnOdDlRQ8b+UoJMV5jYhn4d6vUzMY=
@@ -46,7 +47,7 @@ matrix:
     - os: linux
       dist: trusty
       sudo: required
-      env: SCENARIO="prepare"
+      env: SCENARIO="prepare" FREY_OS=trusty # <-- this FREY_OS is ignored, but useful for display in Travis build index
     - os: osx
       osx_image: xcode7.2
-      env: SCENARIO="prepare"
+      env: SCENARIO="prepare" FREY_OS=osx # <-- this FREY_OS is ignored, but useful for display in Travis build index
