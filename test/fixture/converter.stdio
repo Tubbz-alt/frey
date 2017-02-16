@@ -5,7 +5,6 @@
    Skipping confirmation for 'About to convert existing TOML, YAML, CFG and TF to HCL files in your project dir. Make sure your files are under source control as this is a best-effort procedure. May I proceed?' as '--force-yes' applies
  › frey › format ›
    Skipping confirmation for 'About to rewrite all HCL files in your project dir. Make sure your files are under source control as this is a best-effort procedure. May I proceed?' as '--force-yes' applies
-   {root}/test/scenario/converter/Freyfile.hcl
    Skipping confirmation for 'About to rewrite all HCL files in your project dir. Make sure your files are under source control as this is a best-effort procedure. May I proceed?' as '--force-yes' applies
 Done
 "global" "ansiblecfg" "defaults" {}
