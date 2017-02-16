@@ -20,11 +20,9 @@ addons:
   apt:
     sources:
     - ubuntu-toolchain-r-test
-    - debian-sid
     packages:
     - g++-4.8
     - realpath
-    - shellcheck
 cache:
   apt: true
   directories:
