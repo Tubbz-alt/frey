@@ -1,4 +1,4 @@
-const Command = require('../Command')
+const Step = require('../Step')
 const path = require('path')
 const async = require('async')
 const globby = require('globby')
@@ -12,7 +12,7 @@ const INI = require('ini')
 const YAML = require('js-yaml')
 const TOML = require('toml')
 
-class Convert extends Command {
+class Convert extends Step {
   constructor (name, runtime) {
     super(name, runtime)
     this.boot = [ '_confirm' ]

@@ -3,7 +3,7 @@ const expect = require('chai').expect
 
 describe('Frey', () => {
   describe('_composeChain', () => {
-    it('should not add config if the command was config', done => {
+    it('should not add config if the step was config', done => {
       const frey = new Frey()
 
       const options = { _: [ 'config' ], bailAfter: 'config' }
@@ -61,18 +61,6 @@ describe('Frey', () => {
       frey._composeChain(options, (err, filteredChain) => {
         expect(err).to.equal(null)
         expect(filteredChain).to.deep.equal([ 'init', 'config', 'deps', 'prepare', 'format' ])
-        done()
-      })
-    })
-
-    it('should return auto bail on docbuild which is not part of a chain', done => {
-      const frey = new Frey()
-
-      const options = { _: [ 'docbuild' ] }
-
-      frey._composeChain(options, (err, filteredChain) => {
-        expect(err).to.equal(null)
-        expect(filteredChain).to.deep.equal([ 'init', 'config', 'deps', 'prepare', 'docbuild' ])
         done()
       })
     })

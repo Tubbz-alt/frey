@@ -1,12 +1,12 @@
 const Ansible = require('../apps/Ansible')
-const Command = require('../Command')
+const Step = require('../Step')
 const constants = require('../constants')
 const _ = require('lodash')
 const depurar = require('depurar')
 
 const debug = depurar('frey')
 
-class Restore extends Command {
+class Restore extends Step {
   main (cargo, cb) {
     if (!_.has(this.runtime.config, 'restore.playbooks')) {
       debug('Skipping as there are no restore instructions')

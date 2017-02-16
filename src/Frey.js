@@ -8,11 +8,11 @@ const _ = require('lodash')
 // const chalk = require('chalk')
 const os = require('os')
 const Base = require('./Base')
-const commands = require('./commands')
+const steps = require('./steps')
 const pkgConfig = require('../package.json')
 
 global.frey = {
-  currentCommand: 'welcome',
+  currentStep: 'welcome',
   currentHost   : os.hostname(),
 }
 
@@ -37,12 +37,12 @@ class Frey extends Base {
 
   _composeChain (cliargs, nextCb) {
     const cmd = cliargs._[0]
-    const chain = _.filter(commands, { chained: true })
+    const chain = _.filter(steps, { chained: true })
     const startAt = _.findIndex(chain, { name: cmd })
     let filteredChain = []
 
     if (startAt < 0) {
-      // This command is not part of the chain
+      // This step is not part of the chain
       filteredChain = [ cmd ]
     } else {
       let length = 0
@@ -105,38 +105,38 @@ class Frey extends Base {
   }
 
   main (cargo, cb) {
-    this._outFlush('Frey version %s', pkgConfig.version)
-    this._outFlush('Will run: %o', this.bootCargo._composeChain)
+    this._stick('Frey version %s', pkgConfig.version)
+    this._stick('Will run: %o', this.bootCargo._composeChain)
 
     async.eachSeries(this.bootCargo._composeChain, this._runOne.bind(this), cb)
   }
 
-  _runOne (command, cb) {
-    const className = inflection.camelize(command, false)
-    const p = `./commands/${className}`
+  _runOne (step, cb) {
+    const className = inflection.camelize(step, false)
+    const p = `./steps/${className}`
     const Class = require(p)
-    const obj = new Class(command, this.runtime)
+    const obj = new Class(step, this.runtime)
     const func = obj.run.bind(obj)
 
     // let hostname =
 
     // let x =
-    // this._out(chalk.gray(''))
-    // this._out(chalk.gray(`${hostname} - `))
-    // this._out(chalk.green(`${command}`))
-    // this._out(chalk.green(''))
+    // this._scroll(chalk.gray(''))
+    // this._scroll(chalk.gray(`${hostname} - `))
+    // this._scroll(chalk.green(`${step}`))
+    // this._scroll(chalk.green(''))
     //
-    // this._out(
+    // this._scroll(
 
-    global.frey.currentCommand = command
+    global.frey.currentStep = step
     // global.frey.currentHost = _.get(this.runtime, 'init.os.hostname') || os.hostname()
-    // this._out('start')
+    // this._scroll('start')
 
     func((err, result) => {
       const append = {}
-      append[command] = result
+      append[step] = result
       this.runtime = _.extend(this.runtime, append)
-      this._outFlush('finished')
+      this._stick('finished')
       return cb(err)
     })
   }

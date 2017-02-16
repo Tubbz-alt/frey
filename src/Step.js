@@ -1,7 +1,7 @@
 const Base = require('./Base')
 const Shell = require('./Shell')
 
-class Command extends Base {
+class Step extends Base {
   constructor (name, runtime) {
     super()
     this.name = name
@@ -10,4 +10,4 @@ class Command extends Base {
   }
 }
 
-module.exports = Command
+module.exports = Step

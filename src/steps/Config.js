@@ -1,4 +1,4 @@
-const Command = require('../Command')
+const Step = require('../Step')
 const squashArrays = require('../squashArrays')
 const utils = require('../Utils')
 const json2hcl = require('../json2hcl')
@@ -11,9 +11,10 @@ const fs = require('fs')
 const _ = require('lodash')
 const INI = require('ini')
 const YAML = require('js-yaml')
-import { unflatten } from 'flat'
+const unflatten = require('flat').unflatten
+
 // const constants = require('../constants')
-class Config extends Command {
+class Config extends Step {
   constructor (name, runtime) {
     super(name, runtime)
     this.boot = [
@@ -307,12 +308,12 @@ class Config extends Command {
     return fs.writeFile(this.bootCargo._renderConfig.global.ansiblecfg_file, encoded, cb)
   }
 
-  _writeAnsiblePlaybook (command, cargo, cb) {
-    const cfgBlock = _.get(this.bootCargo._renderConfig, `${command}.playbooks`)
+  _writeAnsiblePlaybook (step, cargo, cb) {
+    const cfgBlock = _.get(this.bootCargo._renderConfig, `${step}.playbooks`)
 
     if (!cfgBlock) {
-      debug(`No ${command} instructions found`)
-      fs.unlink(this.bootCargo._renderConfig.global[`${command}_file`], err => {
+      debug(`No ${step} instructions found`)
+      fs.unlink(this.bootCargo._renderConfig.global[`${step}_file`], err => {
         if (err) {
         }
         return cb(null)
@@ -328,11 +329,11 @@ class Config extends Command {
 
     debug(
       'Writing %s instructions at %s',
-      command,
-      this.bootCargo._renderConfig.global[`${command}_file`]
+      step,
+      this.bootCargo._renderConfig.global[`${step}_file`]
     )
 
-    return fs.writeFile(this.bootCargo._renderConfig.global[`${command}_file`], encoded, cb)
+    return fs.writeFile(this.bootCargo._renderConfig.global[`${step}_file`], encoded, cb)
   }
 
   _writeAnsiblePlaybookInstall (cargo, cb) {

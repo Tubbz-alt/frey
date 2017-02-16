@@ -1,4 +1,4 @@
-const Command = require('../Command')
+const Step = require('../Step')
 const constants = require('../constants')
 const fs = require('fs')
 const globby = require('globby')
@@ -10,7 +10,7 @@ const depurar = require('depurar')
 
 const debug = depurar('frey')
 
-class Show extends Command {
+class Show extends Step {
   constructor (name, runtime) {
     super(name, runtime)
     this.boot = [ '_createTmpDir', 'output', 'publicAddresses', 'endpoint', 'facts' ]
@@ -138,8 +138,8 @@ class Show extends Command {
 
     _.forOwn(results, (out, key) => {
       if (out) {
-        this._out(`- [ ${key} ] ------------------------------`)
-        this._out(`${out}`)
+        this._scroll(`- [ ${key} ] ------------------------------`)
+        this._scroll(`${out}`)
       }
     })
 

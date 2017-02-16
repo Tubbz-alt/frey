@@ -1,12 +1,12 @@
 const Terraform = require('../apps/Terraform')
-const Command = require('../Command')
+const Step = require('../Step')
 const _ = require('lodash')
 const constants = require('../constants')
 
-class Plan extends Command {
+class Plan extends Step {
   main (cargo, cb) {
     if (!_.has(this.runtime.config, 'infra')) {
-      this._out(`Skipping as there are no infra instructions`)
+      this._scroll(`Skipping as there are no infra instructions`)
       return cb(null)
     }
 
@@ -22,7 +22,7 @@ class Plan extends Command {
         return cb(err)
       }
 
-      this._out(`Saved plan as '${this.runtime.config.global.infra_plan_file}'`)
+      this._scroll(`Saved plan as '${this.runtime.config.global.infra_plan_file}'`)
 
       if (stdout.match(/No changes/)) {
         return cb(null, { add: 0, change: 0, destroy: 0 })

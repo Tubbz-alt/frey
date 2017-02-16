@@ -1,7 +1,7 @@
 const _         = require('lodash')
 const Shell     = require('./Shell')
 const constants = require('./constants')
-const Scrolex   = require('scrolex')
+const scrolex   = require('scrolex')
 const debug     = require('depurar')('frey')
 
 class App {
@@ -71,8 +71,11 @@ class App {
     const scrolexOpts = {
       stdio     : opts.stdio || [ 'pipe', 'pipe', 'pipe' ],
       mode      : opts.mode || process.env.FREY_SCROLEX_MODE || process.env.SCROLEX_MODE || 'singlescroll',
-      components: opts.components || `frey>${global.frey.currentHost}>${global.frey.currentCommand}`,
+      components: opts.components || `frey>${global.frey.currentHost}>${global.frey.currentStep}`,
     }
+
+    // @todo: rm -rf ~/.frey/tools/terraform/0.7.3/ && source ../../../env.sh && ./run.sh
+    // console.log({r: this.runtime})
 
     if (_.keys(env).length > 0) {
       // Only add env if it's filled, otherwise we boot processes with an empty env, leading to $PATH finding issues
@@ -85,7 +88,7 @@ class App {
     // const debugCmd = this._debugCmd({ scrolexOpts, env }, scrolexArgs)
     // debug({debugCmd})
 
-    Scrolex.exe(scrolexArgs, scrolexOpts, (err, out) => {
+    scrolex.exe(scrolexArgs, scrolexOpts, (err, out) => {
       if (err) {
         return cb(err)
       }

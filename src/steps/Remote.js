@@ -1,6 +1,6 @@
 const TerraformInventory = require('../apps/TerraformInventory')
 const Ssh = require('../apps/Ssh')
-const Command = require('../Command')
+const Step = require('../Step')
 const constants = require('../constants')
 const inquirer = require('inquirer')
 const async = require('async')
@@ -9,7 +9,7 @@ const depurar = require('depurar')
 
 const debug = depurar('frey')
 
-class Remote extends Command {
+class Remote extends Step {
   constructor (name, runtime) {
     super(name, runtime)
     this.boot = [ '_gatherHosts', '_selectHosts' ]
@@ -101,7 +101,7 @@ class Remote extends Command {
         return cb(err)
       }
 
-      this._out(`Closed console to '${hosts.join(', ')}'`)
+      this._scroll(`Closed console to '${hosts.join(', ')}'`)
       return cb(null)
     })
   }

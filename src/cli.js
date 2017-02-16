@@ -9,13 +9,13 @@ const chalk = require('chalk')
 const updateNotifier = require('update-notifier')
 const pkg = require('../package.json')
 const LiftOff = require('liftoff')
-const commands = require('./commands')
+const steps = require('./steps')
 const _ = require('lodash')
 
 updateNotifier({ pkg }).notify({ defer: false })
 
 yargs
-  .usage('Usage: frey <command> [options]')
+  .usage('Usage: frey <step> [options]')
   .example('frey backup -d ./envs/production', 'backup platform described in ./envs/production')
   .options({
     projectDir: {
@@ -26,7 +26,7 @@ yargs
     remote: {
       nargs   : 1,
       type    : 'string',
-      describe: 'Command to execute on remote server. If ommited, remote opens an interactive shell. ',
+      describe: 'Step to execute on remote server. If ommited, remote opens an interactive shell. ',
     },
     'cfg-var': {
       nargs   : 1,
@@ -45,11 +45,11 @@ yargs
       type    : 'number',
       describe: 'Wait x seconds between showing infra plan, and executing it',
     },
-    bail        : { boolean: true, describe: 'Do not follow the chain of commands, run a one-off command' },
+    bail        : { boolean: true, describe: 'Do not follow the chain of steps, run a one-off step' },
     'bail-after': {
       nargs   : 1,
       type    : 'string',
-      describe: 'After running this command, abort the chain',
+      describe: 'After running this step, abort the chain',
     },
     'no-color': { boolean: true, describe: 'Color support is detected, this forces colors off' },
     verbose   : { alias: 'v', count: true, describe: 'Show debug info' },
@@ -66,8 +66,8 @@ yargs
     return pkg.version
   })
 
-// First add chained commands, in order
-for (let cmd of commands) {
+// First add chained steps, in order
+for (let cmd of steps) {
   let description = `${cmd.description}`
   if (cmd.chained === true) {
     description = chalk.green('\u25BD ') + description
@@ -79,10 +79,10 @@ for (let cmd of commands) {
 const argv = yargs.argv
 
 if (argv._[0] === undefined) {
-  argv._[0] = commands[0].name
+  argv._[0] = steps[0].name
 }
 
-// We override built-in completion command
+// We override built-in completion step
 if (argv._[0] === 'completion') {
   // we want to make sure we have the global /usr/local/bin/frey instead of
   // ../../../frey/bin/frey in the ~/.bash_profile
@@ -90,10 +90,10 @@ if (argv._[0] === 'completion') {
   process.exit(0)
 }
 
-if (!_.find(commands, { name: argv._[0] })) {
+if (!_.find(steps, { name: argv._[0] })) {
   yargs.showHelp()
   console.error('')
-  console.error(`Command '${argv._[0]}' is not recognized`)
+  console.error(`Step '${argv._[0]}' is not recognized`)
   process.exit(1)
 }
 
@@ -111,8 +111,7 @@ liftOff.launch({ cwd: argv.projectDir }, ({ configBase }) => {
   if (
     configBase === undefined &&
       argv._[0] !== 'convert' &&
-      argv._[0] !== 'help' &&
-      argv._[0] !== 'docbuild'
+      argv._[0] !== 'help'
   ) {
     const msg = 'Could not find a Freyfile.hcl in current directory or upwards, or in project directory.'
     throw new Error(msg)

@@ -2,7 +2,7 @@
 const path = require('path')
 const _ = require('lodash')
 const squashArrays = require('./squashArrays')
-import { spawn } from 'child_process'
+const spawn = require('child_process').spawn
 const os = require('os')
 const platform = os.platform()
 const arch = `${os.arch()}`.replace('x64', 'amd64')

@@ -1,4 +1,4 @@
-const Command = require('../Command')
+const Step = require('../Step')
 const utils = require('../Utils')
 const osHomedir = require('os-homedir')
 const os = require('os')
@@ -8,7 +8,7 @@ const async = require('async')
 const fs = require('fs')
 const uuid = require('uuid')
 // const debug = require('depurar')('frey')
-class Init extends Command {
+class Init extends Step {
   constructor (name, runtime) {
     super(name, runtime)
     this.boot = [ '_env', '_os', '_cliargs', '_findClosestProjectGit', '_paths' ]

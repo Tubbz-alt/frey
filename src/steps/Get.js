@@ -1,12 +1,12 @@
 const Terraform = require('../apps/Terraform')
-const Command = require('../Command')
+const Step = require('../Step')
 const _ = require('lodash')
 const constants = require('../constants')
 
-class Get extends Command {
+class Get extends Step {
   main (cargo, cb) {
     if (!_.has(this.runtime.config, 'infra')) {
-      this._out(`Skipping as there are no infra instructions`)
+      this._scroll(`Skipping as there are no infra instructions`)
       return cb(null)
     }
 
@@ -23,7 +23,7 @@ class Get extends Command {
         return cb(err)
       }
 
-      this._out(`Updated modules'`)
+      this._scroll(`Updated modules'`)
       return cb(null)
     })
   }

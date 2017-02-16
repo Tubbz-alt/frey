@@ -15,7 +15,7 @@ class Shell extends Base {
 
   confirm (question, cb) {
     if (this.runtime.init.cliargs.forceYes) {
-      this._out(`Skipping confirmation for '${question}' as '--force-yes' applies`)
+      this._scroll(`Skipping confirmation for '${question}' as '--force-yes' applies`)
       return cb(null)
     }
 
@@ -89,7 +89,7 @@ class Shell extends Base {
   //       }
   //
   //       if (cmdOpts.verbose) {
-  //         return this._out(chalk.gray(data))
+  //         return this._scroll(chalk.gray(data))
   //       }
   //     })
   //   }
@@ -104,7 +104,7 @@ class Shell extends Base {
   //       }
   //
   //       if (cmdOpts.verbose) {
-  //         return this._out(chalk.red(data))
+  //         return this._scroll(chalk.red(data))
   //       }
   //     })
   //   }

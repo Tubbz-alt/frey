@@ -1,7 +1,7 @@
-const Command = require('../Command')
+const Step = require('../Step')
 const utils = require('../Utils')
 // const debug = require('depurar')('frey')
-class Deps extends Command {
+class Deps extends Step {
   main (cargo, cb) {
     let deps = []
 

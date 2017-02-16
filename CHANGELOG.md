@@ -38,10 +38,12 @@ Released: Unreleased.
 - [ ] Speed up prepare by writing hashses do disk and comparing (just like depmake does)
 - [ ] Symlink ansible if needed: `mkdir -p ~/.frey/tools/ansible/2.0.1.0/pip/bin/ && ln -nfs ~/.frey/tools/ansible/2.0.1.0/usr/local/share/python/ansible ~/.frey/tools/ansible/2.0.1.0/pip/bin/ansible && ln -nfs ~/.frey/tools/ansible/2.0.1.0/usr/local/share/python/ansible-playbook ~/.frey/tools/ansible/2.0.1.0/pip/bin/ansible-playbook`
 - [ ] Deal with pip returning version `1.1` in some cases (we error out on that currently with an unrecognized version)
+- [ ] Switch from terraformInventory to terraform-provisioner-ansible (https://github.com/jonmorehouse/terraform-provisioner-ansible)
 
-## v0.3.29
+## master
 
-Released: Unreleased.
+Released: TBA.
+[Diff](https://github.com/freyproject/frey/compare/v0.3.29...master).
 
 - [ ] Transpile `facts {` to an `provisioner "remote-exec"` block writing ini file into `/etc/ansible/facts.d/frey.fact`
 - [ ] When `backup` is ran by hand, the chain should not be triggered. Yet when running a chain, `backup` should be part of it
@@ -55,9 +57,10 @@ Released: Unreleased.
 
 ## v0.3.29
 
-Released: Unreleased.
+Released: TBA.
+[Diff](https://github.com/freyproject/frey/compare/v0.3.28...v0.3.29).
 
-- [ ] Switch from terraformInventory to terraform-provisioner-ansible (https://github.com/jonmorehouse/terraform-provisioner-ansible)
+- [x] Rename commands->steps to reduce ambiguity
 - [x] Refactor Apps, remove cmdOpts sublayer
 - [x] Add support for scrolling output via scrolex
 - [x] Avoid duplication in build steps
@@ -168,7 +171,7 @@ Released: 2016-04-13.
 
 - [x] Fix Remote ssh bug using `SHELLARG_PREPEND_AS_IS`
 - [x] Allow more control over cli args via constants
-- [x] Add support for feeding commands to `Remote` via cli
+- [x] Add support for feeding steps to `Remote` via cli
 
 ## v0.3.15
 
@@ -179,7 +182,7 @@ Released: 2016-03-31.
 - [x] Change `convert.sh` to `frey convert` making the dependencies installed by `prepare`
 - [x] Fix bug where projectDir cli argument was not respected if you did not have a Freyfile in it (useful for `convert`)
 - [x] Add role: munin-node
-- [x] Command's exe functions should mostly be in a util class
+- [x] Step's exe functions should mostly be in a util class
 
 ## v0.3.14
 
@@ -233,7 +236,7 @@ Released: 2016-03-29.
 - [x] ansistrano: Ensure shared paths sources are present
 - [x] Ridiculous Ansible verbosity for `--verbose`
 - [x] All templates now start with `{{ ansible_managed }}`
-- [x] Show copy-pastable commands in Shell's debug log
+- [x] Show copy-pastable steps in Shell's debug log
 - [x] Add role: upstart
 - [x] Add role: logrotate
 
@@ -337,8 +340,8 @@ Released: 2016-03-09.
 - [x] DRY up render (Prepare & Compile could share one implementation)
 - [x] Strip Frey, move 'options.os' to Init (cliargs stay?). Remove options from constructors
 - [x] Make `destroy` a feature of Frey so we don't have to rely on ENV vars in openstack `run.sh` destroy
-- [-] Deprecate a generic `Command._buildChildEnv` in favor of more specific Ansible/Terraform env building
-- [-] Make arg & env functions of all other commands, mimic Install's
+- [-] Deprecate a generic `Step._buildChildEnv` in favor of more specific Ansible/Terraform env building
+- [-] Make arg & env functions of all other steps, mimic Install's
 - [x] All config should come from Freyfile (think ssh). env only used for secrets. argv only for cwd
 - [x] Fix that `this.runtime.Runtime` is thing now. Remove `Runtime` alltogehter?
 - [x] Let compile go before prepare so we can use (ssh) config in prepare
@@ -358,12 +361,12 @@ Released: 2016-02-19.
 - [x] Upgrade Ansible 
 - [x] Replace mustache with lodash templating
 - [x] Put `_transform` in a central place (utils?)
-- [x] New command: `frey compile` that's prefixed to any chain, so you can trust your updates are present in residu, and have its configuration available too (ssh user for instance)
-- [x] Merge chain & commands
+- [x] New step: `frey compile` that's prefixed to any chain, so you can trust your updates are present in residu, and have its configuration available too (ssh user for instance)
+- [x] Merge chain & steps
 - [x] A project's package.json should refer to a frey version, which should be used, vs the global one.
 - [x] Ansible must run from configBase
 - [-] If you do a `frey install` you must trust that at least the Ansible files are re-compiled
-- [-] Re-introduce `init` for local prepare. Such as converting Freyfile to residu. Should be prefixed to chain of commands. Then a single install can benefit from it (remove the `refresh` from that acceptance test) and validation can be ran against it/them
+- [-] Re-introduce `init` for local prepare. Such as converting Freyfile to residu. Should be prefixed to chain of steps. Then a single install can benefit from it (remove the `refresh` from that acceptance test) and validation can be ran against it/them
 - [x] Frey should traverse cwd upwards until it finds a Freyfile, and use that as default project dir
 - [x] Switch to local npm install if available via LiftOff
 - [x] Consider storing residu files in ~/.frey/tmp/
@@ -383,12 +386,12 @@ Released: 2016-02-19.
 - [x] Port Prepare Instals
 - [x] Linux workstation support (Travis ;))
 - [x] tooldir should be coupled with global Frey install and not per-project
-- [-] /command/module/ 
+- [-] /step/module/ 
 - [-] Class.run becomes Class.main. The new run is Base.run. Which does a waterfall of @boot[], then @main
 - [x] Test & document --no-colors
 - [x] Implement a bailAfter, use it for DynamoDB scenario
 - [x] Amazon free tier dynamodb Travis tests 
-- [x] Runtime can be a command module, which can be prefixed to the runChain. Prepare can also be prepended to all. Afterwards, scenarios won't need to be ordered
+- [x] Runtime can be a step module, which can be prefixed to the runChain. Prepare can also be prepended to all. Afterwards, scenarios won't need to be ordered
 - [x] `./Freyfile.toml` ? This means projectdir defaults to `.`, and .git check should traverse upwards 'indefinitely'
 - [x] Move validation to Validate class
 - [x] Port Prepare SSH Keys

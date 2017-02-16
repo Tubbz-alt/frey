@@ -4,7 +4,7 @@ const async = require('async')
 const _ = require('lodash')
 const depurar = require('depurar')
 const debug = depurar('frey')
-const Scrolex = require('scrolex')
+const scrolex = require('scrolex')
 
 class Base {
   constructor () {
@@ -101,23 +101,22 @@ class Base {
     return str
   }
 
-  _out (...args) {
+  _scroll (...args) {
     const str  = this._formatter(args)
     const opts = {
       mode      : process.env.FREY_SCROLEX_MODE || process.env.SCROLEX_MODE || 'singlescroll',
-      components: `frey>${global.frey.currentHost}>${global.frey.currentCommand}`,
+      components: `frey>${global.frey.currentHost}>${global.frey.currentStep}`,
     }
-    Scrolex.out(`${str}`, opts)
+    scrolex.scroll(`${str}`, opts)
   }
 
-  _outFlush (...args) {
+  _stick (...args) {
     const str  = this._formatter(args)
     const opts = {
       mode      : process.env.FREY_SCROLEX_MODE || process.env.SCROLEX_MODE || 'singlescroll',
-      components: `frey>${global.frey.currentHost}>${global.frey.currentCommand}`,
-      flush     : true,
+      components: `frey>${global.frey.currentHost}>${global.frey.currentStep}`,
     }
-    Scrolex.out(`${str}`, opts)
+    scrolex.stick(`${str}`, opts)
   }
 }
 

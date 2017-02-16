@@ -1,4 +1,4 @@
-const Command = require('../Command')
+const Step = require('../Step')
 const constants = require('../constants')
 const Terraform = require('../apps/Terraform')
 const async = require('async')
@@ -9,7 +9,7 @@ const depurar = require('depurar')
 
 const debug = depurar('frey')
 
-class Format extends Command {
+class Format extends Step {
   constructor (name, runtime) {
     super(name, runtime)
     this.boot = [ '_confirm' ]

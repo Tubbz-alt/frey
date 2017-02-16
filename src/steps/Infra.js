@@ -1,9 +1,9 @@
 const Terraform = require('../apps/Terraform')
-const Command = require('../Command')
+const Step = require('../Step')
 const _ = require('lodash')
 const constants = require('../constants')
 
-class Infra extends Command {
+class Infra extends Step {
   constructor (name, runtime) {
     super(name, runtime)
     this.boot = [ '_confirm' ]
@@ -40,7 +40,7 @@ class Infra extends Command {
         return cb(err)
       }
 
-      this._out(`Saved new state to '${this.runtime.config.global.infra_state_file}'`)
+      this._scroll(`Saved new state to '${this.runtime.config.global.infra_state_file}'`)
 
       return cb(null)
     })
