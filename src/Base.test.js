@@ -24,13 +24,15 @@ describe('Base', () => {
         cb(null, cargo)
       }
 
-      base.boot = [ '_a', '_b' ]
+      base.boot = ['_a', '_b']
 
       base.run((err, result) => {
         expect(err).to.equal(null)
-        expect(
-          output
-        ).to.deep.equal([ 'function _a called with [object Object]', 'function _b called with output:a', 'function main called with output:b' ])
+        expect(output).to.deep.equal([
+          'function _a called with [object Object]',
+          'function _b called with output:a',
+          'function main called with output:b',
+        ])
         expect(base.bootCargo).to.deep.equal({ _a: 'output:a', _b: 'output:b' })
 
         done()

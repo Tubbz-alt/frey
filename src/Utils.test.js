@@ -17,9 +17,9 @@ describe('Utils', () => {
       done()
     })
     it('should crash hard by default', done => {
-      expect(
-        utils.render.bind(utils, 'Hi {{{crash}}}', { name: 'kevin' })
-      ).to.throw('Unable to render var(s): {{{crash}}}.')
+      expect(utils.render.bind(utils, 'Hi {{{crash}}}', { name: 'kevin' })).to.throw(
+        'Unable to render var(s): {{{crash}}}.'
+      )
       done()
     })
     it('should allow to prevent crashes', done => {
@@ -28,8 +28,8 @@ describe('Utils', () => {
       done()
     })
     it('should handle arrays', done => {
-      const result = utils.render([ '{{{name}}}', '{{{age}}}' ], { name: 'kevin', age: 32 })
-      expect(result).to.deep.equal([ 'kevin', '32' ])
+      const result = utils.render(['{{{name}}}', '{{{age}}}'], { name: 'kevin', age: 32 })
+      expect(result).to.deep.equal(['kevin', '32'])
       done()
     })
     it('should handle objects recursively with flattening', done => {
@@ -40,9 +40,12 @@ describe('Utils', () => {
         version : '0.1.1-{{{self.arch}}}',
       }
       const result = utils.render(properties, { options: { runtime: { os: 'osx' } } })
-      expect(
-        result
-      ).to.deep.equal({ filename: 'terraform-0.1.1-amd64', arch: 'amd64', os: 'osx', version: '0.1.1-amd64' })
+      expect(result).to.deep.equal({
+        filename: 'terraform-0.1.1-amd64',
+        arch    : 'amd64',
+        os      : 'osx',
+        version : '0.1.1-amd64',
+      })
       done()
     })
   })

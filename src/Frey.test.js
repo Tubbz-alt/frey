@@ -6,11 +6,11 @@ describe('Frey', () => {
     it('should not add config if the step was config', done => {
       const frey = new Frey()
 
-      const options = { _: [ 'config' ], bailAfter: 'config' }
+      const options = { _: ['config'], bailAfter: 'config' }
 
       frey._composeChain(options, (err, filteredChain) => {
         expect(err).to.equal(null)
-        expect(filteredChain).to.deep.equal([ 'init', 'config' ])
+        expect(filteredChain).to.deep.equal(['init', 'config'])
         done()
       })
     })
@@ -18,13 +18,19 @@ describe('Frey', () => {
     it('should always plan infra', done => {
       const frey = new Frey()
 
-      const options = { _: [ 'infra' ], bail: true }
+      const options = { _: ['infra'], bail: true }
 
       frey._composeChain(options, (err, filteredChain) => {
         expect(err).to.equal(null)
-        expect(
-          filteredChain
-        ).to.deep.equal([ 'init', 'config', 'deps', 'prepare', 'get', 'plan', 'infra' ])
+        expect(filteredChain).to.deep.equal([
+          'init',
+          'config',
+          'deps',
+          'prepare',
+          'get',
+          'plan',
+          'infra',
+        ])
         done()
       })
     })
@@ -32,11 +38,11 @@ describe('Frey', () => {
     it('should add format to convert, and not do a prepare', done => {
       const frey = new Frey()
 
-      const options = { _: [ 'convert' ] }
+      const options = { _: ['convert'] }
 
       frey._composeChain(options, (err, filteredChain) => {
         expect(err).to.equal(null)
-        expect(filteredChain).to.deep.equal([ 'init', 'config', 'deps', 'convert', 'format' ])
+        expect(filteredChain).to.deep.equal(['init', 'config', 'deps', 'convert', 'format'])
         done()
       })
     })
@@ -44,11 +50,11 @@ describe('Frey', () => {
     it('should not add format to convert if bail is specified', done => {
       const frey = new Frey()
 
-      const options = { _: [ 'convert' ], bail: true }
+      const options = { _: ['convert'], bail: true }
 
       frey._composeChain(options, (err, filteredChain) => {
         expect(err).to.equal(null)
-        expect(filteredChain).to.deep.equal([ 'init', 'config', 'deps', 'convert' ])
+        expect(filteredChain).to.deep.equal(['init', 'config', 'deps', 'convert'])
         done()
       })
     })
@@ -56,11 +62,11 @@ describe('Frey', () => {
     it('should do format without convert', done => {
       const frey = new Frey()
 
-      const options = { _: [ 'format' ] }
+      const options = { _: ['format'] }
 
       frey._composeChain(options, (err, filteredChain) => {
         expect(err).to.equal(null)
-        expect(filteredChain).to.deep.equal([ 'init', 'config', 'deps', 'prepare', 'format' ])
+        expect(filteredChain).to.deep.equal(['init', 'config', 'deps', 'prepare', 'format'])
         done()
       })
     })
@@ -68,13 +74,27 @@ describe('Frey', () => {
     it('should return all links for prepare', done => {
       const frey = new Frey()
 
-      const options = { _: [ 'prepare' ] }
+      const options = { _: ['prepare'] }
 
       frey._composeChain(options, (err, filteredChain) => {
         expect(err).to.equal(null)
-        expect(
-          filteredChain
-        ).to.deep.equal([ 'init', 'config', 'deps', 'prepare', 'refresh', 'validate', 'get', 'plan', 'backup', 'infra', 'install', 'setup', 'deploy', 'restart', 'show' ])
+        expect(filteredChain).to.deep.equal([
+          'init',
+          'config',
+          'deps',
+          'prepare',
+          'refresh',
+          'validate',
+          'get',
+          'plan',
+          'backup',
+          'infra',
+          'install',
+          'setup',
+          'deploy',
+          'restart',
+          'show',
+        ])
         done()
       })
     })
@@ -82,11 +102,11 @@ describe('Frey', () => {
     it('should return one link for bail', done => {
       const frey = new Frey()
 
-      const options = { _: [ 'deploy' ], bail: true }
+      const options = { _: ['deploy'], bail: true }
 
       frey._composeChain(options, (err, filteredChain) => {
         expect(err).to.equal(null)
-        expect(filteredChain).to.deep.equal([ 'init', 'config', 'deps', 'prepare', 'deploy' ])
+        expect(filteredChain).to.deep.equal(['init', 'config', 'deps', 'prepare', 'deploy'])
         done()
       })
     })
@@ -94,13 +114,20 @@ describe('Frey', () => {
     it('should return some links for bailAfter', done => {
       const frey = new Frey()
 
-      const options = { _: [ 'refresh' ], bailAfter: 'plan' }
+      const options = { _: ['refresh'], bailAfter: 'plan' }
 
       frey._composeChain(options, (err, filteredChain) => {
         expect(err).to.equal(null)
-        expect(
-          filteredChain
-        ).to.deep.equal([ 'init', 'config', 'deps', 'prepare', 'refresh', 'validate', 'get', 'plan' ])
+        expect(filteredChain).to.deep.equal([
+          'init',
+          'config',
+          'deps',
+          'prepare',
+          'refresh',
+          'validate',
+          'get',
+          'plan',
+        ])
         done()
       })
     })
