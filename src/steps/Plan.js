@@ -11,12 +11,13 @@ class Plan extends Step {
     }
 
     new Terraform({
-      args: {
+      runtime: this.runtime,
+      mode   : 'passthru',
+      args   : {
         plan   : constants.SHELLARG_PREPEND_AS_IS,
         refresh: 'false',
         out    : this.runtime.config.global.infra_plan_file,
       },
-      runtime: this.runtime,
     }).exe((err, stdout) => {
       if (err) {
         return cb(err)

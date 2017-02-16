@@ -7,7 +7,6 @@ const Ansible = require('../apps/Ansible')
 const _ = require('lodash')
 const mkdirp = require('mkdirp')
 const depurar = require('depurar')
-
 const debug = depurar('frey')
 
 class Show extends Step {
@@ -97,9 +96,9 @@ class Show extends Step {
     }
 
     opts.args['module-name'] = 'setup'
-    opts.args['tree'] = this.tmpFactDir
-    opts.args['all'] = constants.SHELLARG_APPEND_AS_IS
-    opts.args['tags'] = constants.SHELLARG_REMOVE
+    opts.args['tree']        = this.tmpFactDir
+    opts.args['all']         = constants.SHELLARG_APPEND_AS_IS
+    opts.args['tags']        = constants.SHELLARG_REMOVE
 
     // ansible: error: no such option: --tags
     new Ansible(opts).exe((err, stdout) => {
