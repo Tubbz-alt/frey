@@ -1,12 +1,12 @@
 const Step = require('../Step')
-const mkdirp  = require('mkdirp')
-const utils   = require('../Utils')
-const Bash    = require('../apps/Bash')
-const semver  = require('semver')
-const fs      = require('fs')
-const async   = require('async')
+const mkdirp = require('mkdirp')
+const utils = require('../Utils')
+const Bash = require('../apps/Bash')
+const semver = require('semver')
+const fs = require('fs')
+const async = require('async')
 const depurar = require('depurar')
-const debug   = depurar('frey')
+const debug = depurar('frey')
 
 class Prepare extends Step {
   constructor (name, runtime) {

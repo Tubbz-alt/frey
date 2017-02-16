@@ -6,7 +6,7 @@ const constants = require('../constants')
 class Infra extends Step {
   constructor (name, runtime) {
     super(name, runtime)
-    this.boot = [ '_confirm' ]
+    this.boot = ['_confirm']
   }
 
   _confirm (cargo, cb) {

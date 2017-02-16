@@ -11,7 +11,7 @@ const uuid = require('uuid')
 class Init extends Step {
   constructor (name, runtime) {
     super(name, runtime)
-    this.boot = [ '_env', '_os', '_cliargs', '_findClosestProjectGit', '_paths' ]
+    this.boot = ['_env', '_os', '_cliargs', '_findClosestProjectGit', '_paths']
   }
 
   _env (cargo, cb) {

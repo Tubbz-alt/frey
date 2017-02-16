@@ -30,7 +30,6 @@ class Shell extends Base {
       }
     )
   }
-
   // exeScript (scriptArgs, cmdOpts, cb) {
   //   scriptArgs = [ 'bash', '-o', 'pipefail', '-o', 'errexit', '-o', 'nounset', '-c' ].concat(
   //     scriptArgs
@@ -38,7 +37,6 @@ class Shell extends Base {
   //
   //   return this.exe(scriptArgs, cmdOpts, cb)
   // }
-
   // exe (cmdArgs, cmdOpts = {}, cb) {
   //   if (cmdOpts.env === undefined) {
   //     cmdOpts.env = {}

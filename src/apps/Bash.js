@@ -1,13 +1,13 @@
-const App       = require('../App')
+const App = require('../App')
 const constants = require('../constants')
 
 class Bash extends App {
   exe (cb) {
     const defaults = {
       args: {
-        'e': constants.SHELLARG_BOOLEAN_FLAG,
-        'u': constants.SHELLARG_BOOLEAN_FLAG,
-        'c': constants.SHELLARG_BOOLEAN_FLAG,
+        e: constants.SHELLARG_BOOLEAN_FLAG,
+        u: constants.SHELLARG_BOOLEAN_FLAG,
+        c: constants.SHELLARG_BOOLEAN_FLAG,
       },
       env          : {},
       signatureOpts: { equal: '', quote: '', dash: '-', escape: false },

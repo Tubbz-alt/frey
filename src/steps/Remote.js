@@ -12,7 +12,7 @@ const debug = depurar('frey')
 class Remote extends Step {
   constructor (name, runtime) {
     super(name, runtime)
-    this.boot = [ '_gatherHosts', '_selectHosts' ]
+    this.boot = ['_gatherHosts', '_selectHosts']
   }
 
   _gatherHosts (cargo, cb) {
@@ -71,7 +71,7 @@ class Remote extends Step {
       if (!_.has(answers, 'server')) {
         return cb(new Error('No server selected'))
       }
-      cb(null, [ answers.server ])
+      cb(null, [answers.server])
     })
   }
 

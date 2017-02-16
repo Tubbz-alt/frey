@@ -39,9 +39,11 @@ class Config extends Step {
   _findHclFiles (cargo, cb) {
     const pattern = `${this.runtime.init.cliargs.projectDir}/*.hcl`
     debug(`Reading from '${pattern}'`)
-    return globby(pattern).then(hclFiles => {
-      return cb(null, hclFiles)
-    }).catch(cb)
+    return globby(pattern)
+      .then(hclFiles => {
+        return cb(null, hclFiles)
+      })
+      .catch(cb)
   }
 
   _readHclFiles (hclFiles, cb) {
@@ -86,7 +88,7 @@ class Config extends Step {
     hclParsedItems.forEach(parsedItem => {
       for (let key in parsedItem) {
         if (!_.isArray(parsedItem[key])) {
-          parsedItem[key] = [ parsedItem[key] ]
+          parsedItem[key] = [parsedItem[key]]
         }
       }
       config = _.merge(config, parsedItem)
@@ -102,7 +104,7 @@ class Config extends Step {
       }
     }
 
-    debug({newConfig})
+    debug({ newConfig })
 
     return cb(null, newConfig)
   }
@@ -155,7 +157,7 @@ class Config extends Step {
           fqdn                                 : `{{ lookup('env', 'FREY_DOMAIN') }}`,
           hostname                             : `{{ fqdn.split('.')[0] }}`,
           nodejs_yarn                          : false,
-          nodejs_npm_global_packages           : [ 'yarn' ],
+          nodejs_npm_global_packages           : ['yarn'],
           unattended_remove_unused_dependencies: true,
         },
         ssh: {
@@ -175,7 +177,7 @@ class Config extends Step {
     let cliConfig = {}
     if (this.runtime.init.cliargs.cfgVar) {
       if (!_.isArray(this.runtime.init.cliargs.cfgVar)) {
-        this.runtime.init.cliargs.cfgVar = [ this.runtime.init.cliargs.cfgVar ]
+        this.runtime.init.cliargs.cfgVar = [this.runtime.init.cliargs.cfgVar]
       }
       this.runtime.init.cliargs.cfgVar.forEach(item => {
         let parts = item.split('=')
@@ -335,7 +337,7 @@ class Config extends Step {
 
   _writeAnsiblePlaybook (step, cargo, cb) {
     let cfgBlock = {}
-    let target   = this.bootCargo._renderConfig.global[`${step}_file`]
+    let target = this.bootCargo._renderConfig.global[`${step}_file`]
     if (step === 'playbooks_vars') {
       cfgBlock = _.get(this.bootCargo._renderConfig, `global.playbooks_vars`)
     } else {
@@ -358,13 +360,9 @@ class Config extends Step {
       return cb(new Error('Unable to convert project to Ansible playbook YAML'))
     }
 
-    debug(
-      'Writing %s instructions at %s',
-      step,
-      target
-    )
+    debug('Writing %s instructions at %s', step, target)
 
-    mkdirp(`${path.dirname(target)}`, (err) => {
+    mkdirp(`${path.dirname(target)}`, err => {
       if (err) {
         return cb(err)
       }

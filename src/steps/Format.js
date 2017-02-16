@@ -12,7 +12,7 @@ const debug = depurar('frey')
 class Format extends Step {
   constructor (name, runtime) {
     super(name, runtime)
-    this.boot = [ '_confirm' ]
+    this.boot = ['_confirm']
   }
 
   _confirm (cargo, cb) {
@@ -64,14 +64,16 @@ class Format extends Step {
   main (cargo, cb) {
     const pattern = `${this.runtime.init.cliargs.projectDir}/*.hcl`
     debug(`Reading from '${pattern}'`)
-    return globby(pattern).then(tomlFiles => {
-      async.map(tomlFiles, this._reformatFile.bind(this), (err, results) => {
-        if (err) {
-          return cb(err)
-        }
-        return cb(null)
+    return globby(pattern)
+      .then(tomlFiles => {
+        async.map(tomlFiles, this._reformatFile.bind(this), (err, results) => {
+          if (err) {
+            return cb(err)
+          }
+          return cb(null)
+        })
       })
-    }).catch(cb)
+      .catch(cb)
   }
 }
 

@@ -7,9 +7,11 @@ describe('App', () => {
     it('should convert tf vars', done => {
       const app = new App()
       const env = app._buildChildEnv({ EXTRA: 'Yes Please' }, { FREY_SOMETHING: 'foobar' })
-      expect(
-        env
-      ).to.deep.equal({ EXTRA: 'Yes Please', FREY_SOMETHING: 'foobar', TF_VAR_FREY_SOMETHING: 'foobar' })
+      expect(env).to.deep.equal({
+        EXTRA                : 'Yes Please',
+        FREY_SOMETHING       : 'foobar',
+        TF_VAR_FREY_SOMETHING: 'foobar',
+      })
       done()
     })
   })

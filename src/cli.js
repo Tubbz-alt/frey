@@ -108,11 +108,7 @@ const liftOff = new LiftOff({
 })
 
 liftOff.launch({ cwd: argv.projectDir }, ({ configBase }) => {
-  if (
-    configBase === undefined &&
-      argv._[0] !== 'convert' &&
-      argv._[0] !== 'help'
-  ) {
+  if (configBase === undefined && argv._[0] !== 'convert' && argv._[0] !== 'help') {
     const msg = 'Could not find a Freyfile.hcl in current directory or upwards, or in project directory.'
     throw new Error(msg)
   }

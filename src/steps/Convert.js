@@ -15,7 +15,7 @@ const TOML = require('toml')
 class Convert extends Step {
   constructor (name, runtime) {
     super(name, runtime)
-    this.boot = [ '_confirm' ]
+    this.boot = ['_confirm']
   }
 
   _confirm (cargo, cb) {
@@ -92,27 +92,29 @@ class Convert extends Step {
     const pattern = `${this.runtime.init.cliargs.projectDir}/*.{toml,yml,yaml,tf,cfg}`
     debug(`Reading from '${pattern}'`)
 
-    return globby(pattern).then(origFiles => {
-      async.map(origFiles, this._parseFile.bind(this), (err, mapped) => {
-        if (err) {
-          return cb(err)
-        }
-
-        let config = {}
-        mapped.forEach(val => {
-          config = _.extend(config, val)
-        })
-
-        json2hcl(config, false, (err, hcl) => {
+    return globby(pattern)
+      .then(origFiles => {
+        async.map(origFiles, this._parseFile.bind(this), (err, mapped) => {
           if (err) {
-            debug({ config })
-            return cb(new Error(`Unable to convert JSON to HCL. ${err}`))
+            return cb(err)
           }
 
-          fs.writeFile(`${this.runtime.init.cliargs.projectDir}/Freyfile.hcl`, hcl, 'utf-8', cb)
+          let config = {}
+          mapped.forEach(val => {
+            config = _.extend(config, val)
+          })
+
+          json2hcl(config, false, (err, hcl) => {
+            if (err) {
+              debug({ config })
+              return cb(new Error(`Unable to convert JSON to HCL. ${err}`))
+            }
+
+            fs.writeFile(`${this.runtime.init.cliargs.projectDir}/Freyfile.hcl`, hcl, 'utf-8', cb)
+          })
         })
       })
-    }).catch(cb)
+      .catch(cb)
   }
 }
 

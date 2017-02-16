@@ -28,7 +28,7 @@ class Frey extends Base {
       cliargs._[0] = 'prepare'
     }
 
-    this.boot = [ '_injectCliargs', '_composeChain' ]
+    this.boot = ['_injectCliargs', '_composeChain']
     this.runtime = { frey: { cliargs } }
   }
 
@@ -44,7 +44,7 @@ class Frey extends Base {
 
     if (startAt < 0) {
       // This step is not part of the chain
-      filteredChain = [ cmd ]
+      filteredChain = [cmd]
     } else {
       let length = 0
       if (cliargs.bail) {
@@ -70,7 +70,7 @@ class Frey extends Base {
 
     if (
       filteredChain.indexOf('prepare') < 0 &&
-        (startAt < 0 || startAt > _.findIndex(chain, { name: 'prepare' }))
+      (startAt < 0 || startAt > _.findIndex(chain, { name: 'prepare' }))
     ) {
       if (cmd !== 'convert') {
         filteredChain.unshift('prepare')
@@ -79,7 +79,7 @@ class Frey extends Base {
 
     if (
       filteredChain.indexOf('format') < 0 &&
-        (startAt < 0 || startAt > _.findIndex(chain, { name: 'format' }))
+      (startAt < 0 || startAt > _.findIndex(chain, { name: 'format' }))
     ) {
       if (cmd === 'convert' && !cliargs.bail) {
         filteredChain.push('format')
@@ -88,14 +88,14 @@ class Frey extends Base {
 
     if (
       filteredChain.indexOf('deps') < 0 &&
-        (startAt < 0 || startAt > _.findIndex(chain, { name: 'deps' }))
+      (startAt < 0 || startAt > _.findIndex(chain, { name: 'deps' }))
     ) {
       filteredChain.unshift('deps')
     }
 
     if (
       filteredChain.indexOf('config') < 0 &&
-        (startAt < 0 || startAt > _.findIndex(chain, { name: 'config' }))
+      (startAt < 0 || startAt > _.findIndex(chain, { name: 'config' }))
     ) {
       filteredChain.unshift('config')
     }

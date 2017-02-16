@@ -45,22 +45,23 @@ class Deps extends Step {
       range  : '{{{self.version}}}',
       dir    : '{{{config.global.tools_dir}}}/terraform/{{{self.version}}}',
       exe    : '{{{self.dir}}}/terraform',
-      zip    : 'terraform_' +
-        '{{{self.version}}}_' +
-        '{{{init.os.platform}}}_' +
-        '{{{init.os.arch}}}.zip',
+      zip    : (
+        'terraform_' + '{{{self.version}}}_' + '{{{init.os.platform}}}_' + '{{{init.os.arch}}}.zip'
+      ),
       cmdVersion: '{{{self.exe}}} --version',
       versionTransformer (stdout) {
         const version = `${stdout}`.trim().split('\n')[0].split(/\s+/).pop().replace('v', '')
         return version
       },
-      cmdInstall: 'mkdir -p {{{self.dir}}} && ' +
-        'cd {{{self.dir}}} && ' +
-        "curl -sSL '" +
-        'https://releases.hashicorp.com/terraform/{{{self.version}}}/' +
-        "{{{self.zip}}}'" +
-        "> '{{{self.zip}}}' && " +
-        "unzip -o '{{{self.zip}}}'",
+      cmdInstall: (
+        'mkdir -p {{{self.dir}}} && ' +
+          'cd {{{self.dir}}} && ' +
+          "curl -sSL '" +
+          'https://releases.hashicorp.com/terraform/{{{self.version}}}/' +
+          "{{{self.zip}}}'" +
+          "> '{{{self.zip}}}' && " +
+          "unzip -o '{{{self.zip}}}'"
+      ),
     })
 
     deps.push({
@@ -70,24 +71,28 @@ class Deps extends Step {
       version: '0.6',
       dir    : '{{{config.global.tools_dir}}}/terraform-inventory/{{{self.version}}}',
       exe    : '{{{self.dir}}}/terraform-inventory',
-      zip    : 'terraform-inventory_' +
-        '{{{self.version}}}_' +
-        '{{{init.os.platform}}}_' +
-        '{{{init.os.arch}}}.zip',
+      zip    : (
+        'terraform-inventory_' +
+          '{{{self.version}}}_' +
+          '{{{init.os.platform}}}_' +
+          '{{{init.os.arch}}}.zip'
+      ),
       cmdVersion: '{{{self.exe}}} --version',
       versionTransformer (stdout) {
         let version = `${stdout}`.trim().split('\n')[0].split(/\s+/).pop().replace('v', '')
         version = version.replace(/^(\d+\.\d+)/, '$1.0')
         return version
       },
-      cmdInstall: 'mkdir -p {{{self.dir}}} && ' +
-        'cd {{{self.dir}}} && ' +
-        "curl -sSL '" +
-        'https://github.com/adammck/terraform-inventory/releases/download/' +
-        'v{{{self.version}}}/' +
-        "{{{self.zip}}}'" +
-        "> '{{{self.zip}}}' && " +
-        "unzip -o '{{{self.zip}}}'",
+      cmdInstall: (
+        'mkdir -p {{{self.dir}}} && ' +
+          'cd {{{self.dir}}} && ' +
+          "curl -sSL '" +
+          'https://github.com/adammck/terraform-inventory/releases/download/' +
+          'v{{{self.version}}}/' +
+          "{{{self.zip}}}'" +
+          "> '{{{self.zip}}}' && " +
+          "unzip -o '{{{self.zip}}}'"
+      ),
     })
 
     deps.push({
@@ -108,7 +113,9 @@ class Deps extends Step {
         const version = `${parts[1]}`.replace('v', '')
         return version
       },
-      cmdInstall: `sudo -HE env PATH=\${PATH:-} LD_LIBRARY_PATH=\${LD_LIBRARY_PATH:-} PYTHONPATH=\${PYTHONPATH:-} easy_install --upgrade pip==9.0.1 && $(which pip) && pip --version`,
+      cmdInstall: (
+        `sudo -HE env PATH=\${PATH:-} LD_LIBRARY_PATH=\${LD_LIBRARY_PATH:-} PYTHONPATH=\${PYTHONPATH:-} easy_install --upgrade pip==9.0.1 && $(which pip) && pip --version`
+      ),
     })
 
     deps.push({
@@ -128,15 +135,17 @@ class Deps extends Step {
         version = parts.join('.')
         return version
       },
-      cmdInstall: 'mkdir -p {{{self.dir}}} && ' +
-        'pip install ' +
-        '--prefix=pip ' +
-        '--ignore-installed ' +
-        '--force-reinstall ' +
-        "--root '{{{self.dir}}}' " +
-        '--upgrade ' +
-        '--disable-pip-version-check ' +
-        'ansible=={{{self.version}}}',
+      cmdInstall: (
+        'mkdir -p {{{self.dir}}} && ' +
+          'pip install ' +
+          '--prefix=pip ' +
+          '--ignore-installed ' +
+          '--force-reinstall ' +
+          "--root '{{{self.dir}}}' " +
+          '--upgrade ' +
+          '--disable-pip-version-check ' +
+          'ansible=={{{self.version}}}'
+      ),
     })
 
     deps = utils.render(deps, this.runtime)

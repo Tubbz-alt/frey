@@ -1,14 +1,14 @@
-const _         = require('lodash')
-const Shell     = require('./Shell')
+const _ = require('lodash')
+const Shell = require('./Shell')
 const constants = require('./constants')
-const debug     = require('depurar')('frey')
-const scrolex   = require('scrolex')
+const debug = require('depurar')('frey')
+const scrolex = require('scrolex')
 
 class App {
   constructor (opts = {}) {
-    this.opts    = opts
+    this.opts = opts
     this.runtime = opts.runtime
-    this.shell   = new Shell(this.runtime)
+    this.shell = new Shell(this.runtime)
   }
 
   _debugCmd ({ cmdOpts, env }, args) {
@@ -62,14 +62,14 @@ class App {
   }
 
   _exe (appDefaultOpts, cb) {
-    const opts       = _.defaultsDeep(this.opts, _.cloneDeep(appDefaultOpts))
+    const opts = _.defaultsDeep(this.opts, _.cloneDeep(appDefaultOpts))
     const runtimeEnv = this.runtime && this.runtime.init ? this.runtime.init.env : {}
 
-    const env  = this._buildChildEnv(this._objectToEnv(opts.env || {}), runtimeEnv)
+    const env = this._buildChildEnv(this._objectToEnv(opts.env || {}), runtimeEnv)
     const args = this._objectToFlags(opts.args, opts.signatureOpts)
 
     const scrolexOpts = {
-      stdio: opts.stdio || [ 'pipe', 'pipe', 'pipe' ],
+      stdio: opts.stdio || ['pipe', 'pipe', 'pipe'],
     }
 
     if (_.keys(env).length > 0) {
@@ -82,7 +82,7 @@ class App {
     }
 
     // scrolexOpts.addCommandAsComponent = true
-    const scrolexArgs = [ opts.exe ].concat(args)
+    const scrolexArgs = [opts.exe].concat(args)
 
     // const debugCmd = this._debugCmd({ scrolexOpts, env }, scrolexArgs)
     // debug({debugCmd})
@@ -101,7 +101,7 @@ class App {
       return str
     }
     if (`${str}` !== str) {
-      debug({str})
+      debug({ str })
       throw new Error(`You should pass _escape a string. But you passed: ${str}`)
     }
     return str.replace(/([^a-zA-Z0-9\-./,_])/g, '\\$1')
@@ -144,7 +144,7 @@ class App {
     _.forOwn(obj, (val, key) => {
       if (val === constants.SHELLARG_BOOLEAN_FLAG) {
         // turn on a boolean flag
-        args.push([ opts.dash, fn(key) ].join(''))
+        args.push([opts.dash, fn(key)].join(''))
       } else if (val === constants.SHELLARG_PREPEND_AS_IS) {
         // add the value as is
         prepend.push(fn(key))
@@ -156,8 +156,8 @@ class App {
         return
       } else {
         // (array of) key/value pairs
-        const vals = _.isArray(val) ? val : [ val ]
-        vals.forEach((val) => {
+        const vals = _.isArray(val) ? val : [val]
+        vals.forEach(val => {
           args.push(`${opts.dash}${fn(key)}${opts.equal}${opts.quote}${fn(val)}${opts.quote}`)
         })
       }
