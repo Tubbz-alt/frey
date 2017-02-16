@@ -31,7 +31,7 @@ RUN apt-get install --no-install-recommends -y openssh-client unzip git-core && 
   apt-get autoremove && \
   yarn install && \
   touch Freyfile.hcl && \
-  node_modules/.bin/babel-node src/cli.js prepare --bail --force-yes && \
+  node src/cli.js prepare --bail --force-yes && \
   rm -Rf ${HOME}/.cache
 
-ENTRYPOINT ["/opt/frey/node_modules/.bin/babel-node", "/opt/frey/src/cli.js"]
+ENTRYPOINT ["node", "/opt/frey/src/cli.js"]

@@ -14,7 +14,7 @@ __sysTmpDir="${TMPDIR:-/tmp}"
 __sysTmpDir="${__sysTmpDir%/}" # <-- remove trailing slash on macosx
 __node="node"; __codelib="lib"
 if [[ "${OSTYPE}" == "darwin"* ]]; then
-  __node="babel-node"; __codelib="src"
+  __node="node"; __codelib="src"
 fi
 
 echo "Disabled due to a very unreliable trystack.org causing ~1/5 build failures. "

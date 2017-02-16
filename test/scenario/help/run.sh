@@ -12,7 +12,7 @@ __base="$(basename ${__file} .sh)"
 __root="$(cd "$(dirname $(dirname $(dirname "${__dir}")))" && pwd)"
 __node="node"; __codelib="lib"
 if [[ "${OSTYPE}" == "darwin"* ]]; then
-  __node="babel-node"; __codelib="src"
+  __node="node"; __codelib="src"
 fi
 
 git init > /dev/null 2>&1 || true
