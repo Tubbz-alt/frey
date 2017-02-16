@@ -19,7 +19,8 @@
 - munin-node -- Copyright (c) 2014 Jeff Geerling
 - nginx -- Copyright 1994-2004 Benno Joy. All rights reserved.
 - nix -- Copyright (c) 2016, Tomasz Kontusz
-- nodejs -- Copyright (c) 2014 Jeff Geerling
+- nodejs -- Copyright (c) Oefenweb.nl <https://github.com/Oefenweb>
+- nodejs-legacy -- Copyright (c) 2014 Jeff Geerling
 - prometheus -- Copyright (c) 2015 William Yeh <william.pjyeh@gmail.com>
 - redis -- Copyright (c) 2014 Jeff Geerling
 - rollback -- Copyright (c) 2014 Carlos Buenosvinos

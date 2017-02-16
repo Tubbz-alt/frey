@@ -40,9 +40,9 @@ roles=(
   'deploy,1.3.0,master'
   'deploy,1.4.0,master'
   'deploy,2.0.0,master'
-  'nodejs,2.1.1,master'
-  'nodejs,2.2.0,master'
-  'nodejs,3.0.0,master'
+  'nodejs-legacy,2.1.1,master'
+  'nodejs-legacy,2.2.0,master'
+  'nodejs-legacy,3.0.0,master'
   'redis,1.2.0,master'
   'redis,1.3.0,master'
   'redis,1.4.0,master'
@@ -84,6 +84,7 @@ roles=(
   'nix,1.2.1,master'
   'timezone,1.0.0,master'
   'yarn,1.0.3,master'
+  'nodejs,4.0.0,master'
 )
 
 for role in "${roles[@]}"; do

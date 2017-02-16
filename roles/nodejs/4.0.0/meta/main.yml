@@ -1,0 +1,22 @@
+# meta file for nodejs
+---
+galaxy_info:
+  author: Mischa ter Smitten
+  company: Oefenweb.nl B.V.
+  description: Set up the latest version of Node.js and npm in Debian-like systems
+  license: MIT
+  min_ansible_version: 1.9.6
+  platforms:
+    - name: Ubuntu
+      versions:
+        - precise
+        - trusty
+        - xenial
+    - name: Debian
+      versions:
+        - wheezy
+        - jessie
+  galaxy_tags:
+    - system
+    - web
+dependencies: []
