@@ -76,7 +76,13 @@ class Remote extends Step {
   }
 
   _ssh (host, cb) {
-    const opts = { args: {}, runtime: this.runtime }
+    const opts = {
+      args   : {},
+      runtime: this.runtime,
+      stdio  : ['inherit', 'inherit', 'inherit'],
+      mode   : 'passthru',
+    }
+
     opts.args[host] = constants.SHELLARG_APPEND_AS_IS
 
     const rcmd = _.get(this.runtime, 'init.cliargs.remote')
