@@ -24,6 +24,7 @@ __root="$(dirname "${__dir}")"
 
 
 version=$(node -e 'console.log(require("./package.json").version)')
+newBranch="frey-v${version}"
 allUrls=""
 CODE_DIR="${CODE_DIR:-${HOME}/code}"
 echo "--> Scanning '${CODE_DIR}'..."
@@ -39,19 +40,19 @@ while IFS= read -r -d '' freyFile; do
     exit 1
   fi
 
-  if [[ "${freyFile}" = *"uppy-server/infra/Freyfile.hcl" ]]; then
+  if [[ "${freyFile}" = *"/freyfiles/"* ]]; then
     echo "--> Skipping '${freyFile}' as requested"
     continue
   fi
 
   echo "--> Processing '${freyFile}'..."
   pushd "${infraDir}" > /dev/null
-    allUrls="${allUrls} - $(awk '/url = / {print $NF}' "${gitDir}/config" |sed -e 's#git@github.com:#https://github.com/#' -e 's#\.git$##')$(echo "\\n")"
-    # git reset --hard
+    allUrls="${allUrls} - $(awk '/url = / {print $NF}' "${gitDir}/config" |sed -e 's#git@github.com:#https://github.com/#' -e 's#\.git$##')/compare/${newBranch}?expand=1$(echo "\\n")"
+    git reset --hard
     [[ -z $(git status -s) ]] || (git diff |cat; git status ; echo "Aborting due to dirty git index at '${infraDir}'."; exit 1)
     git checkout master
     git pull
-    git checkout -B "frey-v${version}"
+    git checkout -B "${newBranch}"
     npm unlink frey || true
     if grep -q 'FREY_VERSION' ./Makefile; then
       "${__root}/node_modules/.bin/replace" "^FREY_VERSION\s*:?=.*$" "FREY_VERSION := ${version}" ./Makefile
@@ -77,21 +78,25 @@ while IFS= read -r -d '' freyFile; do
 
     # Upgrade roles to their latest versions
     while IFS= read -r -d '' roleDir; do
-      pushd "${roleDir}"
+      pushd "${roleDir}" > /dev/null
         role="$(basename "${roleDir}")"
         latestRoleVersion=$(ls |egrep -v '^v' |sort -nr |head -n1)
         "${__root}/node_modules/.bin/replace" "/${role}/(\d+.\d+.\d+)" "/${role}/${latestRoleVersion}" "${freyFile}" || true
-      popd
+      popd > /dev/null
     done < <(find "${__root}/roles" -maxdepth 1 -type d -print0) || true
     # Remove legacy residue
     rm -f group_vars/all/_frey.yml
 
     git add "${freyFile}" || true
     git commit -m "Upgrade Frey to v${version} /cc @tersmitten" || true
-    git push -f origin "frey-v${version}"
+    git push -f origin "${newBranch}"
     git checkout master
   popd > /dev/null
 done < <(find "${CODE_DIR}" -maxdepth 3 -name Freyfile.hcl -print0)
 
 echo
 echo -e "${allUrls}"
+echo
+echo "--> After merging the frey-v${version} branches to master in every repo, consider running"
+echo "cd ${CODE_DIR}/freyfiles && ./sync-freyfiles.sh import && cd -"
+echo
