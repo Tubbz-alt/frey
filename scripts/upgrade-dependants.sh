@@ -39,15 +39,15 @@ while IFS= read -r -d '' freyFile; do
     exit 1
   fi
 
-  # if [[ "${freyFile}" = *"uppy-server/infra/Freyfile.hcl" ]]; then
-  #   echo "--> Skipping '${freyFile}' as requested"
-  #   continue
-  # fi
+  if [[ "${freyFile}" = *"uppy-server/infra/Freyfile.hcl" ]]; then
+    echo "--> Skipping '${freyFile}' as requested"
+    continue
+  fi
 
   echo "--> Processing '${freyFile}'..."
   pushd "${infraDir}" > /dev/null
     allUrls="${allUrls} - $(awk '/url = / {print $NF}' "${gitDir}/config" |sed -e 's#git@github.com:#https://github.com/#' -e 's#\.git$##')$(echo "\\n")"
-    git reset --hard
+    # git reset --hard
     [[ -z $(git status -s) ]] || (git diff |cat; git status ; echo "Aborting due to dirty git index at '${infraDir}'."; exit 1)
     git checkout master
     git pull
@@ -64,9 +64,9 @@ while IFS= read -r -d '' freyFile; do
     elif [ -f ../package.json ]; then
       pushd ..
         yarn upgrade frey@${version} || (yarn && yarn add --dev frey@${version}) || npm install --save-dev frey@${version}
+        git add ./package.json || true
+        git add ./yarn.lock || true
       popd
-      git add ../package.json || true
-      git add ../yarn.lock || true
     else
       echo "Unsure how to upgrade '${infraDir}'"
       exit 1
@@ -83,6 +83,8 @@ while IFS= read -r -d '' freyFile; do
         "${__root}/node_modules/.bin/replace" "/${role}/(\d+.\d+.\d+)" "/${role}/${latestRoleVersion}" "${freyFile}" || true
       popd
     done < <(find "${__root}/roles" -maxdepth 1 -type d -print0) || true
+    # Remove legacy residue
+    rm -f group_vars/all/_frey.yml
 
     git add "${freyFile}" || true
     git commit -m "Upgrade Frey to v${version} /cc @tersmitten" || true
