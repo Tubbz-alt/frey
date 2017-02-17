@@ -22,10 +22,10 @@ set -o nounset
 __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 __root="$(dirname "${__dir}")"
 
-
 version=$(node -e 'console.log(require("./package.json").version)')
 newBranch="frey-v${version}"
 allUrls=""
+allFreyFiles=""
 CODE_DIR="${CODE_DIR:-${HOME}/code}"
 echo "--> Scanning '${CODE_DIR}'..."
 while IFS= read -r -d '' freyFile; do
@@ -48,6 +48,7 @@ while IFS= read -r -d '' freyFile; do
   echo "--> Processing '${freyFile}'..."
   pushd "${infraDir}" > /dev/null
     allUrls="${allUrls} - $(awk '/url = / {print $NF}' "${gitDir}/config" |sed -e 's#git@github.com:#https://github.com/#' -e 's#\.git$##')/compare/${newBranch}?expand=1$(echo "\\n")"
+    allFreyFiles="${allFreyFiles} - ${freyFile}$(echo "\\n")"
     git reset --hard
     [[ -z $(git status -s) ]] || (git diff |cat; git status ; echo "Aborting due to dirty git index at '${infraDir}'."; exit 1)
     git checkout master
@@ -84,8 +85,12 @@ while IFS= read -r -d '' freyFile; do
         "${__root}/node_modules/.bin/replace" "/${role}/(\d+.\d+.\d+)" "/${role}/${latestRoleVersion}" "${freyFile}" || true
       popd > /dev/null
     done < <(find "${__root}/roles" -maxdepth 1 -type d -print0) || true
+
+    # Upgrade nodejs version
+    "${__root}/node_modules/.bin/replace" "nodejs_version = \".+\"" "nodejs_version = \"nodejs-v6x\"" "${freyFile}" || true
+
     # Remove legacy residue
-    rm -f group_vars/all/_frey.yml
+    git rm -f group_vars/all/_frey.yml || true
 
     git add "${freyFile}" || true
     git commit -m "Upgrade Frey to v${version} /cc @tersmitten" || true
@@ -93,6 +98,10 @@ while IFS= read -r -d '' freyFile; do
     git checkout master
   popd > /dev/null
 done < <(find "${CODE_DIR}" -maxdepth 3 -name Freyfile.hcl -print0)
+
+echo
+echo -e "${allFreyFiles}"
+echo
 
 echo
 echo -e "${allUrls}"

@@ -54,10 +54,18 @@ Released: TBA.
 - [ ] Possible bug: We should likely not squashArray ansible actions such as `restart`, or actions in multiple files in the same dir are merged into one
 - [ ] Offer to run `backup` if a destructive change was detected. Skip otherwise. Defaults to yes
 - [ ] Ansible command output parsing is very basic, we can do a better job
+- [x] Improve upgrade dependents script
+
+## v0.3.30
+
+Released: 2017-02-16.
+[Diff](https://github.com/freyproject/frey/compare/v0.3.29...v0.3.30).
+
+- [x] Fix casing typo bug that only exposed on Linux
 
 ## v0.3.29
 
-Released: TBA.
+Released: 2017-02-16.
 [Diff](https://github.com/freyproject/frey/compare/v0.3.28...v0.3.29).
 
 - [x] Deprecate `Shell.js`
