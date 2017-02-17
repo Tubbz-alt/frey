@@ -2,7 +2,7 @@ ACCPTST:STDIO_REPLACE_LONGTIMES
 ACCPTST:STDIO_REPLACE_DURATIONS
 ACCPTST:STDIO_REPLACE_ASTERISKHR
  › frey › main ›
-   Frey version '0.3.30'
+   Frey version '0.3.31'
    Will run: [ 'init', 'config', 'deps', 'prepare', 'install' ]
  › frey › prepare ›
    Creating private key '{tmpdir}/frey-install.pem'
