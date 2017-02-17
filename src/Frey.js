@@ -14,7 +14,6 @@ const scrolex = require('scrolex').persistOpts({
   addCommandAsComponent: false,
   announce             : false,
   components           : `frey>main`,
-  mode                 : process.env.FREY_SCROLEX_MODE || process.env.SCROLEX_MODE || 'singlescroll',
 })
 
 class Frey extends Base {

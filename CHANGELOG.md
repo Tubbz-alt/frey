@@ -42,7 +42,7 @@ Released: Unreleased.
 ## master
 
 Released: TBA.
-[Diff](https://github.com/freyproject/frey/compare/v0.3.29...master).
+[Diff](https://github.com/freyproject/frey/compare/v0.3.31...master).
 
 - [ ] Transpile `facts {` to an `provisioner "remote-exec"` block writing ini file into `/etc/ansible/facts.d/frey.fact`
 - [ ] When `backup` is ran by hand, the chain should not be triggered. Yet when running a chain, `backup` should be part of it
@@ -54,6 +54,13 @@ Released: TBA.
 - [ ] Possible bug: We should likely not squashArray ansible actions such as `restart`, or actions in multiple files in the same dir are merged into one
 - [ ] Offer to run `backup` if a destructive change was detected. Skip otherwise. Defaults to yes
 - [ ] Ansible command output parsing is very basic, we can do a better job
+
+## v0.3.31
+
+Released: 2017-02-16.
+[Diff](https://github.com/freyproject/frey/compare/v0.3.30...v0.3.31).
+
+- [x] Upgrade to `scrolex@0.0.26` which will default to `passthru` `mode` on Travis CI and non-TTY environments
 - [x] Remove node defaults
 - [x] Improve upgrade dependents script
 
