@@ -31,7 +31,7 @@
     "roles",
     "lib"
   ],
-  "main": "lib/Frey",
+  "main": "lib/Frey.js",
   "bin": {
     "frey": "lib/cli.js"
   },
