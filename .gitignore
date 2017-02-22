@@ -14,3 +14,5 @@ website/_vendor/
 website/changelog.md
 website/faq.md
 .DS_Store
+
+yarn-error.log
