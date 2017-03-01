@@ -56,6 +56,13 @@ Released: TBA.
 - [ ] Ansible command output parsing is very basic, we can do a better job
 - [x] Upgrade `scrolex@0.0.27`
 
+## v0.3.32
+
+Released: Unreleased.
+[Diff](https://github.com/freyproject/frey/compare/v0.3.31...v0.3.32.
+
+- [x] Update apt role ([see](https://github.com/freyproject/role-apt/compare/frey-v1.4.0...frey-v1.4.1))
+
 ## v0.3.31
 
 Released: 2017-02-16.

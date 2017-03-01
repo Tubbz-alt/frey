@@ -32,6 +32,7 @@ __root="$(dirname "${__dir}")"
 roles=(
   'apt,1.3.0,master'
   'apt,1.4.0,master'
+  'apt,1.4.1,master'
   'rsyslog,3.1.0,master'
   'rsyslog,3.1.1,master'
   'rollback,1.2.0,master'
