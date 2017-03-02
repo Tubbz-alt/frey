@@ -54,6 +54,7 @@ Released: TBA.
 - [ ] Possible bug: We should likely not squashArray ansible actions such as `restart`, or actions in multiple files in the same dir are merged into one
 - [ ] Offer to run `backup` if a destructive change was detected. Skip otherwise. Defaults to yes
 - [ ] Ansible command output parsing is very basic, we can do a better job
+- [ ] Fix bug where `frey get` ignores `--project-dir ./infra` and will just try to find `Terraform configuration files` in the cwd
 - [x] Upgrade `scrolex@0.0.27`
 
 ## v0.3.32
