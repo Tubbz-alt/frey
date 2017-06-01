@@ -57,6 +57,13 @@ Released: TBA.
 - [ ] Fix bug where Frey won't show the error output when e.g. ansible cannot connect due to an invalid pem key (likely a scrolex issue)
 - [ ] Fix bug where `frey get` ignores `--project-dir ./infra` and will just try to find `Terraform configuration files` in the cwd
 
+## v0.3.33
+
+Released: 2017-06-01.
+[Diff](https://github.com/freyproject/frey/compare/v0.3.32...v0.3.33.
+
+- [x] Fix bug complaining about `this.info`
+
 ## v0.3.32
 
 Released: 2017-06-01.

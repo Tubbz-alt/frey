@@ -12,7 +12,7 @@ class Infra extends Step {
 
   _confirm (cargo, cb) {
     if (!_.has(this.runtime.config, 'infra')) {
-      this.info(`Skipping as there are no install instructions\n`)
+      this._stick(`Skipping as there are no install instructions`)
       return cb(null)
     }
 
@@ -29,7 +29,7 @@ class Infra extends Step {
 
   main (cargo, cb) {
     if (!_.has(this.runtime.config, 'infra')) {
-      this.info(`Skipping as there are no install instructions\n`)
+      this._stick(`Skipping as there are no install instructions`)
       return cb(null)
     }
 
