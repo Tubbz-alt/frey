@@ -42,7 +42,7 @@ class Deps extends Step {
     deps.push({
       type   : 'App',
       name   : 'terraform',
-      version: '0.7.3',
+      version: '0.9.6',
       range  : '{{{self.version}}}',
       dir    : '{{{config.global.tools_dir}}}/terraform/{{{self.version}}}',
       exe    : '{{{self.dir}}}/terraform',

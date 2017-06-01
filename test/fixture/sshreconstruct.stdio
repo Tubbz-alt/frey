@@ -4,7 +4,7 @@
  › frey › prepare ›
    Reconstructing private key '{root}/test/scenario/sshreconstruct/frey-sshreconstruct.pem' from '{root}/test/scenario/sshreconstruct/frey-sshreconstruct.pem.cast5'
    Creating public key '{root}/test/scenario/sshreconstruct/frey-sshreconstruct.pub'
-   Found 'terraform' with version '0.7.3'
+   Found 'terraform' with version '0.9.6'
    Found 'terraformInventory' with version '0.6.0'
    Found 'pip' with version {{global_pip_version}}
    Found 'ansible' with version '2.1.4'

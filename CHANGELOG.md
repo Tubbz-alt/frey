@@ -56,13 +56,14 @@ Released: TBA.
 - [ ] Ansible command output parsing is very basic, we can do a better job
 - [ ] Fix bug where Frey won't show the error output when e.g. ansible cannot connect due to an invalid pem key (likely a scrolex issue)
 - [ ] Fix bug where `frey get` ignores `--project-dir ./infra` and will just try to find `Terraform configuration files` in the cwd
-- [x] Upgrade `scrolex@0.0.27`
 
 ## v0.3.32
 
-Released: Unreleased.
+Released: 2017-06-01.
 [Diff](https://github.com/freyproject/frey/compare/v0.3.31...v0.3.32.
 
+- [x] Upgrade from Terraform 0.7.3 -> 0.9.6
+- [x] Upgrade `scrolex@0.0.27`
 - [x] Update apt role ([see](https://github.com/freyproject/role-apt/compare/frey-v1.4.0...frey-v1.4.1))
 
 ## v0.3.31
@@ -153,7 +154,7 @@ Released: 2016-09-15.
 
 Released: 2016-09-15.
 
-- [x] Upgrade from Terraform 0.6.15 -> 0.7.3 again, because all our states cannot be downgraded
+- [x] Upgrade from Terraform 0.6.15 -> 0.9.6 again, because all our states cannot be downgraded
 - [x] Better exception handling
 - [x] More control over squashArray exceptions by using full paths
 
@@ -163,7 +164,7 @@ Released: 2016-09-15.
 
 - [x] Fix node install problem on Trusty with python 2.7.6: https://github.com/ansible/ansible/issues/9966#issuecomment-246373269 https://github.com/nodesource/distributions/issues/354
 - [x] Squash exceptions on non object arrays
-- [x] Downgrade from Terraform 0.7.3 -> 0.6.15 as the first throws EOL errors (test with `statuspage` repo and you'll see)
+- [x] Downgrade from Terraform 0.9.6 -> 0.6.15 as the first throws EOL errors (test with `statuspage` repo and you'll see)
 - [x] Less verbosity in debug mode
 
 ## v0.3.20
@@ -171,7 +172,7 @@ Released: 2016-09-15.
 Released: 2016-09-14.
 
 - [x] Write a higher quality json->hcl->json converter
-- [x] Upgrade from Terraform 0.6.15 -> 0.7.3
+- [x] Upgrade from Terraform 0.6.15 -> 0.9.6
 - [-] Equal sign vertical alignment for `frey format`
 - [x] Make HCL the primary format of Freyfiles (vs TOML)
 - [x] Deprecate pyhcl alltogether in favor of json2hcl
