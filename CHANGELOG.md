@@ -50,12 +50,19 @@ Released: TBA.
 - [ ] When launching `frey` and we have no `FREY_` env keys, and we do `globSync` of `env*.sh` in the `cwd()` or `projectDir`, offer a list of which one to source automatically. Then inject these into the process.env(?)
 - [ ] Frey should show debug output based on `-v` or `-vv` or `-vvv`. Because it's a tool, and not a library, we should ditch the `DEBUG` env var
 - [ ] Upon `may i destroy infra?` question, Frey should show all the resource IDs that are getting destroyed
-- [ ] `get` should be daisychained before `refresh`, not `plan`
 - [ ] Possible bug: We should likely not squashArray ansible actions such as `restart`, or actions in multiple files in the same dir are merged into one
 - [ ] Offer to run `backup` if a destructive change was detected. Skip otherwise. Defaults to yes
 - [ ] Ansible command output parsing is very basic, we can do a better job
 - [ ] Fix bug where Frey won't show the error output when e.g. ansible cannot connect due to an invalid pem key (likely a scrolex issue)
-- [ ] Fix bug where `frey get` ignores `--project-dir ./infra` and will just try to find `Terraform configuration files` in the cwd
+
+## v0.3.34
+
+Released: 2017-06-01.
+[Diff](https://github.com/freyproject/frey/compare/v0.3.33...v0.3.34.
+
+- [x] Change TF deprecated `key_file` to `private_key` (which requires `${file("/path")}`)
+- [x] `get` is now daisychained before `refresh`, not `plan`
+- [x] Fix bug where `frey get` ignores `--project-dir ./infra` and will just try to find `Terraform configuration files` in the cwd
 
 ## v0.3.33
 

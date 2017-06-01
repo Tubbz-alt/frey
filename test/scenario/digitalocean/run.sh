@@ -44,7 +44,7 @@ git init > /dev/null 2>&1 || true
 rm -f *.pem > /dev/null 2>&1 || true
 
 # We seem to not be able to guarantee the create order of multiple web hosts, so override with count = 1 in tests
-"${__node}" "${__root}/${__codelib}/cli.js" \
+SCROLEX_MODE=passthru "${__node}" "${__root}/${__codelib}/cli.js" \
   --cfg-var "global.ssh.key_dir=." \
   --cfg-var "infra.variable.web_count.default=1" \
   --no-color \

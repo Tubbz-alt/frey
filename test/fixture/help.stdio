@@ -5,9 +5,9 @@ Commands:
   config      ▽ Loads, merges, renders, writes configuration
   deps        ▽ Loads dependency definitions
   prepare     ▽ Installs dependencies like Terraform
+  get         ▽ Get infra modules
   refresh     ▽ Refreshes current infra state and saves to terraform.tfstate
   validate    ▽ Checks your projects
-  get         ▽ Get infra modules
   plan        ▽ Shows infra changes and saves in an executable plan
   backup      ▽ Backs up server state
   infra       ▽ Launches virtual machines at a provider

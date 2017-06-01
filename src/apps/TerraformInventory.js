@@ -8,6 +8,7 @@ class TerraformInventory extends App {
     const appDefaults = {
       args         : {},
       env          : terraformInventoryProps.env || {},
+      cwd          : runtime.init.cliargs.projectDir,
       signatureOpts: { equal: '=', quote: '', dash: '-', escape: false },
       exe          : terraformInventoryProps.exe,
     }

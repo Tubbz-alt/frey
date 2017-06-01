@@ -71,7 +71,7 @@ describe('Frey', () => {
       })
     })
 
-    it('should return all links for prepare', done => {
+    it('should return all steps for prepare', done => {
       const frey = new Frey()
 
       const options = { _: ['prepare'] }
@@ -83,9 +83,9 @@ describe('Frey', () => {
           'config',
           'deps',
           'prepare',
+          'get',
           'refresh',
           'validate',
-          'get',
           'plan',
           'backup',
           'infra',
@@ -99,7 +99,7 @@ describe('Frey', () => {
       })
     })
 
-    it('should return one link for bail', done => {
+    it('should return one step for bail', done => {
       const frey = new Frey()
 
       const options = { _: ['deploy'], bail: true }
@@ -111,7 +111,7 @@ describe('Frey', () => {
       })
     })
 
-    it('should return some links for bailAfter', done => {
+    it('should return some steps for bailAfter', done => {
       const frey = new Frey()
 
       const options = { _: ['refresh'], bailAfter: 'plan' }
@@ -123,9 +123,9 @@ describe('Frey', () => {
           'config',
           'deps',
           'prepare',
+          'get',
           'refresh',
           'validate',
-          'get',
           'plan',
         ])
         done()

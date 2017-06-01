@@ -91,6 +91,9 @@ class App {
       if ('showCmd' in opts) {
         scrolexOpts.showCmd = opts.showCmd
       }
+      if ('cwd' in opts) {
+        scrolexOpts.cwd = opts.cwd
+      }
 
       const scrolexArgs = [opts.exe].concat(args)
 

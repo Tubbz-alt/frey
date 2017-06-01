@@ -94,7 +94,7 @@ infra resource "openstack_compute_instance_v2" freytest_app {
   provisioner "remote-exec" {
     inline = ["sudo pwd"]
     connection {
-      key_file = "{{{config.global.ssh.privatekey_file}}}"
+      private_key = "{{{config.global.ssh.privatekey_file}}}"
       user     = "{{{config.global.ssh.user}}}"
     }
   }

@@ -3,7 +3,7 @@
   "version": "0.3.33",
   "description": "Automated infrastructure CLI",
   "scripts": {
-    "acceptance:savefixtures": "env SAVE_FIXTURES=true npm run acceptance",
+    "acceptance:savefixtures": "source env.sh && env SAVE_FIXTURES=true npm run acceptance",
     "acceptance": "npm run build && ./test/acceptance.sh ${SCENARIO}",
     "babel": "babel src --out-dir lib --source-maps",
     "build:watch": "babel src --watch --source-maps --out-dir lib",

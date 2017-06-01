@@ -2,7 +2,7 @@ ACCPTST:STDIO_REPLACE_ELAPSED
 (maybe) Destroying..
  › frey › main ›
    Frey version '0.3.33'
-   Will run: [ 'init', 'config', 'deps', 'prepare', 'refresh', 'validate', 'get', 'plan', 'backup', 'infra', 'install', 'setup', 'deploy', 'restart', 'show' ]
+   Will run: [ 'init', 'config', 'deps', 'prepare', 'get', 'refresh', 'validate', 'plan', 'backup', 'infra', 'install', 'setup', 'deploy', 'restart', 'show' ]
  › frey › prepare ›
    Creating private key '{tmpdir}/frey-dynamodb.pem'
    Creating public key '{tmpdir}/frey-dynamodb.pub'
@@ -11,9 +11,15 @@ ACCPTST:STDIO_REPLACE_ELAPSED
    Found 'terraformInventory' with version '0.6.0'
    Found 'pip' with version {{global_pip_version}}
    Found 'ansible' with version '2.1.4'
- › frey › refresh ›
-   Saved state to '{root}/test/scenario/dynamodb/Frey-state-terraform.tfstate'
    Updated modules
+ › frey › refresh ›
+   Empty or non-existent state file.
+
+   Refresh will do nothing. Refresh does not error or return an erroneous
+   exit status because many automation scripts use refresh, plan, then apply
+   and may not have a state file yet for the first run.
+
+   Saved state to '{root}/test/scenario/dynamodb/Frey-state-terraform.tfstate'
  › frey › plan ›
    The Terraform execution plan has been generated and is shown below.
    Resources are shown in alphabetical order for quick scanning. Green resources
@@ -28,61 +34,61 @@ ACCPTST:STDIO_REPLACE_ELAPSED
    Path: {root}/test/scenario/dynamodb/Frey-residu-terraform.plan
 
    + aws_dynamodb_table.basic-dynamodb-table
-   arn:                                                   "<computed>"
-   attribute.#:                                           "3"
-   attribute.301566416.name:                              "TopScore"
-   attribute.301566416.type:                              "N"
-   attribute.3178016421.name:                             "GameTitle"
-   attribute.3178016421.type:                             "S"
-   attribute.3403068082.name:                             "UserId"
-   attribute.3403068082.type:                             "N"
-   global_secondary_index.#:                              "1"
-   global_secondary_index.505842399.hash_key:             "GameTitle"
-   global_secondary_index.505842399.name:                 "GameTitleIndex"
-   global_secondary_index.505842399.non_key_attributes.#: "1"
-   global_secondary_index.505842399.non_key_attributes.0: "UserId"
-   global_secondary_index.505842399.projection_type:      "INCLUDE"
-   global_secondary_index.505842399.range_key:            "TopScore"
-   global_secondary_index.505842399.read_capacity:        "10"
-   global_secondary_index.505842399.write_capacity:       "10"
-   hash_key:                                              "UserId"
-   name:                                                  "GameScores"
-   range_key:                                             "GameTitle"
-   read_capacity:                                         "20"
-   stream_arn:                                            "<computed>"
-   stream_enabled:                                        "<computed>"
-   stream_view_type:                                      "<computed>"
-   write_capacity:                                        "20"
+   arn:                                                    "<computed>"
+   attribute.#:                                            "3"
+   attribute.301566416.name:                               "TopScore"
+   attribute.301566416.type:                               "N"
+   attribute.3178016421.name:                              "GameTitle"
+   attribute.3178016421.type:                              "S"
+   attribute.3403068082.name:                              "UserId"
+   attribute.3403068082.type:                              "N"
+   global_secondary_index.#:                               "1"
+   global_secondary_index.2342318823.hash_key:             "GameTitle"
+   global_secondary_index.2342318823.name:                 "GameTitleIndex"
+   global_secondary_index.2342318823.non_key_attributes.#: "1"
+   global_secondary_index.2342318823.non_key_attributes.0: "UserId"
+   global_secondary_index.2342318823.projection_type:      "INCLUDE"
+   global_secondary_index.2342318823.range_key:            "TopScore"
+   global_secondary_index.2342318823.read_capacity:        "10"
+   global_secondary_index.2342318823.write_capacity:       "10"
+   hash_key:                                               "UserId"
+   name:                                                   "GameScores"
+   range_key:                                              "GameTitle"
+   read_capacity:                                          "20"
+   stream_arn:                                             "<computed>"
+   stream_enabled:                                         "<computed>"
+   stream_view_type:                                       "<computed>"
+   write_capacity:                                         "20"
    Plan: 1 to add, 0 to change, 0 to destroy.
    Saved plan as '{root}/test/scenario/dynamodb/Frey-residu-terraform.plan'
  › frey › infra ›
    aws_dynamodb_table.basic-dynamodb-table: Creating...
-   arn:                                                   "" => "<computed>"
-   attribute.#:                                           "" => "3"
-   attribute.301566416.name:                              "" => "TopScore"
-   attribute.301566416.type:                              "" => "N"
-   attribute.3178016421.name:                             "" => "GameTitle"
-   attribute.3178016421.type:                             "" => "S"
-   attribute.3403068082.name:                             "" => "UserId"
-   attribute.3403068082.type:                             "" => "N"
-   global_secondary_index.#:                              "" => "1"
-   global_secondary_index.505842399.hash_key:             "" => "GameTitle"
-   global_secondary_index.505842399.name:                 "" => "GameTitleIndex"
-   global_secondary_index.505842399.non_key_attributes.#: "" => "1"
-   global_secondary_index.505842399.non_key_attributes.0: "" => "UserId"
-   global_secondary_index.505842399.projection_type:      "" => "INCLUDE"
-   global_secondary_index.505842399.range_key:            "" => "TopScore"
-   global_secondary_index.505842399.read_capacity:        "" => "10"
-   global_secondary_index.505842399.write_capacity:       "" => "10"
-   hash_key:                                              "" => "UserId"
-   name:                                                  "" => "GameScores"
-   range_key:                                             "" => "GameTitle"
-   read_capacity:                                         "" => "20"
-   stream_arn:                                            "" => "<computed>"
-   stream_enabled:                                        "" => "<computed>"
-   stream_view_type:                                      "" => "<computed>"
-   write_capacity:                                        "" => "20"
-   aws_dynamodb_table.basic-dynamodb-table: Creation complete
+   arn:                                                    "" => "<computed>"
+   attribute.#:                                            "" => "3"
+   attribute.301566416.name:                               "" => "TopScore"
+   attribute.301566416.type:                               "" => "N"
+   attribute.3178016421.name:                              "" => "GameTitle"
+   attribute.3178016421.type:                              "" => "S"
+   attribute.3403068082.name:                              "" => "UserId"
+   attribute.3403068082.type:                              "" => "N"
+   global_secondary_index.#:                               "" => "1"
+   global_secondary_index.2342318823.hash_key:             "" => "GameTitle"
+   global_secondary_index.2342318823.name:                 "" => "GameTitleIndex"
+   global_secondary_index.2342318823.non_key_attributes.#: "" => "1"
+   global_secondary_index.2342318823.non_key_attributes.0: "" => "UserId"
+   global_secondary_index.2342318823.projection_type:      "" => "INCLUDE"
+   global_secondary_index.2342318823.range_key:            "" => "TopScore"
+   global_secondary_index.2342318823.read_capacity:        "" => "10"
+   global_secondary_index.2342318823.write_capacity:       "" => "10"
+   hash_key:                                               "" => "UserId"
+   name:                                                   "" => "GameScores"
+   range_key:                                              "" => "GameTitle"
+   read_capacity:                                          "" => "20"
+   stream_arn:                                             "" => "<computed>"
+   stream_enabled:                                         "" => "<computed>"
+   stream_view_type:                                       "" => "<computed>"
+   write_capacity:                                         "" => "20"
+   aws_dynamodb_table.basic-dynamodb-table: Creation complete (ID: GameScores)
 
    Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 
@@ -91,7 +97,7 @@ ACCPTST:STDIO_REPLACE_ELAPSED
    infrastructure, so keep it safe. To inspect the complete state
    use the `terraform show` command.
 
-   State path: {root}/test/scenario/dynamodb/Frey-state-terraform.tfstate
+   State path:
 
    Outputs:
 

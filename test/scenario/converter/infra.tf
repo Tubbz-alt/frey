@@ -47,7 +47,7 @@ resource "aws_instance" "infra-tusd-server" {
 
   connection {
     user     = "ubuntu"
-    key_file = "${var.TSD_SSH_KEY_FILE}"
+    private_key = "${var.TSD_SSH_KEY_FILE}"
   }
 
   tags {

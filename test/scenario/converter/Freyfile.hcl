@@ -18,7 +18,7 @@ infra {
   "resource" aws_instance "infra-tusd-server" {
     ami = "${lookup(var.ami, var.region)}"
     connection {
-      key_file = "${var.TSD_SSH_KEY_FILE}"
+      private_key = "${var.TSD_SSH_KEY_FILE}"
       user = "ubuntu"
     }
     instance_type = "c3.large"

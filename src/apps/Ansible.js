@@ -10,6 +10,7 @@ class Ansible extends App {
     const ansibleProps = _.find(runtime.deps, { name: 'ansible' })
     const appDefaults = {
       args         : {},
+      cwd          : runtime.init.cliargs.projectDir,
       env          : ansibleProps.env || {},
       signatureOpts: { equal: '=', quote: '', dash: '--', escape: false },
       exe          : ansibleProps.exePlaybook,

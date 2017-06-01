@@ -43,7 +43,7 @@ infra resource digitalocean_droplet "freytest-web" {
   count      = "${var.web_count}"
   depends_on = ["digitalocean_droplet.freytest-db"]
   connection {
-    key_file = "{{{config.global.ssh.privatekey_file}}}"
+    private_key = "${file("{{{config.global.ssh.privatekey_file}}}")}"
     user     = "{{{config.global.ssh.user}}}"
   }
   provisioner "remote-exec" {
@@ -59,7 +59,7 @@ infra resource digitalocean_droplet "freytest-db" {
   ssh_keys = ["${digitalocean_ssh_key.freytest-sshkey.id}"]
   count    = "${var.db_count}"
   connection {
-    key_file = "{{{config.global.ssh.privatekey_file}}}"
+    private_key = "${file("{{{config.global.ssh.privatekey_file}}}")}"
     user     = "{{{config.global.ssh.user}}}"
   }
   provisioner "remote-exec" {

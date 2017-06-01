@@ -9,6 +9,7 @@ class Terraform extends App {
     const appDefaults = {
       args         : {},
       env          : terraformProps.env || {},
+      cwd          : runtime.init.cliargs.projectDir,
       signatureOpts: { equal: '=', quote: '', dash: '-', escape: false },
       exe          : terraformProps.exe,
     }
