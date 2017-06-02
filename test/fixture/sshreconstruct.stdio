@@ -1,5 +1,5 @@
  › frey › main ›
-   Frey version '0.3.35'
+   Frey version '0.3.36'
    Will run: [ 'init', 'config', 'deps', 'prepare' ]
  › frey › prepare ›
    Reconstructing private key '{root}/test/scenario/sshreconstruct/frey-sshreconstruct.pem' from '{root}/test/scenario/sshreconstruct/frey-sshreconstruct.pem.cast5'

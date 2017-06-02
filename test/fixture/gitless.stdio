@@ -1,5 +1,5 @@
  › frey › main ›
-   Frey version '0.3.35'
+   Frey version '0.3.36'
    Will run: [ 'init', 'config', 'deps', 'prepare', 'validate' ]
  › frey › prepare ›
    Creating private key '{tmpdir}/frey-gitless/frey-frey-gitless.pem'
