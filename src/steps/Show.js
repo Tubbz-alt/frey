@@ -30,6 +30,7 @@ class Show extends Step {
       mode: 'silent',
       args: {
         output     : constants.SHELLARG_PREPEND_AS_IS,
+        target     : constants.SHELLARG_REMOVE,
         parallelism: constants.SHELLARG_REMOVE,
       },
       runtime: this.runtime,
@@ -51,6 +52,7 @@ class Show extends Step {
       args: {
         output          : constants.SHELLARG_PREPEND_AS_IS,
         parallelism     : constants.SHELLARG_REMOVE,
+        target          : constants.SHELLARG_REMOVE,
         public_addresses: constants.SHELLARG_APPEND_AS_IS,
       },
       runtime: this.runtime,
@@ -72,6 +74,7 @@ class Show extends Step {
       args: {
         output     : constants.SHELLARG_PREPEND_AS_IS,
         parallelism: constants.SHELLARG_REMOVE,
+        target     : constants.SHELLARG_REMOVE,
         endpoint   : constants.SHELLARG_APPEND_AS_IS,
       },
       runtime: this.runtime,

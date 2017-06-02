@@ -38,8 +38,9 @@ yargs
       boolean : true,
       describe: 'Answer yes to all questions (dangerous!)',
     },
-    tags : { nargs: 1, type: 'string', describe: 'A list of tags to execute in isolation' },
-    sleep: {
+    target: { nargs: 1, type: 'string', describe: 'A Terraform target to execute in isolation' },
+    tags  : { nargs: 1, type: 'string', describe: 'A list of Ansible tags to execute in isolation' },
+    sleep : {
       default : 5,
       nargs   : 1,
       type    : 'number',

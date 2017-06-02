@@ -60,6 +60,7 @@ Released: TBA.
 Released: 2017-06-02.
 [Diff](https://github.com/freyproject/frey/compare/v0.3.34...v0.3.35.
 
+- [x] Add support for Terraform's `target` to isolate resources or modules
 - [x] Add support for remote state
 
 ## v0.3.34

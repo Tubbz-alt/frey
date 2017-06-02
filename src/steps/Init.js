@@ -46,6 +46,9 @@ class Init extends Step {
     if (cliargs.tags === undefined) {
       cliargs.tags = ''
     }
+    if (cliargs.target === undefined) {
+      cliargs.target = ''
+    }
 
     if (cliargs.projectDir === undefined) {
       cliargs.projectDir = this.bootCargo._os.cwd

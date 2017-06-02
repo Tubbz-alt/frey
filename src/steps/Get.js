@@ -15,6 +15,7 @@ class Get extends Step {
         get        : constants.SHELLARG_PREPEND_AS_IS,
         state      : constants.SHELLARG_REMOVE,
         parallelism: constants.SHELLARG_REMOVE,
+        target     : constants.SHELLARG_REMOVE,
         update     : true,
       },
       runtime: this.runtime,

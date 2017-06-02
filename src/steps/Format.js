@@ -30,6 +30,7 @@ class Format extends Step {
       list       : true,
       state      : constants.SHELLARG_REMOVE,
       parallelism: constants.SHELLARG_REMOVE,
+      target     : constants.SHELLARG_REMOVE,
     }
     args[hclFile] = constants.SHELLARG_APPEND_AS_IS
 

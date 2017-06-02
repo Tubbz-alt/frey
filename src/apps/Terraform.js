@@ -23,6 +23,10 @@ class Terraform extends App {
       appDefaults.env['TF_LOG'] = 'DEBUG'
     }
 
+    if (runtime.init.cliargs.target) {
+      appDefaults.args['target'] = runtime.init.cliargs.target
+    }
+
     appDefaults.args['parallelism'] = runtime.config.global.terraformcfg.parallelism
 
     let remoteState = _.get(runtime, 'config.infra.terraform.backend')
