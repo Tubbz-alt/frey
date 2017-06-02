@@ -28,7 +28,14 @@ class Refresh extends Step {
         }
       }
 
-      this._scroll(`Saved state to '${this.runtime.config.global.infra_state_file}'`)
+      let remoteState = _.get(this.runtime, 'config.infra.terraform.backend')
+      if (remoteState) {
+        debug({remoteState})
+        debug('Refraining form pointing to local state as I found remoteState config')
+        this._scroll(`Saved state to remote backend`)
+      } else {
+        this._scroll(`Saved state to '${this.runtime.config.global.infra_state_file}'`)
+      }
       return cb(null)
     })
   }

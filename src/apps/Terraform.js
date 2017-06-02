@@ -1,5 +1,6 @@
 const chalk = require('chalk')
 const _ = require('lodash')
+const debug = require('depurar')('frey')
 const App = require('../App')
 const constants = require('../constants')
 
@@ -23,7 +24,14 @@ class Terraform extends App {
     }
 
     appDefaults.args['parallelism'] = runtime.config.global.terraformcfg.parallelism
-    appDefaults.args['state'] = runtime.config.global.infra_state_file
+
+    let remoteState = _.get(runtime, 'config.infra.terraform.backend')
+    if (remoteState) {
+      debug({remoteState})
+      debug(`Refraining form pointing to local state as I found remote backend`)
+    } else {
+      appDefaults.args['state'] = runtime.config.global.infra_state_file
+    }
 
     cb(null, appDefaults)
   }

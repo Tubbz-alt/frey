@@ -30,7 +30,6 @@ class Show extends Step {
       mode: 'silent',
       args: {
         output     : constants.SHELLARG_PREPEND_AS_IS,
-        state      : this.runtime.config.global.infra_state_file,
         parallelism: constants.SHELLARG_REMOVE,
       },
       runtime: this.runtime,
@@ -51,7 +50,6 @@ class Show extends Step {
       mode: 'silent',
       args: {
         output          : constants.SHELLARG_PREPEND_AS_IS,
-        state           : this.runtime.config.global.infra_state_file,
         parallelism     : constants.SHELLARG_REMOVE,
         public_addresses: constants.SHELLARG_APPEND_AS_IS,
       },
@@ -73,7 +71,6 @@ class Show extends Step {
       mode: 'silent',
       args: {
         output     : constants.SHELLARG_PREPEND_AS_IS,
-        state      : this.runtime.config.global.infra_state_file,
         parallelism: constants.SHELLARG_REMOVE,
         endpoint   : constants.SHELLARG_APPEND_AS_IS,
       },
