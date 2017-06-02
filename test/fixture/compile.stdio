@@ -1,6 +1,6 @@
 ACCPTST:STDIO_SKIP_COMPARE
  › frey › main ›
-   Frey version '0.3.34'
+   Frey version '0.3.35'
    Will run: [ 'init', 'config' ]
 Done
 --> Freyfile.hcl
