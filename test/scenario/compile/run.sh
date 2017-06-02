@@ -41,8 +41,8 @@ SCROLEX_MODE=${SCROLEX_MODE:-} \
 HOME=${HOME} \
 FREY_SHOULD_BE_AS_VAR_IN_TERRAFORM=now \
 "${__node}" "${__root}/${__codelib}/cli.js" config \
-  --cfg-var "global.ssh.key_dir=${__sysTmpDir}" \
-  --cfg-var "infra.provider.aws.region=eu-west-1" \
+  --cfgVar "global.ssh.key_dir=${__sysTmpDir}" \
+  --cfgVar "infra.provider.aws.region=eu-west-1" \
   --project-dir "." \
   --bail
 

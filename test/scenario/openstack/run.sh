@@ -36,8 +36,8 @@ function destroy() {
   echo "(maybe) Destroying.."
 
   "${__node}" "${__root}/${__codelib}/cli.js" destroy \
-    --force-yes \
-    --cfg-var="global.terraformcfg.parallelism=1" \
+    --forceYes \
+    --cfgVar="global.terraformcfg.parallelism=1" \
   > /dev/null 2>&1 || true
 }
 
@@ -49,10 +49,10 @@ rm -f *.pem > /dev/null 2>&1 || true
 git init > /dev/null 2>&1 || true
 
 "${__node}" "${__root}/${__codelib}/cli.js" config \
-  --cfg-var "global.ssh.key_dir=${__dir}" \
+  --cfgVar "global.ssh.key_dir=${__dir}" \
   --no-color \
-  --force-yes \
-  --cfg-var="global.terraformcfg.parallelism=1" \
+  --forceYes \
+  --cfgVar="global.terraformcfg.parallelism=1" \
 || false
 
 rm -f Frey-residu* > /dev/null 2>&1 || true

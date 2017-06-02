@@ -44,9 +44,9 @@ SCROLEX_MODE=${SCROLEX_MODE:-} \
 DEBUG=${DEBUG:-} \
 FREY_SHOULD_BE_AS_VAR_IN_ANSIBLE=now \
 "${__node}" "${__root}/${__codelib}/cli.js" install \
-  --cfg-var "global.ssh.key_dir=${__sysTmpDir}" \
+  --cfgVar "global.ssh.key_dir=${__sysTmpDir}" \
   --no-color \
-  --force-yes \
+  --forceYes \
   --bail \
 || false
 

@@ -23,9 +23,9 @@ mkdir -p "${__sysTmpDir}/frey-gitless"
 cp Freyfile.hcl "${__sysTmpDir}/frey-gitless/"
 
 "${__node}" "${__root}/${__codelib}/cli.js" validate \
-  --force-yes \
+  --forceYes \
   --no-color \
-  --cfg-var "global.ssh.key_dir=${__sysTmpDir}/frey-gitless" \
+  --cfgVar "global.ssh.key_dir=${__sysTmpDir}/frey-gitless" \
   --project-dir "${__sysTmpDir}/frey-gitless/" \
   --bail
 

@@ -26,8 +26,8 @@ rm -f "${__sysTmpDir}/frey-dynamodb"* || true
 function destroy() {
   echo "(maybe) Destroying.."
   "${__node}" "${__root}/${__codelib}/cli.js" destroy \
-    --force-yes \
-    --cfg-var="global.terraformcfg.parallelism=1" \
+    --forceYes \
+    --cfgVar="global.terraformcfg.parallelism=1" \
   > /dev/null 2>&1 || true
 
   # @todo: Do we really need a target when destroying?
@@ -40,9 +40,9 @@ if true; then trap destroy EXIT; fi
 git init > /dev/null 2>&1 || true
 
 "${__node}" "${__root}/${__codelib}/cli.js" \
-  --cfg-var "global.ssh.key_dir=${__sysTmpDir}" \
+  --cfgVar "global.ssh.key_dir=${__sysTmpDir}" \
   --no-color \
-  --force-yes \
+  --forceYes \
 || false
 
 rm -f Frey-residu* > /dev/null 2>&1 || true

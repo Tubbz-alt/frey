@@ -27,7 +27,7 @@ class Utils {
 
   confirm (question, forceYes, cb) {
     if (forceYes) {
-      scrolex.scroll(`Skipping confirmation for '${question}' as '--force-yes' applies`)
+      scrolex.scroll(`Skipping confirmation for '${question}' as '--forceYes' applies`)
       return cb(null)
     }
 

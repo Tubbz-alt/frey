@@ -25,7 +25,7 @@ rm -f Freyfile.hcl > /dev/null 2>&1 || true
 # We seem to not be able to guarantee the create order of multiple web hosts, so override with count = 1 in tests
 "${__node}" "${__root}/${__codelib}/cli.js" convert --projectDir .\
   --no-color \
-  --force-yes \
+  --forceYes \
 || false
 
 cat Freyfile.hcl

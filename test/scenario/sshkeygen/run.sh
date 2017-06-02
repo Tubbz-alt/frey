@@ -22,14 +22,14 @@ git init > /dev/null 2>&1 || true
 
 rm -f "${__sysTmpDir}/frey-sshkeygen."* || true
 "${__node}" "${__root}/${__codelib}/cli.js" \
-  --cfg-var "global.ssh.key_dir=${__sysTmpDir}" \
+  --cfgVar "global.ssh.key_dir=${__sysTmpDir}" \
   --bail-after prepare
 
 ls "${__sysTmpDir}/frey-sshkeygen."* || true
 
 rm -f "${__sysTmpDir}/frey-sshkeygen.pub" || true
 "${__node}" "${__root}/${__codelib}/cli.js" \
-  --cfg-var "global.ssh.key_dir=${__sysTmpDir}" \
+  --cfgVar "global.ssh.key_dir=${__sysTmpDir}" \
   --bail-after prepare
 
 ls "${__sysTmpDir}/frey-sshkeygen."* || true

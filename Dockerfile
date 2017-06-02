@@ -31,7 +31,7 @@ RUN apt-get install --no-install-recommends -y openssh-client unzip git-core && 
   apt-get autoremove && \
   yarn install && \
   touch Freyfile.hcl && \
-  node src/cli.js prepare --bail --force-yes && \
+  node src/cli.js prepare --bail --forceYes && \
   rm -Rf ${HOME}/.cache
 
 ENTRYPOINT ["node", "/opt/frey/src/cli.js"]

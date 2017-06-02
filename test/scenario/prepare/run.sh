@@ -34,8 +34,8 @@ rm -f "${__sysTmpDir}/frey-customprepare"* || true
 git init > /dev/null 2>&1 || true
 
 "${__node}" "${__root}/${__codelib}/cli.js" prepare \
-  --force-yes \
-  --cfg-var "global.ssh.key_dir=${__sysTmpDir}" \
+  --forceYes \
+  --cfgVar "global.ssh.key_dir=${__sysTmpDir}" \
   --project-dir "." \
   --bail
 

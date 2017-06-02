@@ -32,8 +32,8 @@ rm -f "${__sysTmpDir}/frey-digitalocean"* || true
 function destroy() {
   echo "(maybe) Destroying.."
   "${__node}" "${__root}/${__codelib}/cli.js" destroy \
-    --force-yes \
-    --cfg-var="global.terraformcfg.parallelism=1" \
+    --forceYes \
+    --cfgVar="global.terraformcfg.parallelism=1" \
   > /dev/null 2>&1 || true
 }
 
@@ -45,10 +45,10 @@ rm -f *.pem > /dev/null 2>&1 || true
 
 # We seem to not be able to guarantee the create order of multiple web hosts, so override with count = 1 in tests
 SCROLEX_MODE=passthru "${__node}" "${__root}/${__codelib}/cli.js" \
-  --cfg-var "global.ssh.key_dir=." \
-  --cfg-var "infra.variable.web_count.default=1" \
+  --cfgVar "global.ssh.key_dir=." \
+  --cfgVar "infra.variable.web_count.default=1" \
   --no-color \
-  --force-yes \
+  --forceYes \
 || false
 
 rm -f *.pem > /dev/null 2>&1 || true

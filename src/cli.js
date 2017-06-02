@@ -31,7 +31,7 @@ yargs
     'cfg-var': {
       nargs   : 1,
       type    : 'string',
-      describe: 'Keys in your config to overwrite such as: --cfg-var="global.ssh.key_dir=/tmp" --cfg-var="global.terraformcfg.parallelism=2"',
+      describe: 'Keys in your config to overwrite such as: --cfgVar="global.ssh.key_dir=/tmp" --cfgVar="global.terraformcfg.parallelism=2"',
     },
     'force-yes': {
       default : false,

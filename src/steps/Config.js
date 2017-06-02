@@ -171,7 +171,7 @@ class Config extends Step {
       },
     }
 
-    // Take --cfg-var cli options
+    // Take --cfgVar cli options
     let flatCliConfig = {}
     let cliConfig = {}
     if (this.runtime.init.cliargs.cfgVar) {
