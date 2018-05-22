@@ -1,6 +1,6 @@
 {
   "name": "frey",
-  "version": "0.3.39",
+  "version": "0.3.40",
   "description": "Automated infrastructure CLI",
   "scripts": {
     "acceptance:savefixtures": "source env.sh && env SAVE_FIXTURES=true npm run acceptance",
