@@ -48,7 +48,10 @@ class Utils {
   }
 
   decryptFile (readFile, writeFile, password, cb) {
-    this._cryptFile(crypto.createDecipher('cast5-cbc', password), readFile, writeFile, cb)
+    let decrypt = crypto.createDecipher('cast5-cbc', password)
+    // https://github.com/nodejs/node/issues/2794#issuecomment-139436581
+    decrypt.setAutoPadding(false)
+    this._cryptFile(decrypt, readFile, writeFile, cb)
   }
 
   render (subject, data, opts = {}) {
