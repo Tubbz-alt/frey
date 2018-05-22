@@ -1,7 +1,7 @@
 ACCPTST:STDIO_REPLACE_ELAPSED
 (maybe) Destroying..
  › frey › main ›
-   Frey version '0.3.36'
+   Frey version '0.3.39'
    Will run: [ 'init', 'config', 'deps', 'prepare', 'get', 'refresh', 'validate', 'plan', 'backup', 'infra', 'install', 'setup', 'deploy', 'restart', 'show' ]
  › frey › prepare ›
    Creating private key '{tmpdir}/frey-dynamodb.pem'
