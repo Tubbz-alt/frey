@@ -24,7 +24,7 @@
     "test": "npm run lint && npm run build && npm run mocha",
     "toc": "doctoc --github --notitle --maxlevel 3 README.md",
     "version:current": "node -e 'console.log(require(\"./package.json\").version)'",
-    "version:replace": "replace \"Frey version '\\d+\\.\\d+\\.\\d+'\" \"Frey version '$(npm run --silent version:current)'\" test/fixture/*.stdio"
+    "version:replace": "replace-x \"Frey version '\\d+\\.\\d+\\.\\d+'\" \"Frey version '$(npm run --silent version:current)'\" test/fixture/*.stdio"
   },
   "files": [
     "bin",
