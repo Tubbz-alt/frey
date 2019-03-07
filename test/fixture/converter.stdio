@@ -1,5 +1,5 @@
  › frey › main ›
-   Frey version '0.3.41'
+   Frey version '0.3.42'
    Will run: [ 'init', 'config', 'deps', 'convert', 'format' ]
  › frey › convert ›
    Skipping confirmation for 'About to convert existing TOML, YAML, CFG and TF to HCL files in your project dir. Make sure your files are under source control as this is a best-effort procedure. May I proceed?' as '--forceYes' applies
