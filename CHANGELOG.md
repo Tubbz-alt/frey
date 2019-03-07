@@ -55,6 +55,13 @@ Released: TBA.
 - [ ] Ansible command output parsing is very basic, we can do a better job
 - [ ] Fix bug where Frey won't show the error output when e.g. ansible cannot connect due to an invalid pem key (likely a scrolex issue)
 
+## v0.3.41
+
+Released: 2017-06-02.
+[Diff](https://github.com/freyproject/frey/compare/v0.3.36...v0.3.41.
+
+- [x] Fix handling of two-digit pip version
+
 ## v0.3.36
 
 Released: 2017-06-02.

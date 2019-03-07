@@ -112,6 +112,12 @@ class Deps extends Step {
           return stdout
         }
         const version = `${parts[1]}`.replace('v', '')
+
+        let pp = version.split('.')
+        if (pp.length === 2) {
+          version += '.0'
+        }
+
         return version
       },
       cmdInstall: (
