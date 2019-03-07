@@ -111,7 +111,7 @@ class Deps extends Step {
         if (!parts || !parts[1]) {
           return stdout
         }
-        const version = `${parts[1]}`.replace('v', '')
+        let version = `${parts[1]}`.replace('v', '')
 
         let pp = version.split('.')
         if (pp.length === 2) {
