@@ -1,6 +1,6 @@
 ACCPTST:STDIO_SKIP_COMPARE
  › frey › main ›
-   Frey version '0.3.40'
+   Frey version '0.3.41'
    Will run: [ 'init', 'config', 'deps', 'prepare' ]
  › frey › prepare ›
    Creating private key '{tmpdir}/frey-prepare.pem'
