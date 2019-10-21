@@ -26,7 +26,7 @@ Unreleased and unplanned todos
 ## next
 
 Released: TBA.
-[Diff](https://github.com/freyproject/frey/compare/v0.4.0...master).
+[Diff](https://github.com/freyproject/frey/compare/v0.5.0...master).
 
 - [ ] `Show` should use `terraformInventory` just like `Remote`, instead of `public_addresses`
 - [ ] Add support for a `alienInventory` executable, that can cough up hostnames of existing infra
@@ -50,10 +50,10 @@ Released: TBA.
 - [ ] When `backup` is ran by hand, the chain should not be triggered. Yet when running a chain, `backup` should be part of it
 - [ ] When launching `frey` and we have no `FREY_` env keys, and we do `globSync` of `env*.sh` in the `cwd()` or `projectDir`, offer a list of which one to source automatically. Then inject these into the process.env(?)
 
-## v0.4.0
+## v0.5.0
 
 Released: 2019-10-21.
-[Diff](https://github.com/freyproject/frey/compare/v0.3.43...v0.4.0).
+[Diff](https://github.com/freyproject/frey/compare/v0.3.43...v0.5.0).
 
 - [x] Upgrade from Terraform 0.9.6 to 0.11.14
 
