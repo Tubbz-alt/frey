@@ -7,7 +7,7 @@ ACCPTST:STDIO_REPLACE_REMOTE_EXEC
 ACCPTST:STDIO_REPLACE_ELAPSED
 (maybe) Destroying..
  › frey › main ›
-   Frey version '0.5.0'
+   Frey version '0.5.1'
    Will run: [ 'init', 'config', 'deps', 'prepare', 'get', 'refresh', 'validate', 'plan', 'backup', 'infra', 'install', 'setup', 'deploy', 'restart', 'show' ]
  › frey › prepare ›
    Reconstructing private key '{root}/test/scenario/digitalocean/frey-digitalocean.pem' from '{root}/test/scenario/digitalocean/frey-digitalocean.pem.cast5'
