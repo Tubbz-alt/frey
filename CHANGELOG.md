@@ -23,56 +23,58 @@ Unreleased and unplanned todos
 - [ ] Add generic cleanup method that `.pem` as well as `Frey-residu-*` can be registered with, so it will all be deleted if `global.purge_residu` is turned on (default = `true`)
 - [ ] Don't rely on `exceptions` in `squashArrays`, but have a more clever system to preserve arrays (a better json2hcl or adhering to arrayed config might also fix this already, ridding ourselves from squash)
 
-## v0.3.x
-
-Released: Unreleased.
-
-- [ ] Consider putting `provider` `output` `variable` `resource` at the root level, and removing intermediate `playbooks` level from `install`, `setup`, `backup`, `restore`, etc. This will simplify how the hcl looks, and (maybe) allow us to keep the hcl for terraform untouched, vs doing hcl->object->json (but what about injecting FREY vars..)
-- [ ] Make Frey less 'classy', utilizing more pure functions, and allow the introduction of globals such as `runtime`
-- [ ] allow Ansible and Terraform version override from config
-- [ ] Check for `git ignore Frey-residu-*`
-- [ ] Don't set default arguments for Apps so we can deprecate `SHELLARG_REMOVE`
-- [ ] Offer cast5 encryption and decryption for `env.sh` (then remove `rebuild-env.sh` script from dependents)
-- [ ] `Show` should use `terraformInventory` just like `Remote`, instead of `public_addresses`
-- [ ] Speed up prepare by writing hashses do disk and comparing (just like depmake does)
-- [ ] Symlink ansible if needed: `mkdir -p ~/.frey/tools/ansible/2.0.1.0/pip/bin/ && ln -nfs ~/.frey/tools/ansible/2.0.1.0/usr/local/share/python/ansible ~/.frey/tools/ansible/2.0.1.0/pip/bin/ansible && ln -nfs ~/.frey/tools/ansible/2.0.1.0/usr/local/share/python/ansible-playbook ~/.frey/tools/ansible/2.0.1.0/pip/bin/ansible-playbook`
-- [ ] Deal with pip returning version `1.1` in some cases (we error out on that currently with an unrecognized version)
-- [ ] Switch from terraformInventory to terraform-provisioner-ansible (https://github.com/jonmorehouse/terraform-provisioner-ansible)
-
-## master
+## next
 
 Released: TBA.
-[Diff](https://github.com/freyproject/frey/compare/v0.3.31...master).
+[Diff](https://github.com/freyproject/frey/compare/v0.4.0...master).
 
-- [ ] Transpile `facts {` to an `provisioner "remote-exec"` block writing ini file into `/etc/ansible/facts.d/frey.fact`
-- [ ] When `backup` is ran by hand, the chain should not be triggered. Yet when running a chain, `backup` should be part of it
+- [ ] `Show` should use `terraformInventory` just like `Remote`, instead of `public_addresses`
 - [ ] Add support for a `alienInventory` executable, that can cough up hostnames of existing infra
-- [ ] When launching `frey` and we have no `FREY_` env keys, and we do `globSync` of `env*.sh` in the `cwd()` or `projectDir`, offer a list of which one to source automatically. Then inject these into the process.env(?)
-- [ ] Frey should show debug output based on `-v` or `-vv` or `-vvv`. Because it's a tool, and not a library, we should ditch the `DEBUG` env var
-- [ ] Upon `may i destroy infra?` question, Frey should show all the resource IDs that are getting destroyed
-- [ ] Possible bug: We should likely not squashArray ansible actions such as `restart`, or actions in multiple files in the same dir are merged into one
-- [ ] Offer to run `backup` if a destructive change was detected. Skip otherwise. Defaults to yes
+- [ ] allow Ansible and Terraform version override from config
 - [ ] Ansible command output parsing is very basic, we can do a better job
+- [ ] Check for `git ignore Frey-residu-*`
+- [ ] Consider putting `provider` `output` `variable` `resource` at the root level, and removing intermediate `playbooks` level from `install`, `setup`, `backup`, `restore`, etc. This will simplify how the hcl looks, and (maybe) allow us to keep the hcl for terraform untouched, vs doing hcl->object->json (but what about injecting FREY vars..)
+- [ ] Deal with pip returning version `1.1` in some cases (we error out on that currently with an unrecognized version)
+- [ ] Don't set default arguments for Apps so we can deprecate `SHELLARG_REMOVE`
 - [ ] Fix bug where Frey won't show the error output when e.g. ansible cannot connect due to an invalid pem key (likely a scrolex issue)
+- [ ] Frey should show debug output based on `-v` or `-vv` or `-vvv`. Because it's a tool, and not a library, we should ditch the `DEBUG` env var
+- [ ] Make Frey less 'classy', utilizing more pure functions, and allow the introduction of globals such as `runtime`
+- [ ] Offer cast5 encryption and decryption for `env.sh` (then remove `rebuild-env.sh` script from dependents)
+- [ ] Offer to run `backup` if a destructive change was detected. Skip otherwise. Defaults to yes
+- [ ] Possible bug: We should likely not squashArray ansible actions such as `restart`, or actions in multiple files in the same dir are merged into one
+- [ ] Speed up prepare by writing hashses do disk and comparing (just like depmake does)
+- [ ] Switch from terraformInventory to terraform-provisioner-ansible (https://github.com/jonmorehouse/terraform-provisioner-ansible)
+- [ ] Symlink ansible if needed: `mkdir -p ~/.frey/tools/ansible/2.0.1.0/pip/bin/ && ln -nfs ~/.frey/tools/ansible/2.0.1.0/usr/local/share/python/ansible ~/.frey/tools/ansible/2.0.1.0/pip/bin/ansible && ln -nfs ~/.frey/tools/ansible/2.0.1.0/usr/local/share/python/ansible-playbook ~/.frey/tools/ansible/2.0.1.0/pip/bin/ansible-playbook`
+- [ ] Transpile `facts {` to an `provisioner "remote-exec"` block writing ini file into `/etc/ansible/facts.d/frey.fact`
+- [ ] Upon `may i destroy infra?` question, Frey should show all the resource IDs that are getting destroyed
+- [ ] When `backup` is ran by hand, the chain should not be triggered. Yet when running a chain, `backup` should be part of it
+- [ ] When launching `frey` and we have no `FREY_` env keys, and we do `globSync` of `env*.sh` in the `cwd()` or `projectDir`, offer a list of which one to source automatically. Then inject these into the process.env(?)
+
+## v0.4.0
+
+Released: 2019-10-21.
+[Diff](https://github.com/freyproject/frey/compare/v0.3.43...v0.4.0).
+
+- [x] Upgrade from Terraform 0.9.6 to 0.11.14
 
 ## v0.3.43
 
 Released: 2019-03-07.
-[Diff](https://github.com/freyproject/frey/compare/v0.3.36...v0.3.43.
+[Diff](https://github.com/freyproject/frey/compare/v0.3.36...v0.3.43).
 
 - [x] Fix handling of two-digit pip version
 
 ## v0.3.36
 
 Released: 2017-06-02.
-[Diff](https://github.com/freyproject/frey/compare/v0.3.35...v0.3.36.
+[Diff](https://github.com/freyproject/frey/compare/v0.3.35...v0.3.36).
 
 - [x] Consistent casing of cli args
 
 ## v0.3.35
 
 Released: 2017-06-02.
-[Diff](https://github.com/freyproject/frey/compare/v0.3.34...v0.3.35.
+[Diff](https://github.com/freyproject/frey/compare/v0.3.34...v0.3.35).
 
 - [x] Add support for Terraform's `target` to isolate resources or modules
 - [x] Add support for remote state
@@ -80,7 +82,7 @@ Released: 2017-06-02.
 ## v0.3.34
 
 Released: 2017-06-01.
-[Diff](https://github.com/freyproject/frey/compare/v0.3.33...v0.3.34.
+[Diff](https://github.com/freyproject/frey/compare/v0.3.33...v0.3.34).
 
 - [x] Change TF deprecated `key_file` to `private_key` (which requires `${file("/path")}`)
 - [x] `get` is now daisychained before `refresh`, not `plan`
@@ -89,14 +91,14 @@ Released: 2017-06-01.
 ## v0.3.33
 
 Released: 2017-06-01.
-[Diff](https://github.com/freyproject/frey/compare/v0.3.32...v0.3.33.
+[Diff](https://github.com/freyproject/frey/compare/v0.3.32...v0.3.33).
 
 - [x] Fix bug complaining about `this.info`
 
 ## v0.3.32
 
 Released: 2017-06-01.
-[Diff](https://github.com/freyproject/frey/compare/v0.3.31...v0.3.32.
+[Diff](https://github.com/freyproject/frey/compare/v0.3.31...v0.3.32).
 
 - [x] Upgrade from Terraform 0.7.3 -> 0.9.6
 - [x] Upgrade `scrolex@0.0.27`
