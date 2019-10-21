@@ -97,8 +97,8 @@ class App {
 
       const scrolexArgs = [opts.exe].concat(args)
 
-      // const debugCmd = this._debugCmd({ scrolexOpts, env }, scrolexArgs)
-      // debug({debugCmd})
+      const debugCmd = this._debugCmd({ scrolexOpts, env }, scrolexArgs)
+      debug({debugCmd})
 
       scrolex.exe(scrolexArgs, scrolexOpts, (err, out) => {
         if (err) {

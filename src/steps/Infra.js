@@ -34,7 +34,10 @@ class Infra extends Step {
     }
 
     new Terraform().exe({
-      args   : { apply: constants.SHELLARG_PREPEND_AS_IS },
+      args: {
+        apply          : constants.SHELLARG_PREPEND_AS_IS,
+        '-auto-approve': this.runtime.init.cliargs.forceYes,
+      },
       runtime: this.runtime,
     }, (err, stdout) => {
       if (err) {
